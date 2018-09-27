@@ -8,10 +8,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 @TeleOp
 public class OpModeOne extends OpMode {
 
-    DcMotor frontLeft;
-    DcMotor backLeft;
-    DcMotor frontRight;
-    DcMotor backRight;
+    DcMotor frontLeft, backLeft, frontRight, backRight;
 
     public void init(){
         frontLeft = hardwareMap.dcMotor.get("PHFL");
@@ -31,5 +28,10 @@ public class OpModeOne extends OpMode {
         backLeft.setPower(-gamepad1.right_stick_x);
         frontRight.setPower(gamepad1.right_stick_x);
         backRight.setPower(gamepad1.right_stick_x);
+       // Strafing (might be backwards)
+        frontLeft.setPower(-gamepad1.left_stick_x);
+        backRight.setPower(-gamepad1.left_stick_x);
+        frontRight.setPower(gamepad1.left_stick_x);
+        backLeft.setPower(gamepad1.left_stick_x);
     }
 }
