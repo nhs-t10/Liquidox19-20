@@ -23,16 +23,12 @@ public class OpModeOne extends OpMode {
         frontLeft.setPower(-gamepad1.left_stick_y);
         backLeft.setPower(-gamepad1.left_stick_y);
         frontRight.setPower(gamepad1.left_stick_y);
-        backRight.setPower(gamepad1.left_stick_y);
+        backRight.setPower(2*gamepad1.left_stick_y);
        // circular rotations (not strafing)
         frontLeft.setPower(-gamepad1.right_stick_x);
         backLeft.setPower(-gamepad1.right_stick_x);
         frontRight.setPower(gamepad1.right_stick_x);
-        backRight.setPower(gamepad1.right_stick_x);
-       // Strafing (Probably not backwards)
-       // frontLeft.setPower(gamepad1.left_stick_x);
-       // backRight.setPower(gamepad1.left_stick_x);
-        //frontRight.setPower(-gamepad1.left_stick_x);
-       // backLeft.setPower(-gamepad1.left_stick_x);
+        backRight.setPower(2*gamepad1.right_stick_x);
+
     }
 }
