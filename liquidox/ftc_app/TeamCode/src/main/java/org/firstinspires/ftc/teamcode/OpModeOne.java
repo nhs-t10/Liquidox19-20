@@ -11,10 +11,11 @@ public class OpModeOne extends OpMode {
     DcMotor frontLeft, backLeft, frontRight, backRight;
 
     public void init(){
-        frontLeft = hardwareMap.dcMotor.get("PHFL");
-        backLeft = hardwareMap.dcMotor.get("PHBL");
-        frontRight = hardwareMap.dcMotor.get("PHFR");
-        backRight = hardwareMap.dcMotor.get("PHBR");
+       //Naming the Motors for phone
+        frontLeft = hardwareMap.dcMotor.get("FL");
+        backLeft = hardwareMap.dcMotor.get("BL");
+        frontRight = hardwareMap.dcMotor.get("FR");
+        backRight = hardwareMap.dcMotor.get("BR");
 
     }
     public void loop(){
@@ -23,15 +24,15 @@ public class OpModeOne extends OpMode {
         backLeft.setPower(-gamepad1.left_stick_y);
         frontRight.setPower(gamepad1.left_stick_y);
         backRight.setPower(gamepad1.left_stick_y);
-       // circular roatations (not strafing)
+       // circular rotations (not strafing)
         frontLeft.setPower(-gamepad1.right_stick_x);
         backLeft.setPower(-gamepad1.right_stick_x);
         frontRight.setPower(gamepad1.right_stick_x);
         backRight.setPower(gamepad1.right_stick_x);
-       // Strafing (might be backwards)
-        frontLeft.setPower(-gamepad1.left_stick_x);
-        backRight.setPower(-gamepad1.left_stick_x);
-        frontRight.setPower(gamepad1.left_stick_x);
-        backLeft.setPower(gamepad1.left_stick_x);
+       // Strafing (Probably not backwards)
+       // frontLeft.setPower(gamepad1.left_stick_x);
+       // backRight.setPower(gamepad1.left_stick_x);
+        //frontRight.setPower(-gamepad1.left_stick_x);
+       // backLeft.setPower(-gamepad1.left_stick_x);
     }
 }
