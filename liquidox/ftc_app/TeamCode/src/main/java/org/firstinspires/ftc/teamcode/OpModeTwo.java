@@ -19,23 +19,26 @@ public class OpModeTwo extends OpMode{
 
     }
 
-    public void drive(float FL, float BL, float FR, float BR){
-        frontLeft.setPower(FL);
-        backRight.setPower(BR);
-        frontRight.setPower(FR);
-        backLeft.setPower(BL);
-    }
+//    public void drive(float FL, float BL, float FR, float BR){
+//        frontLeft.setPower(FL);
+//        backRight.setPower(BR);
+//        frontRight.setPower(FR);
+//        backLeft.setPower(BL);
+//    }
 
-    public void loop(){
-        float x = gamepad1.left_stick_x;
-        float y = gamepad1.left_stick_y;
+    public void loop() {
 
-        if (y >=0.9){
-            drive(1,1,1, 1);
-        }else if(y <=-0.5){
-            drive(-1, -1, -1, -1);
-        }else {
-            drive(0, 0, 0, 0);
+
+        if (gamepad1.left_stick_y > 0.1) {
+            frontLeft.setPower(-gamepad1.left_stick_y);
+           //  backRight.setPower(gamepad1.left_stick_y);
+            frontRight.setPower(gamepad1.left_stick_y);
+          //  backLeft.setPower(-gamepad1.left_stick_y);
+        } else if (gamepad1.left_stick_y < -0.1) {
+            frontLeft.setPower(gamepad1.left_stick_y);
+           // backRight.setPower(-gamepad1.left_stick_y);
+            frontRight.setPower(-gamepad1.left_stick_y);
+           // backLeft.setPower(gamepad1.left_stick_y);
         }
     }
 }
