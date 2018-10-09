@@ -3,6 +3,8 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.util.Range;
+
 @TeleOp
 public class OpModeTwo extends OpMode{
 
@@ -16,27 +18,25 @@ public class OpModeTwo extends OpMode{
         backRight = hardwareMap.dcMotor.get("BR");
 
     }
-    public void loop(){
-       if (gamepad1.left_stick_x > gamepad1.left_stick_y){
-           if (gamepad1.left_stick_x >= 0.5 || gamepad1.left_stick_x <= -0.5){
-               //insert strafing code
-               frontLeft.setPower(-gamepad1.left_stick_x);
-               backRight.setPower(gamepad1.left_stick_x);
-               frontRight.setPower(-gamepad1.left_stick_x);
-               backLeft.setPower(gamepad1.left_stick_x);
-           }
-       }else if (gamepad1.left_stick_y >= 0.5 || gamepad1.left_stick_y <= -0.5){
-           frontLeft.setPower(-gamepad1.left_stick_y);
-           backLeft.setPower(-gamepad1.left_stick_y);
-           frontRight.setPower(gamepad1.left_stick_y);
-           backRight.setPower(gamepad1.left_stick_y);
-       }else{
-           frontLeft.setPower(0);
-           backLeft.setPower(0);
-           frontRight.setPower(0);
-           backRight.setPower(0);
-       }
 
+    public void drive(float FL, float BL, float FR, float BR){
+        frontLeft.setPower(FL);
+        backRight.setPower(BR);
+        frontRight.setPower(FR);
+        backLeft.setPower(BL);
+    }
+
+    public void loop(){
+        float x = gamepad1.left_stick_x;
+        float y = gamepad1.left_stick_y;
+
+        if (y >=0.9){
+            drive(1,1,1, 1);
+        }else if(y <=-0.5){
+            drive(-1, -1, -1, -1);
+        }else {
+            drive(0, 0, 0, 0);
+        }
     }
 }
 
