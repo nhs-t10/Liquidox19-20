@@ -19,12 +19,12 @@ public class OpModeTwo extends OpMode{
 
     }
 
-//    public void drive(double FL, double BL, double FR, double BR){
-//        frontLeft.setPower(FL);
-//        backRight.setPower(-BR);
-//        frontRight.setPower(-FR);
-//        backLeft.setPower(BL);
-//    }
+    public void drive(double FL, double BL, double FR, double BR){
+        frontLeft.setPower(FL);
+        backRight.setPower(-BR);
+        frontRight.setPower(-FR);
+        backLeft.setPower(BL);
+    }
     public void Sdrive(double L, double R) {
         frontLeft.setPower(L);
         backRight.setPower(-R);
@@ -32,19 +32,19 @@ public class OpModeTwo extends OpMode{
         backLeft.setPower(L);
     }
     public void loop() {
-        Sdrive((gamepad1.left_stick_y + gamepad1.left_stick_x)/2, (gamepad1.left_stick_y  -gamepad1.left_stick_x)/2);
-//        if (gamepad1.left_stick_y > 0.1) {
-//            frontLeft.setPower(gamepad1.left_stick_y);
-//            backRight.setPower(gamepad1.left_stick_y);
-//            frontRight.setPower(gamepad1.left_stick_y);
-//            backLeft.setPower(gamepad1.left_stick_y);
-//        } else if (gamepad1.left_stick_x < -0.1) {
-//            frontLeft.setPower(gamepad1.left_stick_x);
-//            backRight.setPower(gamepad1.left_stick_x);
-//            frontRight.setPower(-gamepad1.left_stick_x);
-//            backLeft.setPower(-gamepad1.left_stick_x);
-//        }
+        double LX = range.clip(gamepad1.left_stick_x, -1, 1);
+        double LY = range.clip(gamepad1.left_stick_y, -1, 1);
+        double RX = range.clip(gamepad1.right_stick_x, -1, 1);
+        double RY = range.clip(gamepad1.right_stick_y, -1, 1);
 
+        Sdrive((LY + LX)/2, (LY -LX)/2);
+//        telemetry.addData("Front Left mortor", LX/2);
+//        telemetry.addData("Front Right mortor", LX/2);
+//        telemetry.addData("Back Left", LX/2);
+//        telemetry.addData("Back Right", LX/2);
+
+
+        //drive(1, 1, 1, 1);
 
 
     }
