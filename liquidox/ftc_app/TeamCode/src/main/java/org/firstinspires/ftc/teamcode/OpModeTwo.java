@@ -28,6 +28,7 @@ public class OpModeTwo extends OpMode {
                 telemetry.addData("BL", -gamepad1.right_stick_x);
             }
         } else if (Math.abs(gamepad1.left_stick_x) > Math.abs(gamepad1.left_stick_y)) {
+            //turning
             frontLeft.setPower(-0.5 * gamepad1.left_stick_x);
             backLeft.setPower(-0.5 * gamepad1.left_stick_x);
             frontRight.setPower(-0.5 * gamepad1.left_stick_x);
@@ -37,6 +38,7 @@ public class OpModeTwo extends OpMode {
             telemetry.addData("FR", -gamepad1.left_stick_x);
             telemetry.addData("BR", -gamepad1.left_stick_x);
         } else if (gamepad1.left_stick_y >= 0.5 || gamepad1.left_stick_y <= -0.5) {
+            //basic front and back
             frontLeft.setPower(-0.5 * gamepad1.left_stick_y);
             backLeft.setPower(-0.5 * gamepad1.left_stick_y);
             frontRight.setPower(0.5 * gamepad1.left_stick_y);
