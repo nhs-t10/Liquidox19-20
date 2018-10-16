@@ -18,10 +18,10 @@ public class OpModeTwo extends OpMode {
         if (Math.abs(gamepad1.right_stick_x) > Math.abs(gamepad1.left_stick_y) && Math.abs(gamepad1.right_stick_x) > Math.abs(gamepad1.left_stick_x)) {
             if (gamepad1.left_stick_x >= 0.5 || gamepad1.left_stick_x <= -0.5) {
                 //insert strafing code
-                frontLeft.setPower(0.5 * gamepad1.right_stick_x);
-                backRight.setPower(-0.5 * gamepad1.right_stick_x);
-                frontRight.setPower(0.5 * gamepad1.right_stick_x);
-                backLeft.setPower(-0.5 * gamepad1.right_stick_x);
+                frontLeft.setPower(0.25 * gamepad1.right_stick_x);
+                backRight.setPower(-0.25 * gamepad1.right_stick_x);
+                frontRight.setPower(0.25 * gamepad1.right_stick_x);
+                backLeft.setPower(-0.25 * gamepad1.right_stick_x);
                 telemetry.addData("FL", gamepad1.right_stick_x);
                 telemetry.addData("BR", -gamepad1.right_stick_x);
                 telemetry.addData("FR", gamepad1.right_stick_x);
@@ -29,10 +29,10 @@ public class OpModeTwo extends OpMode {
             }
         } else if (Math.abs(gamepad1.left_stick_x) > Math.abs(gamepad1.left_stick_y)) {
             //turning
-            frontLeft.setPower(-0.5 * gamepad1.left_stick_x);
-            backLeft.setPower(-0.5 * gamepad1.left_stick_x);
-            frontRight.setPower(-0.5 * gamepad1.left_stick_x);
-            backRight.setPower(-0.5 * gamepad1.left_stick_x);
+            frontLeft.setPower(-0.25 * gamepad1.left_stick_x);
+            backLeft.setPower(-0.25 * gamepad1.left_stick_x);
+            frontRight.setPower(-0.25 * gamepad1.left_stick_x);
+            backRight.setPower(-0.25 * gamepad1.left_stick_x);
             telemetry.addData("FL", -gamepad1.left_stick_x);
             telemetry.addData("BL", -gamepad1.left_stick_x);
             telemetry.addData("FR", -gamepad1.left_stick_x);
