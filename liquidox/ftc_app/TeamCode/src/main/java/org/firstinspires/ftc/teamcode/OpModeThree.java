@@ -37,19 +37,19 @@ public class OpModeThree extends OpMode {
     double angle ;
     float mAgle;
     public void loop() {
-        try{
-            TimeUnit.SECONDS.sleep(1/100);
-        }catch (InterruptedException e){
-               e.printStackTrace();
+        try {
+            TimeUnit.SECONDS.sleep(1 / 100);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
         angle = 123456789;
         double lX = Range.clip(gamepad1.left_stick_x, -1, 1);
         double lY = Range.clip(gamepad1.left_stick_y, -1, 1);
         double rX = Range.clip(gamepad1.right_stick_x, -1, 1);
         double rY = Range.clip(gamepad1.right_stick_y, -1, 1);
-        if(lX + lY != 0) {
-            Sdrive((lY + lX) / 2, (lY - lX) / 2);
-        }
+
+        Sdrive((lY + lX) / 2, (lY - lX) / 2);
+
         if (rX == 0) {
             if(rY > 0){
                 angle = Math.PI / 2;
@@ -66,7 +66,7 @@ public class OpModeThree extends OpMode {
 
 
         //quadrant 1
-       if(angle != 123456789)           {
+
         if (rX >= 0 && rY > 0) {
             if (rX > 0 && rX <= 45) {
                 //section 1
@@ -123,7 +123,7 @@ public class OpModeThree extends OpMode {
 
 
 
-    }
+
 
 
 }
