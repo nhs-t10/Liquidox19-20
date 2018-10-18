@@ -5,6 +5,31 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 
 import java.util.concurrent.TimeUnit;
 
+//
+//
+//Hello! This entire section is just going to be a sort of logbook for all of the changes I intend to make
+//
+//Right now I am working on simplifying my cascading if statements into methods.
+//This will probably take a while but it will be worth it in the end.
+//Right now we are kind of waiting on hardware to add
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+
+
 @TeleOp
 public class OpModeTwo extends OpMode {
     DcMotor frontLeft, backLeft, frontRight, backRight;
@@ -33,7 +58,7 @@ public class OpModeTwo extends OpMode {
         backRight = hardwareMap.dcMotor.get("BR");
     }
     public void loop() {
-        //finding values for custom variables
+        //boost test
         if (gamepad1.start == true){
            if ((boost (gamepad1.a, gamepad1.b, gamepad1.x, gamepad1.y)) == true){
                sanic = 2;
