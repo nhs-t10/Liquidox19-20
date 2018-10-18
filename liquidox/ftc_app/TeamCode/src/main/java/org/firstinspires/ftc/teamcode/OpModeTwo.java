@@ -8,6 +8,22 @@ import java.util.concurrent.TimeUnit;
 @TeleOp
 public class OpModeTwo extends OpMode {
     DcMotor frontLeft, backLeft, frontRight, backRight;
+    int  sanic;
+    public int boostSpeed (boolean boost){
+        if (boost == false){
+            return 1;
+        }else{
+            return 2;
+        }
+    }
+
+    public boolean boost (boolean a, boolean b, boolean x, boolean y){
+    if (a == true && b == true && x == true && y == false){
+    return true;
+    }else{
+        return false;
+    }
+    }
 
     public void init() {
         //Naming the Motors for phone
@@ -16,8 +32,16 @@ public class OpModeTwo extends OpMode {
         frontRight = hardwareMap.dcMotor.get("FR");
         backRight = hardwareMap.dcMotor.get("BR");
     }
-
     public void loop() {
+        //finding values for custom variables
+        if (gamepad1.start == true){
+           if ((boost (gamepad1.a, gamepad1.b, gamepad1.x, gamepad1.y)) == true){
+               sanic = 2;
+           }else{
+               sanic = 1;
+           }
+        }
+        //lag
         try {
             TimeUnit.SECONDS.sleep(1/100);
         } catch (InterruptedException e) {
@@ -26,10 +50,10 @@ public class OpModeTwo extends OpMode {
         if (Math.abs(gamepad1.right_stick_x) > Math.abs(gamepad1.left_stick_y) && Math.abs(gamepad1.right_stick_x) > Math.abs(gamepad1.left_stick_x)) {
             if (gamepad1.left_stick_x >= 0.5 || gamepad1.left_stick_x <= -0.5) {
                 //insert strafing code
-                frontLeft.setPower(0.5 * gamepad1.right_stick_x);
-                backRight.setPower(-0.5 * gamepad1.right_stick_x);
-                frontRight.setPower(0.5 * gamepad1.right_stick_x);
-                backLeft.setPower(-0.5 * gamepad1.right_stick_x);
+                frontLeft.setPower(0.5  * sanic * gamepad1.right_stick_x);
+                backRight.setPower(-0.5 * sanic *gamepad1.right_stick_x);
+                frontRight.setPower(0.5 * sanic *gamepad1.right_stick_x);
+                backLeft.setPower(-0.5 * sanic *gamepad1.right_stick_x);
                 telemetry.addData("FL", gamepad1.right_stick_x);
                 telemetry.addData("BR", -gamepad1.right_stick_x);
                 telemetry.addData("FR", gamepad1.right_stick_x);
@@ -37,20 +61,20 @@ public class OpModeTwo extends OpMode {
             }
         } else if (Math.abs(gamepad1.left_stick_x) > Math.abs(gamepad1.left_stick_y)) {
             //turning
-            frontLeft.setPower(-0.5 * gamepad1.left_stick_x);
-            backLeft.setPower(-0.5 * gamepad1.left_stick_x);
-            frontRight.setPower(-0.5 * gamepad1.left_stick_x);
-            backRight.setPower(-0.5 * gamepad1.left_stick_x);
+            frontLeft.setPower(-0.5 * sanic *gamepad1.left_stick_x);
+            backLeft.setPower(-0.5 * sanic *gamepad1.left_stick_x);
+            frontRight.setPower(-0.5 * sanic *gamepad1.left_stick_x);
+            backRight.setPower(-0.5 * sanic *gamepad1.left_stick_x);
             telemetry.addData("FL", -gamepad1.left_stick_x);
             telemetry.addData("BL", -gamepad1.left_stick_x);
             telemetry.addData("FR", -gamepad1.left_stick_x);
             telemetry.addData("BR", -gamepad1.left_stick_x);
         } else if (gamepad1.left_stick_y >= 0.5 || gamepad1.left_stick_y <= -0.5) {
             //basic front and back
-            frontLeft.setPower(-0.5 * gamepad1.left_stick_y);
-            backLeft.setPower(-0.5 * gamepad1.left_stick_y);
-            frontRight.setPower(0.5 * gamepad1.left_stick_y);
-            backRight.setPower(0.5 * gamepad1.left_stick_y);
+            frontLeft.setPower(-0.5 * sanic *gamepad1.left_stick_y);
+            backLeft.setPower(-0.5 * sanic *gamepad1.left_stick_y);
+            frontRight.setPower(0.5 * sanic *gamepad1.left_stick_y);
+            backRight.setPower(0.5 * sanic *gamepad1.left_stick_y);
             telemetry.addData("FL", -gamepad1.left_stick_y);
             telemetry.addData("BL", -gamepad1.left_stick_y);
         }else{

@@ -59,9 +59,9 @@ public class OpModeThree extends OpMode {
                 angle =3 *Math.PI/2;
             }
         } else if(rX > 0) {
-            angle = Math.atan(Y/X);
+            angle = Math.atan(rY/rX);
         } else {
-            angle = Math.atan(Y/X)+Math.PI;
+            angle = Math.atan(rY/rX)+Math.PI;
         }
 
 
@@ -120,11 +120,7 @@ public class OpModeThree extends OpMode {
 
          }
     }
-        telemetry.addData("angle: ", angle);
-        telemetry.addDAta("FL: ", frontLeft.getPower());
-        telemetry.addDAta("FL: ", frontRight.getPower());
-        telemetry.addDAta("FL: ", );
-        telemetry.addDAta("FL: ", );
+
 
 
     }
