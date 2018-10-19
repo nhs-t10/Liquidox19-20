@@ -34,16 +34,20 @@ public class OpModeThree extends OpMode {
     }
     double scaleFactor = 0.4;
     public void loop() {
+
+        //Adam's lag that makes it work better... somehow
         try {
             TimeUnit.SECONDS.sleep(1 / 100);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        //setting, and  chging scale factor
         if (gamepad1.left_bumper) {
             if (scaleFactor < 0.8) {
                 scaleFactor = scaleFactor + 0.1;
             }
         }
+
         if (gamepad1.right_bumper) {
             if (scaleFactor < 1) {
                 scaleFactor = scaleFactor - 0.1;
@@ -53,13 +57,15 @@ public class OpModeThree extends OpMode {
         double lY = Range.clip(gamepad1.left_stick_y, -1, 1);
         double rX = Range.clip(gamepad1.right_stick_x, -1, 1);
         double rY = Range.clip(gamepad1.right_stick_y, -1, 1);
+
         if (lX + lY != 0) {
             leftStickDrive((lY + lX) * scaleFactor, (lY - lX) * scaleFactor);
         }
+        //NOT DONE, NEEDS TO BE FINISHED
         if (rX + rY != 0) {
-            rightStickDrive(rX, rY);
+            rightStickDrive(rX * scaleFactor, rY * scaleFactor);
         }
-
+        //Adds motor values for bug fixing
         telemetry.addData("Front Left: ", frontLeft.getPower());
         telemetry.addData("Front Right: ", frontRight.getPower());
         telemetry.addData("Back Left: ", backLeft.getPower());
