@@ -35,6 +35,11 @@ public class OpModeThree extends OpMode {
     double scaleFactor = 0.4;
     public void loop() {
 
+        double lX = Range.clip(gamepad1.left_stick_x, -1, 1);
+        double lY = Range.clip(gamepad1.left_stick_y, -1, 1);
+        double rX = Range.clip(gamepad1.right_stick_x, -1, 1);
+        double rY = Range.clip(gamepad1.right_stick_y, -1, 1);
+
         //Adam's lag that makes it work better... somehow
         try {
             TimeUnit.SECONDS.sleep(1 / 100);
@@ -53,10 +58,6 @@ public class OpModeThree extends OpMode {
                 scaleFactor = scaleFactor - 0.1;
             }
         }
-        double lX = Range.clip(gamepad1.left_stick_x, -1, 1);
-        double lY = Range.clip(gamepad1.left_stick_y, -1, 1);
-        double rX = Range.clip(gamepad1.right_stick_x, -1, 1);
-        double rY = Range.clip(gamepad1.right_stick_y, -1, 1);
 
         if (lX + lY != 0) {
             leftStickDrive((lY + lX) * scaleFactor, (lY - lX) * scaleFactor);
