@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.util.Range;
 import java.util.concurrent.TimeUnit;
 
 @TeleOp
-public class OpModeThree extends OpMode {
+public class OpModeOne extends OpMode {
 
     DcMotor frontLeft, backLeft, frontRight, backRight;
 
