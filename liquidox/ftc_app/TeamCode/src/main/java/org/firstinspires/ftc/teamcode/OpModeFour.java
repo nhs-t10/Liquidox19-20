@@ -18,8 +18,6 @@ public class OpModeFour extends OpMode {
         backLeft = hardwareMap.dcMotor.get("BL");
         frontRight = hardwareMap.dcMotor.get("FR");
         backRight = hardwareMap.dcMotor.get("BR");
-
-
     }
 
     public void leftStickDrive(double L, double R) {
@@ -28,7 +26,7 @@ public class OpModeFour extends OpMode {
         frontRight.setPower(-R);
         backLeft.setPower(L);
     }
-    public void rightStickDrive(float x , float y) {
+    public void rightStickDrive(float L , float R) {
         frontLeft.setPower(L);
         backRight.setPower(-R);
         frontRight.setPower(R);
