@@ -41,9 +41,9 @@ public class OpModeFive extends OpMode {
         float rX = Range.clip(gamepad1.right_stick_x, -1, 1);
         float rY = Range.clip(gamepad1.right_stick_y, -1, 1);
 
-        float[] vertical = {1*lY, 1*lY, 1*lY, 1*lY};
-        float[] horizontal = {-1*lX, 1*lX, -1*lX, 1*lX};
-        float[] rotational = {1*rX, 1*rX, -1*rX, -1*rX};
+        float[] vertical = {lY, lY, lY, lY};
+        float[] horizontal = {-lX, lX, -lX, lX};
+        float[] rotational = {rX, rX, -rX, -rX};
 
         for(int i=0; i<4; i++) {
             sum[i] = vertical[i] + horizontal[i] + rotational[i];
