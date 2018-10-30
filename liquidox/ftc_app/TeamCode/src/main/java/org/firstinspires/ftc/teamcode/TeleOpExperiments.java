@@ -2,6 +2,8 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.Servo;
+
 import java.util.concurrent.TimeUnit;
 //Hello! This entire section is just going to be a sort of logbook for all of the changes I intend to make
 //This used to be called "OpModeTwo"
@@ -11,6 +13,7 @@ import java.util.concurrent.TimeUnit;
 @TeleOp
 public class TeleOpExperiments extends OpMode {
     DcMotor frontLeft, backLeft, frontRight, backRight;
+    Servo servoOne;
     int  sanic;
     public int boostSpeed (boolean boost){
         if (boost == false){
@@ -26,6 +29,10 @@ public class TeleOpExperiments extends OpMode {
             return false;
         }
     }
+    public double servoUno (float rTrig){
+        servoOne.setPosition(rTrig);
+        return rTrig;
+    }
     public void drive(double FL, double BL, double FR, double BR){
         frontLeft.setPower(FL);
         backRight.setPower(BR);
@@ -38,6 +45,7 @@ public class TeleOpExperiments extends OpMode {
         backLeft = hardwareMap.dcMotor.get("BL");
         frontRight = hardwareMap.dcMotor.get("FR");
         backRight = hardwareMap.dcMotor.get("BR");
+        servoOne = hardwareMap.servo.get("S1");
     }
     public void loop() {
         //boost test
@@ -48,6 +56,8 @@ public class TeleOpExperiments extends OpMode {
                 sanic = 1;
             }
         }
+        //servo method
+        servoUno(gamepad1.right_trigger);
         //lag
         try {
             TimeUnit.SECONDS.sleep(1/100);
