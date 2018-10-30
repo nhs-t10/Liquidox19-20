@@ -29,6 +29,6 @@ public class AutonomousTesting extends OpMode {
         drive(0,0,0,0);
     }
     public void loop(){
-        //nothing in here
+        //nothing in here, its autonomous
     }
 }
