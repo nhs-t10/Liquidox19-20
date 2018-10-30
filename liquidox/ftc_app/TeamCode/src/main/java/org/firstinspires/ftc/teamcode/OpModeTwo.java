@@ -7,7 +7,7 @@ import java.util.concurrent.TimeUnit;
 //
 //Right now I am working on simplifying my cascading if statements into methods.
 //This will probably take a while but it will be worth it in the end.
-//Right now we are kind of waiting on hardware to add something to work on but we should probably start on autonomous.
+//Work on autonomus has started
 @TeleOp
 public class OpModeTwo extends OpMode {
     DcMotor frontLeft, backLeft, frontRight, backRight;
