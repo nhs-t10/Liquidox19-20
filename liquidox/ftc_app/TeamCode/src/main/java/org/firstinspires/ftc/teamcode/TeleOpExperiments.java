@@ -4,12 +4,12 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import java.util.concurrent.TimeUnit;
 //Hello! This entire section is just going to be a sort of logbook for all of the changes I intend to make
-//
+//This used to be called "OpModeTwo"
 //Right now I am working on simplifying my cascading if statements into methods.
 //This will probably take a while but it will be worth it in the end.
 //Work on autonomus has started
 @TeleOp
-public class OpModeTwo extends OpMode {
+public class TeleOpExperiments extends OpMode {
     DcMotor frontLeft, backLeft, frontRight, backRight;
     int  sanic;
     public int boostSpeed (boolean boost){
@@ -20,11 +20,11 @@ public class OpModeTwo extends OpMode {
         }
     }
     public boolean boost (boolean a, boolean b, boolean x, boolean y){
-    if (a == true && b == true && x == true && y == false){
-    return true;
-    }else{
-        return false;
-    }
+        if (a == true && b == true && x == true && y == false){
+            return true;
+        }else{
+            return false;
+        }
     }
     public void drive(double FL, double BL, double FR, double BR){
         frontLeft.setPower(FL);
@@ -42,11 +42,11 @@ public class OpModeTwo extends OpMode {
     public void loop() {
         //boost test
         if (gamepad1.start == true){
-           if ((boost (gamepad1.a, gamepad1.b, gamepad1.x, gamepad1.y)) == true){
-               sanic = 2;
-           }else{
-               sanic = 1;
-           }
+            if ((boost (gamepad1.a, gamepad1.b, gamepad1.x, gamepad1.y)) == true){
+                sanic = 2;
+            }else{
+                sanic = 1;
+            }
         }
         //lag
         try {
