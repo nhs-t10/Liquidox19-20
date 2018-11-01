@@ -13,7 +13,7 @@ public class OpModeFive extends OpMode {
     DcMotor frontLeft, backLeft, frontRight, backRight;
 
     public void init() {
-        /**Namiyng the Motors for phone*/
+        /*Namiyng the Motors for phone*/
         frontLeft = hardwareMap.dcMotor.get("FL");
         backLeft = hardwareMap.dcMotor.get("BL");
         frontRight = hardwareMap.dcMotor.get("FR");
@@ -21,14 +21,11 @@ public class OpModeFive extends OpMode {
 
     }
     public void drive(float bl, float fl, float fr, float br ) {
-          frontLeft.setPower(-fl);
-          backRight.setPower(br);
+          frontLeft.setPower(fl);
+          backRight.setPower(-br);
           frontRight.setPower(-fr);
           backLeft.setPower(bl);
     }
-
-
-
 
     float[] sum = {0 ,0 , 0, 0};
 
@@ -39,11 +36,10 @@ public class OpModeFive extends OpMode {
         float lX = Range.clip(gamepad1.left_stick_x, -1, 1);
         float lY = Range.clip(gamepad1.left_stick_y, -1, 1);
         float rX = Range.clip(gamepad1.right_stick_x, -1, 1);
-        float rY = Range.clip(gamepad1.right_stick_y, -1, 1);
 
-        float[] vertical = {1*lY, 1*lY, 1*lY, 1*lY};
-        float[] horizontal = {-1*lX, 1*lX, -1*lX, 1*lX};
-        float[] rotational = {1*rX, 1*rX, -1*rX, -1*rX};
+        float[] vertical = {lY, lY, lY, lY};
+        float[] horizontal = {-lX, lX, -lX, lX};
+        float[] rotational = {rX, rX, -rX, -rX};
 
         for(int i=0; i<4; i++) {
             sum[i] = vertical[i] + horizontal[i] + rotational[i];
