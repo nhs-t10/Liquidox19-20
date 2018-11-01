@@ -21,8 +21,8 @@ public class OpModeFive extends OpMode {
 
     }
     public void drive(float bl, float fl, float fr, float br ) {
-          frontLeft.setPower(-fl);
-          backRight.setPower(br);
+          frontLeft.setPower(fl);
+          backRight.setPower(-br);
           frontRight.setPower(-fr);
           backLeft.setPower(bl);
     }
