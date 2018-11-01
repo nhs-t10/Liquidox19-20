@@ -13,27 +13,27 @@ import java.util.concurrent.TimeUnit;
 @TeleOp
 public class TeleOpExperiments extends OpMode {
     DcMotor frontLeft, backLeft, frontRight, backRight;
-    Servo servoOne;
+   // Servo servoOne;
     int  sanic;
     public int boostSpeed (boolean boost){
-        if (boost == false){
+        if (!boost){
             return 1;
         }else{
             return 2;
         }
     }
-    public boolean boost (boolean a, boolean b, boolean x, boolean y){
-        if (a == true && b == true && x == true && y == false){
+    private boolean boost (boolean a, boolean b, boolean x, boolean y){
+        if (a && b && x && !y){
             return true;
         }else{
             return false;
         }
     }
-    public double servoUno (float rTrig){
-        servoOne.setPosition(rTrig);
-        return rTrig;
-    }
-    public void drive(double FL, double BL, double FR, double BR){
+//    public double servoUno (float rTrig){
+//        servoOne.setPosition(rTrig);
+//        return rTrig;
+//    }
+    private void drive(double FL, double BL, double FR, double BR){
         frontLeft.setPower(FL);
         backRight.setPower(BR);
         frontRight.setPower(FR);
@@ -45,19 +45,19 @@ public class TeleOpExperiments extends OpMode {
         backLeft = hardwareMap.dcMotor.get("BL");
         frontRight = hardwareMap.dcMotor.get("FR");
         backRight = hardwareMap.dcMotor.get("BR");
-        servoOne = hardwareMap.servo.get("S1");
+//        servoOne = hardwareMap.servo.get("S1");
     }
     public void loop() {
         //boost test
-        if (gamepad1.start == true){
-            if ((boost (gamepad1.a, gamepad1.b, gamepad1.x, gamepad1.y)) == true){
+        if (gamepad1.start){
+            if ((boost (gamepad1.a, gamepad1.b, gamepad1.x, gamepad1.y))){
                 sanic = 2;
             }else{
                 sanic = 1;
             }
         }
-        //servo method
-        servoUno(gamepad1.right_trigger);
+//        //servo method
+//        servoUno(gamepad1.right_trigger);
         //lag
         try {
             TimeUnit.SECONDS.sleep(1/100);
