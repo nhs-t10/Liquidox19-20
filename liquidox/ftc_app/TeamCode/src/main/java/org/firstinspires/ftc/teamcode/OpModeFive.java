@@ -22,10 +22,10 @@ public class OpModeFive extends OpMode {
     }
     public void drive(float bl, float fl, float fr, float br ) {
 
-          frontLeft.setPower(-fl);
+          frontLeft.setPower(fl);
           backRight.setPower(br);
           frontRight.setPower(fr);
-          backLeft.setPower(-bl);
+          backLeft.setPower(bl);
 
     }
 
@@ -40,7 +40,7 @@ public class OpModeFive extends OpMode {
         float rX = Range.clip(gamepad1.right_stick_x, -1, 1);
 
         float[] vertical = {lY, lY, lY, lY};
-        float[] horizontal = {-lX, lX, -lX, lX};
+        float[] horizontal = {lX, -lX, -lX, lX};
         float[] rotational = {rX, rX, -rX, -rX};
 
         for(int i=0; i<4; i++) {

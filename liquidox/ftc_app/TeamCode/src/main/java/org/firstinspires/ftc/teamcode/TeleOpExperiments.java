@@ -64,6 +64,17 @@ public class TeleOpExperiments extends OpMode {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        /** A better, much more simple driving code that does not use any if statments (preventing errors), and prety much does the same thing.*/
+        /** ============================================================================================*/
+        //only for forwards, backwards, and turning.
+        drive(-(gamepad1.left_stick_x + gamepad1.left_stick_y)/2 * sanic,
+                -(gamepad1.left_stick_x + gamepad1.left_stick_y)/2 * sanic,
+                 (gamepad1.left_stick_x - gamepad1.left_stick_y)/2 * sanic,
+                (gamepad1.left_stick_x - gamepad1.left_stick_y)/2 * sanic);
+        /** ============================================================================================*/
+        /** one of the drive codes must be commented out for testing */
+
+
         if (Math.abs(gamepad1.right_stick_x) > Math.abs(gamepad1.left_stick_y) && Math.abs(gamepad1.right_stick_x) > Math.abs(gamepad1.left_stick_x)) {
             if (gamepad1.left_stick_x >= 0.5 || gamepad1.left_stick_x <= -0.5) {
                 //insert strafing code
