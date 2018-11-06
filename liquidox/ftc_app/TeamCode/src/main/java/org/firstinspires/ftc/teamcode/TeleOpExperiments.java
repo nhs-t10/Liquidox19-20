@@ -69,7 +69,7 @@ public class TeleOpExperiments extends OpMode {
         //only for forwards, backwards, and turning.
         drive(-(gamepad1.left_stick_x + gamepad1.left_stick_y)/2 * sanic,
                 -(gamepad1.left_stick_x + gamepad1.left_stick_y)/2 * sanic,
-                 (gamepad1.left_stick_x - gamepad1.left_stick_y)/2 * sanic,
+                (gamepad1.left_stick_x - gamepad1.left_stick_y)/2 * sanic,
                 (gamepad1.left_stick_x - gamepad1.left_stick_y)/2 * sanic);
         /** ============================================================================================*/
         /** one of the drive codes must be commented out for testing */
