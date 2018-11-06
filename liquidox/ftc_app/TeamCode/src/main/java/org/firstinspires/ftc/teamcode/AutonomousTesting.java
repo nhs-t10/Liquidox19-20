@@ -20,7 +20,7 @@ public class AutonomousTesting extends OpMode {
         backLeft = hardwareMap.dcMotor.get("BL");
         frontRight = hardwareMap.dcMotor.get("FR");
         backRight = hardwareMap.dcMotor.get("BR");
-        drive(0.5, 0.5, 0.5, 0.5);
+        drive(-0.5, -0.5, 0.5, 0.5);
         try {
             TimeUnit.SECONDS.sleep(3/2);
         } catch (InterruptedException e) {

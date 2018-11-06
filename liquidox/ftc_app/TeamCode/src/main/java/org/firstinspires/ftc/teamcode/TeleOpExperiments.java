@@ -16,14 +16,14 @@ public class TeleOpExperiments extends OpMode {
    // Servo servoOne;
     int  sanic;
     public int boostSpeed (boolean boost){
-        if (!boost){
+        if (boost == false){
             return 1;
         }else{
             return 2;
         }
     }
-    private boolean boost (boolean a, boolean b, boolean x, boolean y){
-        if (a && b && x && !y){
+    public boolean boost (boolean a, boolean b, boolean x, boolean y){
+        if (a == true && b == true && x == true && y == false){
             return true;
         }else{
             return false;
@@ -33,7 +33,7 @@ public class TeleOpExperiments extends OpMode {
 //        servoOne.setPosition(rTrig);
 //        return rTrig;
 //    }
-    private void drive(double FL, double BL, double FR, double BR){
+    public void drive(double FL, double BL, double FR, double BR){
         frontLeft.setPower(FL);
         backRight.setPower(BR);
         frontRight.setPower(FR);
@@ -49,8 +49,8 @@ public class TeleOpExperiments extends OpMode {
     }
     public void loop() {
         //boost test
-        if (gamepad1.start){
-            if ((boost (gamepad1.a, gamepad1.b, gamepad1.x, gamepad1.y))){
+        if (gamepad1.start == true){
+            if ((boost (gamepad1.a, gamepad1.b, gamepad1.x, gamepad1.y)) == true){
                 sanic = 2;
             }else{
                 sanic = 1;
