@@ -43,18 +43,17 @@ float sanic = 1;
         float rX = Range.clip(gamepad1.right_stick_x, -1, 1);
 
 
-        if (Math.abs(lX)+Math.abs(lY)>0.1) {
+
 
 
             leftStickDrive(-(gamepad1.left_stick_x + gamepad1.left_stick_y) / 2 * sanic,
                     -(gamepad1.left_stick_x - gamepad1.left_stick_y) / 2 * sanic);
+            if(Math.abs(rX)>0.1){
 
-        }else if(Math.abs(rX)>0.1){
-
-            if (rX>0){
-               rightStickDrive(rX, rX);
-            }/*lse if(rX<0){
-                rightStickDrive( rX, rX)
+                if (rX>0){
+                 rightStickDrive(rX, rX);
+               }/*else if(rX<0){
+                  rightStickDrive( rX, rX)
             } */
 
 
