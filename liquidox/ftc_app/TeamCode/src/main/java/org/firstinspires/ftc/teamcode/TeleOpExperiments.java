@@ -34,6 +34,8 @@ public class TeleOpExperiments extends OpMode {
     public int dir (){
         if (Math.abs(lsy)>Math.abs(lsx)) {
             return 1;
+        }if (Math.abs(rsx)>Math.abs(lsy) && Math.abs(rsx)>Math.abs(lsx)){
+            return 2;
         }return 0;
     }
 //    public double servoUno (float rTrig){
@@ -52,7 +54,7 @@ public class TeleOpExperiments extends OpMode {
         backLeft = hardwareMap.dcMotor.get("BL");
         frontRight = hardwareMap.dcMotor.get("FR");
         backRight = hardwareMap.dcMotor.get("BR");
-        sanic = 1;
+        sanic = 1/2;
 //        servoOne = hardwareMap.servo.get("S1");
     }
     public void loop() {
@@ -63,9 +65,9 @@ public class TeleOpExperiments extends OpMode {
         //boost test
         if (gamepad1.start == true){
             if ((boost (gamepad1.a, gamepad1.b, gamepad1.x, gamepad1.y)) == true){
-                sanic = 2;
-            }else{
                 sanic = 1;
+            }else{
+                sanic = 1/2;
             }
         }
 //        //servo method
@@ -76,31 +78,14 @@ public class TeleOpExperiments extends OpMode {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        /** A better, much more simple driving code that does not use any if statements (preventing errors), and pretty much does the same thing.*/
-        /** ============================================================================================*/
         //only for forwards, backwards, and turning.
-        if (dir() == 0){
-            drive(-lsx/2*sanic, lsx/2*sanic, lsx/2*sanic, -lsx/2*sanic);
+        if (dir() == 2){
+            drive(-rsx*sanic, -rsx*sanic, -rsx*sanic, -rsx*sanic);
         }
-        drive(-lsy/2*sanic, lsy/2*sanic, -lsy/2*sanic, lsy/2*sanic);
-        /** ============================================================================================*/
-        /** one of the drive codes must be commented out for testing */
+        if (dir() == 0){
+            drive(-lsx*sanic, lsx*sanic, lsx*sanic, -lsx*sanic);
+        }
+        drive(-lsy*sanic, lsy*sanic, -lsy*sanic, lsy*sanic);
 
-
-//        if (Math.abs(gamepad1.right_stick_x) > Math.abs(gamepad1.left_stick_y) && Math.abs(gamepad1.right_stick_x) > Math.abs(gamepad1.left_stick_x)) {
-//            if (gamepad1.left_stick_x >= 0.5 || gamepad1.left_stick_x <= -0.5) {
-//                //insert strafing code
-//                drive((0.5  * sanic * gamepad1.right_stick_x), (-0.5  * sanic * gamepad1.right_stick_x), (0.5  * sanic * gamepad1.right_stick_x), (-0.5  * sanic * gamepad1.right_stick_x));
-//            }
-//        } else if (Math.abs(gamepad1.left_stick_x) > Math.abs(gamepad1.left_stick_y)) {
-//            //turning
-//            drive((-0.5  * sanic * gamepad1.right_stick_x), (-0.5  * sanic * gamepad1.right_stick_x), (-0.5  * sanic * gamepad1.right_stick_x), (-0.5  * sanic * gamepad1.right_stick_x));
-//        } else if (gamepad1.left_stick_y >= 0.5 || gamepad1.left_stick_y <= -0.5) {
-//            //basic front and back
-//            drive((-0.5 * sanic *gamepad1.left_stick_y), (-0.5 * sanic *gamepad1.left_stick_y), (0.5 * sanic *gamepad1.left_stick_y), (0.5 * sanic *gamepad1.left_stick_y));
-//        }else{
-//            //it stops now
-//            drive(0,0,0,0);
-//        }
     }
 }
