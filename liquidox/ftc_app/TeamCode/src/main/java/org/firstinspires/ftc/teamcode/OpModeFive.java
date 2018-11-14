@@ -20,7 +20,7 @@ public class OpModeFive extends OpMode {
         backRight = hardwareMap.dcMotor.get("BR");
 
     }
-    public void drive(float bl, float fl, float fr, float br ) {
+    public final void drive(float bl, float fl, float fr, float br ) {
 
           frontLeft.setPower(-fl);
           backRight.setPower(br);
