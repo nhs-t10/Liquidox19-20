@@ -25,7 +25,7 @@ public class OpModeFive extends OpMode {
 
         //assign shoulders (motors involved in arms)
       //  rightShoulder = hardwareMap.servo.get("RS");
-        leftShoulder = hardwareMap.servo.get("LS");
+        //leftShoulder = hardwareMap.servo.get("LS");
         //chestShoulder = hardwareMap.servo.get("CS");
 
     }
