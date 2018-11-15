@@ -1,10 +1,7 @@
 
 package org.firstinspires.ftc.teamcode;
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.HardwareMap;
-import org.firstinspires.ftc.teamcode.LO2Library;
 
 
 @Autonomous
@@ -12,15 +9,11 @@ public class Turning extends LO2Library {
     float currentAngle;
     float destination;
     float pComponent;
-    float dComponent;
-    float iComponent;
     boolean turning=false;
-    float prevError = 0;
     float sumError = 0;
     float prevTime = 0;
     final float P = 0.03f;
-    final float D = 0.3f;
-    final float I = 0.01f;
+
 
     DcMotor frontLeft, backLeft, frontRight, backRight;
 
@@ -65,15 +58,14 @@ public class Turning extends LO2Library {
         float error = getError();
         pComponent = error * P;
         double currTime = getCurrTime();
-        dComponent = (float)-Math.abs(D*(error-prevError)/(currTime- prevTime));
+
 
         sumError += error*(currTime-prevTime);
-        iComponent = I * sumError;
         if (turning) {
             if (Math.abs(error) < 3) {
                 stopTurning();
             }
-            drive((pComponent+dComponent+iComponent), (pComponent+dComponent+iComponent),-(pComponent+dComponent+iComponent),-(pComponent+dComponent+iComponent));
+            drive((pComponent), (pComponent),-(pComponent),-(pComponent));
 
         }
         prevTime = (float)currTime;

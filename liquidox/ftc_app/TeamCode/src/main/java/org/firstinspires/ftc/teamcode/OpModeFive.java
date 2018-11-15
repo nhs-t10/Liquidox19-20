@@ -31,14 +31,14 @@ public class OpModeFive extends OpMode {
     }
     public final void drive(float bl, float fl, float fr, float br ) {
 
-          frontLeft.setPower(-fl);
-          backRight.setPower(br);
-          frontRight.setPower(-fr);
-          backLeft.setPower(bl);
+          frontLeft.setPower(-1/2*fl);
+          backRight.setPower(1/2*br);
+          frontRight.setPower(-1/2*fr);
+          backLeft.setPower(1/2*bl);
 
     }
 
-    float[] sum = {0 ,0 , 0, 0};
+    float[] sum;
 
 
 
