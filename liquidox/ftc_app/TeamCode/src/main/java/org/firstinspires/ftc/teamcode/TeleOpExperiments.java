@@ -82,10 +82,10 @@ public class TeleOpExperiments extends OpMode {
 //            drive(-rsx*sanic, -rsx*sanic, -rsx*sanic, -rsx*sanic);
 //        }
         if (dir() == 0){
-            drive(-lsx*sanic, lsx*sanic, lsx*sanic, -lsx*sanic);
+            drive(-lsx*sanic, -lsx*sanic, -lsx*sanic, -lsx*sanic);
         }
         if (dir() == 1) {
-            drive(-lsy*sanic, lsy*sanic, -lsy*sanic, lsy*sanic);
+            drive(-lsy*sanic, -lsy*sanic, lsy*sanic, lsy*sanic);
         }
 
 
