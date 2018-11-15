@@ -23,6 +23,13 @@ public class TeleOpExperiments extends OpMode {
             return 2;
         }
     }
+    public int mode () {
+        if (rsx>= 0.3){
+            return 2;
+        }else{
+            return 1;
+        }
+    }
     public boolean boost (boolean a, boolean b, boolean x, boolean y){
         if (a == true && b == true && x == true && y == false){
             return true;
@@ -32,13 +39,17 @@ public class TeleOpExperiments extends OpMode {
     }
 /** 0 is turn, 1 is normal, 2 will be strafing */
     public int dir (int mode){
-        if (Math.abs(lsy)>Math.abs(lsx)) {
-            return 1;
-//        }if (Math.abs(rsx)>Math.abs(lsy) && Math.abs(rsx)>Math.abs(lsx)){
-//            return 2;
+        if (mode == 1){
+            if (Math.abs(lsy)>Math.abs(lsx)) {
+                return 1;
+            }else{
+                return 0;
+            }
+
         }else{
-            return 0;
+            return 2;
         }
+
     }
 //    public double servoUno (float rTrig){
 //        servoOne.setPosition(rTrig);
@@ -83,14 +94,15 @@ public class TeleOpExperiments extends OpMode {
 //        if (dir() == 2){
 //            drive(-rsx*sanic, -rsx*sanic, -rsx*sanic, -rsx*sanic);
 //        }
-        if (dir(1) == 0){
-            drive(-lsx, -lsx, -lsx, -lsx);
-            drive(-lsx, -lsx, -lsx, -lsx);
+        if (dir(mode()) == 0){
+            drive(lsx/2, lsx/2, lsx/2, lsx/2);
         }
-        if (dir(1) == 1) {
-            drive(-lsy, -lsy, lsy, lsy);
+        if (dir(mode()) == 1) {
+            drive(-lsy/2, -lsy/2, lsy/2, lsy/2);
         }
-
+        if (dir(mode()) == 2){
+            drive(-lsy/2, lsy/2, -lsy/2, lsy/2);
+        }
 
     }
 }
