@@ -23,8 +23,8 @@ float sanic = 1;
 
     public void rightStickDrive(float front, float back) {
 
-        frontLeft.setPower(front);
-        backRight.setPower(-back);
+        frontLeft.setPower(-front);
+        backRight.setPower(back);
         frontRight.setPower(front);
         backLeft.setPower(-back);
 

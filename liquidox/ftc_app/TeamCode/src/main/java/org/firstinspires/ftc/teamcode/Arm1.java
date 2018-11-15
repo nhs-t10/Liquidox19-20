@@ -3,10 +3,11 @@
 //import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 //import com.qualcomm.robotcore.hardware.DcMotor;
 //import java.util.concurrent.TimeUnit;
+//import com.qualcomm.robotcore.hardware.Servo;
 //
 //@TeleOp
 //public class Arm1 extends OpMode {
-//    DcMotor Arm1;
+//    Servo Arm1;
 //
 //    public void drive(double FL, double BL, double FR, double BR){
 //        frontLeft.setPower(FL);
