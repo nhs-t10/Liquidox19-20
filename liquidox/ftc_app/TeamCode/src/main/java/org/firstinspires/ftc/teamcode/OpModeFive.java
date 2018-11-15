@@ -17,7 +17,7 @@ public class OpModeFive extends OpMode {
     Servo rightShoulder, leftShoulder, chestShoulder;
 
     public void init() {
-        /*Namiyng the Motors for phone*/
+        /*Naming the Motors for phone*/
         frontLeft = hardwareMap.dcMotor.get("FL");
         backLeft = hardwareMap.dcMotor.get("BL");
         frontRight = hardwareMap.dcMotor.get("FR");
