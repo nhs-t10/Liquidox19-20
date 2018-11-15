@@ -33,8 +33,8 @@ public class OpModeFive extends OpMode {
 
           frontLeft.setPower(-1/2*fl);
           backRight.setPower(1/2*br);
-          frontRight.setPower(-1/2*fr);
-          backLeft.setPower(1/2*bl);
+          frontRight.setPower(1/2*fr);
+          backLeft.setPower(-1/2*bl);
 
     }
 
@@ -49,8 +49,8 @@ public class OpModeFive extends OpMode {
         float rX = Range.clip(gamepad1.right_stick_x, -1, 1);
 
         float[] vertical = {lY, lY, lY, lY};
-        float[] horizontal = {-lX, lX, lX, -lX};
-        float[] rotational = {rX, rX, -rX, -rX};
+        float[] horizontal = {lX, -lX, -lX, lX};
+        float[] rotational = {-rX, -rX, rX, rX};
 
         for(int i=0; i<4; i++) {
             sum[i] = vertical[i] + horizontal[i] + rotational[i];
@@ -73,18 +73,16 @@ public class OpModeFive extends OpMode {
                 leftShoulder.setPosition(leftShoulder.getPosition()+1);
             } /*no else because we don't want one button to "take precedence" over another-- might be jittery, but there you go `\_('-')_/` */ if (gamepad1.b) {
             //rightShoulder.setPosition(rightShoulder.getPosition()-1);
-            leftShoulder.setPosition(leftShoulder.getPosition()-1);
-            }
+            leftShoulder.setPosition(leftShoulder.getPosition() - 1);
+        }
         // why the heck did this show up here? }
 
     }
 
     /**Adds motor values for bug fixing*/
-        /*telemetry.addData("Front Left: ", frontLeft.getPower());
-        telemetry.addData("Front Right: ", frontRight.getPower());
-        telemetry.addData("Back Left: ", backLeft.getPower());
-        telemetry.addData("Back Right: ", backRight.getPower());*/
+//        telemetry.addData("Front Left: ", frontLeft.getPower());
+//        telemetry.addData("Front Right: ", frontRight.getPower());
+//        telemetry.addData("Back Left: ", backLeft.getPower());
+//        telemetry.addData("Back Right: ", backRight.getPower());
+
 }
-
-
-

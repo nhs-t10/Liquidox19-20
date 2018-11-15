@@ -30,8 +30,8 @@ public class Turning extends LO2Library {
 
         frontLeft.setPower(-fl);
         backRight.setPower(br);
-        frontRight.setPower(-fr);
-        backLeft.setPower(bl);
+        frontRight.setPower(fr);
+        backLeft.setPower(-bl);
 
     }
 
