@@ -34,8 +34,8 @@ public class TeleOpExperiments extends OpMode {
     public int dir (){
         if (Math.abs(lsy)>Math.abs(lsx)) {
             return 1;
-        }if (Math.abs(rsx)>Math.abs(lsy) && Math.abs(rsx)>Math.abs(lsx)){
-            return 2;
+//        }if (Math.abs(rsx)>Math.abs(lsy) && Math.abs(rsx)>Math.abs(lsx)){
+//            return 2;
         }return 0;
     }
 //    public double servoUno (float rTrig){
@@ -66,9 +66,8 @@ public class TeleOpExperiments extends OpMode {
         if (gamepad1.start == true){
             if ((boost (gamepad1.a, gamepad1.b, gamepad1.x, gamepad1.y)) == true){
                 sanic = 1;
-            }else{
-                sanic = 1/2;
             }
+            sanic = 1/2;
         }
 //        //servo method
 //        servoUno(gamepad1.right_trigger);
@@ -79,9 +78,9 @@ public class TeleOpExperiments extends OpMode {
             e.printStackTrace();
         }
         //only for forwards, backwards, and turning.
-        if (dir() == 2){
-            drive(-rsx*sanic, -rsx*sanic, -rsx*sanic, -rsx*sanic);
-        }
+//        if (dir() == 2){
+//            drive(-rsx*sanic, -rsx*sanic, -rsx*sanic, -rsx*sanic);
+//        }
         if (dir() == 0){
             drive(-lsx*sanic, lsx*sanic, lsx*sanic, -lsx*sanic);
         }
