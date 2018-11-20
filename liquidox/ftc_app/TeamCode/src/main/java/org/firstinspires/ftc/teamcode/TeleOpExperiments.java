@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 public class TeleOpExperiments extends OpMode {
     DcMotor frontLeft, backLeft, frontRight, backRight;
    // Servo servoOne;
-    int  sanic;
+    /**int  sanic; */
     double lsx, lsy, rsx, rsy;
     public int boostSpeed (boolean boost){
         if (boost == false){
@@ -32,12 +32,20 @@ public class TeleOpExperiments extends OpMode {
     }
 /** 0 is turn, 1 is normal, 2 will be strafing */
     public int dir (){
-        if (Math.abs(lsy)>Math.abs(lsx)) {
-            return 1;
-        }if (Math.abs(rsx)>Math.abs(lsy) && Math.abs(rsx)>Math.abs(lsx)){
-            return 2;
-        }return 0;
-    }
+
+        if (Math.abs(rsx) >= 0.3){
+            return 666 /**This number can be anything*/;
+        }
+            else if (Math.abs(lsy)>Math.abs(lsx)) {
+                return 1;
+            }else{
+                return 0;
+            }
+        }
+
+
+
+
 //    public double servoUno (float rTrig){
 //        servoOne.setPosition(rTrig);
 //        return rTrig;
@@ -54,22 +62,21 @@ public class TeleOpExperiments extends OpMode {
         backLeft = hardwareMap.dcMotor.get("BL");
         frontRight = hardwareMap.dcMotor.get("FR");
         backRight = hardwareMap.dcMotor.get("BR");
-        sanic = 1/2;
+     //   sanic = 1/2;
 //        servoOne = hardwareMap.servo.get("S1");
     }
     public void loop() {
-        lsx = gamepad1.left_stick_x;
+        lsx=gamepad1.left_stick_x;
         lsy=gamepad1.left_stick_y;
         rsx=gamepad1.right_stick_x;
         rsy=gamepad1.right_stick_y;
         //boost test
-        if (gamepad1.start == true){
+      /**  if (gamepad1.start == true){
             if ((boost (gamepad1.a, gamepad1.b, gamepad1.x, gamepad1.y)) == true){
                 sanic = 1;
-            }else{
-                sanic = 1/2;
             }
-        }
+            sanic = 1/2;
+        } */
 //        //servo method
 //        servoUno(gamepad1.right_trigger);
         //lag
@@ -79,13 +86,18 @@ public class TeleOpExperiments extends OpMode {
             e.printStackTrace();
         }
         //only for forwards, backwards, and turning.
-        if (dir() == 2){
-            drive(-rsx*sanic, -rsx*sanic, -rsx*sanic, -rsx*sanic);
-        }
+//        if (dir() == 2){
+//            drive(-rsx*sanic, -rsx*sanic, -rsx*sanic, -rsx*sanic);
+//        }
         if (dir() == 0){
-            drive(-lsx*sanic, lsx*sanic, lsx*sanic, -lsx*sanic);
+            drive(lsx*9/10, lsx*9/10, lsx*5.5/10, lsx*5.5/10);
         }
-        drive(-lsy*sanic, lsy*sanic, -lsy*sanic, lsy*sanic);
+        if (dir() == 1) {
+            drive(-lsy*9/10, -lsy*9/10, lsy*5.5/10, lsy*5.5/10);
+        }
+        if (dir() == 666){
+            drive(-rsx*9/10, rsx*9/10, -rsx*5.5/10, rsx*5.5/10);
+        }
 
     }
 }
