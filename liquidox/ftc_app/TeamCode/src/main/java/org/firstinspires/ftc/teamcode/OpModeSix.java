@@ -21,7 +21,7 @@ float sanic = 1;
 
     }
 
-    public void rightStickDrive(float front, float back) {
+    private void rightStickDrive(float front, float back) {
 
         frontLeft.setPower(-front);
         backRight.setPower(back);
@@ -30,7 +30,7 @@ float sanic = 1;
 
     }
 
-    public void leftStickDrive(float right, float left){
+    private void leftStickDrive(float right, float left){
         frontLeft.setPower(left);
         backRight.setPower(right);
         frontRight.setPower(right);
@@ -50,18 +50,18 @@ float sanic = 1;
                     -(gamepad1.left_stick_x - gamepad1.left_stick_y) / 2 * sanic);
             if(Math.abs(rX)>0.1){
 
-                if (rX>0){
+
                  rightStickDrive(rX, rX);
-               }/*else if(rX<0){
-                  rightStickDrive( rX, rX)
-            } */
+               
+
+            }
 
 
 
         }
     }
 
-}
+
 
 
 
