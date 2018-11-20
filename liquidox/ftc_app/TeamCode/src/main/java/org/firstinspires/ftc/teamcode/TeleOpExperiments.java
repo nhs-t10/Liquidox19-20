@@ -90,13 +90,13 @@ public class TeleOpExperiments extends OpMode {
 //            drive(-rsx*sanic, -rsx*sanic, -rsx*sanic, -rsx*sanic);
 //        }
         if (dir() == 0){
-            drive(lsx*8/10, lsx*8/10, lsx*5/10, lsx*5/10);
+            drive(lsx*9/10, lsx*9/10, lsx*5.5/10, lsx*5.5/10);
         }
         if (dir() == 1) {
-            drive(-lsy*8/10, -lsy*8/10, lsy*5/10, lsy*5/10);
+            drive(-lsy*9/10, -lsy*9/10, lsy*5.5/10, lsy*5.5/10);
         }
         if (dir() == 666){
-            drive(-rsx*8/10, rsx*8/10, -rsx*5/10, rsx*5/10);
+            drive(-rsx*9/10, rsx*9/10, -rsx*5.5/10, rsx*5.5/10);
         }
 
     }
