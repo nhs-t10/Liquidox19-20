@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
-
+import org.firstinspires.ftc.robotcore.external.*;
 import java.util.concurrent.TimeUnit;
 
 @TeleOp
@@ -16,6 +16,8 @@ public class OpModeFive extends OpMode {
 
     Servo rightShoulder, leftShoulder, chestShoulder;
 
+
+    float speed = 1;
     public void init() {
         /*Naming the Motors for phone*/
         frontLeft = hardwareMap.dcMotor.get("FL");
@@ -31,10 +33,10 @@ public class OpModeFive extends OpMode {
     }
     public final void drive(float bl, float fl, float fr, float br ) {
 
-          frontLeft.setPower(-fl);
-          backRight.setPower(br);
-          frontRight.setPower(fr);
-          backLeft.setPower(-bl);
+          frontLeft.setPower(-fl*speed);
+          backRight.setPower(br*speed);
+          frontRight.setPower(fr*speed);
+          backLeft.setPower(-bl*speed);
 
     }
 
@@ -76,13 +78,16 @@ public class OpModeFive extends OpMode {
 //            leftShoulder.setPosition(leftShoulder.getPosition() - 1);
 //        }
         // why the heck did this show up here? }
-
+        telemetry.addData("Front Left Power: ", frontLeft.getPower());
+        telemetry.addData("Front Right Power: ", frontRight.getPower());
+        telemetry.addData("Back Left Power: ", backLeft.getPower());
+        telemetry.addData("Back Right Power: ", backRight.getPower());
+        telemetry.addData("Left Gamepad X-Coordinate: ", lX);
+        telemetry.addData("Left Gamepad X-Coordinate: ", lY);
+        telemetry.addData("Data we eventually feed into `drive()`: ", sum.toString());
+        telemetry.update();
     }
 
     /**Adds motor values for bug fixing*/
-//        telemetry.addData("Front Left: ", frontLeft.getPower());
-//        telemetry.addData("Front Right: ", frontRight.getPower());
-//        telemetry.addData("Back Left: ", backLeft.getPower());
-//        telemetry.addData("Back Right: ", backRight.getPower());
 
 }
