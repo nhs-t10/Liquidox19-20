@@ -41,17 +41,17 @@ public class AutonomousTesting extends OpMode {
     public void loop(){
         if(cState == currentState.starting){
            unLatch();
-           if(timer1 == 50000){
+           if(timer1 == 5000){
                cState = currentState.step1;
            }
         }
         if(cState == currentState.step1){
-            drive(0.5, 0.5, 0.5, 0.5)
+            drive(0.5, 0.5, 0.5, 0.5);
             if(timer1 == 10000){
                 cState = currentState.step2;
             }
         }
-        timer = System.currentTimeMillis();
+        timer1 = System.currentTimeMillis();
 //        if(current == currentState.Turning){
 //            turn();
 //        }
@@ -60,9 +60,7 @@ public class AutonomousTesting extends OpMode {
 
     }
 
-    public void turn(){
-        drive(-1,1,1,-1);
-    }
+
     public void unLatch() {
         //code to unlatch
     }
