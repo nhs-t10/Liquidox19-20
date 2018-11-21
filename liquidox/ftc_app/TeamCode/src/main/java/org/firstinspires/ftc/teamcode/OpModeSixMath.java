@@ -22,7 +22,7 @@ public class OpModeSixMath extends OpMode {
     }
 
     private void rightStickDrive(float front, float back) {
-        
+
         frontLeft.setPower(-front);
         backRight.setPower(back);
         frontRight.setPower(front);
