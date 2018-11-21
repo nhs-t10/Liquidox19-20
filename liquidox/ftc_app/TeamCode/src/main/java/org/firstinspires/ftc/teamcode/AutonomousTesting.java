@@ -47,7 +47,7 @@ public class AutonomousTesting extends OpMode {
         if(step == 2){
             drive(-0.5, -0.5, 0.5, 0.5);
             if(timer1 >= 10000){
-                drive(0,0,0,0);
+              //  drive(0,0,0,0);
                 step++;
             }
             if(step == 3){
