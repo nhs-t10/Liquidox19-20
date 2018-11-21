@@ -85,10 +85,7 @@ public class TeleOpExperiments extends OpMode {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        //only for forwards, backwards, and turning.
-//        if (dir() == 2){
-//            drive(-rsx*sanic, -rsx*sanic, -rsx*sanic, -rsx*sanic);
-//        }
+
         if (dir() == 0){
             drive(lsx*9/10, lsx*9/10, lsx*5.5/10, lsx*5.5/10);
         }
@@ -96,7 +93,7 @@ public class TeleOpExperiments extends OpMode {
             drive(-lsy*9/10, -lsy*9/10, lsy*5.5/10, lsy*5.5/10);
         }
         if (dir() == 666){
-            drive(-rsx*9/10, rsx*9/10, -rsx*5.5/10, rsx*5.5/10);
+            drive(-rsx*9/10, rsx*9/10, -rsx*7/10, rsx*7/10);
         }
 
     }
