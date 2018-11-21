@@ -81,14 +81,15 @@ public class OpModeFive extends OpMode {
         //if the left bumper is down, down the speed by 1.
         if(gamepad1.left_bumper) { speed = 0.25f; }
         else if(gamepad1.right_bumper) { speed = 0.75f; }
-        else { speed = 0.5f }
+        else { speed = 0.5f; }
         telemetry.addData("Front Left Power: ", frontLeft.getPower());
         telemetry.addData("Front Right Power: ", frontRight.getPower());
         telemetry.addData("Back Left Power: ", backLeft.getPower());
         telemetry.addData("Back Right Power: ", backRight.getPower());
         telemetry.addData("Left Gamepad X-Coordinate: ", lX);
         telemetry.addData("Left Gamepad X-Coordinate: ", lY);
-        telemetry.addData("Data we eventually feed into `drive()`: ", sum.toString());
+        telemetry.addData("Data we  fed into `drive()`: ", sum.toString());
+        telemetry.addData("Current speed: ", speed);
         telemetry.update();
     }
 
