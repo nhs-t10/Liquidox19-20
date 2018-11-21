@@ -1,103 +1,97 @@
 package org.firstinspires.ftc.teamcode;
+
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
-
+import com.qualcomm.robotcore.util.Range;
+import org.firstinspires.ftc.robotcore.external.*;
 import java.util.concurrent.TimeUnit;
-//Hello! This entire section is just going to be a sort of logbook for all of the changes I intend to make
-//This used to be called "OpModeTwo"
-//Right now I am working on simplifying my cascading if statements into methods.
-//This will probably take a while but it will be worth it in the end.
-//Work on autonomus has started
+
 @TeleOp
 public class TeleOpExperiments extends OpMode {
+
+    //instantiate hardware devices
     DcMotor frontLeft, backLeft, frontRight, backRight;
-   // Servo servoOne;
-    /**int  sanic; */
-    double lsx, lsy, rsx, rsy;
-    public int boostSpeed (boolean boost){
-        if (boost == false){
-            return 1;
-        }else{
-            return 2;
-        }
-    }
-    public boolean boost (boolean a, boolean b, boolean x, boolean y){
-        if (a == true && b == true && x == true && y == false){
-            return true;
-        }else{
-            return false;
-        }
-    }
-/** 0 is turn, 1 is normal, 2 will be strafing */
-    public int dir (){
 
-        if (Math.abs(rsx) >= 0.3){
-            return 666 /**This number can be anything*/;
-        }
-            else if (Math.abs(lsy)>Math.abs(lsx)) {
-                return 1;
-            }else{
-                return 0;
-            }
-        }
+    Servo rightShoulder, leftShoulder, chestShoulder;
 
 
-
-
-//    public double servoUno (float rTrig){
-//        servoOne.setPosition(rTrig);
-//        return rTrig;
-//    }
-    public void drive(double FL, double BL, double FR, double BR){
-        frontLeft.setPower(FL);
-        backRight.setPower(BR);
-        frontRight.setPower(FR);
-        backLeft.setPower(BL);
-    }
+    float speed = 0.5f;
     public void init() {
-        //Naming the Motors for phone
+        /*Naming the Motors for phone*/
         frontLeft = hardwareMap.dcMotor.get("FL");
         backLeft = hardwareMap.dcMotor.get("BL");
         frontRight = hardwareMap.dcMotor.get("FR");
         backRight = hardwareMap.dcMotor.get("BR");
-     //   sanic = 1/2;
-//        servoOne = hardwareMap.servo.get("S1");
-    }
-    public void loop() {
-        lsx=gamepad1.left_stick_x;
-        lsy=gamepad1.left_stick_y;
-        rsx=gamepad1.right_stick_x;
-        rsy=gamepad1.right_stick_y;
-        //boost test
-      /**  if (gamepad1.start == true){
-            if ((boost (gamepad1.a, gamepad1.b, gamepad1.x, gamepad1.y)) == true){
-                sanic = 1;
-            }
-            sanic = 1/2;
-        } */
-//        //servo method
-//        servoUno(gamepad1.right_trigger);
-        //lag
-        try {
-            TimeUnit.SECONDS.sleep(1/100);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        //only for forwards, backwards, and turning.
-//        if (dir() == 2){
-//            drive(-rsx*sanic, -rsx*sanic, -rsx*sanic, -rsx*sanic);
-//        }
-        if (dir() == 0){
-            drive(lsx*9/10, lsx*9/10, lsx*5.5/10, lsx*5.5/10);
-        }
-        if (dir() == 1) {
-            drive(-lsy*9/10, -lsy*9/10, lsy*5.5/10, lsy*5.5/10);
-        }
-        if (dir() == 666){
-            drive(-rsx*9/10, rsx*9/10, -rsx*5.5/10, rsx*5.5/10);
-        }
+
+        //assign shoulders (motors involved in arms)
+        //  rightShoulder = hardwareMap.servo.get("RS");
+        //leftShoulder = hardwareMap.servo.get("LS");
+        //chestShoulder = hardwareMap.servo.get("CS");
 
     }
+    public final void drive(float bl, float fl, float fr, float br ) {
+
+        frontLeft.setPower(-fl*speed);
+        backRight.setPower(br*speed);
+        frontRight.setPower(fr*speed);
+        backLeft.setPower(-bl*speed);
+
+    }
+
+    float[] sum = {0,0,0,0};
+
+
+
+    public void loop() {
+
+        float lX = Range.clip(gamepad1.left_stick_x, -1, 1);
+        float lY = Range.clip(gamepad1.left_stick_y, -1, 1);
+        float rX = Range.clip(gamepad1.right_stick_x, -1, 1);
+
+        float[] vertical = {lY, lY, lY, lY};
+        float[] horizontal = {-lX, lX, lX, -lX};
+        float[] rotational = {rX, rX, -rX, -rX};
+
+        for(int i=0; i<4; i++) {
+            sum[i] = vertical[i] + horizontal[i] + rotational[i];
+        }
+
+        float highest = Math.max(Math.max(sum[0], sum[1]), Math.max(sum[2], sum[3]));
+
+        if(Math.abs(highest)>1) {
+            for (int i=0; i<4; i++) {
+                sum[i]=sum[i]/highest;
+            }
+        }
+
+
+        drive(sum[0],sum[1],sum[2],sum[3]);
+        //okay now that that masterpiece of coding is done, have some disgusting pasta.
+        //if the button is down, move left and right shoulders forwards.
+//            if(gamepad1.a) {
+//              //  rightShoulder.setPosition(rightShoulder.getPosition()+1);
+//                leftShoulder.setPosition(leftShoulder.getPosition()+1);
+//            } /*no else because we don't want one button to "take precedence" over another-- might be jittery, but there you go `\_('-')_/` */ if (gamepad1.b) {
+//            //rightShoulder.setPosition(rightShoulder.getPosition()-1);
+//            leftShoulder.setPosition(leftShoulder.getPosition() - 1);
+//        }
+        // why the heck did this show up here? }
+        //if the left bumper is down, down the speed by 1.
+        if(gamepad1.left_bumper) { speed = 0.25f; }
+        else if(gamepad1.right_bumper) { speed = 0.75f; }
+        else { speed = 0.5f; }
+        telemetry.addData("Front Left Power: ", frontLeft.getPower());
+        telemetry.addData("Front Right Power: ", frontRight.getPower());
+        telemetry.addData("Back Left Power: ", backLeft.getPower());
+        telemetry.addData("Back Right Power: ", backRight.getPower());
+        telemetry.addData("Left Gamepad X-Coordinate: ", lX);
+        telemetry.addData("Left Gamepad X-Coordinate: ", lY);
+        telemetry.addData("Data we eventually feed into `drive()`: ", sum.toString());
+        telemetry.update();
+    }
+
+    /**Adds motor values for bug fixing-- adam did this out of loop initially, wow whw what a stupid*/
+
 }
