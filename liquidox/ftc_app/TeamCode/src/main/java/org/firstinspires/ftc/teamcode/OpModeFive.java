@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
 
 @TeleOp
 public class OpModeFive extends OpMode {
-
+    private double random;
     //instantiate hardware devices
     DcMotor frontLeft, backLeft, frontRight, backRight;
 
@@ -82,6 +82,16 @@ public class OpModeFive extends OpMode {
         if(gamepad1.left_bumper) { speed = 0.25f; }
         else if(gamepad1.right_bumper) { speed = 0.75f; }
         else { speed = 0.5f; }
+        //////////////////////////////
+        //MEMES
+        if(gamepad1.x == true) {
+            drive(0.8f, 0.8f ,1 ,1 );
+        }
+        random = Math.random() * 1 + 4;
+
+        
+
+        //////////////////////////////
         telemetry.addData("Front Left Power: ", frontLeft.getPower());
         telemetry.addData("Front Right Power: ", frontRight.getPower());
         telemetry.addData("Back Left Power: ", backLeft.getPower());
