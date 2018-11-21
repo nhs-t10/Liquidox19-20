@@ -17,7 +17,7 @@ public class OpModeFive extends OpMode {
     Servo rightShoulder, leftShoulder, chestShoulder;
 
 
-    float speed = 1;
+    float speed = 0.5f;
     public void init() {
         /*Naming the Motors for phone*/
         frontLeft = hardwareMap.dcMotor.get("FL");
@@ -78,6 +78,10 @@ public class OpModeFive extends OpMode {
 //            leftShoulder.setPosition(leftShoulder.getPosition() - 1);
 //        }
         // why the heck did this show up here? }
+        //if the left bumper is down, down the speed by 1.
+        if(gamepad1.left_bumper) { speed = 0.25f; }
+        else if(gamepad1.right_bumper) { speed = 0.75f; }
+        else { speed = 0.5f }
         telemetry.addData("Front Left Power: ", frontLeft.getPower());
         telemetry.addData("Front Right Power: ", frontRight.getPower());
         telemetry.addData("Back Left Power: ", backLeft.getPower());
@@ -88,6 +92,6 @@ public class OpModeFive extends OpMode {
         telemetry.update();
     }
 
-    /**Adds motor values for bug fixing*/
+    /**Adds motor values for bug fixing-- adam did this out of loop initially, wow whw what a stupid*/
 
 }
