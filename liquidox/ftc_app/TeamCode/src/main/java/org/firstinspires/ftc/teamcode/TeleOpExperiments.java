@@ -34,27 +34,9 @@ public class TeleOpExperiments extends OpMode {
         //chestShoulder = hardwareMap.servo.get("CS");
 
     }
-    public  int lTrig (){
 
-        if (lT == 0.1 || lT == 0.2) {lGun = 5/10;}
-        if (lT == 0.3 || lT == 0.4) {lGun = 4/10;}
-        if (lT == 0.5 || lT == 0.6) {lGun = 3/10;}
-        if (lT == 0.7 || lT == 0.8) {lGun = 2/10;}
-        if (lT == 0.9 || lT == 1) {lGun = 1/10;}
 
-       return 420;
-    }
 
-    public int rTrig (){
-
-        if (rT == 0.1 || rT == 0.2) {rGun =  6/10;}
-        if (rT == 0.3 || rT == 0.4) {rGun =  7/10;}
-        if (rT == 0.5 || rT == 0.6) {rGun = 8/10;}
-        if (rT == 0.7 || rT == 0.8) {rGun = 9/10;}
-        if (rT == 0.9 || rT == 1) {rGun =  10/10;}
-
-        return 420;
-    }
 
     public final void drive(float bl, float fl, float fr, float br ) {
 
@@ -70,8 +52,6 @@ public class TeleOpExperiments extends OpMode {
 
 
     public void loop() {
-rTrig();
-lTrig();
         float lX = Range.clip(gamepad1.left_stick_x, -1, 1);
         float lY = Range.clip(gamepad1.left_stick_y, -1, 1);
         float rX = Range.clip(gamepad1.right_stick_x, -1, 1);
@@ -107,9 +87,8 @@ lTrig();
 //        }
         // why the heck did this show up here? }
         //if the left bumper is down, down the speed by 1.
-        if (gamepad1.a == true) { speed = sSpeed;}
-        if (rT > 0 && lT > 0) { sSpeed = 0.5f; }
-        else if (lT>0) {sSpeed = lT;}
+        if (rT > 0 || lT > 0) { speed = Math.abs((rT + lT)/2 -1); }
+        else {speed = 1/2;}
         telemetry.addData("Front Left Power: ", frontLeft.getPower());
         telemetry.addData("Front Right Power: ", frontRight.getPower());
         telemetry.addData("Back Left Power: ", backLeft.getPower());
@@ -121,6 +100,6 @@ lTrig();
         telemetry.update();
     }
 
-    /**Adds motor values for bug fixing-- adam did this out of loop initially, wow whw what a stupid*/
+    /**Working on speed code*/
 
 }
