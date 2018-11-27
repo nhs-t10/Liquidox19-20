@@ -9,7 +9,8 @@ import com.qualcomm.robotcore.util.Range;
 public class BasicTankMode extends OpMode {
 
     DcMotor frontLeft, backLeft, frontRight, backRight;
-
+    float t = 0;
+    int dir = 0;
     public void init() {
         /*Namiyng the Motors for phone*/
         frontLeft = hardwareMap.dcMotor.get("FL");
@@ -19,11 +20,11 @@ public class BasicTankMode extends OpMode {
 
     }
     public void drive(float bl, float fl, float fr, float br ) {
-            float coef = 0.8f;
-          frontLeft.setPower(-fl * coef);
-          backRight.setPower(br* coef);
-          frontRight.setPower(fr* coef);
-          backLeft.setPower(-bl* coef);
+        float coef = 0.8f;
+        frontLeft.setPower(-fl * coef);
+        backRight.setPower(br* coef);
+        frontRight.setPower(fr* coef);
+        backLeft.setPower(-bl* coef);
 
     }
 
@@ -32,25 +33,53 @@ public class BasicTankMode extends OpMode {
 
 
     public void loop() {
-
-        float lX = Range.clip(gamepad1.left_stick_x, -1, 1);
-        float lY = Range.clip(gamepad1.left_stick_y, -1, 1);
-        float rX = Range.clip(gamepad1.right_stick_x, -1, 1);
-        float rY = Range.clip(gamepad1.right_stick_y, -1, 1);
-        if((rX > -0.6 && rX < 0.6) || (lX > -0.6 && lX < 0.6)) {
-            drive(lY, lY, rY, rY);
-        } else {
-            drive((rX+lX)/2,-((rX+lX)/2),-((rX+lX)/2),(rX+lX)/2);
+//
+//        float lX = Range.clip(gamepad1.left_stick_x, -1, 1);
+//        float lY = Range.clip(gamepad1.left_stick_y, -1, 1);
+//        float rX = Range.clip(gamepad1.right_stick_x, -1, 1);
+//        float rY = Range.clip(gamepad1.right_stick_y, -1, 1);
+        t = (float) System.currentTimeMillis();
+        if(gamepad1.x){
+            t = 0;
+            dir = 2000;
+            drive(1, 1 ,1 ,1 );
         }
+        if(gamepad1.a){
+            t = 0;
+            dir = 1000;
+        }
+        if(gamepad1.b){
+            t = 0;
+            dir = 3000;
+        }
+        if(gamepad1.y){
+            t = 0;
+            dir = 4000;
+        }
+        if(t < dir){
+            drive(1, 1 ,1, 1);
+        }
+
+        telemetry.addData("Front Left: ", frontLeft.getPower());
+        telemetry.addData("Front Right: ", frontRight.getPower());
+        telemetry.addData("Back Left: ", backLeft.getPower());
+        telemetry.addData("Back Right: ", backRight.getPower());
+        
+        }
+
+
+
+//        if((rX > -0.6 && rX < 0.6) || (lX > -0.6 && lX < 0.6)) {
+//            drive(lY, lY, rY, rY);
+//        } else {
+//            drive((rX+lX)/2,-((rX+lX)/2),-((rX+lX)/2),(rX+lX)/2);
+//        }
         //drive(lY,lY,rY,rY);//multiply by x?
     }
 
     //Adds motor values for bug fixing*/
-        /*telemetry.addData("Front Left: ", frontLeft.getPower());
-        telemetry.addData("Front Right: ", frontRight.getPower());
-        telemetry.addData("Back Left: ", backLeft.getPower());
-        telemetry.addData("Back Right: ", backRight.getPower());*/
-}
+
+
 
 
 
