@@ -19,7 +19,7 @@ public class Turning extends LO2Library {
 
 
     public void init() {
-        /*Namiyng the Motors for phone*/
+        /*Naming the Motors for phone*/
         frontLeft = hardwareMap.dcMotor.get("FL");
         backLeft = hardwareMap.dcMotor.get("BL");
         frontRight = hardwareMap.dcMotor.get("FR");
@@ -35,7 +35,7 @@ public class Turning extends LO2Library {
 
     }
 
-    public Turning(){
+    public Turning() {
         destination=0;
     }
 

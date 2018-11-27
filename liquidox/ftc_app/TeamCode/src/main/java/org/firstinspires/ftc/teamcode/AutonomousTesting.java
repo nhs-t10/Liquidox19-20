@@ -9,10 +9,7 @@ import java.util.concurrent.TimeUnit;
 public class AutonomousTesting extends OpMode {
     float timer1;
     DcMotor frontLeft, backLeft, frontRight, backRight;
-    enum currentState{
-        starting, step1, step2, step3, step4, step5;
-    }
-    public currentState cState;
+    public int step;
 
     public void drive(double FL, double BL, double FR, double BR){
         frontLeft.setPower(FL);
@@ -35,20 +32,29 @@ public class AutonomousTesting extends OpMode {
         backLeft = hardwareMap.dcMotor.get("BL");
         frontRight = hardwareMap.dcMotor.get("FR");
         backRight = hardwareMap.dcMotor.get("BR");
-        cState = currentState.starting;
+        step = 1;
     }
 
     public void loop(){
-        if(cState == currentState.starting){
+
+        if(step == 1){
            unLatch();
-           if(timer1 == 5000){
-               cState = currentState.step1;
+           drive(1 ,1, 1, 1 );
+           if(timer1 >= 5000){
+               step++;
            }
         }
-        if(cState == currentState.step1){
-            drive(0.5, 0.5, 0.5, 0.5);
-            if(timer1 == 10000){
-                cState = currentState.step2;
+        if(step == 2){
+            drive(-0.5, -0.5, 0.5, 0.5);
+            if(timer1 >= 10000){
+              //  drive(0,0,0,0);
+                step++;
+            }
+            if(step == 3){
+                drive(1, 1,1 , 1 );
+                if(timer1 >= 15000){
+                    step++;
+                }
             }
         }
         timer1 = System.currentTimeMillis();
@@ -56,7 +62,11 @@ public class AutonomousTesting extends OpMode {
 //            turn();
 //        }
 //        if(current. )
-
+        telemetry.addData("Front Left Power: ", frontLeft.getPower());
+        telemetry.addData("Front Right Power: ", frontRight.getPower());
+        telemetry.addData("Back Left Power: ", backLeft.getPower());
+        telemetry.addData("Back Right Power: ", backRight.getPower());
+        telemetry.addData("step: ", step);
 
     }
 

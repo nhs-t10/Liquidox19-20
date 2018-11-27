@@ -10,14 +10,14 @@ import java.util.concurrent.TimeUnit;
 
 @TeleOp
 public class OpModeFive extends OpMode {
-
+    private double random;
     //instantiate hardware devices
     DcMotor frontLeft, backLeft, frontRight, backRight;
 
     Servo rightShoulder, leftShoulder, chestShoulder;
 
 
-    float speed = 1;
+    float speed = 0.5f;
     public void init() {
         /*Naming the Motors for phone*/
         frontLeft = hardwareMap.dcMotor.get("FL");
@@ -78,16 +78,34 @@ public class OpModeFive extends OpMode {
 //            leftShoulder.setPosition(leftShoulder.getPosition() - 1);
 //        }
         // why the heck did this show up here? }
+        //if the left bumper is down, down the speed by 1.
+        if(gamepad1.left_bumper) { speed = 0.25f; }
+        else if(gamepad1.right_bumper) { speed = 0.75f; }
+        else { speed = 0.5f; }
+        //////////////////////////////
+        //MEMES
+        if(gamepad1.x == true) {
+            frontLeft.setPower(1);
+            backRight.setPower(-0.8);
+            frontRight.setPower(-0.8);
+            backLeft.setPower(1);
+        }
+        random = Math.random() * 1 + 4;
+
+
+
+        //////////////////////////////
         telemetry.addData("Front Left Power: ", frontLeft.getPower());
         telemetry.addData("Front Right Power: ", frontRight.getPower());
         telemetry.addData("Back Left Power: ", backLeft.getPower());
         telemetry.addData("Back Right Power: ", backRight.getPower());
         telemetry.addData("Left Gamepad X-Coordinate: ", lX);
         telemetry.addData("Left Gamepad X-Coordinate: ", lY);
-        telemetry.addData("Data we eventually feed into `drive()`: ", sum.toString());
+        telemetry.addData("Data we  fed into `drive()`: ", sum.toString());
+        telemetry.addData("Current speed: ", speed);
         telemetry.update();
     }
 
-    /**Adds motor values for bug fixing*/
+    /**Adds motor values for bug fixing-- adam did this out of loop initially, wow whw what a stupid*/
 
 }
