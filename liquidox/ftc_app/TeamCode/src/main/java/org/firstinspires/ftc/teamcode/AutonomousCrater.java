@@ -9,15 +9,27 @@ public class AutonomousCrater extends AutonomousTesting {
 
     public void loop() {
 
-        if (step == 1) {
-            unLatch();
-            if (timer1 >= 5000) {
+        init();
+
+//        if (step == 1) {
+//            unLatch();
+//            if (timer1 >= 5000) {
+//                step++;
+//            }
+//        }
+        step == 2
+
+        if (step == 2) {
+            drive(1,1,1,1);
+            if (timer1 >= 200) {
                 step++;
             }
+
         }
 
-        if (step==2) {
-            //Turning.setDestination();
+        if (step==3) {
+            setDestination(90);
+            update();
         }
 
     }
