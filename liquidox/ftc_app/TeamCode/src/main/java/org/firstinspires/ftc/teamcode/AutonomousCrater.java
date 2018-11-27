@@ -21,7 +21,7 @@ public class AutonomousCrater extends AutonomousTesting {
 
         if (step == 2) {
             drive(1,1,1,1);
-            if (timer1 >= 200) {
+            if (timer1 >= 2000) {
                 step++;
             }
 
@@ -30,6 +30,9 @@ public class AutonomousCrater extends AutonomousTesting {
         if (step==3) {
             setDestination(90);
             update();
+            if (error == 0) {
+                step++
+            }
         }
 
     }
