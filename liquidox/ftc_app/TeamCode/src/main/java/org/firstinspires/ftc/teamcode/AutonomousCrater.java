@@ -28,8 +28,8 @@ public class AutonomousCrater extends AutonomousTesting {
         }
 
         if (step==3) {
-            setDestination(90);
-            update();
+            Turning.setDestination(90);
+            Turning.update();
             if (error == 0) {
                 step++
             }

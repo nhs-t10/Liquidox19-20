@@ -64,7 +64,7 @@ public class BasicTankMode extends OpMode {
         telemetry.addData("Front Right: ", frontRight.getPower());
         telemetry.addData("Back Left: ", backLeft.getPower());
         telemetry.addData("Back Right: ", backRight.getPower());
-        
+
         }
 
 
