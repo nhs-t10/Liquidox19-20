@@ -83,16 +83,6 @@ public class OpModeFive extends OpMode {
         else if(gamepad1.right_bumper) { speed = 0.75f; }
         else { speed = 0.5f; }
         //////////////////////////////
-        //MEMES
-        if(gamepad1.x == true) {
-            frontLeft.setPower(1);
-            backRight.setPower(-0.8);
-            frontRight.setPower(-0.8);
-            backLeft.setPower(1);
-        }
-        random = Math.random() * 1 + 4;
-
-
 
         //////////////////////////////
         telemetry.addData("Front Left Power: ", frontLeft.getPower());
