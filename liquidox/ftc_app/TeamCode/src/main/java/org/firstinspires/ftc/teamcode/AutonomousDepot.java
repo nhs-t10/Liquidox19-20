@@ -1,6 +1,10 @@
 package org.firstinspires.ftc.teamcode;
 
 public class AutonomousDepot extends AutonomousTesting {
+
+    double power = 0.5;
+   // double secCoef = 1;
+
     public void loop(){
 
         if(step == 1){
