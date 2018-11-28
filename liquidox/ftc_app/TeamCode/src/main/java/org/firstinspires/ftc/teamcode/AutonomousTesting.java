@@ -40,7 +40,7 @@ public class AutonomousTesting extends OpMode {
         if(step == 1){
            unLatch();
            drive(1 ,1, 1, 1 );
-           if(timer1 >= 5000){
+           if(timer1 >= 20000){
                step++;
            }
         }

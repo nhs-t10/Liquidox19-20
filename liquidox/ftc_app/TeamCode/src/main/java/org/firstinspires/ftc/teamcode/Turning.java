@@ -35,7 +35,7 @@ public class Turning extends LO2Library {
 
     }
 
-    public Turning() {
+    public void Turning() {
         destination=0;
     }
 
@@ -53,8 +53,8 @@ public class Turning extends LO2Library {
         drive(0,0,0,0);
     }
 
-    public void update(imuData sean) {
-        currentAngle = sean.getAngle();
+    public void update(float sean) {
+        currentAngle = sean;
         float error = getError();
         pComponent = error * P;
         double currTime = getCurrTime();
