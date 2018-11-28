@@ -25,10 +25,10 @@ public class OpModeFive extends OpMode {
         frontRight = hardwareMap.dcMotor.get("FR");
         backRight = hardwareMap.dcMotor.get("BR");
 
-        //assign shoulders (motors involved in arms)
-      //  rightShoulder = hardwareMap.servo.get("RS");
-        //leftShoulder = hardwareMap.servo.get("LS");
-        //chestShoulder = hardwareMap.servo.get("CS");
+       // assign shoulders (motors involved in arms)
+        rightShoulder = hardwareMap.servo.get("RS");
+        leftShoulder = hardwareMap.servo.get("LS");
+        chestShoulder = hardwareMap.servo.get("CS");
 
     }
     public final void drive(float bl, float fl, float fr, float br ) {
