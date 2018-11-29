@@ -10,14 +10,13 @@ import java.util.concurrent.TimeUnit;
 
 @TeleOp
 public class OpModeFive extends OpMode {
-    private double random;
+    //private double random;
     //instantiate hardware devices
     DcMotor frontLeft, backLeft, frontRight, backRight;
 
     //Servo rightShoulder, leftShoulder, chestShoulder;
-Servo leftShoulder;
 
-    float speed = 0.3f;
+    float speed = 0.6f;
     public void init() {
         /*Naming the Motors for phone*/
         frontLeft = hardwareMap.dcMotor.get("FL");
@@ -73,10 +72,10 @@ Servo leftShoulder;
         //if the button is down, move left and right shoulders forwards.
             if(gamepad1.a) {
 //                rightShoulder.setPosition(rightShoulder.getPosition()+1);
-                leftShoulder.setPosition(leftShoulder.getPosition()+1);
+              //  leftShoulder.setPosition(leftShoulder.getPosition()+1);
             } /*no else because we don't want one button to "take precedence" over another-- might be jittery, but there you go `\_('-')_/` */ if (gamepad1.b) {
 //            rightShoulder.setPosition(rightShoulder.getPosition()-1);
-            leftShoulder.setPosition(leftShoulder.getPosition() - 1);
+            //leftShoulder.setPosition(leftShoulder.getPosition() - 1);
         }
         // why the heck did this show up here? }
         //if the left bumper is down, down the speed by 1.
