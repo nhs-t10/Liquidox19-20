@@ -53,7 +53,7 @@ public class Turning {
             prevTime = (float) currTime;
         }
 
-    public float getError(){
+    public static float getError(){
         return currentAngle- destination ;
     }
 

@@ -46,9 +46,10 @@ public class OpModeFive extends OpMode {
 
     public void loop() {
 
-        float lX = Range.clip(gamepad1.left_stick_x, -1, 1);
-        float lY = Range.clip(gamepad1.left_stick_y, -1, 1);
-        float rX = Range.clip(gamepad1.right_stick_x, -1, 1);
+        float lX = Range.clip((gamepad1.left_stick_x * gamepad1.left_stick_x * gamepad1.left_stick_x)/3, -1, 1);
+        float lY = Range.clip((gamepad1.left_stick_y * gamepad1.left_stick_y * gamepad1.left_stick_y)/3, -1, 1);
+        float rX = Range.clip((gamepad1.right_stick_x * gamepad1.right_stick_x * gamepad1.right_stick_x)/3, -1, 1);
+
 
         float[] vertical = {lY, lY, lY, lY};
         float[] horizontal = {-lX, lX, lX, -lX};
