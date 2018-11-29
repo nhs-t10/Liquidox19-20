@@ -34,7 +34,6 @@ public class AutonomousTesting extends OpMode {
         backRight = hardwareMap.dcMotor.get("BR");
         step = 1;
     }
-
     public void loop(){
 
         if(step == 1){
