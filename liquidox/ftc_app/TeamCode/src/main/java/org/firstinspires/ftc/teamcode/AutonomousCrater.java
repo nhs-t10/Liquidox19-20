@@ -4,7 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import org.firstinspires.ftc.teamcode.Turning;
 import org.firstinspires.ftc.teamcode.BasicTankMode;
-
+import org.firstinspires.ftc.teamcode.imuData;
 @Autonomous
 public class AutonomousCrater extends AutonomousTesting {
 
@@ -36,8 +36,8 @@ public class AutonomousCrater extends AutonomousTesting {
 
         if (step==3) {
             Turning.setDestination(90);
-            Turning.update();
-            if (Turning.getError < 3) {
+            Turning.update(imuData.);
+            if (Turning.error < 3) {
                 step++;
                 drive(0, 0,0,0);
             }
