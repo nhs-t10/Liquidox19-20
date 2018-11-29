@@ -2,10 +2,11 @@
 //package org.firstinspires.ftc.teamcode;
 //import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 //import com.qualcomm.robotcore.hardware.DcMotor;
+//import org.firstinspires.ftc.teamcode.LO2Library;
 //
 //
 //@Autonomous
-//public class Turning extends LO2Library {
+//public class Turning {
 //    private float error;
 //    private float currentAngle;
 //    private float destination;
@@ -18,20 +19,6 @@
 //
 //    DcMotor frontLeft, backLeft, frontRight, backRight;
 //
-//    public Turning() {
-//        this.currentAngle = currentAngle;
-//        this.pComponent = pComponent;
-//        this.sumError = sumError;
-//    }
-//
-//
-//    public void init() {
-//        /*Naming the Motors for phone*/
-//        frontLeft = hardwareMap.dcMotor.get("FL");
-//        backLeft = hardwareMap.dcMotor.get("BL");
-//        frontRight = hardwareMap.dcMotor.get("FR");
-//        backRight = hardwareMap.dcMotor.get("BR");
-//    }
 //
 //
 //    public void Turning() {
@@ -39,22 +26,22 @@
 //    }
 //
 //    public void setDestination(float degrees){
-//        if(degrees>180) destination=degrees-360;
-//        else destination=degrees;
+//        if(degrees > 180) destination = degrees - 360;
+//        else destination = degrees;
 //        prevTime = System.currentTimeMillis();
-//        destination=degrees;
-//        turning=true;
+//        destination = degrees;
+//        turning = true;
 //    }
 //
 //    public void stopTurning(){
 //        turning = false;
-//        sumError=0;
-//        drive(0,0,0,0);
+//        sumError = 0;
+//        LO2Library.drive(0,0,0,0);
 //    }
 //
 //    public void update(float sean) {
 //        currentAngle = sean;
-//        error = currentAngle - destination;
+//        error = getError();
 //        pComponent = error * P;
 //        double currTime = System.currentTimeMillis();
 //
@@ -64,14 +51,14 @@
 //            if (Math.abs(error) < 3) {
 //                stopTurning();
 //            }
-//                drive((pComponent), (pComponent), -(pComponent), -(pComponent));
+//                LO2Library.drive((pComponent), (pComponent), -(pComponent), -(pComponent));
 //
 //            }
 //            prevTime = (float) currTime;
 //        }
 //
-////    public float getError(){
-////        return currentAngle- destination ;
-////    }
+//    public float getError(){
+//        return currentAngle- destination ;
+//    }
 //
 //}
