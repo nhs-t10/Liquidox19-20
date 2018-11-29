@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 
 @Autonomous
-public class Turning {
+public class Turning extends AutonomousTesting{
     public static float error;
     public static float currentAngle;
     private static float destination;
