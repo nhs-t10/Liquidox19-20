@@ -12,10 +12,10 @@ public class AutonomousTesting extends OpMode {
     public int step;
 
     public void drive(double FL, double BL, double FR, double BR){
-        frontLeft.setPower(FL);
+        frontLeft.setPower(-FL);
         backRight.setPower(BR);
         frontRight.setPower(FR);
-        backLeft.setPower(BL);
+        backLeft.setPower(-BL);
     }
 
     public void sleep(int seconds){

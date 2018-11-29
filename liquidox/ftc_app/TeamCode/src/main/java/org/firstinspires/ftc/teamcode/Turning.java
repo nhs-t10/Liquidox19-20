@@ -6,17 +6,23 @@
 //
 //@Autonomous
 //public class Turning extends LO2Library {
-//    public static float error;
-//    float currentAngle;
-//    static float destination;
-//    float pComponent;
-//    static boolean turning=false;
-//    public float sumError = 0;
-//    static float prevTime = 0;
-//    final float P = 0.03f;
+//    private float error;
+//    private float currentAngle;
+//    private float destination;
+//    private float pComponent;
+//    private boolean turning=false;
+//    private float sumError = 0;
+//    private float prevTime = 0;
+//    private final float P = 0.03f;
 //
 //
 //    DcMotor frontLeft, backLeft, frontRight, backRight;
+//
+//    public Turning() {
+//        this.currentAngle = currentAngle;
+//        this.pComponent = pComponent;
+//        this.sumError = sumError;
+//    }
 //
 //
 //    public void init() {
@@ -28,23 +34,14 @@
 //    }
 //
 //
-//    public final void drive(float bl, float fl, float fr, float br ) {
-//
-//        frontLeft.setPower(-fl);
-//        backRight.setPower(br);
-//        frontRight.setPower(fr);
-//        backLeft.setPower(-bl);
-//
-//    }
-//
 //    public void Turning() {
 //        destination=0;
 //    }
 //
-//    public static void setDestination(float degrees){
+//    public void setDestination(float degrees){
 //        if(degrees>180) destination=degrees-360;
 //        else destination=degrees;
-//        prevTime = getCurrTime();
+//        prevTime = System.currentTimeMillis();
 //        destination=degrees;
 //        turning=true;
 //    }
@@ -57,27 +54,24 @@
 //
 //    public void update(float sean) {
 //        currentAngle = sean;
-//        error = getError();
+//        error = currentAngle - destination;
 //        pComponent = error * P;
-//        double currTime = getCurrTime();
+//        double currTime = System.currentTimeMillis();
 //
 //
-//        sumError += error*(currTime-prevTime);
+//        sumError += error * (currTime - prevTime);
 //        if (turning) {
 //            if (Math.abs(error) < 3) {
 //                stopTurning();
-////            }
-//            drive((pComponent), (pComponent),-(pComponent),-(pComponent));
+//            }
+//                drive((pComponent), (pComponent), -(pComponent), -(pComponent));
 //
+//            }
+//            prevTime = (float) currTime;
 //        }
-//        prevTime = (float)currTime;
-//    }
 //
-//    public float getError(){
-//        return currentAngle- destination ;
-//    }
+////    public float getError(){
+////        return currentAngle- destination ;
+////    }
 //
-//    public static float getCurrTime() {
-//        return System.currentTimeMillis();
-//    }
 //}
