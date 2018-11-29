@@ -1,7 +1,7 @@
 
 package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.hardware.DcMotor;
+
 
 
 @Autonomous
@@ -15,19 +15,6 @@ public class Turning {
     private static float prevTime = 0;
     private static final float P = 0.03f;
 
-//    static DcMotor frontLeft, backLeft, frontRight, backRight;
-//
-//    frontLeft = hardwareMap.dcMotor.get("FL");
-//    backLeft = hardwareMap.dcMotor.get("BL");
-//    frontRight = hardwareMap.dcMotor.get("FR");
-//    backRight = hardwareMap.dcMotor.get("BR");
-//
-//    public static void drive(float bl, float fl, float fr, float br ) {
-//        frontLeft.setPower(-fl*speed);
-//        backRight.setPower(br*speed);
-//        frontRight.setPower(fr*speed);
-//        backLeft.setPower(-bl*speed);
-//    }
 
     public static void Turning() {
         destination=0;
