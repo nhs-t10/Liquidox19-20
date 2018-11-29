@@ -40,7 +40,7 @@ public class AutonomousCrater extends AutonomousTesting {
         }
 
         if (step == 3) {
-            Turning.setDestination(270);
+            Turning.setDestination(-90);
             Turning.update(Turning.currentAngle);
             if (Turning.error < 3) {
                 drive(0, 0,0,0);
@@ -59,7 +59,7 @@ public class AutonomousCrater extends AutonomousTesting {
         }
 
         if (step == 5) {
-            Turning.setDestination(225);
+            Turning.setDestination(-135);
             Turning.update(Turning.currentAngle);
             if (Turning.error < 3) {
                 drive(0,0,0,0);
