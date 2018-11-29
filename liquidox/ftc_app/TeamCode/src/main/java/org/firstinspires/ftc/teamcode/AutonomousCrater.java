@@ -18,17 +18,19 @@ public class AutonomousCrater extends AutonomousTesting {
 
         //init(); - not deleted because I don't want to mess up everything.
 
-        if (step == 1) {
-            unLatch();
-            if (timer1 >= 5000) {
-                step++;
-                drive(0, 0,0,0);
-                timer1 = 0;
-            }
-        }
+//        if (step == 1) {
+//            unLatch();
+//            if (timer1 >= 5000) {
+//                step++;
+//                drive(0, 0,0,0);
+//                timer1 = 0;
+//            }
+//        }
+
+        step = 2;
 
         if (step == 2) {
-            drive(1,1,1,1);
+            drive(0.5,0.5f,0.5,0.5);
             if (timer1 >= 2000) {
                 drive(0, 0,0,0);
                 timer1 = 0;
@@ -48,7 +50,7 @@ public class AutonomousCrater extends AutonomousTesting {
         }
 
         if (step == 4) {
-            drive(1,1,1,1);
+            drive(0.5f,0.5f,0.5f, 0.5f);
             if (timer1 >= 2000) {
                 drive(0,0,0,0);
                 timer1 = 0;
@@ -63,6 +65,22 @@ public class AutonomousCrater extends AutonomousTesting {
                 drive(0,0,0,0);
                 timer1 = 0;
                 step++;
+            }
+        }
+
+        if (step == 6) {
+            drive(0.5f,0.5f, 0.5f, 0.5f);
+            if (timer1 == 2000) {
+                drive(0,0,0,0);
+                timer1 = 0;
+                step++;
+            }
+        }
+
+        if (step == 7) {
+            drive(-1,-1,-1,-1);
+            if (timer1 == 2000) {
+                drive(0,0,0,0);
             }
         }
 
