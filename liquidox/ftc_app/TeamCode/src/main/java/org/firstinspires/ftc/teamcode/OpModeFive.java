@@ -70,13 +70,13 @@ public class OpModeFive extends OpMode {
         drive(sum[0],sum[1],sum[2],sum[3]);
         //okay now that that masterpiece of coding is done, have some disgusting pasta.
         //if the button is down, move left and right shoulders forwards.
-//            if(gamepad1.a) {
-//              //  rightShoulder.setPosition(rightShoulder.getPosition()+1);
-//                leftShoulder.setPosition(leftShoulder.getPosition()+1);
-//            } /*no else because we don't want one button to "take precedence" over another-- might be jittery, but there you go `\_('-')_/` */ if (gamepad1.b) {
-//            //rightShoulder.setPosition(rightShoulder.getPosition()-1);
-//            leftShoulder.setPosition(leftShoulder.getPosition() - 1);
-//        }
+            if(gamepad1.a) {
+              //  rightShoulder.setPosition(rightShoulder.getPosition()+1);
+              //  leftShoulder.setPosition(leftShoulder.getPosition()+1);
+            } /*no else because we don't want one button to "take precedence" over another-- might be jittery, but there you go `\_('-')_/` */ if (gamepad1.b) {
+            //rightShoulder.setPosition(rightShoulder.getPosition()-1);
+            //leftShoulder.setPosition(leftShoulder.getPosition() - 1);
+        }
         // why the heck did this show up here? }
         //if the left bumper is down, down the speed by 1.
         if(gamepad1.left_bumper) { speed = 1.5f; }
@@ -96,6 +96,5 @@ public class OpModeFive extends OpMode {
         telemetry.update();
     }
 
-    /**Adds motor values for bug fixing-- adam did this out of loop initially, wow whw what a stupid*/
 
 }
