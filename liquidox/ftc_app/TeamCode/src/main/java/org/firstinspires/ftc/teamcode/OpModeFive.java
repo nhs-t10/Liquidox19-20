@@ -33,8 +33,8 @@ public class OpModeFive extends OpMode {
     public final void drive(float bl, float fl, float fr, float br ) {
 
         frontLeft.setPower(-fl*speed*9/10);
-        backRight.setPower(br*speed*5.5/10);
-        frontRight.setPower(fr*speed*5.5/10);
+        backRight.setPower(br*speed*4.5/10);
+        frontRight.setPower(fr*speed*4.5/10);
         backLeft.setPower(-bl*speed*9/10);
 
     }
@@ -81,7 +81,7 @@ public class OpModeFive extends OpMode {
         //if the left bumper is down, down the speed by 1.
         if(gamepad1.left_bumper) { speed = 1.5f; }
         else if(gamepad1.right_bumper) { speed = 4.5f; }
-        else { speed = 0.5f; }
+        else { speed = 3f; }
         //////////////////////////////
 
         //////////////////////////////
