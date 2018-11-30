@@ -14,7 +14,7 @@ public class OpModeFive extends OpMode {
     //instantiate hardware devices
     DcMotor frontLeft, backLeft, frontRight, backRight;
 
-    //Servo rightShoulder, leftShoulder, chestShoulder;
+    Servo rightChestShoulder, leftChestShoulder, leftOuterShoulder, rightOuterShoulder;
 
     float speed = 0.6f;
     public void init() {
@@ -24,10 +24,10 @@ public class OpModeFive extends OpMode {
         frontRight = hardwareMap.dcMotor.get("FR");
         backRight = hardwareMap.dcMotor.get("BR");
 
-       // assign shoulders (motors involved in arms)
-//        rightShoulder = hardwareMap.servo.get("RS");
-//        leftShoulder = hardwareMap.servo.get("LS");
-//        chestShoulder = hardwareMap.servo.get("CS");
+        rightChestShoulder = hardwareMap.servo.get("RCS");
+        leftChestShoulder = hardwareMap.servo.get("LCS");
+        rightOuterShoulder = hardwareMap.servo.get("ROS");
+        leftOuterShoulder = hardwareMap.servo.get("LOS");
 
     }
     public final void drive(float bl, float fl, float fr, float br ) {
@@ -70,12 +70,29 @@ public class OpModeFive extends OpMode {
         drive(sum[0],sum[1],sum[2],sum[3]);
         //okay now that that masterpiece of coding is done, have some disgusting pasta.
         //if the button is down, move left and right shoulders forwards.
-            if(gamepad1.a) {
-//                rightShoulder.setPosition(rightShoulder.getPosition()+1);
-              //  leftShoulder.setPosition(leftShoulder.getPosition()+1);
-            } /*no else because we don't want one button to "take precedence" over another-- might be jittery, but there you go `\_('-')_/` */ if (gamepad1.b) {
-//            rightShoulder.setPosition(rightShoulder.getPosition()-1);
-            //leftShoulder.setPosition(leftShoulder.getPosition() - 1);
+        if (gamepad1.b) {
+            leftChestShoulder.setPosition(leftOuterShoulder.getPosition()-1);
+            rightChestShoulder.setPosition(rightOuterShoulder.getPosition()+1);
+            leftChestShoulder.setPosition(leftOuterShoulder.getPosition());
+            rightChestShoulder.setPosition(rightOuterShoulder.getPosition());
+        }
+        if(gamepad1.a) {
+            leftOuterShoulder.setPosition(leftOuterShoulder.getPosition()+1);
+            rightOuterShoulder.setPosition(rightOuterShoulder.getPosition()-1);
+            leftOuterShoulder.setPosition(leftOuterShoulder.getPosition());
+            rightOuterShoulder.setPosition(rightOuterShoulder.getPosition());
+        }
+        if (gamepad1.x) {
+            leftChestShoulder.setPosition(leftOuterShoulder.getPosition()+1);
+            rightChestShoulder.setPosition(rightOuterShoulder.getPosition()-1);
+            leftChestShoulder.setPosition(leftOuterShoulder.getPosition());
+            rightChestShoulder.setPosition(rightOuterShoulder.getPosition());
+        }
+        if(gamepad1.y) {
+            leftOuterShoulder.setPosition(leftOuterShoulder.getPosition()-1);
+            rightOuterShoulder.setPosition(rightOuterShoulder.getPosition()+1);
+            leftOuterShoulder.setPosition(leftOuterShoulder.getPosition());
+            rightOuterShoulder.setPosition(rightOuterShoulder.getPosition());
         }
         // why the heck did this show up here? }
         //if the left bumper is down, down the speed by 1.

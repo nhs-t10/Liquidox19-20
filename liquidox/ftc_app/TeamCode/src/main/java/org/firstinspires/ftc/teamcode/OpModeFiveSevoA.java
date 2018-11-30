@@ -72,18 +72,26 @@ public class OpModeFiveSevoA extends OpMode {
         if (gamepad1.b) {
             leftChestShoulder.setPosition(leftOuterShoulder.getPosition()-1);
             rightChestShoulder.setPosition(rightOuterShoulder.getPosition()+1);
+            leftChestShoulder.setPosition(leftOuterShoulder.getPosition());
+            rightChestShoulder.setPosition(rightOuterShoulder.getPosition());
         }
         if(gamepad1.a) {
             leftOuterShoulder.setPosition(leftOuterShoulder.getPosition()+1);
             rightOuterShoulder.setPosition(rightOuterShoulder.getPosition()-1);
+            leftOuterShoulder.setPosition(leftOuterShoulder.getPosition());
+            rightOuterShoulder.setPosition(rightOuterShoulder.getPosition());
         }
         if (gamepad1.x) {
             leftChestShoulder.setPosition(leftOuterShoulder.getPosition()+1);
             rightChestShoulder.setPosition(rightOuterShoulder.getPosition()-1);
+            leftChestShoulder.setPosition(leftOuterShoulder.getPosition());
+            rightChestShoulder.setPosition(rightOuterShoulder.getPosition());
         }
         if(gamepad1.y) {
             leftOuterShoulder.setPosition(leftOuterShoulder.getPosition()-1);
             rightOuterShoulder.setPosition(rightOuterShoulder.getPosition()+1);
+            leftOuterShoulder.setPosition(leftOuterShoulder.getPosition());
+            rightOuterShoulder.setPosition(rightOuterShoulder.getPosition());
         }
         
         //if the left bumper is down, down the speed by 1.
