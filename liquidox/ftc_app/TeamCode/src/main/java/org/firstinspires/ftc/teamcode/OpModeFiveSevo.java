@@ -70,17 +70,21 @@ public class OpModeFiveSevo extends OpMode {
         //okay now that that masterpiece of coding is done, have some disgusting pasta.
         //if the button is down, move left and right shoulders forwards.
             if(gamepad1.a) {
-                leftOuterShoulder.setPosition(leftOuterShoulder.getPosition()+1);
-                rightOuterShoulder.setPosition(rightOuterShoulder.getPosition()+1);
+                leftOuterShoulder.setPosition(0.5);
+                rightOuterShoulder.setPosition(-0.5);
             } /*no else because we don't want one button to "take precedence" over another-- might be jittery, but there you go `\_('-')_/` */
         if (gamepad1.b) {
-            leftChestShoulder.setPosition(leftOuterShoulder.getPosition()+1);
-            rightChestShoulder.setPosition(rightOuterShoulder.getPosition()+1);
+            leftOuterShoulder.setPosition(0);
+            rightOuterShoulder.setPosition(0);
         }
         if(gamepad1.x) {
-            leftOuterShoulder.setPosition(leftOuterShoulder.getPosition()+1);
-            rightOuterShoulder.setPosition(rightOuterShoulder.getPosition()+1);
+            rightChestShoulder.setPosition(0.5);
+            leftChestShoulder.setPosition(0.5);
         } /*no else because we don't want one button to "take precedence" over another-- might be jittery, but there you go `\_('-')_/` */
+        if(gamepad1.x) {
+            rightChestShoulder.setPosition(0);
+            leftChestShoulder.setPosition(0);
+        }
 
         //if the left bumper is down, down the speed by 1.
         if(gamepad1.left_bumper) {
@@ -100,7 +104,10 @@ public class OpModeFiveSevo extends OpMode {
         telemetry.addData("Back Right Power: ", backRight.getPower());
         telemetry.addData("Left Gamepad X-Coordinate: ", lX);
         telemetry.addData("Left Gamepad X-Coordinate: ", lY);
-        telemetry.addData("Data we  fed into `drive()`: ", sum.toString());
+        telemetry.addData("leftChestShoulder: ", leftChestShoulder.getPosition());
+        telemetry.addData("leftOuterShoulder: ", leftOuterShoulder.getPosition());
+        telemetry.addData("rightChestShoulder: ", rightChestShoulder.getPosition());
+        telemetry.addData("leftOuterShoulder: ", leftOuterShoulder.getPosition());
         telemetry.addData("Current speed: ", speed);
         telemetry.update();
     }
