@@ -102,7 +102,7 @@ public class ColorSensorV extends LinearOpMode {
     boolean bPrevState = false;
     boolean bCurrState = false;
 
-    // Get a reference to our sensor object.
+    // Naming for the Phone
     colorSensor = hardwareMap.get(NormalizedColorSensor.class, "sensor_color");
 
     // If possible, turn the light on in the beginning (it might already be on anyway,
