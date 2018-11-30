@@ -50,7 +50,7 @@ public class OpModeFive extends OpMode {
         float rX = Range.clip((gamepad1.right_stick_x * gamepad1.right_stick_x * gamepad1.right_stick_x)/3, -1, 1);
 
 
-        float[] vertical = {lY, lY, lY, lY};
+        float[] vertical = {0.7f * lY, 0.7f * lY, 0.7f * lY, 0.7f * lY};
         float[] horizontal = {-lX, lX, lX, -lX};
         float[] rotational = {-rX, -rX, rX, rX};
 
