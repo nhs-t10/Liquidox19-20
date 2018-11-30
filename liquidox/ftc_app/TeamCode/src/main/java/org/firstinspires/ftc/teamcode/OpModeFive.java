@@ -32,10 +32,10 @@ public class OpModeFive extends OpMode {
     }
     public final void drive(float bl, float fl, float fr, float br ) {
 
-          frontLeft.setPower(-fl*speed);
-          backRight.setPower(br*speed);
-          frontRight.setPower(fr*speed);
-          backLeft.setPower(-bl*speed);
+          frontLeft.setPower(-fl*9.5);
+          backRight.setPower(br*5.5);
+          frontRight.setPower(fr*5.5);
+          backLeft.setPower(-bl*9.5);
 
     }
 
