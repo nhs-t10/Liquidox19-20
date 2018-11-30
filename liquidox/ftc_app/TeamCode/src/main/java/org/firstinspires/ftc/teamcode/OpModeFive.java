@@ -71,28 +71,24 @@ public class OpModeFive extends OpMode {
         //okay now that that masterpiece of coding is done, have some disgusting pasta.
         //if the button is down, move left and right shoulders forwards.
         if (gamepad1.b) {
-            leftChestShoulder.setPosition(leftOuterShoulder.getPosition()-1);
-            rightChestShoulder.setPosition(rightOuterShoulder.getPosition()+1);
-            leftChestShoulder.setPosition(leftOuterShoulder.getPosition());
-            rightChestShoulder.setPosition(rightOuterShoulder.getPosition());
+            leftChestShoulder.setPosition(0);
+            rightChestShoulder.setPosition(1);
+
         }
         if(gamepad1.a) {
-            leftOuterShoulder.setPosition(leftOuterShoulder.getPosition()+1);
-            rightOuterShoulder.setPosition(rightOuterShoulder.getPosition()-1);
-            leftOuterShoulder.setPosition(leftOuterShoulder.getPosition());
-            rightOuterShoulder.setPosition(rightOuterShoulder.getPosition());
+            leftOuterShoulder.setPosition(0);
+            rightOuterShoulder.setPosition(1);
+
         }
         if (gamepad1.x) {
-            leftChestShoulder.setPosition(leftOuterShoulder.getPosition()+1);
-            rightChestShoulder.setPosition(rightOuterShoulder.getPosition()-1);
-            leftChestShoulder.setPosition(leftOuterShoulder.getPosition());
-            rightChestShoulder.setPosition(rightOuterShoulder.getPosition());
+            leftChestShoulder.setPosition(1);
+            rightChestShoulder.setPosition(0);
+
         }
         if(gamepad1.y) {
-            leftOuterShoulder.setPosition(leftOuterShoulder.getPosition()-1);
-            rightOuterShoulder.setPosition(rightOuterShoulder.getPosition()+1);
-            leftOuterShoulder.setPosition(leftOuterShoulder.getPosition());
-            rightOuterShoulder.setPosition(rightOuterShoulder.getPosition());
+            leftOuterShoulder.setPosition(1);
+            rightOuterShoulder.setPosition(0);
+
         }
         // why the heck did this show up here? }
         //if the left bumper is down, down the speed by 1.
