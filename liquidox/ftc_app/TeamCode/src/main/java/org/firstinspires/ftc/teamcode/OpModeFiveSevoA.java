@@ -35,7 +35,7 @@ public class OpModeFiveSevoA extends OpMode {
         backRight.setPower(br*speed*4.5/10);
         frontRight.setPower(fr*speed*4.5/10);
         backLeft.setPower(-bl*speed*9/10);
-        
+
     }
 
     float[] sum = {0,0,0,0};

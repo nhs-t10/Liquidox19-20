@@ -77,9 +77,9 @@ public class OpModeFiveSevo extends OpMode {
             leftChestShoulder.setPosition(leftOuterShoulder.getPosition()+1);
             rightChestShoulder.setPosition(rightOuterShoulder.getPosition()+1);
         }
-        if(gamepad1.a) {
-            leftOuterShoulder.setPosition(leftOuterShoulder.getPosition()-1);
-            rightOuterShoulder.setPosition(rightOuterShoulder.getPosition()-1);
+        if(gamepad1.x) {
+            leftOuterShoulder.setPosition(leftOuterShoulder.getPosition()+1);
+            rightOuterShoulder.setPosition(rightOuterShoulder.getPosition()+1);
         } /*no else because we don't want one button to "take precedence" over another-- might be jittery, but there you go `\_('-')_/` */
 
         //if the left bumper is down, down the speed by 1.
