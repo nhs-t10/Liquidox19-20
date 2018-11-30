@@ -10,6 +10,8 @@ import com.qualcomm.robotcore.util.Range;
 public class OpModeFiveSevo extends OpMode {
     //private double random;
     //instantiate hardware devices
+    boolean a = true;
+    boolean b = true;
     DcMotor frontLeft, backLeft, frontRight, backRight;
 
     Servo rightChestShoulder, leftChestShoulder, leftOuterShoulder, rightOuterShoulder;
@@ -27,7 +29,7 @@ public class OpModeFiveSevo extends OpMode {
         leftChestShoulder = hardwareMap.servo.get("LCS");
         rightOuterShoulder = hardwareMap.servo.get("ROS");
         leftOuterShoulder = hardwareMap.servo.get("LOS");
-
+        leftOuterShoulder.setDirection(Servo.Direction.REVERSE);
     }
     public final void drive(float bl, float fl, float fr, float br ) {
 
@@ -69,21 +71,21 @@ public class OpModeFiveSevo extends OpMode {
         drive(sum[0],sum[1],sum[2],sum[3]);
         //okay now that that masterpiece of coding is done, have some disgusting pasta.
         //if the button is down, move left and right shoulders forwards.
-            if(gamepad1.a) {
+        if(gamepad1.a) {
                 leftOuterShoulder.setPosition(0.5);
-                rightOuterShoulder.setPosition(-0.5);
+                rightOuterShoulder.setPosition(0.5);
             } /*no else because we don't want one button to "take precedence" over another-- might be jittery, but there you go `\_('-')_/` */
         if (gamepad1.b) {
             leftOuterShoulder.setPosition(0);
             rightOuterShoulder.setPosition(0);
         }
         if(gamepad1.x) {
-            rightChestShoulder.setPosition(0.5);
-            leftChestShoulder.setPosition(0.5);
+//            rightChestShoulder.setPosition(0.5);
+//            leftChestShoulder.setPosition(0.5);
         } /*no else because we don't want one button to "take precedence" over another-- might be jittery, but there you go `\_('-')_/` */
-        if(gamepad1.x) {
-            rightChestShoulder.setPosition(0);
-            leftChestShoulder.setPosition(0);
+        if(gamepad1.y) {
+//            rightChestShoulder.setPosition(0);
+//            leftChestShoulder.setPosition(0);
         }
 
         //if the left bumper is down, down the speed by 1.
