@@ -17,10 +17,10 @@ public abstract class LO2Library extends OpMode {
     }
 
     public static void drive(float bl, float fl, float fr, float br) {
-        frontLeft.setPower(fl);
-        backRight.setPower(-br);
-        frontRight.setPower(-fr);
-        backLeft.setPower(bl);
+        frontLeft.setPower(-fl);
+        backRight.setPower(br);
+        frontRight.setPower(fr);
+        backLeft.setPower(-bl);
 
     }
 }
