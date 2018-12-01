@@ -51,9 +51,9 @@ public class OpModeFiveSevo extends OpMode {
         float rX = Range.clip((gamepad1.right_stick_x * gamepad1.right_stick_x * gamepad1.right_stick_x)/3, -1, 1);
 
 
-        float[] vertical = {lY, lY, lY, lY};
+        float[] vertical = {0.7f * lY, 0.7f * lY, 0.7f * lY, 0.7f * lY};
         float[] horizontal = {-lX, lX, lX, -lX};
-        float[] rotational = {-rX, -rX, rX, rX};
+        float[] rotational = {-0.7f * rX, -0.7f * rX, 0.7f * rX, 0.7f * rX};
 
         for(int i=0; i<4; i++) {
             sum[i] = vertical[i] + horizontal[i] + rotational[i];
