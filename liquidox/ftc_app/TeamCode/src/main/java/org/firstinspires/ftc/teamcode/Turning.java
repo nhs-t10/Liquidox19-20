@@ -31,7 +31,7 @@ public class Turning extends AutonomousTesting{
     public static void stopTurning(){
         turning = false;
         sumError = 0;
-        LO2Library.drive(0,0,0,0);
+        LO2Library.drive(0f,0f,0f,0f);
     }
 
     public static void update(float sean) {

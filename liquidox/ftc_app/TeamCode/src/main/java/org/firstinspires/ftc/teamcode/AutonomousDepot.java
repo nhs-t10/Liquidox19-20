@@ -9,22 +9,19 @@ import org.firstinspires.ftc.teamcode.BasicTankMode;
 @Autonomous
 public class AutonomousDepot extends AutonomousTesting {
 
+    public void init(){
+        init();
+    }
+
     public void loop(){
 
-        init();
 
-//        if(step == 1){
-//            unLatch();
-//            if(timer1 >= 5000){
-//                step++;
-//            }
-//        }
         step = 2;
 
         if(step == 2){
-            drive(0.2, 0.2, 0.2, 0.2);
+            LO2Library.drive(0.2f, 0.2f, 0.2f, 0.2f);
             if(timer1 >= 1500){
-                drive(0,0,0,0);
+                LO2Library.drive(0f,0f,0f,0f);
                 timer1 = 0;
                 step++;
             }
@@ -40,25 +37,25 @@ public class AutonomousDepot extends AutonomousTesting {
 //            }
 
             if (timer1 == 6500) {
-                drive(0, 0,0,0);
+                LO2Library.drive(0f, 0f,0f,0f);
                 timer1 = 0;
                 step++;
             }
         }
 
         if(step == 4) {
-            drive(-0.2f,0.2f,0.2f,-0.2f);
+            LO2Library.drive(-0.2f,0.2f,0.2f,-0.2f);
             if(timer1 == 7000) {
-                drive(0,0,0,0);
+                LO2Library.drive(0f,0f,0f,0f);
                 timer1 = 0;
                 step++;
             }
         }
 
         if(step == 5) {
-            drive(-1,-1,-1,-1);
+            LO2Library.drive(-1f,-1f,-1f,-1f);
             if (timer1 == 6000) {
-                drive(0,0,0,0);
+                LO2Library.drive(0f,0f,0f,0f);
             }
         }
 
