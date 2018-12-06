@@ -6,7 +6,7 @@ import org.firstinspires.ftc.teamcode.Turning;
 import org.firstinspires.ftc.teamcode.BasicTankMode;
 
 @Autonomous
-public class AutonomousCrater extends AutonomousTesting {
+public class AutonomousCrater extends LO2Library {
 
 
 
@@ -14,7 +14,12 @@ public class AutonomousCrater extends AutonomousTesting {
     int step  = 1;
     float timer1;
     public void init(){
-        init();
+        /*Namiyng the Motors for phone*/
+        frontLeft = hardwareMap.dcMotor.get("FL");
+        backLeft = hardwareMap.dcMotor.get("BL");
+        frontRight = hardwareMap.dcMotor.get("FR");
+        backRight = hardwareMap.dcMotor.get("BR");
+        step = 1;
     }
     public void loop() {
         timer1 = System.currentTimeMillis();
