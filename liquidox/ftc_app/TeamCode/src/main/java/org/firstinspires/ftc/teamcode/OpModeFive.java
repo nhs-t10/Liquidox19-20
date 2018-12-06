@@ -83,7 +83,7 @@ public class OpModeFive extends OpMode {
         if(gamepad1.x) {
 //            rightChestShoulder.setPosition(0.5);
 //            leftChestShoulder.setPosition(0.5);
-        } /*no else because we don't want one button to "take precedence" over another-- might be jittery, but there you go `\_('-')_/` */
+        }
         if(gamepad1.y) {
 //            rightChestShoulder.setPosition(0);
 //            leftChestShoulder.setPosition(0);

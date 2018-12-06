@@ -12,7 +12,7 @@ public class AutonomousCrater extends LO2Library {
 
     /* WE STILL NEED TO INITIALIZE THE IMU, ASK PAUL WHAT WE HAVE OT DO FOR THAT */
     int step  = 1;
-    float timer1;
+    float timer1, timerOffset;
     public void init(){
         /*Namiyng the Motors for phone*/
         frontLeft = hardwareMap.dcMotor.get("FL");
@@ -20,9 +20,10 @@ public class AutonomousCrater extends LO2Library {
         frontRight = hardwareMap.dcMotor.get("FR");
         backRight = hardwareMap.dcMotor.get("BR");
         step = 1;
+        timerOffset = System.currentTimeMillis();
     }
     public void loop() {
-        timer1 = System.currentTimeMillis();
+        timer1 = System.currentTimeMillis() - timerOffset;
 
         if (step == 1) {
             /*We doon't have unlatch code*/
