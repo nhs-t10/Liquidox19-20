@@ -5,18 +5,16 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
-import org.firstinspires.ftc.robotcore.external.*;
-import java.util.concurrent.TimeUnit;
 
 @TeleOp
-public class OpModeFive extends OpMode {
+public class OpModeFiveSevoA extends OpMode {
     //private double random;
     //instantiate hardware devices
     DcMotor frontLeft, backLeft, frontRight, backRight;
 
     Servo rightChestShoulder, leftChestShoulder, leftOuterShoulder, rightOuterShoulder;
 
-    float speed = 3f;
+    float speed = 0.6f;
     public void init() {
         /*Naming the Motors for phone*/
         frontLeft = hardwareMap.dcMotor.get("FL");
@@ -24,6 +22,7 @@ public class OpModeFive extends OpMode {
         frontRight = hardwareMap.dcMotor.get("FR");
         backRight = hardwareMap.dcMotor.get("BR");
 
+       // assign shoulders (motors involved in arms)
         rightChestShoulder = hardwareMap.servo.get("RCS");
         leftChestShoulder = hardwareMap.servo.get("LCS");
         rightOuterShoulder = hardwareMap.servo.get("ROS");
@@ -50,7 +49,7 @@ public class OpModeFive extends OpMode {
         float rX = Range.clip((gamepad1.right_stick_x * gamepad1.right_stick_x * gamepad1.right_stick_x)/3, -1, 1);
 
 
-        float[] vertical = {0.7f * lY, 0.7f * lY, 0.7f * lY, 0.7f * lY};
+        float[] vertical = {lY, lY, lY, lY};
         float[] horizontal = {-lX, lX, lX, -lX};
         float[] rotational = {-rX, -rX, rX, rX};
 
@@ -70,29 +69,40 @@ public class OpModeFive extends OpMode {
         drive(sum[0],sum[1],sum[2],sum[3]);
         //okay now that that masterpiece of coding is done, have some disgusting pasta.
         //if the button is down, move left and right shoulders forwards.
-        /**moves outer servos if a button is pressed*/
-        if(gamepad1.a) {
-            leftOuterShoulder.setPosition(0.5);
-            rightOuterShoulder.setPosition(0.5);
-        } /*no else because we don't want one button to "take precedence" over another-- might be jittery, but there you go `\_('-')_/` */
-        /**moves outer servos in opposite direction when b button is pressed*/
         if (gamepad1.b) {
-            leftOuterShoulder.setPosition(0);
-            rightOuterShoulder.setPosition(0);
+            leftChestShoulder.setPosition(leftOuterShoulder.getPosition()-1);
+            rightChestShoulder.setPosition(rightOuterShoulder.getPosition()+1);
+            leftChestShoulder.setPosition(leftOuterShoulder.getPosition());
+            rightChestShoulder.setPosition(rightOuterShoulder.getPosition());
         }
-        if(gamepad1.x) {
-//            rightChestShoulder.setPosition(0.5);
-//            leftChestShoulder.setPosition(0.5);
-        } /*no else because we don't want one button to "take precedence" over another-- might be jittery, but there you go `\_('-')_/` */
+        if(gamepad1.a) {
+            leftOuterShoulder.setPosition(leftOuterShoulder.getPosition()+1);
+            rightOuterShoulder.setPosition(rightOuterShoulder.getPosition()-1);
+            leftOuterShoulder.setPosition(leftOuterShoulder.getPosition());
+            rightOuterShoulder.setPosition(rightOuterShoulder.getPosition());
+        }
+        if (gamepad1.x) {
+            leftChestShoulder.setPosition(leftOuterShoulder.getPosition()+1);
+            rightChestShoulder.setPosition(rightOuterShoulder.getPosition()-1);
+            leftChestShoulder.setPosition(leftOuterShoulder.getPosition());
+            rightChestShoulder.setPosition(rightOuterShoulder.getPosition());
+        }
         if(gamepad1.y) {
-//            rightChestShoulder.setPosition(0);
-//            leftChestShoulder.setPosition(0);
+            leftOuterShoulder.setPosition(leftOuterShoulder.getPosition()-1);
+            rightOuterShoulder.setPosition(rightOuterShoulder.getPosition()+1);
+            leftOuterShoulder.setPosition(leftOuterShoulder.getPosition());
+            rightOuterShoulder.setPosition(rightOuterShoulder.getPosition());
         }
-        // why the heck did this show up here? }
+        
         //if the left bumper is down, down the speed by 1.
-        if(gamepad1.left_bumper) { speed = 1.5f; }
-        else if(gamepad1.right_bumper) { speed = 4.5f; }
-        else { speed = 3f; }
+        if(gamepad1.left_bumper) {
+            speed = 1.5f;
+        } else if(gamepad1.right_bumper) {
+            speed = 4.5f;
+        }
+        else {
+            speed = 3f;
+        }
         //////////////////////////////
 
         //////////////////////////////

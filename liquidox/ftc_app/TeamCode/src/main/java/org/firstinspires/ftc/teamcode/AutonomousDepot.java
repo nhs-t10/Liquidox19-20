@@ -9,22 +9,19 @@ import org.firstinspires.ftc.teamcode.BasicTankMode;
 @Autonomous
 public class AutonomousDepot extends AutonomousTesting {
 
+    public void init(){
+        init();
+    }
+
     public void loop(){
 
-        init();
 
-//        if(step == 1){
-//            unLatch();
-//            if(timer1 >= 5000){
-//                step++;
-//            }
-//        }
         step = 2;
 
         if(step == 2){
-            drive(0.5, 0.5, 0.5, 0.5);
-            if(timer1 >= 2000){
-                drive(0,0,0,0);
+            LO2Library.drive(0.2f, 0.2f, 0.2f, 0.2f);
+            if(timer1 >= 1500){
+                LO2Library.drive(0f,0f,0f,0f);
                 timer1 = 0;
                 step++;
             }
@@ -33,26 +30,32 @@ public class AutonomousDepot extends AutonomousTesting {
         if(step == 3) {
             Turning.setDestination(45);
             Turning.update(Turning.currentAngle);
-            if (Turning.error < 3) {
-                drive(0, 0,0,0);
+//            if (Turning.error < 3) {
+//                drive(0, 0,0,0);
+//                timer1 = 0;
+//                step++;
+//            }
+
+            if (timer1 == 6500) {
+                LO2Library.drive(0f, 0f,0f,0f);
                 timer1 = 0;
                 step++;
             }
         }
 
         if(step == 4) {
-            drive(-0.2f,0.2f,0.2f,-0.2f);
-            if(timer1 == 500) {
-                drive(0,0,0,0);
+            LO2Library.drive(-0.2f,0.2f,0.2f,-0.2f);
+            if(timer1 == 7000) {
+                LO2Library.drive(0f,0f,0f,0f);
                 timer1 = 0;
                 step++;
             }
         }
 
         if(step == 5) {
-            drive(-1,-1,-1,-1);
-            if (timer1 == 2000) {
-                drive(0,0,0,0);
+            LO2Library.drive(-1f,-1f,-1f,-1f);
+            if (timer1 == 6000) {
+                LO2Library.drive(0f,0f,0f,0f);
             }
         }
 

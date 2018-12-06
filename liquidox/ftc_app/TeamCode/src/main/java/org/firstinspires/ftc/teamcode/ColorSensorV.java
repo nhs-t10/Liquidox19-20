@@ -51,7 +51,6 @@ import com.qualcomm.robotcore.hardware.SwitchableLight;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 @TeleOp(name = "Sensor: Color", group = "Sensor")
-@Disabled
 public class ColorSensorV extends LinearOpMode {
 
   /** The colorSensor field will contain a reference to our color sensor hardware object */
@@ -103,7 +102,7 @@ public class ColorSensorV extends LinearOpMode {
     boolean bPrevState = false;
     boolean bCurrState = false;
 
-    // Get a reference to our sensor object.
+    // Naming for the Phone
     colorSensor = hardwareMap.get(NormalizedColorSensor.class, "sensor_color");
 
     // If possible, turn the light on in the beginning (it might already be on anyway,
