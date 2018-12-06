@@ -1,17 +1,26 @@
 package org.firstinspires.ftc.teamcode;
 
+import android.os.SystemClock;
+
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.util.ElapsedTime;
+
 import org.firstinspires.ftc.teamcode.Turning;
 import org.firstinspires.ftc.teamcode.BasicTankMode;
+
+import java.text.SimpleDateFormat;
+import java.util.concurrent.TimeUnit;
 
 @Autonomous
 public class AutonomousCrater extends LO2Library {
 
 
 
-    /* WE STILL NEED TO INITIALIZE THE IMU, ASK PAUL WHAT WE HAVE TO DO FOR THAT */
+    /* WE STILL NEED TO INITIALIZE THE IMU, ASK PAUL WHAT WE HAVE OT DO FOR THAT */
     int step  = 1;
+    ElapsedTime eTimeObj = new ElapsedTime();
+    boolean setTime = true;
     float timer1, timerOffset;
     public void init(){
         /*Namiyng the Motors for phone*/
@@ -20,20 +29,21 @@ public class AutonomousCrater extends LO2Library {
         frontRight = hardwareMap.dcMotor.get("FR");
         backRight = hardwareMap.dcMotor.get("BR");
         step = 1;
-        timerOffset = System.currentTimeMillis();
+
+
     }
     public void loop() {
-        timer1 = System.currentTimeMillis() - timerOffset;
 
+
+        timer1 = eTimeObj.time(TimeUnit.MILLISECONDS);
         if (step == 1) {
-            /*We don't have unlatch code*/
+            /*We doon't have unlatch code*/
 //            unLatch();
             if (timer1 >= 5000) {
                 LO2Library.drive(0f, 0f,0f,0f);
                 step++;
             }
         }
-
 
 
 
@@ -57,16 +67,17 @@ public class AutonomousCrater extends LO2Library {
 
         if (step == 4) {
             LO2Library.drive(0.2f,0.2f,0.2f, 0.2f);
-            if (timer1 >= 7500) {
+            if (timer1 >= 9500) {
                 LO2Library.drive(0f,0f,0f,0f);
                 step++;
             }
         }
 
+
         if (step == 5) {
             Turning.setDestination(-135f);
             Turning.update(Turning.currentAngle);
-            if (timer1 >= 12500) {
+            if (timer1 >= 15500) {
                 LO2Library.drive(0f,0f,0f,0f);
                 step++;
             }
