@@ -6,18 +6,24 @@ import org.firstinspires.ftc.teamcode.Turning;
 import org.firstinspires.ftc.teamcode.BasicTankMode;
 
 @Autonomous
-public class AutonomousCrater extends AutonomousTesting {
+public class AutonomousCrater extends LO2Library {
 
 
 
     /* WE STILL NEED TO INITIALIZE THE IMU, ASK PAUL WHAT WE HAVE TO DO FOR THAT */
     int step  = 1;
-    float timer1;
+    float timer1, timerOffset;
     public void init(){
-        init();
+        /*Namiyng the Motors for phone*/
+        frontLeft = hardwareMap.dcMotor.get("FL");
+        backLeft = hardwareMap.dcMotor.get("BL");
+        frontRight = hardwareMap.dcMotor.get("FR");
+        backRight = hardwareMap.dcMotor.get("BR");
+        step = 1;
+        timerOffset = System.currentTimeMillis();
     }
     public void loop() {
-        timer1 = System.currentTimeMillis();
+        timer1 = System.currentTimeMillis() - timerOffset;
 
         if (step == 1) {
             /*We don't have unlatch code*/
@@ -84,7 +90,7 @@ public class AutonomousCrater extends AutonomousTesting {
         telemetry.addData("Front Right Power: ", frontRight.getPower());
         telemetry.addData("Back Left Power: ", backLeft.getPower());
         telemetry.addData("Back Right Power: ", backRight.getPower());
-        telemetry.addData("Time: ", System.currentTimeMillis() + "");
+        telemetry.addData("Time: ", timer1 + "");
         telemetry.addData("Step: ", step + "");
     }
 }
