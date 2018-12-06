@@ -90,7 +90,7 @@ public class AutonomousCrater extends LO2Library {
         telemetry.addData("Front Right Power: ", frontRight.getPower());
         telemetry.addData("Back Left Power: ", backLeft.getPower());
         telemetry.addData("Back Right Power: ", backRight.getPower());
-        telemetry.addData("Time: ", System.currentTimeMillis() + "");
+        telemetry.addData("Time: ", timer1 + "");
         telemetry.addData("Step: ", step + "");
     }
 }
