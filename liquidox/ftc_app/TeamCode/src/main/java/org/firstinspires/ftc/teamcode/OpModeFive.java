@@ -88,11 +88,13 @@ public class OpModeFive extends OpMode {
 //            rightChestShoulder.setPosition(0);
 //            leftChestShoulder.setPosition(0);
         }
-        // why the heck did this show up here? }
-        //if the left bumper is down, down the speed by 1.
-        if(gamepad1.left_bumper) { speed = 1.5f; }
-        else if(gamepad1.right_bumper) { speed = 4.5f; }
-        else { speed = 3f; }
+        //Throttle Controls: If both bumpers are down, set the speed to 3f.
+        if(gamepad1.left_bumper && gamepad1.right_bumper) { speed = 3f; }
+        //Otherwise, if the left bumper is down, lower the speed (with a minimum of 0)
+        else if(gamepad1.left_bumper) { speed = Math.max(speed-0.5f,0); }
+        //and if we don't do that, raise the speed-- maximum of 10.
+        else if (gamepad1.right_bumper) { speed = Math.min(speed+0.5f,10); }
+
         //////////////////////////////
 
         //////////////////////////////
@@ -102,7 +104,7 @@ public class OpModeFive extends OpMode {
         telemetry.addData("Back Right Power: ", backRight.getPower());
         telemetry.addData("Left Gamepad X-Coordinate: ", lX);
         telemetry.addData("Left Gamepad X-Coordinate: ", lY);
-        telemetry.addData("Data we  fed into `drive()`: ", sum.toString());
+        telemetry.addData("Data we  fed into `drive()`: ", sum);
         telemetry.addData("Current speed: ", speed);
         telemetry.update();
     }
