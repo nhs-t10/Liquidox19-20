@@ -33,12 +33,14 @@ public class OpModeFiveSevo extends OpMode {
     }
     public final void drive(float bl, float fl, float fr, float br ) {
 /** Tells the robot how to drive */
-          frontLeft.setPower(-fl*1.8*speed);
+          frontLeft.setPower(-fl*speed); //Scaled by 1.8
           backRight.setPower(br*speed);
           frontRight.setPower(fr*speed);
-          backLeft.setPower(-bl*1.8*speed);
+          backLeft.setPower(-bl*speed);
 
     }
+
+    float speed = .5
 
     float[] sum = {0,0,0,0};
 
@@ -46,9 +48,9 @@ public class OpModeFiveSevo extends OpMode {
 
     public void loop() {
 /** finds the values from the controller*/
-        float lX = Range.clip((gamepad1.left_stick_x * gamepad1.left_stick_x * gamepad1.left_stick_x)/3, -1, 1);
-        float lY = Range.clip((gamepad1.left_stick_y * gamepad1.left_stick_y * gamepad1.left_stick_y)/3, -1, 1);
-        float rX = Range.clip((gamepad1.right_stick_x * gamepad1.right_stick_x * gamepad1.right_stick_x)/3, -1, 1);
+        float lX = Range.clip(gamepad1.left_stick_x , -1, 1);
+        float lY = Range.clip(gamepad1.left_stick_y, -1, 1);
+        float rX = Range.clip(gamepad1.right_stick_x, -1, 1);
 
 /** creates driving modes */
         float[] vertical = {0.7f * lY, 0.7f * lY, 0.7f * lY, 0.7f * lY};

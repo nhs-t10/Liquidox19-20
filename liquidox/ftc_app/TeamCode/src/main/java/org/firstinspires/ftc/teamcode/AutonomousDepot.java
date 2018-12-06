@@ -30,11 +30,8 @@ public class AutonomousDepot extends AutonomousTesting {
         if(step == 3) {
             Turning.setDestination(45);
             Turning.update(Turning.currentAngle);
-//            if (Turning.error < 3) {
-//                drive(0, 0,0,0);
-//                timer1 = 0;
-//                step++;
-//            }
+
+        }
 
             if (timer1 == 6500) {
                 LO2Library.drive(0f, 0f,0f,0f);

@@ -10,7 +10,7 @@ public class AutonomousCrater extends AutonomousTesting {
 
 
 
-    /* WE STILL NEED TO INITIALIZE THE IMU, ASK PAUL WHAT WE HAVE OT DO FOR THAT */
+    /* WE STILL NEED TO INITIALIZE THE IMU, ASK PAUL WHAT WE HAVE TO DO FOR THAT */
     int step  = 1;
     float timer1;
     public void init(){
@@ -20,7 +20,7 @@ public class AutonomousCrater extends AutonomousTesting {
         timer1 = System.currentTimeMillis();
 
         if (step == 1) {
-            /*We doon't have unlatch code*/
+            /*We don't have unlatch code*/
 //            unLatch();
             if (timer1 >= 5000) {
                 LO2Library.drive(0f, 0f,0f,0f);

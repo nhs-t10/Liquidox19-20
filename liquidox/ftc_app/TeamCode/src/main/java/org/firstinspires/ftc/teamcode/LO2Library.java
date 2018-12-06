@@ -9,7 +9,7 @@ public abstract class LO2Library extends OpMode {
     public static DcMotor frontLeft, backLeft, frontRight, backRight;
 
     public void init() {
-        /*Namiyng the Motors for phone*/
+        /*Naming the Motors for phone*/
         frontLeft = hardwareMap.dcMotor.get("FL");
         backLeft = hardwareMap.dcMotor.get("BL");
         frontRight = hardwareMap.dcMotor.get("FR");
