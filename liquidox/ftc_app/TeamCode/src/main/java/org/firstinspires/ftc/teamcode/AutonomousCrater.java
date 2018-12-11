@@ -31,6 +31,7 @@ public class AutonomousCrater extends LO2Library {
         }
         switch(step) {
             case (1):
+                //unLatch();
                 if (timer1 >= 5000) {
                     drive(0f, 0f, 0f, 0f);
                     step++;
@@ -38,6 +39,7 @@ public class AutonomousCrater extends LO2Library {
                 break;
 
             case (2):
+                drive(0.4f,0.4f,0.4f,0.4f);
                 if (timer1 >= 10000) {
                     drive(0f, 0f, 0f, 0f);
                     step++;
