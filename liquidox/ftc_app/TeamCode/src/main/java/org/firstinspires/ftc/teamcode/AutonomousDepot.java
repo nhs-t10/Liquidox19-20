@@ -16,6 +16,9 @@ public class AutonomousDepot extends AutonomousTesting {
     int step  = 1;
     ElapsedTime eTimeObj = new ElapsedTime();
     float timer1;
+    void unlatch(){
+        //
+    }
     public void init(){
         /*Namiyng the Motors for phone*/
         frontLeft = hardwareMap.dcMotor.get("FL");
@@ -32,6 +35,7 @@ public class AutonomousDepot extends AutonomousTesting {
         }
         switch(step) {
             case (1):
+                unlatch();
                 if (timer1 >= 5000) {
                     drive(0f, 0f, 0f, 0f);
                     step++;
@@ -39,6 +43,9 @@ public class AutonomousDepot extends AutonomousTesting {
                 break;
 
             case (2):
+
+
+
                 if (timer1 >= 10000) {
                     drive(0f, 0f, 0f, 0f);
                     step++;
