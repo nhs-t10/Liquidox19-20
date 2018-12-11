@@ -12,10 +12,22 @@ import java.util.concurrent.TimeUnit;
 
 @Autonomous
 public class AutonomousDepot extends AutonomousTesting {
-
+    boolean gold = true;
     int step  = 1;
     ElapsedTime eTimeObj = new ElapsedTime();
     float timer1;
+    void sample(float time1, float time2, float next){
+        if(gold){
+            if(timer1 < time1){
+                drive(0.4, 0.4, 0.4, 0.4);
+            } else if(timer1 < time2)
+                drive(-0.4, -0.4, -0.4, -0.4);
+        }
+        if (timer1 >= next) {
+            drive(0f, 0f, 0f, 0f);
+            step++;
+        }
+    }
     void unlatch(){
         //
     }
@@ -43,37 +55,52 @@ public class AutonomousDepot extends AutonomousTesting {
                 break;
 
             case (2):
-
-
-
-                if (timer1 >= 10000) {
+                drive(0.4, 0.4, 0.4, 0.4);
+                if (timer1 >= 6000) {
                     drive(0f, 0f, 0f, 0f);
                     step++;
                 }
                 break;
 
             case (3):
-                if (timer1 >= 15000) {
+                drive(-0.4, 0.4, 0.4, -0.4);
+                if (timer1 >= 6500) {
                     drive(0f, 0f, 0f, 0f);
                     step++;
                 }
                 break;
             case (4):
-                if (timer1 >= 20000) {
-                    drive(0f, 0f, 0f, 0f);
-                    step++;
-                }
-                break;
 
+                sample(7000f, 7500, 8000);
+
+                break;
             case (5):
-                if (timer1 >= 25000) {
+                //moving to the next thing
+                drive(-0.4, 0.4, 0.4, -0.4);
+                if (timer1 >= 8500) {
                     drive(0f, 0f, 0f, 0f);
                     step++;
                 }
                 break;
-
             case (6):
-                if (timer1 >= 30000) {
+                //sample 2
+                sample(9000f, 9500f, 10000f);
+                if (timer1 >= 10500) {
+                    drive(0f, 0f, 0f, 0f);
+                    step++;
+                }
+                break;
+            case (7):
+               drive(-0.4, 0.4, 0.4, -0.4);
+                if (timer1 >= 11000) {
+                    drive(0f, 0f, 0f, 0f);
+                    step++;
+                }
+                break;
+            case (8):
+                //sample 3
+                sample(11500, 12000, 12500);
+                if (timer1 >= 13000) {
                     drive(0f, 0f, 0f, 0f);
                     step++;
                 }
