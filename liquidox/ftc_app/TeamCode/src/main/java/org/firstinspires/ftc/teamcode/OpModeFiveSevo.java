@@ -16,7 +16,7 @@ public class OpModeFiveSevo extends OpMode {
 
     Servo rightChestShoulder, leftChestShoulder, leftOuterShoulder, rightOuterShoulder;
 
-    float speed = 0.6f;
+    float speed;
     public void init() {
         /*Naming the Motors for phone*/
         frontLeft = hardwareMap.dcMotor.get("FL");
@@ -33,28 +33,25 @@ public class OpModeFiveSevo extends OpMode {
     }
     public final void drive(float bl, float fl, float fr, float br ) {
 /** Tells the robot how to drive */
-          frontLeft.setPower(-fl*speed); //Scaled by 1.8
-          backRight.setPower(br*speed);
-          frontRight.setPower(fr*speed);
-          backLeft.setPower(-bl*speed);
+          frontLeft.setPower(-fl/speed); //Scaled by 1.8
+          backRight.setPower(br/speed);
+          frontRight.setPower(fr/speed);
+          backLeft.setPower(-bl/speed);
 
     }
 
-    float speed = .5
-
     float[] sum = {0,0,0,0};
-
 
 
     public void loop() {
 /** finds the values from the controller*/
         float lX = Range.clip(gamepad1.left_stick_x , -1, 1);
         float lY = Range.clip(gamepad1.left_stick_y, -1, 1);
-        float rX = Range.clip(gamepad1.right_stick_x, -1, 1);
+        float rX = Range.clip(gamepad1.right_stick_x/1.5f, -1, 1);
 
 /** creates driving modes */
         float[] vertical = {0.7f * lY, 0.7f * lY, 0.7f * lY, 0.7f * lY};
-        float[] horizontal = {-lX, lX, lX, -lX};
+        float[] horizontal = {lX, -lX, lX, -lX};
         float[] rotational = {-0.7f * rX, -0.7f * rX, 0.7f * rX, 0.7f * rX};
 /** Adds all of the driving modes together */
         for(int i=0; i<4; i++) {
@@ -96,12 +93,12 @@ public class OpModeFiveSevo extends OpMode {
         //if the left bumper is down, down the speed by 1.
 
         if(gamepad1.left_bumper) {
-            speed = 1.5f;
+            speed = 1.25f;
         } else if(gamepad1.right_bumper) {
-            speed = 4.5f;
+            speed = 2.5f;
         }
         else {
-            speed = 3f;
+            speed = 1.5f;
         }
         //////////////////////////////
 
@@ -111,7 +108,7 @@ public class OpModeFiveSevo extends OpMode {
         telemetry.addData("Back Left Power: ", backLeft.getPower());
         telemetry.addData("Back Right Power: ", backRight.getPower());
         telemetry.addData("Left Gamepad X-Coordinate: ", lX);
-        telemetry.addData("Left Gamepad X-Coordinate: ", lY);
+        telemetry.addData("Left Gamepad Y-Coordinate: ", lY);
         telemetry.addData("leftChestShoulder: ", leftChestShoulder.getPosition());
         telemetry.addData("leftOuterShoulder: ", leftOuterShoulder.getPosition());
         telemetry.addData("rightChestShoulder: ", rightChestShoulder.getPosition());
