@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit;
 
 @Autonomous
 public class AutonomousDepot extends LO2Library {
-    boolean gold = true;
+    boolean gold = false;
     int step  = 1;
     ElapsedTime eTimeObj = new ElapsedTime();
 
@@ -20,10 +20,11 @@ public class AutonomousDepot extends LO2Library {
     float timer1;
     void sample(float time1, float time2, float next){
         if(gold){
-            if(timer1 < time1){
-                drive(0.2f, 0.2f, 0.2f, 0.2f);
-            } else if(timer1 < time2)
-                drive(-0.2f, -0.2f, -0.2f, -0.2f);
+            if(timer1 < time1) {
+                drive(0.1f,0.1f, 0.1f, 0.1f);
+            } else if(timer1 < time2) {
+                drive(-0.1f, -0.1f, -0.1f, -0.1f);
+            }
         }
         if (timer1 >= next) {
             drive(0f, 0f, 0f, 0f);
@@ -87,10 +88,7 @@ public class AutonomousDepot extends LO2Library {
             case (6):
                 //sample 2
                 sample(9000f, 9500f, 10000f);
-                if (timer1 >= 10500) {
-                    drive(0f, 0f, 0f, 0f);
-                    step++;
-                }
+
                 break;
             case (7):
                drive(-0.2f, 0.2f, 0.2f, -0.2f);
@@ -102,10 +100,7 @@ public class AutonomousDepot extends LO2Library {
             case (8):
                 //sample 3
                 sample(11500, 12000, 12500);
-                if (timer1 >= 13000) {
-                    drive(0f, 0f, 0f, 0f);
-                    step++;
-                }
+
                 break;
             case (9):
                 drive(0.2f,-0.2f,-0.2f,0.2f);
