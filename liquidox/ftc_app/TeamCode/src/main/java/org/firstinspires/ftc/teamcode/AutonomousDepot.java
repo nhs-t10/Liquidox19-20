@@ -21,9 +21,9 @@ public class AutonomousDepot extends AutonomousTesting {
     void sample(float time1, float time2, float next){
         if(gold){
             if(timer1 < time1){
-                drive(0.4, 0.4, 0.4, 0.4);
+                drive(0.2, 0.2, 0.2, 0.2);
             } else if(timer1 < time2)
-                drive(-0.4, -0.4, -0.4, -0.4);
+                drive(-0.2, -0.2, -0.2, -0.2);
         }
         if (timer1 >= next) {
             drive(0f, 0f, 0f, 0f);
