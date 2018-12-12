@@ -12,6 +12,8 @@ public class AutonomousCrater extends LO2Library {
     /* WE STILL NEED TO INITIALIZE THE IMU, ASK PAUL WHAT WE HAVE OT DO FOR THAT */
     int step  = 1;
     ElapsedTime eTimeObj = new ElapsedTime();
+
+    imuData imu = new imuData(hardwareMap);
     float timer1;
     public void init(){
         /*Namiyng the Motors for phone*/
@@ -83,67 +85,7 @@ public class AutonomousCrater extends LO2Library {
         telemetry.addData("Back Right Power: ", backRight.getPower());
         telemetry.addData("Time: ", timer1 + "");
         telemetry.addData("Step: ", step + "");
-//        if (step == 1) {
-//            /*We don't have unlatch code*/
-////            unLatch();
-//            if (timer1 >= 5000) {
-//                LO2Library.drive(0f, 0f,0f,0f);
-//                step++;
-//            }
-//        }
-//
-//
-//
-//        if (step == 2) {
-//            LO2Library.drive(0.2f,0.2f,0.2f,0.2f);
-//            if (timer1 >= 1500) {
-//                LO2Library.drive(0f, 0f,0f,0f);
-//                step++;
-//            }
-//
-//        }
-//
-//        if (step == 3) {
-//            Turning.setDestination(-90f);
-//            Turning.update(Turning.currentAngle);
-//            if (timer1 >= 6500) {
-//                LO2Library.drive(0f, 0f,0f,0f);
-//                step++;
-//            }
-//        }
-//
-//        if (step == 4) {
-//            LO2Library.drive(0.2f,0.2f,0.2f, 0.2f);
-//            if (timer1 >= 9500) {
-//                LO2Library.drive(0f,0f,0f,0f);
-//                step++;
-//            }
-//        }
-//
-//
-//        if (step == 5) {
-//            Turning.setDestination(-135f);
-//            Turning.update(Turning.currentAngle);
-//            if (timer1 >= 15500) {
-//                LO2Library.drive(0f,0f,0f,0f);
-//                step++;
-//            }
-//        }
-//
-//        if (step == 6) {
-//            LO2Library.drive(0.2f,0.2f, 0.2f, 0.2f);
-//            if (timer1 >= 14000) {
-//                LO2Library.drive(0f,0f,0f,0f);
-//                step++;
-//            }
-//        }
-//
-//        if (step == 7) {
-//            LO2Library.drive(-1f,-1f,-1f,-1f);
-//            if (timer1 == 16000) {
-//                LO2Library.drive(0f,0f,0f,0f);
-//            }
-//        }
+        telemetry.addData("Orientation", Turning.currentAngle + "");
 
     }
 }
