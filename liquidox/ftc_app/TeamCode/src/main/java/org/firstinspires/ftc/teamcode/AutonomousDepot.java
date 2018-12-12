@@ -57,7 +57,7 @@ public class AutonomousDepot extends AutonomousTesting {
                 break;
 
             case (2):
-                drive(0.4, 0.4, 0.4, 0.4);
+                drive(0.2, 0.2, 0.2, 0.2);
                 if (timer1 >= 6000) {
                     drive(0f, 0f, 0f, 0f);
                     step++;
@@ -65,7 +65,7 @@ public class AutonomousDepot extends AutonomousTesting {
                 break;
 
             case (3):
-                drive(-0.4, 0.4, 0.4, -0.4);
+                drive(-0.2, 0.2, 0.2, -0.2);
                 if (timer1 >= 6500) {
                     drive(0f, 0f, 0f, 0f);
                     step++;
@@ -78,7 +78,7 @@ public class AutonomousDepot extends AutonomousTesting {
                 break;
             case (5):
                 //moving to the next thing
-                drive(-0.4, 0.4, 0.4, -0.4);
+                drive(-0.2, 0.2, 0.2, -0.2);
                 if (timer1 >= 8500) {
                     drive(0f, 0f, 0f, 0f);
                     step++;
@@ -93,7 +93,7 @@ public class AutonomousDepot extends AutonomousTesting {
                 }
                 break;
             case (7):
-               drive(-0.4, 0.4, 0.4, -0.4);
+               drive(-0.2, 0.2, 0.2, -0.2);
                 if (timer1 >= 11000) {
                     drive(0f, 0f, 0f, 0f);
                     step++;
@@ -108,7 +108,7 @@ public class AutonomousDepot extends AutonomousTesting {
                 }
                 break;
             case (9):
-                drive(0.4,-0.4,-0.4,0.4);
+                drive(0.2,-0.2,-0.2,0.2);
                 if(timer1 >= 17000) {
                     drive(0f,0f,0f,0f);
                     step++;
