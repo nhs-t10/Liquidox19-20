@@ -11,7 +11,7 @@ import org.firstinspires.ftc.teamcode.BasicTankMode;
 import java.util.concurrent.TimeUnit;
 
 @Autonomous
-public class AutonomousDepot extends AutonomousTesting {
+public class AutonomousDepot extends LO2Library {
     boolean gold = true;
     int step  = 1;
     ElapsedTime eTimeObj = new ElapsedTime();
@@ -21,9 +21,9 @@ public class AutonomousDepot extends AutonomousTesting {
     void sample(float time1, float time2, float next){
         if(gold){
             if(timer1 < time1){
-                drive(0.2, 0.2, 0.2, 0.2);
+                drive(0.2f, 0.2f, 0.2f, 0.2f);
             } else if(timer1 < time2)
-                drive(-0.2, -0.2, -0.2, -0.2);
+                drive(-0.2f, -0.2f, -0.2f, -0.2f);
         }
         if (timer1 >= next) {
             drive(0f, 0f, 0f, 0f);
@@ -57,7 +57,7 @@ public class AutonomousDepot extends AutonomousTesting {
                 break;
 
             case (2):
-                drive(0.2, 0.2, 0.2, 0.2);
+                drive(0.2f, 0.2f, 0.2f, 0.2f);
                 if (timer1 >= 6000) {
                     drive(0f, 0f, 0f, 0f);
                     step++;
@@ -65,7 +65,7 @@ public class AutonomousDepot extends AutonomousTesting {
                 break;
 
             case (3):
-                drive(-0.2, 0.2, 0.2, -0.2);
+                drive(-0.2f, 0.2f, 0.2f, -0.2f);
                 if (timer1 >= 6500) {
                     drive(0f, 0f, 0f, 0f);
                     step++;
@@ -78,7 +78,7 @@ public class AutonomousDepot extends AutonomousTesting {
                 break;
             case (5):
                 //moving to the next thing
-                drive(-0.2, 0.2, 0.2, -0.2);
+                drive(-0.2f, 0.2f, 0.2f, -0.2f);
                 if (timer1 >= 8500) {
                     drive(0f, 0f, 0f, 0f);
                     step++;
@@ -93,7 +93,7 @@ public class AutonomousDepot extends AutonomousTesting {
                 }
                 break;
             case (7):
-               drive(-0.2, 0.2, 0.2, -0.2);
+               drive(-0.2f, 0.2f, 0.2f, -0.2f);
                 if (timer1 >= 11000) {
                     drive(0f, 0f, 0f, 0f);
                     step++;
@@ -108,7 +108,7 @@ public class AutonomousDepot extends AutonomousTesting {
                 }
                 break;
             case (9):
-                drive(0.2,-0.2,-0.2,0.2);
+                drive(0.2f,-0.2f,-0.2f,0.2f);
                 if(timer1 >= 16000) {
                     drive(0f,0f,0f,0f);
                     step++;
