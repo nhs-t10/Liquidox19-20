@@ -158,6 +158,7 @@ public class ColorSensorV extends LinearOpMode {
               .addData("r", "%02x", Color.red(color))
               .addData("g", "%02x", Color.green(color))
               .addData("b", "%02x", Color.blue(color));
+     // telemetry.addData('is this a gold thing??', isGold(Color.green(color)))
 
       // Balance the colors. The values returned by getColors() are normalized relative to the
       // maximum possible values that the sensor can measure. For example, a sensor might in a
@@ -193,26 +194,9 @@ public class ColorSensorV extends LinearOpMode {
           relativeLayout.setBackgroundColor(Color.HSVToColor(0xff, values));
         }
 
-        public void range(colorGreen) {
-              while parseint(61,16) ==
-                      int five = parseInt(10,5);
-                      boolean isGold = true
-                      if (isGold == true) {
 
-                      } else {
-                          parseint(65,16);
-                          /*Still working on the code below*/
-//        }
-//      });
-//    }
-//  }
-//}
-//public boolean isGold(greenValue) {
-//    if (0x53 <= parseInt(greenValue,16) <= 0x64) {
-//        return true
-//    } else if (/*TODO: Test for ground*/false) {
-//    } else
-//        return false
-//    }
+      });
+    }
+  }
 }
-}
+

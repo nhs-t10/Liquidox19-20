@@ -1,13 +1,14 @@
 
 package org.firstinspires.ftc.teamcode;
-import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import org.firstinspires.ftc.teamcode.imuData;
+
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 
 
 
-@Autonomous
+
 public class Turning {
     public static float error;
     public static float currentAngle;
