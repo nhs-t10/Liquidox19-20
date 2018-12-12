@@ -109,14 +109,14 @@ public class AutonomousDepot extends AutonomousTesting {
                 break;
             case (9):
                 drive(0.2,-0.2,-0.2,0.2);
-                if(timer1 >= 17000) {
+                if(timer1 >= 16000) {
                     drive(0f,0f,0f,0f);
                     step++;
                 }
             case (10):
                 Turning.setDestination(-45);
                 Turning.update(imu);
-                if(timer1 >= 22000) {
+                if(timer1 >= 18000) {
                     drive(0f,0f,0f,0f);
                     step++;
                 }
