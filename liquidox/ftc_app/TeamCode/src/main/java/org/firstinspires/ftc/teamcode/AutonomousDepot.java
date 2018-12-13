@@ -4,9 +4,10 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
+import org.firstinspires.ftc.teamcode.ColorSensorV;
 
 import org.firstinspires.ftc.teamcode.Turning;
-import org.firstinspires.ftc.teamcode.BasicTankMode;
+
 
 import java.util.concurrent.TimeUnit;
 
