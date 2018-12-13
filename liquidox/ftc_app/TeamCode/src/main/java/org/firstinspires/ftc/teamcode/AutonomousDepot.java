@@ -15,8 +15,8 @@ public class AutonomousDepot extends LO2Library {
     boolean gold = false;
     int step = 1;
     ElapsedTime eTimeObj = new ElapsedTime();
+    imuData imu = null;
 
-    imuData imu = new imuData(hardwareMap);
     float timer1;
 
     void sample(float time1, float time2, float next) {
@@ -33,12 +33,13 @@ public class AutonomousDepot extends LO2Library {
             }
         }
     }
-        //void unlatch(){ }
 
+        //void unlatch(){ }
 
     @Override
     public void init() {
         super.initialize_robot();
+
     }
 
     public void loop() {
