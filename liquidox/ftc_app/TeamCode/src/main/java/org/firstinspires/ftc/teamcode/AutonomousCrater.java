@@ -13,44 +13,41 @@ import java.util.concurrent.TimeUnit;
 @Autonomous
 public class AutonomousCrater extends LO2Library {
     boolean gold = false;
-    int step  = 1;
+    int step = 1;
     ElapsedTime eTimeObj = new ElapsedTime();
+    imuData imu = null;
 
-    imuData imu;
     float timer1;
-    void sample(float time1, float time2, float next){
-        if(gold){
-            if(timer1 < time1){
-                drive(0.2f, 0.2f, 0.2f, 0.2f);
-            } else if(timer1 < time2)
-                drive(-0.2f, -0.2f, -0.2f, -0.2f);
+
+    void sample(float time1, float time2, float next) {
+        if (gold) {
+            if (timer1 > time1 && timer1 < time2) {
+                drive(0.1f, 0.1f, 0.1f, 0.1f);
+            } else if (timer1 > time2 && timer1 < next) {
+                drive(-0.1f, -0.1f, -0.1f, -0.1f);
+
+            }
+            if (timer1 >= next) {
+                drive(0f, 0f, 0f, 0f);
+                step++;
+            }
         }
-        if (timer1 >= next) {
-            drive(0f, 0f, 0f, 0f);
-            step++;
-        }
     }
-    void unlatch(){
-        //
+
+    //void unlatch(){ }
+
+    @Override
+    public void init() {
+        super.initialize_robot();
+
     }
-    public void init(){
-        /*Namiyng the Motors for phone*/
-        frontLeft = hardwareMap.dcMotor.get("FL");
-        backLeft = hardwareMap.dcMotor.get("BL");
-        frontRight = hardwareMap.dcMotor.get("FR");
-        backRight = hardwareMap.dcMotor.get("BR");
-        imu = new imuData(hardwareMap);
-        step = 1;
-    }
+
     public void loop() {
         timer1 = eTimeObj.time(TimeUnit.MILLISECONDS);
-        //emergency stop
-        if(gamepad1.x){
-            step = 30;
-        }
-        switch(step) {
+
+        switch (step) {
             case (1):
-                unlatch();
+                //unlatch();
                 if (timer1 >= 5000) {
                     drive(0f, 0f, 0f, 0f);
                     step++;
@@ -74,55 +71,49 @@ public class AutonomousCrater extends LO2Library {
                 break;
             case (4):
 
-                sample(7000f, 7500, 8000);
+                sample(7000, 7250, 7500);
 
                 break;
             case (5):
                 //moving to the next thing
-                drive(-0.2f, 0.2f, 0.2f, -0.2f);
-                if (timer1 >= 8500) {
+                drive(0.2f, -0.2f, -0.2f, 0.2f);
+                if (timer1 >= 8000) {
                     drive(0f, 0f, 0f, 0f);
                     step++;
                 }
                 break;
             case (6):
                 //sample 2
-                sample(9000f, 9500f, 10000f);
-                if (timer1 >= 10500) {
-                    drive(0f, 0f, 0f, 0f);
-                    step++;
-                }
+                sample(8500f, 8750f, 9000f);
+
                 break;
             case (7):
-                drive(-0.2f, 0.2f, 0.2f, -0.2f);
-                if (timer1 >= 11000) {
+                drive(0.2f, -0.2f, -0.2f, 0.2f);
+                if (timer1 >= 9500) {
                     drive(0f, 0f, 0f, 0f);
                     step++;
                 }
                 break;
             case (8):
                 //sample 3
-                sample(11500, 12000, 12500);
-                if (timer1 >= 13000) {
-                    drive(0f, 0f, 0f, 0f);
-                    step++;
-                }
+                sample(10000, 10250, 10500);
+
                 break;
             case (9):
-                drive(0.2f,-0.2f,-0.2f,0.2f);
-                if(timer1 >= 16000) {
-                    drive(0f,0f,0f,0f);
+                drive(0.2f, -0.2f, -0.2f, 0.2f);
+                if (timer1 >= 11500) {
+                    drive(0f, 0f, 0f, 0f);
                     step++;
                 }
             case (10):
                 Turning.setDestination(-135);
                 Turning.update(imu);
-                if(timer1 >= 18000) {
-                    drive(0f,0f,0f,0f);
+                if (timer1 >= 16500) {
+                    drive(0f, 0f, 0f, 0f);
                     step++;
                 }
             default:
-                drive(0,0,0,0);
+                drive(0, 0, 0, 0);
                 break;
         }
 
