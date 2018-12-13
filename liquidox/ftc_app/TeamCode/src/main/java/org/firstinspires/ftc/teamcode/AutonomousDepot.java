@@ -19,7 +19,7 @@ public class AutonomousDepot extends LO2Library {
 
     imuData imu;
 
-    ColorSensorV colorSensor = new ColorSensorV();
+    ColorSensorV colorSensor;
 
     float timer1;
 
@@ -39,8 +39,11 @@ public class AutonomousDepot extends LO2Library {
     @Override
     public void init() {
         super.initialize_robot();
-        colorSensor.init(hardwareMap);
+        colorSensor = new ColorSensorV();
         imu = new imuData(hardwareMap);
+
+        
+        colorSensor.init(hardwareMap);
     }
 
     public void loop() {
