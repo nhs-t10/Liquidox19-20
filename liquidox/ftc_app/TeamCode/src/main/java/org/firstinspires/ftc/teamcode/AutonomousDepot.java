@@ -43,8 +43,6 @@ public class AutonomousDepot extends LO2Library {
 
         
         colorSensor.init(hardwareMap);
-
-
     }
 
     public void loop() {
