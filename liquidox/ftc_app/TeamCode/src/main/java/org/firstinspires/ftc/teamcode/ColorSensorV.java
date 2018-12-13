@@ -47,28 +47,21 @@ public class ColorSensorV {
   HardwareMap hardwareMap;
   boolean weShouldRead = false, weveInitiated = false;
   int colorReturned;
-  /**
-   * The runOpMode() method is the root of this LinearOpMode, as it is in all linear opModes.
-   * Our implementation here, though is a bit unusual: we've decided to put all the actual work
-   * in the main() method rather than directly in runOpMode() itself. The reason we do that is that
-   * in this sample we're changing the background color of the robot controller screen as the
-   * opmode runs, and we want to be able to *guarantee* that we restore it to something reasonable
-   * and palatable when the opMode ends. The simplest way to do that is to use a try...finally
-   * block around the main, core logic, and an easy way to make that all clear was to separate
-   * the former from the latter in separate methods.
-   */
+
   public void init(HardwareMap passedHardwareMap) {
 
       hardwareMap = passedHardwareMap;
 
       weveInitiated = true;
 
-      runSample(); // actually execute the sample
+      runSample(); // actually execute the sampling code
   }
 
   public void switchSampling(boolean start_or_dont) {
+          boolean weShouldRead_old = weShouldRead;
           weShouldRead = start_or_dont;
-          if(start_or_dont) {
+          //if it's switching on from being previously off, start the loop again
+          if(start_or_dont != weShouldRead_old && start_or_dont) {
               runSample();
           }
   }

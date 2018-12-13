@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.Turning;
 import org.firstinspires.ftc.teamcode.BasicTankMode;
+import org.firstinspires.ftc.teamcode.ColorSensorV;
 
 import java.util.concurrent.TimeUnit;
 
@@ -16,6 +17,8 @@ public class AutonomousDepot extends LO2Library {
     int step = 1;
     ElapsedTime eTimeObj = new ElapsedTime();
     imuData imu = null;
+
+    ColorSensorV colorSensor = new ColorSensorV();
 
     float timer1;
 
@@ -39,7 +42,7 @@ public class AutonomousDepot extends LO2Library {
     @Override
     public void init() {
         super.initialize_robot();
-
+        colorSensor.init(hardwareMap);
     }
 
     public void loop() {
