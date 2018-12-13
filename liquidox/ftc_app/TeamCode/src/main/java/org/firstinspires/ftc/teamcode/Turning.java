@@ -11,18 +11,18 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 
 
 public class Turning {
-    public static float error;
-    public static float currentAngle;
-    private static float destination;
-    private static float pComponent;
+    public static double error;
+    public static double currentAngle;
+    private static double destination;
+    private static double pComponent;
     private static boolean turning=false;
-    private static final float P = 0.03f;
+    private static final double P = 0.03;
 
     public static void Turning() {
         destination=0;
     }
 
-    public static void setDestination(float degrees){
+    public static void setDestination(double degrees){
         if(degrees > 180) destination = degrees - 360;
         else destination = degrees;
         destination = degrees;
@@ -45,12 +45,12 @@ public class Turning {
             if (Math.abs(error) < 3) {
                 stopTurning();
             }
-                LO2Library.drive((pComponent), (pComponent), -(pComponent), -(pComponent));
+                LO2Library.TurnDrive((pComponent), (pComponent), -(pComponent), -(pComponent));
         }
 
     }
 
-    public static float getError(){
+    public static double getError(){
         return currentAngle- destination ;
     }
 
