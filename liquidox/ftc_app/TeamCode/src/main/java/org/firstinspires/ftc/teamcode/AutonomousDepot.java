@@ -18,7 +18,7 @@ public class AutonomousDepot extends LO2Library {
 
     imuData imu = new imuData(hardwareMap);
     float timer1;
-    void sample(float time1, float time2, float next){
+    void sample(float time1, float time2, float next) {
         if(gold){
             if(timer1 < time1){
                 drive(0.2f, 0.2f, 0.2f, 0.2f);
