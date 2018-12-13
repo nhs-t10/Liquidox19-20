@@ -15,8 +15,8 @@ public class AutonomousDepot extends LO2Library {
     boolean gold = false;
     int step  = 1;
     ElapsedTime eTimeObj = new ElapsedTime();
+    imuData imu = null;
 
-    imuData imu = new imuData(hardwareMap);
     float timer1;
     void sample(float time1, float time2, float next){
         if(gold){
@@ -40,6 +40,7 @@ public class AutonomousDepot extends LO2Library {
         backLeft = hardwareMap.dcMotor.get("BL");
         frontRight = hardwareMap.dcMotor.get("FR");
         backRight = hardwareMap.dcMotor.get("BR");
+        imu = new imuData(hardwareMap);
         step = 1;
     }
     public void loop() {

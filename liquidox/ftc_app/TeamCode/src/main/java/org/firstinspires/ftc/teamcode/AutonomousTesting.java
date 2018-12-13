@@ -7,11 +7,11 @@ import java.util.concurrent.TimeUnit;
 
 @Autonomous(name="LO2 Auto")
 public class AutonomousTesting extends OpMode {
-    float timer1;
+    float timer1 = 0;
     DcMotor frontLeft, backLeft, frontRight, backRight;
     public int step;
 
-    public void drive(double FL, double BL, double FR, double BR){
+    public void drive(float FL, float BL, float FR, float BR){
         frontLeft.setPower(-FL);
         backRight.setPower(BR);
         frontRight.setPower(FR);
@@ -36,7 +36,7 @@ public class AutonomousTesting extends OpMode {
            }
         }
         if(step == 2){
-            drive(-0.5, -0.5, 0.5, 0.5);
+            drive(-0.5f, -0.5f, 0.5f, 0.5f);
             if(timer1 >= 10000){
               //  drive(0,0,0,0);
                 step++;
@@ -48,7 +48,7 @@ public class AutonomousTesting extends OpMode {
                 }
             }
         }
-        timer1 = System.currentTimeMillis();
+
 //        if(current == currentState.Turning){
 //            turn();
 //        }
