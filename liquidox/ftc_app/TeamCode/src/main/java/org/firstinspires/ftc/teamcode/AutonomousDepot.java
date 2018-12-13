@@ -23,6 +23,7 @@ public class AutonomousDepot extends LO2Library {
     float timer1;
 
     void sample(float time1, float time2) {
+        gold = colorSensor.isGold();
         if (gold) {
             if (timer1 > time1 && timer1 < time2) {
                 drive(0.2f, 0.2f, 0.2f, 0.2f);
@@ -87,7 +88,7 @@ public class AutonomousDepot extends LO2Library {
                 case (6):
                     //sample 2
                     sample(8500f, 8750f);
-                    if (timer1 >= 7500) {
+                    if (timer1 >= 9000) {
                         drive(0f, 0f, 0f, 0f);
                         step++;
                     }
