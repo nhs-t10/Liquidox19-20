@@ -10,7 +10,7 @@ public abstract class LO2Library extends OpMode {
     public static DcMotor frontLeft, backLeft, frontRight, backRight;
     public static Servo rightChestShoulder, leftChestShoulder, leftOuterShoulder, rightOuterShoulder;
 
-    public void init() {
+    public void initialize_robot() {
         /*Naming the Motors for phone*/
         frontLeft = hardwareMap.dcMotor.get("FL");
         backLeft = hardwareMap.dcMotor.get("BL");
@@ -21,6 +21,8 @@ public abstract class LO2Library extends OpMode {
         leftChestShoulder = hardwareMap.servo.get("LCS");
         rightOuterShoulder = hardwareMap.servo.get("ROS");
         leftOuterShoulder = hardwareMap.servo.get("LOS");
+
+
     }
 
     public static void drive(float bl, float fl, float fr, float br) {
@@ -30,4 +32,6 @@ public abstract class LO2Library extends OpMode {
         backLeft.setPower(-bl);
 
     }
+
+
 }

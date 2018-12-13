@@ -10,11 +10,12 @@ import java.util.concurrent.TimeUnit;
 
 @TeleOp
 public class AutonomousTesting extends OpMode {
-    //private double random;
-    //instantiate hardware devices
+    float timer1 = 0;
     DcMotor frontLeft, backLeft, frontRight, backRight;
 
     Servo rightChestShoulder, leftChestShoulder, leftOuterShoulder, rightOuterShoulder;
+
+    int step = 1;
 
     float speed = .5f  /* 3f */;
     public void init() {
@@ -58,54 +59,24 @@ public class AutonomousTesting extends OpMode {
             sum[i] = vertical[i] + horizontal[i] + rotational[i];
         }
 
-        float highest = Math.max(Math.max(sum[0], sum[1]), Math.max(sum[2], sum[3]));
-
-        if(Math.abs(highest)>1) {
-            for (int i=0; i<4; i++) {
-                sum[i]=sum[i]/highest;
+        if(step == 2){
+            drive(-0.5f, -0.5f, 0.5f, 0.5f);
+            if(timer1 >= 10000){
+              //  drive(0,0,0,0);
+                step++;
+            }
+            if(step == 3){
+                drive(1, 1,1 , 1 );
+                if(timer1 >= 15000){
+                    step++;
+                }
             }
         }
 
+//        if(current == currentState.Turning){
+//            turn();
+//        }
 
-        drive(sum[0],sum[1],sum[2],sum[3]);
-        //okay now that that masterpiece of coding is done, have some disgusting pasta.
-        //if the button is down, move left and right shoulders forwards.
-        /**moves outer servos if a button is pressed*/
-        if(gamepad1.a) {
-            leftOuterShoulder.setPosition(0.5);
-            rightOuterShoulder.setPosition(0.5);
-        } /*no else because we don't want one button to "take precedence" over another-- might be jittery, but there you go `\_('-')_/` */
-        /**moves outer servos in opposite direction when b button is pressed*/
-        if (gamepad1.b) {
-            leftOuterShoulder.setPosition(0);
-            rightOuterShoulder.setPosition(0);
-        }
-        if(gamepad1.x) {
-//            rightChestShoulder.setPosition(0.5);
-//            leftChestShoulder.setPosition(0.5);
-        }
-        if(gamepad1.y) {
-//            rightChestShoulder.setPosition(0);
-//            leftChestShoulder.setPosition(0);
-        }
-
-        // why the heck did this show up here? }
-        //if the left bumper is down, down the speed by 1.
-        if(gamepad1.left_bumper) { speed = .25f /* 1.5f */; }
-        else if(gamepad1.right_bumper) { speed = .75f /* 4.5f */ ; }
-        else { speed = .5f /*3f*/; }
-//
-//        //Throttle Controls: If both bumpers are down, set the speed to 3f.
-//        if(gamepad1.left_bumper && gamepad1.right_bumper) { speed = 3f; }
-//        //Otherwise, if the left bumper is down, lower the speed (with a minimum of 0)
-//        else if(gamepad1.left_bumper) { speed = Math.max(speed-0.5f,0); }
-//        //and if we don't do that, raise the speed-- maximum of 10.
-//        else if (gamepad1.right_bumper) { speed = Math.min(speed+0.5f,10); }
-
-
-        //////////////////////////////
-
-        //////////////////////////////
         telemetry.addData("Front Left Power: ", frontLeft.getPower());
         telemetry.addData("Front Right Power: ", frontRight.getPower());
         telemetry.addData("Back Left Power: ", backLeft.getPower());

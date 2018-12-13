@@ -1,39 +1,53 @@
 package org.firstinspires.ftc.teamcode;
 
+
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
+
+import org.firstinspires.ftc.teamcode.Turning;
+import org.firstinspires.ftc.teamcode.BasicTankMode;
+
 import java.util.concurrent.TimeUnit;
 
 @Autonomous
 public class AutonomousCrater extends LO2Library {
-
-
-
-    /* WE STILL NEED TO INITIALIZE THE IMU, ASK PAUL WHAT WE HAVE OT DO FOR THAT */
-    int step  = 1;
+    boolean gold = false;
+    int step = 1;
     ElapsedTime eTimeObj = new ElapsedTime();
+    imuData imu = null;
 
-    imuData imu = new imuData(hardwareMap);
     float timer1;
-    public void init(){
-        /*Namiyng the Motors for phone*/
-        frontLeft = hardwareMap.dcMotor.get("FL");
-        backLeft = hardwareMap.dcMotor.get("BL");
-        frontRight = hardwareMap.dcMotor.get("FR");
-        backRight = hardwareMap.dcMotor.get("BR");
-        step = 1;
 
+    void sample(float time1, float time2, float next) {
+        if (gold) {
+            if (timer1 > time1 && timer1 < time2) {
+                drive(0.1f, 0.1f, 0.1f, 0.1f);
+            } else if (timer1 > time2 && timer1 < next) {
+                drive(-0.1f, -0.1f, -0.1f, -0.1f);
+
+            }
+            if (timer1 >= next) {
+                drive(0f, 0f, 0f, 0f);
+                step++;
+            }
+        }
+    }
+
+    //void unlatch(){ }
+
+    @Override
+    public void init() {
+        super.initialize_robot();
 
     }
+
     public void loop() {
         timer1 = eTimeObj.time(TimeUnit.MILLISECONDS);
-        //emergency stop
-        if(gamepad1.x){
-            step = 8;
-        }
-        switch(step) {
+
+        switch (step) {
             case (1):
-                //unLatch();
+                //unlatch();
                 if (timer1 >= 5000) {
                     drive(0f, 0f, 0f, 0f);
                     step++;
@@ -41,41 +55,65 @@ public class AutonomousCrater extends LO2Library {
                 break;
 
             case (2):
-                drive(0.4f,0.4f,0.4f,0.4f);
-                if (timer1 >= 10000) {
+                drive(0.2f, 0.2f, 0.2f, 0.2f);
+                if (timer1 >= 6000) {
                     drive(0f, 0f, 0f, 0f);
                     step++;
                 }
                 break;
 
             case (3):
-                if (timer1 >= 15000) {
+                drive(-0.2f, 0.2f, 0.2f, -0.2f);
+                if (timer1 >= 6500) {
                     drive(0f, 0f, 0f, 0f);
                     step++;
                 }
                 break;
             case (4):
-                if (timer1 >= 20000) {
-                    drive(0f, 0f, 0f, 0f);
-                    step++;
-                }
-                break;
 
+                sample(7000, 7250, 7500);
+
+                break;
             case (5):
-                if (timer1 >= 25000) {
+                //moving to the next thing
+                drive(0.2f, -0.2f, -0.2f, 0.2f);
+                if (timer1 >= 8000) {
                     drive(0f, 0f, 0f, 0f);
                     step++;
                 }
                 break;
-
             case (6):
-                if (timer1 >= 30000) {
+                //sample 2
+                sample(8500f, 8750f, 9000f);
+
+                break;
+            case (7):
+                drive(0.2f, -0.2f, -0.2f, 0.2f);
+                if (timer1 >= 9500) {
                     drive(0f, 0f, 0f, 0f);
                     step++;
                 }
                 break;
+            case (8):
+                //sample 3
+                sample(10000, 10250, 10500);
+
+                break;
+            case (9):
+                drive(0.2f, -0.2f, -0.2f, 0.2f);
+                if (timer1 >= 11500) {
+                    drive(0f, 0f, 0f, 0f);
+                    step++;
+                }
+            case (10):
+                Turning.setDestination(-135);
+                Turning.update(imu);
+                if (timer1 >= 16500) {
+                    drive(0f, 0f, 0f, 0f);
+                    step++;
+                }
             default:
-                drive(0,0,0,0);
+                drive(0, 0, 0, 0);
                 break;
         }
 
@@ -86,6 +124,7 @@ public class AutonomousCrater extends LO2Library {
         telemetry.addData("Time: ", timer1 + "");
         telemetry.addData("Step: ", step + "");
         telemetry.addData("Orientation", Turning.currentAngle + "");
+
 
     }
 }
