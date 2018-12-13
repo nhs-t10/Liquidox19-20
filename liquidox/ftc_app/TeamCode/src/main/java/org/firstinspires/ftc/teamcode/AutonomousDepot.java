@@ -16,7 +16,7 @@ public class AutonomousDepot extends LO2Library {
     boolean gold = false;
     int step = 1;
     ElapsedTime eTimeObj = new ElapsedTime();
-    imuData imu = null;
+    imuData imu = new imuData(hardwareMap);
 
     ColorSensorV colorSensor = new ColorSensorV();
 
@@ -116,6 +116,7 @@ public class AutonomousDepot extends LO2Library {
                         drive(0f, 0f, 0f, 0f);
                         step++;
                     }
+                    break;
                 case (10):
                     Turning.setDestination(-45);
                     Turning.update(imu);
@@ -123,6 +124,7 @@ public class AutonomousDepot extends LO2Library {
                         drive(0f, 0f, 0f, 0f);
                         step++;
                     }
+                    break;
                 default:
                     drive(0, 0, 0, 0);
                     break;

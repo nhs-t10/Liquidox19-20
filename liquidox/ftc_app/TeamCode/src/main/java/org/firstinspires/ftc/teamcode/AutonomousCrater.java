@@ -116,6 +116,7 @@ public class AutonomousCrater extends LO2Library {
                     drive(0f, 0f, 0f, 0f);
                     step++;
                 }
+                break;
             case (10):
                 Turning.setDestination(-135);
                 Turning.update(imu);
@@ -123,6 +124,7 @@ public class AutonomousCrater extends LO2Library {
                     drive(0f, 0f, 0f, 0f);
                     step++;
                 }
+                break;
             default:
                 drive(0, 0, 0, 0);
                 break;
