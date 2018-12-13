@@ -39,7 +39,7 @@ public class AutonomousDepot extends LO2Library {
     public void init() {
         super.initialize_robot();
         colorSensor.init(hardwareMap);
-        imu = new imuData(hardwareMap)
+        imu = new imuData(hardwareMap);
     }
 
     public void loop() {
