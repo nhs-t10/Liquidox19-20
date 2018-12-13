@@ -16,7 +16,7 @@ public class AutonomousDepot extends LO2Library {
     boolean gold = false;
     int step = 1;
     ElapsedTime eTimeObj = new ElapsedTime();
-    imuData imu = null;
+    imuData imu;
 
     ColorSensorV colorSensor = new ColorSensorV();
 
@@ -39,6 +39,7 @@ public class AutonomousDepot extends LO2Library {
     public void init() {
         super.initialize_robot();
         colorSensor.init(hardwareMap);
+        imu = new imuData(hardwareMap)
     }
 
     public void loop() {
