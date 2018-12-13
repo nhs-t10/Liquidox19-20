@@ -4,9 +4,10 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
+import org.firstinspires.ftc.teamcode.ColorSensorV;
 
 import org.firstinspires.ftc.teamcode.Turning;
-import org.firstinspires.ftc.teamcode.BasicTankMode;
+
 
 import java.util.concurrent.TimeUnit;
 
@@ -26,10 +27,8 @@ public class AutonomousCrater extends LO2Library {
             if (timer1 > time1 && timer1 < time2) {
                 drive(0.2f, 0.2f, 0.2f, 0.2f);
             } else if (timer1 > time2) {
-                drive(-0.2f, -0.2f, -0.2f, -0.2f);
-
+                drive(-0.1f, -0.1f, -0.1f, -0.1f);
             }
-
         }
     }
 
@@ -38,7 +37,7 @@ public class AutonomousCrater extends LO2Library {
     @Override
     public void init() {
         super.initialize_robot();
-
+        colorSensor.init(hardwareMap);
     }
 
     public void loop() {
@@ -88,7 +87,7 @@ public class AutonomousCrater extends LO2Library {
             case (6):
                 //sample 2
                 sample(8500f, 8750f);
-                if (timer1 >= 7500) {
+                if (timer1 >= 9000) {
                     drive(0f, 0f, 0f, 0f);
                     step++;
                 }
