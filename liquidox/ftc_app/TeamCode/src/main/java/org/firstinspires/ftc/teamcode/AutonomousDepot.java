@@ -22,17 +22,12 @@ public class AutonomousDepot extends LO2Library {
 
     float timer1;
 
-    void sample(float time1, float time2, float next) {
+    void sample(float time1, float time2) {
         if (gold) {
             if (timer1 > time1 && timer1 < time2) {
-                drive(0.1f, 0.1f, 0.1f, 0.1f);
-            } else if (timer1 > time2 && timer1 < next) {
+                drive(0.2f, 0.2f, 0.2f, 0.2f);
+            } else if (timer1 > time2) {
                 drive(-0.1f, -0.1f, -0.1f, -0.1f);
-
-            }
-            if (timer1 >= next) {
-                drive(0f, 0f, 0f, 0f);
-                step++;
             }
         }
     }
@@ -58,7 +53,7 @@ public class AutonomousDepot extends LO2Library {
                     break;
 
                 case (2):
-                    drive(0.2f, 0.2f, 0.2f, 0.2f);
+                    drive(-0.3f, -0.3f, -0.3f, -0.3f);
                     if (timer1 >= 6000) {
                         drive(0f, 0f, 0f, 0f);
                         step++;
@@ -66,7 +61,7 @@ public class AutonomousDepot extends LO2Library {
                     break;
 
                 case (3):
-                    drive(-0.2f, 0.2f, 0.2f, -0.2f);
+                    drive(-0.3f, 0.3f, 0.3f, -0.3f);
                     if (timer1 >= 6500) {
                         drive(0f, 0f, 0f, 0f);
                         step++;
@@ -74,7 +69,11 @@ public class AutonomousDepot extends LO2Library {
                     break;
                 case (4):
 
-                    sample(7000, 7250, 7500);
+                    sample(7000, 7250);
+                    if (timer1 >= 7500) {
+                        drive(0f, 0f, 0f, 0f);
+                        step++;
+                    }
 
                     break;
                 case (5):
@@ -87,7 +86,11 @@ public class AutonomousDepot extends LO2Library {
                     break;
                 case (6):
                     //sample 2
-                    sample(8500f, 8750f, 9000f);
+                    sample(8500f, 8750f);
+                    if (timer1 >= 7500) {
+                        drive(0f, 0f, 0f, 0f);
+                        step++;
+                    }
 
                     break;
                 case (7):
@@ -99,7 +102,11 @@ public class AutonomousDepot extends LO2Library {
                     break;
                 case (8):
                     //sample 3
-                    sample(10000, 10250, 10500);
+                    sample(10000, 10250);
+                    if (timer1 >= 10500) {
+                        drive(0f, 0f, 0f, 0f);
+                        step++;
+                    }
 
                     break;
                 case (9):
