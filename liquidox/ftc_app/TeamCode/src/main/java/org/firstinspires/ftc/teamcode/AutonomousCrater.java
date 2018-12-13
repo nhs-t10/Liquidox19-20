@@ -27,7 +27,7 @@ public class AutonomousCrater extends LO2Library {
             if (timer1 > time1 && timer1 < time2) {
                 drive(0.2f, 0.2f, 0.2f, 0.2f);
             } else if (timer1 > time2) {
-                drive(-0.1f, -0.1f, -0.1f, -0.1f);
+                drive(-0.2f, -0.2f, -0.2f, -0.2f);
             }
         }
     }
@@ -54,15 +54,15 @@ public class AutonomousCrater extends LO2Library {
 
             case (2):
                 drive(-0.3f, -0.3f, -0.3f, -0.3f);
-                if (timer1 >= 6000) {
+                if (timer1 >= 5750) {
                     drive(0f, 0f, 0f, 0f);
                     step++;
                 }
                 break;
 
             case (3):
-                drive(-0.3f, 0.3f, 0.3f, -0.3f);
-                if (timer1 >= 6500) {
+                drive(0.3f, -0.3f, 0.3f, -0.3f);
+                if (timer1 >= 6750) {
                     drive(0f, 0f, 0f, 0f);
                     step++;
                 }
@@ -70,7 +70,7 @@ public class AutonomousCrater extends LO2Library {
             case (4):
 
                 sample(7000, 7250);
-                if (timer1 >= 7500) {
+                if (timer1 >= 7500f) {
                     drive(0f, 0f, 0f, 0f);
                     step++;
                 }
@@ -78,8 +78,8 @@ public class AutonomousCrater extends LO2Library {
                 break;
             case (5):
                 //moving to the next thing
-                drive(0.2f, -0.2f, -0.2f, 0.2f);
-                if (timer1 >= 8000) {
+                drive(-0.3f, 0.3f, -0.3f, 0.3f);
+                if (timer1 >= 8250f) {
                     drive(0f, 0f, 0f, 0f);
                     step++;
                 }
@@ -94,8 +94,8 @@ public class AutonomousCrater extends LO2Library {
 
                 break;
             case (7):
-                drive(0.2f, -0.2f, -0.2f, 0.2f);
-                if (timer1 >= 9500) {
+                drive(-0.3f, 0.3f, -0.3f, 0.3f);
+                if (timer1 >= 9750) {
                     drive(0f, 0f, 0f, 0f);
                     step++;
                 }
@@ -110,8 +110,8 @@ public class AutonomousCrater extends LO2Library {
 
                 break;
             case (9):
-                drive(0.2f, -0.2f, -0.2f, 0.2f);
-                if (timer1 >= 11500) {
+                drive(-0.3f, 0.3f, -0.3f, 0.3f);
+                if (timer1 >= 13000) {
                     drive(0f, 0f, 0f, 0f);
                     step++;
                 }
