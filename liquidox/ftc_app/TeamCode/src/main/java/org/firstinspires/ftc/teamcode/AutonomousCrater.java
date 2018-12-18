@@ -38,6 +38,7 @@ public class AutonomousCrater extends LO2Library {
     public void init() {
         super.initialize_robot();
         colorSensor.init(hardwareMap);
+        imu = new imuData(hardwareMap);
     }
 
     public void loop() {
@@ -53,7 +54,8 @@ public class AutonomousCrater extends LO2Library {
                 break;
 
             case (2):
-                drive(-0.3f, -0.3f, -0.3f, -0.3f);
+                //move forwards to the the sample sites
+                drive(-0.285f, -0.285f, -0.285f, -0.285f);
                 if (timer1 >= 5750) {
                     drive(0f, 0f, 0f, 0f);
                     step++;
@@ -61,14 +63,15 @@ public class AutonomousCrater extends LO2Library {
                 break;
 
             case (3):
-                drive(0.3f, -0.3f, 0.3f, -0.3f);
+                //move to the side to get to the sample sites
+                drive(0.285f, -0.285f, 0.285f, -0.285f);
                 if (timer1 >= 6750) {
                     drive(0f, 0f, 0f, 0f);
                     step++;
                 }
                 break;
             case (4):
-
+                //first sample
                 sample(7000, 7250);
                 if (timer1 >= 7500f) {
                     drive(0f, 0f, 0f, 0f);
@@ -78,15 +81,15 @@ public class AutonomousCrater extends LO2Library {
                 break;
             case (5):
                 //moving to the next thing
-                drive(-0.3f, 0.3f, -0.3f, 0.3f);
-                if (timer1 >= 8250f) {
+                drive(-0.285f, 0.285f, -0.285f, 0.285f);
+                if (timer1 >= 8500f) {
                     drive(0f, 0f, 0f, 0f);
                     step++;
                 }
                 break;
             case (6):
                 //sample 2
-                sample(8500f, 8750f);
+                sample(8750f, 9000);
                 if (timer1 >= 9000) {
                     drive(0f, 0f, 0f, 0f);
                     step++;
@@ -94,8 +97,8 @@ public class AutonomousCrater extends LO2Library {
 
                 break;
             case (7):
-                drive(-0.3f, 0.3f, -0.3f, 0.3f);
-                if (timer1 >= 9750) {
+                drive(-0.285f, 0.285f, -0.285f, 0.285f);
+                if (timer1 >= 10000) {
                     drive(0f, 0f, 0f, 0f);
                     step++;
                 }
@@ -110,16 +113,30 @@ public class AutonomousCrater extends LO2Library {
 
                 break;
             case (9):
-                drive(-0.3f, 0.3f, -0.3f, 0.3f);
+                drive(-0.255f, 0.255f, -0.255f, 0.255f);
                 if (timer1 >= 13000) {
                     drive(0f, 0f, 0f, 0f);
                     step++;
                 }
                 break;
             case (10):
-                Turning.setDestination(-135);
+                Turning.setDestination(45);
                 Turning.update(imu);
-                if (timer1 >= 16500) {
+                if (timer1 >= 18500) {
+                    drive(0f, 0f, 0f, 0f);
+                    step++;
+                }
+                break;
+            case (11):
+              drive(-0.285f, -0.285f, -0.285f, -0.285f);
+                if (timer1 >= 19000) {
+                    drive(0f, 0f, 0f, 0f);
+                    step++;
+                }
+                break;
+            case (12):
+                drive(-0.285f, -0.285f, -0.285f, -0.285f);
+                if (timer1 >= 22000) {
                     drive(0f, 0f, 0f, 0f);
                     step++;
                 }
@@ -136,7 +153,7 @@ public class AutonomousCrater extends LO2Library {
         telemetry.addData("Time: ", timer1 + "");
         telemetry.addData("Step: ", step + "");
         telemetry.addData("Orientation", Turning.currentAngle + "");
-
+        telemetry.addData("error", Turning.getError() + "");
 
     }
 }

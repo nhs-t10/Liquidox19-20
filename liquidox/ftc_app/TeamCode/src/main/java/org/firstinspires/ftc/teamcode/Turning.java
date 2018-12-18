@@ -45,13 +45,13 @@ public class Turning {
             if (Math.abs(error) < 3) {
                 stopTurning();
             }
-                LO2Library.TurnDrive((pComponent), (pComponent), -(pComponent), -(pComponent));
+                LO2Library.TurnDrive((pComponent * 0.16), (pComponent  * 0.16), -(pComponent  * 0.16), -(pComponent  * 0.16));
         }
 
     }
 
     public static double getError(){
-        return currentAngle- destination ;
+        return currentAngle - destination ;
     }
 
 }
