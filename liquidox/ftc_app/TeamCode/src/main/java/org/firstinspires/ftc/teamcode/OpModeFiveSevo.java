@@ -16,7 +16,7 @@ public class OpModeFiveSevo extends OpMode {
 
     Servo rightChestShoulder, leftChestShoulder, leftOuterShoulder, rightOuterShoulder;
 
-    float speed;
+    float speed = 0.8f;
     public void init() {
         /*Naming the Motors for phone*/
         frontLeft = hardwareMap.dcMotor.get("FL");
@@ -33,10 +33,10 @@ public class OpModeFiveSevo extends OpMode {
     }
     public final void drive(float bl, float fl, float fr, float br ) {
 /** Tells the robot how to drive */
-          frontLeft.setPower(-fl/speed); //Scaled by 1.8
-          backRight.setPower(br/speed);
-          frontRight.setPower(fr/speed);
-          backLeft.setPower(-bl/speed);
+          frontLeft.setPower(-fl*speed); //Scaled by 1.8
+          backRight.setPower(br*speed);
+          frontRight.setPower(fr*speed);
+          backLeft.setPower(-bl*speed);
 
     }
 
@@ -90,15 +90,17 @@ public class OpModeFiveSevo extends OpMode {
 //            leftChestShoulder.setPosition(0);
         }
 
-        //if the left bumper is down, down the speed by 1.
+        //Throttle Code
 
-        if(gamepad1.left_bumper) {
-            speed = 1.25f;
+        //If both bumpers are down, revert the speed to default
+        if(gamepad1.left_bumper && gamepad2.right_bumper) {
+           speed = 0.8f;
+           //otherwise, if the left bumper is down, decrease the speed (with a minumum of 0)
+        } else if(gamepad1.left_bumper) {
+            speed = Math.max(speed - 0.05f, 0);
         } else if(gamepad1.right_bumper) {
-            speed = 2.5f;
-        }
-        else {
-            speed = 1.5f;
+            //then, if the right bumper is down, increase the speed (max of 5)
+            speed = Math.min(0.05f, 5);
         }
         //////////////////////////////
 
