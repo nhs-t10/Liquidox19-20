@@ -9,6 +9,9 @@ import java.util.concurrent.TimeUnit;
 
 @Autonomous
 public class AutonomousCraterNew extends LO2Library {
+
+    Turning turning = new Turning();
+
     boolean gold = false;
     int step = 1;
     boolean goldNow = false;
@@ -75,7 +78,7 @@ public class AutonomousCraterNew extends LO2Library {
     @Override
     public void init() {
         super.initialize_robot();
-        Turning.offSet = imu.getAngle();
+        turning.offSet = imu.getAngle();
         colorSensor.init(hardwareMap);
         imu = new imuData(hardwareMap);
     }
@@ -127,12 +130,12 @@ public class AutonomousCraterNew extends LO2Library {
                 nextStep(3000);//13,000
                 break;
             case (10):
-//                Turning.setDestination(45);
-//                Turning.update(imu);
-//                if (timer1 >= 18500) {
-//                    drive(0f, 0f, 0f, 0f);
-//                    step++;
-//                }
+                turning.setDestination(45);
+                turning.update(imu);
+                if (timer1 >= 18500) {
+                    drive(0f, 0f, 0f, 0f);
+                    step++;
+                }
                 break;
             case (11):
               drive(-0.285f, -0.285f, -0.285f, -0.285f);
@@ -153,9 +156,9 @@ public class AutonomousCraterNew extends LO2Library {
         telemetry.addData("Back Right Power: ", backRight.getPower());
         telemetry.addData("Time: ", timer1 + "");
         telemetry.addData("Step: ", step + "");
-        telemetry.addData("Orientation", Turning.currentAngle + "");
-        telemetry.addData("Error",  Turning.getError() + "" );
-        telemetry.addData("Off Set: ", Turning.offSet +"");
+        telemetry.addData("Orientation", turning.currentAngle + "");
+        telemetry.addData("Error",  turning.getError() + "" );
+        telemetry.addData("Off Set: ", turning.offSet +"");
         telemetry.addData("Angle",  imu.getAngle() + "");
 
     }
