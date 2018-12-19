@@ -3,7 +3,8 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.util.ElapsedTime;
-
+import org.firstinspires.ftc.teamcode.Turning;
+import org.firstinspires.ftc.teamcode.ColorSensorV;
 import java.util.concurrent.TimeUnit;
 
 @Autonomous
@@ -13,11 +14,11 @@ public class AutonomousCraterNew extends LO2Library {
     boolean goldNow = false;
     ElapsedTime eTimeObj = new ElapsedTime();
     imuData imu = null;
+    float timeDone = 0;
     ColorSensorV colorSensor = new ColorSensorV();
     float timer1;
     boolean isDelay;
     public void nextStep(float delay) {
-        float timeDone = 0;
         if(isDelay == false){
             timeDone = timer1 + delay;
             isDelay = true;
