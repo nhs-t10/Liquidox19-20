@@ -15,8 +15,9 @@ public class Turning {
     public static double currentAngle;
     private static double destination;
     private static double pComponent;
-    private static boolean turning=false;
+    public static boolean turning = false;
     private static final double P = 0.03;
+    public static boolean isDone;
 
     public static void Turning() {
         destination=0;
@@ -27,11 +28,9 @@ public class Turning {
         else destination = degrees;
         destination = degrees;
         turning = true;
-
     }
 
     public static void stopTurning(){
-        turning = false;
         LO2Library.drive(0f,0f,0f,0f);
     }
 
