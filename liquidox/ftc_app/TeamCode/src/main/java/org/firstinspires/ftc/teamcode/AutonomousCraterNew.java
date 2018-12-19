@@ -10,13 +10,14 @@ import java.util.concurrent.TimeUnit;
 public class AutonomousCraterNew extends LO2Library {
     boolean gold = false;
     int step = 1;
+    boolean goldNow = false;
+    float timeDone = 99999;
     ElapsedTime eTimeObj = new ElapsedTime();
     imuData imu = null;
     ColorSensorV colorSensor = new ColorSensorV();
     float timer1;
     boolean isDelay;
     public void nextStep(float delay) {
-        float timeDone = 99999;
         if(isDelay == false){
             timeDone = timer1 + delay;
             isDelay = true;
@@ -31,24 +32,44 @@ public class AutonomousCraterNew extends LO2Library {
 
     void sample(float time1) {
         gold = colorSensor.isGold();
-            if(timer1 > time1 && timer1 < time1 + 500) {
-                drive(-0.2f, -0.2f, -0.2f, -0.2f);
-            }
-            float time2 = timer1 + 500;
+        /** The robot should move forward, strafe left slowly, and see if it can see a gold
+         * then, if it saw a gold it will go up, then come back to knock the gold off, else: nothing
+         * */
+        float time2 = time1 + 500;//<--the number that is being added is how many Millis the step takes
+        float time3 = time2 + 500;
+        float time4 = time3 + 250;
+        float time5 = time4 + 250;
+        //this will take is 1.5 seconds
+        //step one of sample
+        if(timer1 > time1 && timer1 <time2){
+            drive(0.2f, 0.2f, 0.2f, 0.2f);
+        }
+        //step two of sample
+        if(timer1 > time2 && timer1 <time3){
+            drive(0.1f, -0.1f, -0.1f, 0.1f);
             if(gold){
-                if (timer1 > time2 && timer1 < time2 + 500) {
-                    drive(0.2f, 0.2f, 0.2f, 0.2f);
-                } else if (timer1 > time2 + 500) {
-                    drive(-0.2f, -0.2f, -0.2f, -0.2f);
-                }
-            }
-            if(timer1 <time2 + 500 &&timer1 > time2 + 1000){
-                drive(0.2f, 0.2f, 0.2f, 0.2f);
-
+                goldNow = true;
             }
         }
-
-    //void unlatch(){ }
+        //step three of sample
+        if(timer1 > time3 && timer1 <time4 - 10){
+            if(goldNow == true){
+                drive(0.2f, 0.2f, 0.2f, 0.2f);
+            }
+        }
+        //step four of sample
+        if(timer1 > time4 && timer1 <time5) {
+            if (goldNow == true) {
+                drive(-0.2f, -0.2f, -0.2f, -0.2f);
+            }
+        }
+        //setting the goleNow boolean back to false
+        if(timer1 > time5 - 10) {
+            goldNow = false;
+        }
+        nextStep( 1500);
+    }
+//void unlatch(){ }
 
     @Override
     public void init() {
@@ -70,27 +91,23 @@ public class AutonomousCraterNew extends LO2Library {
             case (2):
                 //move forwards to the the sample sites
                 drive(-0.285f, -0.285f, -0.285f, -0.285f);
-                nextStep(5750);
+                nextStep(750); //5750
                 break;
 
             case (3):
                 //move to the side to get to the sample sites
                 drive(0.285f, -0.285f, 0.285f, -0.285f);
-                nextStep(6750);
+                nextStep(1000);//6750
                 break;
             case (4):
                 //first sample
-                sample(7000);
-                nextStep(5000);
-
+                sample(1000);//inc
+                //it will automatically move to the next one after 1500ms
                 break;
             case (5):
                 //moving to the next thing
                 drive(-0.285f, 0.285f, -0.285f, 0.285f);
-                if (timer1 >= 8750f) {
-                    drive(0f, 0f, 0f, 0f);
-                    step++;
-                }
+                nextStep(8500);
                 break;
             case (6):
                 //sample 2
