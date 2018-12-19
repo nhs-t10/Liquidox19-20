@@ -11,13 +11,13 @@ public class AutonomousCraterNew extends LO2Library {
     boolean gold = false;
     int step = 1;
     boolean goldNow = false;
-    float timeDone = 99999;
     ElapsedTime eTimeObj = new ElapsedTime();
     imuData imu = null;
     ColorSensorV colorSensor = new ColorSensorV();
     float timer1;
     boolean isDelay;
     public void nextStep(float delay) {
+        float timeDone = 0;
         if(isDelay == false){
             timeDone = timer1 + delay;
             isDelay = true;
@@ -101,66 +101,45 @@ public class AutonomousCraterNew extends LO2Library {
                 break;
             case (4):
                 //first sample
-                sample(1000);//inc
+                sample(6750);//inc
                 //it will automatically move to the next one after 1500ms
                 break;
             case (5):
                 //moving to the next thing
                 drive(-0.285f, 0.285f, -0.285f, 0.285f);
-                nextStep(8500);
+                nextStep(1000);//9250
                 break;
             case (6):
                 //sample 2
-                sample(9000);
-                if (timer1 >= 9000) {
-                    drive(0f, 0f, 0f, 0f);
-                    step++;
-                }
+                sample(9250);
                 break;
             case (7):
                 drive(-0.285f, 0.285f, -0.285f, 0.285f);
-                if (timer1 >= 10000) {
-                    drive(0f, 0f, 0f, 0f);
-                    step++;
-                }
+                 nextStep(1); //10,000
                 break;
             case (8):
                 //sample 3
                 sample(10000);
-                if (timer1 >= 10500) {
-                    drive(0f, 0f, 0f, 0f);
-                    step++;
-                }
-
                 break;
             case (9):
                 drive(-0.255f, 0.255f, -0.255f, 0.255f);
-                if (timer1 >= 13000) {
-                    drive(0f, 0f, 0f, 0f);
-                    step++;
-                }
+                nextStep(3000);//13,000
                 break;
             case (10):
-                Turning.setDestination(45);
-                Turning.update(imu);
-                if (timer1 >= 18500) {
-                    drive(0f, 0f, 0f, 0f);
-                    step++;
-                }
+//                Turning.setDestination(45);
+//                Turning.update(imu);
+//                if (timer1 >= 18500) {
+//                    drive(0f, 0f, 0f, 0f);
+//                    step++;
+//                }
                 break;
             case (11):
               drive(-0.285f, -0.285f, -0.285f, -0.285f);
-                if (timer1 >= 19000) {
-                    drive(0f, 0f, 0f, 0f);
-                    step++;
-                }
+               nextStep(1500);
                 break;
             case (12):
                 drive(-0.285f, -0.285f, -0.285f, -0.285f);
-                if (timer1 >= 22000) {
-                    drive(0f, 0f, 0f, 0f);
-                    step++;
-                }
+                nextStep(3000);
                 break;
             default:
                 drive(0, 0, 0, 0);
