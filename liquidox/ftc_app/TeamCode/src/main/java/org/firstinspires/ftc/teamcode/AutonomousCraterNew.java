@@ -32,7 +32,7 @@ public class AutonomousCraterNew extends LO2Library {
 
     void sample(float time1) {
         gold = colorSensor.isGold();
-        /** The robot should move forward, strafe left slowly, and see if it can see a gold
+        /* * The robot should move forward, strafe left slowly, and see if it can see a gold
          * then, if it saw a gold it will go up, then come back to knock the gold off, else: nothing
          * */
         float time2 = time1 + 500;//<--the number that is being added is how many Millis the step takes
@@ -53,13 +53,13 @@ public class AutonomousCraterNew extends LO2Library {
         }
         //step three of sample
         if(timer1 > time3 && timer1 <time4 - 10){
-            if(goldNow == true){
+            if(goldNow){
                 drive(0.2f, 0.2f, 0.2f, 0.2f);
             }
         }
         //step four of sample
         if(timer1 > time4 && timer1 <time5) {
-            if (goldNow == true) {
+            if (goldNow) {
                 drive(-0.2f, -0.2f, -0.2f, -0.2f);
             }
         }
