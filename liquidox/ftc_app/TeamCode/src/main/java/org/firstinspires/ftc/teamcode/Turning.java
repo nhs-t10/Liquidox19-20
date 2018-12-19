@@ -11,31 +11,31 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 
 
 public class Turning {
-    public static double error;
-    public static double currentAngle;
-    private static double destination;
-    private static double pComponent;
-    private static boolean turning=false;
-    private static final double P = 0.03;
-    public static double offSet;
+    public double error;
+    public double currentAngle;
+    private double destination;
+    private double pComponent;
+    private boolean turning=false;
+    private final double P = 0.03;
+    public double offSet;
 
-    public static void Turning() {
+    public void Turning() {
         destination=0;
     }
 
-    public static void setDestination(double degrees){
+    public void setDestination(double degrees){
         if(degrees > 180) destination = degrees - 360;
         else destination = degrees;
         destination = degrees;
         turning = true;
     }
 
-    public static void stopTurning(){
+    public void stopTurning(){
         turning = false;
         LO2Library.drive(0f,0f,0f,0f);
     }
 
-    public static void update(imuData imu) {
+    public void update(imuData imu) {
         currentAngle = imu.getAngle() - offSet;
         error = getError();
         pComponent = Range.clip(error * P,-1,1);
@@ -50,11 +50,11 @@ public class Turning {
 
     }
 
-    public static double getError(){
+    public double getError(){
         return currentAngle - destination ;
     }
 
-    public static double get_angle(){
+    public double get_angle(){
         return currentAngle;
     }
 
