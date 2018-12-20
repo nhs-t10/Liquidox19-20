@@ -172,7 +172,7 @@ public class AutonomousCraterNew extends LO2Library {
         telemetry.addData("Error",  turning.getError() + "" );
         telemetry.addData("Off Set: ", turning.offSet +"");
         telemetry.addData("Angle",  imu.getAngle() + "");
-        telemetry.addData("Hex code", Integer.toString(colorSensor.getColorInt(), 16) + "");
+        telemetry.addData("Hex code", colorSensor.getHexCode() + "");
 
         telemetry.update();
     }
