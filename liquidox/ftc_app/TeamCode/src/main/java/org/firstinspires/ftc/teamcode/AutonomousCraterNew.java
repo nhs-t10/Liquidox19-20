@@ -34,19 +34,67 @@ public class AutonomousCraterNew extends LO2Library {
 
     }
 
-    void sample(float time1) {
+    void sample() {
         gold = colorSensor.isGold();
-        /* * The robot should move forward, strafe left slowly, and see if it can see a gold
+        /** The robot should move forward, strafe left slowly, and see if it can see a gold
          * then, if it saw a gold it will go up, then come back to knock the gold off, else: nothing
          * */
-
-        time1 = timer1;
-
+        float time1 = timer1;
         float time2 = time1 + 500;//<--the number that is being added is how many Millis the step takes
         float time3 = time2 + 500;
         float time4 = time3 + 250;
         float time5 = time4 + 250;
-        //this will take is 1.5 seconds
+        int sampleStep = 1;
+        //this will take 1.5 seconds
+
+        /**THE SWITCH STATEMENT, SHOULD DO THE SAME THING; IT IS A BACK UP. */
+
+        switch (sampleStep){
+            case(1):
+                drive(0.2f, 0.2f, 0.2f, 0.2f);
+                if(timer1 >= time2){
+                    sampleStep++;
+            }
+                break;
+            case(2):
+                    drive(0.1f, -0.1f, -0.1f, 0.1f);
+                    if(gold) {
+                        goldNow = true;
+                    }
+                if(timer1 >= time3){
+                sampleStep++;
+            }
+                break;
+            case(3):
+                if(goldNow){
+                    drive(0.2f, 0.2f, 0.2f, 0.2f);
+                } else{
+                    drive(0,0,0,0);
+                }
+                if(timer1 >= time4){
+                    sampleStep++;
+                }
+                break;
+            case(4):
+
+                if(timer1 >= time5){
+                    sampleStep++;
+                }
+                break;
+            case(5):
+                if (goldNow) {
+                    drive(-0.2f, -0.2f, -0.2f, -0.2f);
+                }else{
+                    drive(0,0,0,0);
+                }
+                if(timer1 >= time5 + 490){
+                    sampleStep++;
+
+                }
+                break;
+
+        }
+        /** HE'S WHAT WE HAD*/
         //step one of sample
         if(timer1 > time1 && timer1 <time2){
             drive(0.2f, 0.2f, 0.2f, 0.2f);
@@ -59,18 +107,22 @@ public class AutonomousCraterNew extends LO2Library {
             }
         }
         //step three of sample
-        if(timer1 > time3 && timer1 <time4 - 10){
+        if(timer1 > time3 && timer1 <time4){
             if(goldNow){
                 drive(0.2f, 0.2f, 0.2f, 0.2f);
+            }else{
+                drive(0,0,0,0);
             }
         }
         //step four of sample
         if(timer1 > time4 && timer1 <time5) {
             if (goldNow) {
                 drive(-0.2f, -0.2f, -0.2f, -0.2f);
+            }else{
+                drive(0,0,0,0);
             }
         }
-        //setting the goleNow boolean back to false
+        //setting the goldNow boolean back to false
         if(timer1 > time5 - 10) {
             goldNow = false;
         }
@@ -110,7 +162,7 @@ public class AutonomousCraterNew extends LO2Library {
                 break;
             case (4):
                 //first sample
-                sample(6750);//inc
+                sample();//6750
                 //it will automatically move to the next one after 1500ms
                 break;
             case (5):
@@ -120,7 +172,7 @@ public class AutonomousCraterNew extends LO2Library {
                 break;
             case (6):
                 //sample 2
-                sample(9250);
+                sample();//9250
                 break;
             case (7):
                 drive(-0.285f, 0.285f, -0.285f, 0.285f);
@@ -128,7 +180,7 @@ public class AutonomousCraterNew extends LO2Library {
                 break;
             case (8):
                 //sample 3
-                sample(10000);
+                sample();//1000
                 break;
             case (9):
                 drive(-0.255f, 0.255f, -0.255f, 0.255f);
