@@ -16,7 +16,7 @@ public class AutonomousCraterNew extends LO2Library {
     int step = 1;
     boolean goldNow = false;
     ElapsedTime eTimeObj = new ElapsedTime();
-    imuData imu = null;
+    imuData imu;
     float timeDone = 0;
     ColorSensorV colorSensor = new ColorSensorV();
     float timer1;
@@ -78,9 +78,11 @@ public class AutonomousCraterNew extends LO2Library {
     @Override
     public void init() {
         super.initialize_robot();
-        turning.offSet = imu.getAngle();
+
         colorSensor.init(hardwareMap);
         imu = new imuData(hardwareMap);
+
+        turning.offSet = imu.getAngle();
     }
 
     public void loop() {
