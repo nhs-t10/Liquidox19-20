@@ -3,12 +3,11 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.util.ElapsedTime;
-import org.firstinspires.ftc.teamcode.Turning;
-import org.firstinspires.ftc.teamcode.ColorSensorV;
+
 import java.util.concurrent.TimeUnit;
 
 @Autonomous
-public class AutonomousCraterNew extends LO2Library {
+public class AutonomousCraterNewNew extends LO2Library {
 
     Turning turning = new Turning();
 
@@ -46,41 +45,54 @@ public class AutonomousCraterNew extends LO2Library {
         float time5 = time4 + 250;
         int sampleStep = 1;
         //this will take 1.5 seconds
-        //step one of sample
-        if(timer1 > time1 && timer1 <time2){
-            drive(0.2f, 0.2f, 0.2f, 0.2f);
-        }
-        //step two of sample
-        if(timer1 > time2 && timer1 <time3){
-            drive(0.1f, -0.1f, -0.1f, 0.1f);
-            if(gold){
-                goldNow = true;
-            }
-        }
-        //step three of sample
-        if(timer1 > time3 && timer1 <time4){
-            if(goldNow){
-                drive(0.2f, 0.2f, 0.2f, 0.2f);
-            }else{
-                drive(0,0,0,0);
-            }
-        }
-        //step four of sample
-        if(timer1 > time4 && timer1 <time5) {
-            if (goldNow) {
-                drive(-0.2f, -0.2f, -0.2f, -0.2f);
-            }else{
-                drive(0,0,0,0);
-            }
-        }
-        //setting the goldNow boolean back to false
-        if(timer1 > time5 - 10) {
-            goldNow = false;
-        }
-        nextStep( 1500);
-    }
-//void unlatch(){ }
 
+        /**THE SWITCH STATEMENT, SHOULD DO THE SAME THING; IT IS A BACK UP. */
+
+        switch (sampleStep) {
+            case (1):
+                drive(0.2f, 0.2f, 0.2f, 0.2f);
+                if (timer1 >= time2) {
+                    sampleStep++;
+                }
+                break;
+            case (2):
+                drive(0.1f, -0.1f, -0.1f, 0.1f);
+                if (gold) {
+                    goldNow = true;
+                }
+                if (timer1 >= time3) {
+                    sampleStep++;
+                }
+                break;
+            case (3):
+                if (goldNow) {
+                    drive(0.2f, 0.2f, 0.2f, 0.2f);
+                } else {
+                    drive(0, 0, 0, 0);
+                }
+                if (timer1 >= time4) {
+                    sampleStep++;
+                }
+                break;
+            case (4):
+
+                if (timer1 >= time5) {
+                    sampleStep++;
+                }
+                break;
+            case (5):
+                if (goldNow) {
+                    drive(-0.2f, -0.2f, -0.2f, -0.2f);
+                } else {
+                    drive(0, 0, 0, 0);
+                }
+                if (timer1 >= time5 + 490) {
+                    sampleStep = 1;
+
+                }
+                break;
+             }
+         }
     @Override
     public void init() {
         super.initialize_robot();
