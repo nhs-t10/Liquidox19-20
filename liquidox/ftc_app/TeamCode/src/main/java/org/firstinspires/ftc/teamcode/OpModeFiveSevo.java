@@ -100,7 +100,7 @@ public class OpModeFiveSevo extends OpMode {
             speed = Math.max(speed - 0.05f, 0);
         } else if(gamepad1.right_bumper) {
             //then, if the right bumper is down, increase the speed (max of 5)
-            speed = Math.min(0.05f, 5);
+            speed = Math.min(speed + 0.05f, 5);
         }
         //////////////////////////////
 

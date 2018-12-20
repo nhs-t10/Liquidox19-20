@@ -39,6 +39,9 @@ public class AutonomousCraterNew extends LO2Library {
         /* * The robot should move forward, strafe left slowly, and see if it can see a gold
          * then, if it saw a gold it will go up, then come back to knock the gold off, else: nothing
          * */
+
+        time1 = timer1;
+
         float time2 = time1 + 500;//<--the number that is being added is how many Millis the step takes
         float time3 = time2 + 500;
         float time4 = time3 + 250;
@@ -162,6 +165,7 @@ public class AutonomousCraterNew extends LO2Library {
         telemetry.addData("pComponent", turning.pComponent + "");
         telemetry.addData("turning", turning.turning + "");
         telemetry.addData("destination", turning.destination + "");
+        telemetry.addData("isGold", colorSensor.isGold() + "");
         telemetry.addData("Error",  turning.getError() + "" );
         telemetry.addData("Off Set: ", turning.offSet +"");
         telemetry.addData("Angle",  imu.getAngle() + "");
