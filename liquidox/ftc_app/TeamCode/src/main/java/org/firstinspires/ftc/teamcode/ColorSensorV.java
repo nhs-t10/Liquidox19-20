@@ -76,6 +76,11 @@ public class ColorSensorV {
       return colorReturned;
     }
 
+  public String getHexCode() {
+
+      return Color.red(colorReturned) + Color.green(colorReturned) + Color.blue(colorReturned) + Color.alpha(colorReturned) + "";
+  }
+
 //Test if we're seeing gold
 public boolean isGold() {
       //if the green value is between 0x53 (hexidecimal 53) and 0x64 (hexidecimal 64), it's gold. Otherwise, it's false.
@@ -115,7 +120,7 @@ public boolean isGold() {
         NormalizedRGBA colors = colorSensor.getNormalizedColors();
 
         //Convert the color to HSV
-        Color.colorToHSV(colors.toColor(), hsvValues);
+        //Color.colorToHSV(colors.toColor(), hsvValues);
 
         /** We also display a conversion of the colors to an equivalent Android color integer.
          * @see Color */

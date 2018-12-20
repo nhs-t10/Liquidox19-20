@@ -116,7 +116,7 @@ public class AutonomousTesting extends OpMode {
         telemetry.addData("Front Right Power: ", frontRight.getPower());
         telemetry.addData("Back Left Power: ", backLeft.getPower());
         telemetry.addData("Back Right Power: ", backRight.getPower());
-        telemetry.addData("Hex code", Integer.toString(colorSensor.getColorInt(), 16) + "");
+        telemetry.addData("Hex code", colorSensor.getHexCode() + "");
 
         telemetry.update();
     }
