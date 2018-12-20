@@ -159,6 +159,9 @@ public class AutonomousCraterNew extends LO2Library {
         telemetry.addData("Time: ", timer1 + "");
         telemetry.addData("Step: ", step + "");
         telemetry.addData("Orientation", turning.currentAngle + "");
+        telemetry.addData("pComponent", turning.pComponent + "");
+        telemetry.addData("turning", turning.turning + "");
+        telemetry.addData("destination", turning.destination + "");
         telemetry.addData("Error",  turning.getError() + "" );
         telemetry.addData("Off Set: ", turning.offSet +"");
         telemetry.addData("Angle",  imu.getAngle() + "");
