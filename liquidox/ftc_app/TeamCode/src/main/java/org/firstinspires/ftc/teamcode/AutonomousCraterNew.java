@@ -34,49 +34,22 @@ public class AutonomousCraterNew extends LO2Library {
 
     }
 
-    void sample() {
+    void sample(float time1) {
         gold = colorSensor.isGold();
-        /** The robot should move forward, strafe left slowly, and see if it can see a gold
-         * then, if it saw a gold it will go up, then come back to knock the gold off, else: nothing
-         * */
-        float time1 = timer1;
-        float time2 = time1 + 500;//<--the number that is being added is how many Millis the step takes
-        float time3 = time2 + 500;
-        float time4 = time3 + 250;
-        float time5 = time4 + 250;
-        int sampleStep = 1;
-        //this will take 1.5 seconds
-        //step one of sample
-        if(timer1 > time1 && timer1 <time2){
-            drive(0.2f, 0.2f, 0.2f, 0.2f);
+        if(timer1 > time1 + 500 && timer1 <time1 + 1000)
+        if(gold){
+            goldNow = true;
         }
-        //step two of sample
-        if(timer1 > time2 && timer1 <time3){
-            drive(0.1f, -0.1f, -0.1f, 0.1f);
-            if(gold){
-                goldNow = true;
+
+        if(goldNow){
+            if(timer1 > time1 + 1000 && timer1 < time1 + 1500){
+                drive(1.5f,1.5f,1.5f,1.5f);
+            }
+            if(timer1 < time1 + 1500){
+                drive(-1.5f,-1.5f,-1.5f,-1.5f);
             }
         }
-        //step three of sample
-        if(timer1 > time3 && timer1 <time4){
-            if(goldNow){
-                drive(0.2f, 0.2f, 0.2f, 0.2f);
-            }else{
-                drive(0,0,0,0);
-            }
-        }
-        //step four of sample
-        if(timer1 > time4 && timer1 <time5) {
-            if (goldNow) {
-                drive(-0.2f, -0.2f, -0.2f, -0.2f);
-            }else{
-                drive(0,0,0,0);
-            }
-        }
-        //setting the goldNow boolean back to false
-        if(timer1 > time5 - 10) {
-            goldNow = false;
-        }
+
         nextStep( 1500);
     }
 //void unlatch(){ }
@@ -97,58 +70,58 @@ public class AutonomousCraterNew extends LO2Library {
         switch (step) {
             case (1):
                 //Lower down and extend bar
-                nextStep(3000);
+                nextStep(3000);//3000
                 break;
             case (2):
                 //strafing left
                 drive(-0.2f,0.2f,-0.2f,0.2f);
-                nextStep(1000);
+                nextStep(1000);//4000
                 break;
             case (3):
                 //Contract bar
-                nextStep(3000);
+                nextStep(3000);//7000
                 break;
             case (4):
                 //strafing to center
                 drive(0.2f,-0.2f,0.2f,-0.2f);
-                nextStep(1000);
+                nextStep(1000);//8000
                 break;
             case (5):
                 //move forwards to the the sample sites
                 drive(-0.285f, -0.285f, -0.285f, -0.285f);
-                nextStep(750); //5750
+                nextStep(500); //8500
                 break;
 
             case (6):
                 //move to the side to get to the sample sites
                 drive(0.285f, -0.285f, 0.285f, -0.285f);
-                nextStep(1000);//6750
+                nextStep(750);//9250
                 break;
             case (7):
                 //first sample
-                sample();//6750
+                sample(9250);//10750
                 //it will automatically move to the next one after 1500ms
                 break;
             case (8):
                 //moving to the next thing
                 drive(-0.285f, 0.285f, -0.285f, 0.285f);
-                nextStep(1000);//9250
+                nextStep(1000);//11750
                 break;
             case (9):
                 //sample 2
-                sample();//9250
+                sample(11750);//13250
                 break;
             case (10):
                 drive(-0.285f, 0.285f, -0.285f, 0.285f);
-                 nextStep(1); //10,000
+                 nextStep(1000); //14250
                 break;
             case (11):
                 //sample 3
-                sample();//1000
+                sample(14250);//15750
                 break;
             case (12):
                 drive(-0.255f, 0.255f, -0.255f, 0.255f);
-                nextStep(3000);//13,000
+                nextStep(3000);//18750
                 break;
             case (13):
                 turning.setDestination(135);
