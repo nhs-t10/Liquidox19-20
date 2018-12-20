@@ -140,6 +140,7 @@ public class AutonomousDepot extends LO2Library {
         telemetry.addData("Time: ", timer1 + "");
         telemetry.addData("Step: ", step + "");
         telemetry.addData("Orientation", turning.currentAngle + "");
+        telemetry.addData("Hex code", Integer.toString(colorSensor.getColorInt(), 16) + "");
 
 
     }
