@@ -16,7 +16,7 @@ public class Turning {
     public double destination;
     public double pComponent;
     public boolean turning=false;
-    private final double P = 0.03;
+    private final double P = 0.0048;
     public double offSet;
 
     public void Turning() {
@@ -45,7 +45,7 @@ public class Turning {
             if (Math.abs(error) < 3) {
                 stopTurning();
             }
-            LO2Library.TurnDrive((pComponent * 0.16), (pComponent  * 0.16), -(pComponent  * 0.16), -(pComponent  * 0.16));
+            LO2Library.TurnDrive((pComponent), (pComponent), -(pComponent), -(pComponent));
         }
 
     }
