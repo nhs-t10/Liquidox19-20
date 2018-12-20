@@ -138,7 +138,7 @@ public class AutonomousCraterNew extends LO2Library {
                 nextStep(3000);//13,000
                 break;
             case (10):
-                turning.setDestination(45);
+                turning.setDestination(-135);
                 turning.update(imu);
                 if (timer1 >= 18500) {
                     drive(0f, 0f, 0f, 0f);
