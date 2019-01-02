@@ -34,19 +34,21 @@ public class AutonomousCraterNew extends LO2Library {
 
     }
 
-    void sample(float time1) {
-        gold = colorSensor.isGold();
-        if(timer1 > time1 + 500 && timer1 <time1 + 1000)
-        if(gold){
+    void sample(float time) {
+        if(timer1 > time + 500 && timer1 < time + 1000)
+        if(colorSensor.isGold()){
             goldNow = true;
         }
 
         if(goldNow){
-            if(timer1 > time1 + 1000 && timer1 < time1 + 1500){
+            if(timer1 > time + 1000 && timer1 < time + 1250){
                 drive(1.5f,1.5f,1.5f,1.5f);
             }
-            if(timer1 < time1 + 1500){
+            if(timer1 > time + 1250 && timer1 < time + 1500){
                 drive(-1.5f,-1.5f,-1.5f,-1.5f);
+            }
+            if(timer1 < time + 1495){
+                goldNow = false;
             }
         }
 
