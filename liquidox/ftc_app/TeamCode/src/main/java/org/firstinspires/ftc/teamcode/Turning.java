@@ -21,10 +21,10 @@ public class Turning {
 
     public void setDestination(double degrees){
         if(degrees > 180) {
-            destination = degrees 360;
+            destination = degrees - 360;
         }else {
-            destination = this.degrees;
-            this.destination = this.degrees;
+            destination = degrees;
+            this.destination = degrees;
             this.turning = true;
         }
     }
