@@ -66,28 +66,20 @@ public class OpModeFiveSevo extends OpMode {
             }
         }
 
-/** makes it go vroom*/
+/* makes it go vroom*/
         drive(sum[0],sum[1],sum[2],sum[3]);
 
         //okay now that that masterpiece of coding is done, have some disgusting pasta.
         //if the button is down, move left and right shoulders forwards.
-        /**moves outer servos if a button is pressed*/
+        /*moves outer servos if a button is pressed*/
         if(gamepad1.a) {
                 leftOuterShoulder.setPosition(0.5);
                 rightOuterShoulder.setPosition(0.5);
             } /*no else because we don't want one button to "take precedence" over another-- might be jittery, but there you go `\_('-')_/` */
-        /**moves outer servos in opposite direction when b button is pressed*/
+        /*moves outer servos in opposite direction when b button is pressed*/
         if (gamepad1.b) {
             leftOuterShoulder.setPosition(0);
             rightOuterShoulder.setPosition(0);
-        }
-        if(gamepad1.x) {
-//            rightChestShoulder.setPosition(0.5);
-//            leftChestShoulder.setPosition(0.5);
-        } /*no else because we don't want one button to "take precedence" over another-- might be jittery, but there you go `\_('-')_/` */
-        if(gamepad1.y) {
-//            rightChestShoulder.setPosition(0);
-//            leftChestShoulder.setPosition(0);
         }
 
         //Throttle Code
@@ -97,10 +89,10 @@ public class OpModeFiveSevo extends OpMode {
            speed = 0.8f;
            //otherwise, if the left bumper is down, decrease the speed (with a minumum of 0)
         } else if(gamepad1.left_bumper) {
-            speed = Math.max(speed - 0.05f, 0);
+            speed = Math.max(speed - 0.001f, 0);
         } else if(gamepad1.right_bumper) {
             //then, if the right bumper is down, increase the speed (max of 5)
-            speed = Math.min(speed + 0.05f, 5);
+            speed = Math.min(speed + 0.001f, 5);
         }
         //////////////////////////////
 

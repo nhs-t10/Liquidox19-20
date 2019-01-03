@@ -143,6 +143,8 @@ public class AutonomousCraterNew extends LO2Library {
                 break;
         }
 
+
+
         telemetry.addData("Front Left Power: ", frontLeft.getPower());
         telemetry.addData("Front Right Power: ", frontRight.getPower());
         telemetry.addData("Back Left Power: ", backLeft.getPower());

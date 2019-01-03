@@ -8,6 +8,7 @@ import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.teamcode.Turning;
 import org.firstinspires.ftc.teamcode.ColorSensorV;
+import org.firstinspires.ftc.teamcode.imuData;
 
 @TeleOp
 public class AutonomousTesting extends OpMode {
@@ -16,6 +17,9 @@ public class AutonomousTesting extends OpMode {
     boolean a = true;
     boolean b = true;
     DcMotor frontLeft, backLeft, frontRight, backRight;
+
+    Turning turning = new Turning();
+    imuData imu;
 
     ColorSensorV colorSensor = new ColorSensorV();
 
@@ -37,6 +41,8 @@ public class AutonomousTesting extends OpMode {
         leftOuterShoulder.setDirection(Servo.Direction.REVERSE);
 
         colorSensor.init(hardwareMap);
+        imu = new imuData(hardwareMap);
+        turning.offSet = imu.getAngle();
     }
     public final void drive(float bl, float fl, float fr, float br ) {
 /** Tells the robot how to drive */
@@ -89,9 +95,9 @@ public class AutonomousTesting extends OpMode {
             rightOuterShoulder.setPosition(0);
         }
         if(gamepad1.x) {
-//            rightChestShoulder.setPosition(0.5);
-//            leftChestShoulder.setPosition(0.5);
-        } /*no else because we don't want one button to "take precedence" over another-- might be jittery, but there you go `\_('-')_/` */
+            turning.setDestination(180);
+            turning.update(imu);
+        }
         if(gamepad1.y) {
 //            rightChestShoulder.setPosition(0);
 //            leftChestShoulder.setPosition(0);

@@ -19,15 +19,15 @@ public class Turning {
     private final double P = 0.0048;
     public double offSet;
 
-    public void Turning() {
-        destination=0;
-    }
-
     public void setDestination(double degrees){
         if(degrees > 180) destination = degrees - 360;
         else destination = degrees;
         destination = degrees;
         turning = true;
+    }
+
+    public Turning() {
+        this.destination = 0;
     }
 
     public void stopTurning(){
