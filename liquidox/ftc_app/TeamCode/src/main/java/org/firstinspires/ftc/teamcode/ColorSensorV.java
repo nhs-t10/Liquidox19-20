@@ -45,16 +45,17 @@ public class ColorSensorV {
   /** The colorSensor field will contain a reference to our color sensor hardware object */
   NormalizedColorSensor colorSensor;
   HardwareMap hardwareMap;
-  boolean weShouldRead = false, weveInitiated = false;
+  boolean weShouldRead, weveInitiated;
   int colorReturned;
 
-  public void init(HardwareMap passedHardwareMap) {
+  public ColorSensorV(HardwareMap _hardwareMap) {
+      this.hardwareMap = _hardwareMap; //since we don't get the hardwaremap by default-- this isn't an OpMode-- we have to set it manually
 
-      hardwareMap = passedHardwareMap; //since we don't get the hardwaremap by default-- this isn't an OpMode-- we have to set it manually
+      this.weveInitiated = true; //We have initiated the code
 
-      weveInitiated = true; //We have initiated the code
+      this.weShouldRead = false;
 
-      colorSensor = hardwareMap.get(NormalizedColorSensor.class, "sensor_color"); // set the colorSensor to the actual hardware color sensor
+      this.colorSensor = hardwareMap.get(NormalizedColorSensor.class, "sensor_color"); // set the colorSensor to the actual hardware color sensor
 
       runSample(); // actually execute the sampling code; start up the loop
   }
@@ -84,7 +85,7 @@ public class ColorSensorV {
 //Test if we're seeing gold
 public boolean isGold() {
       //if the green value is between 0x53 (hexidecimal 53) and 0x64 (hexidecimal 64), it's gold. Otherwise, it's false.
-    if (0x53 <= Color.green(colorReturned) && Color.green(colorReturned) <= 0x64) {
+    if (0x53 <= Color.green(this.colorReturned) && Color.green(this.colorReturned) <= 0x64) {
         return true;
     //Since the condition is commented out, this will always be passed over
     } else if (/*TODO: Test for ground*/false) {

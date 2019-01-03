@@ -21,7 +21,7 @@ public class AutonomousTesting extends OpMode {
     Turning turning = new Turning();
     imuData imu;
 
-    ColorSensorV colorSensor = new ColorSensorV();
+    ColorSensorV colorSensor;
 
     Servo rightChestShoulder, leftChestShoulder, leftOuterShoulder, rightOuterShoulder;
 
@@ -40,7 +40,7 @@ public class AutonomousTesting extends OpMode {
         leftOuterShoulder = hardwareMap.servo.get("LOS");
         leftOuterShoulder.setDirection(Servo.Direction.REVERSE);
 
-        colorSensor.init(hardwareMap);
+        colorSensor = new ColorSensorV(hardwareMap);
         imu = new imuData(hardwareMap);
         turning.offSet = imu.getAngle();
     }
