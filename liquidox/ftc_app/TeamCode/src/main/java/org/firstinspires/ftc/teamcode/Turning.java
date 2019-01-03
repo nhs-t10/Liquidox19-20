@@ -30,7 +30,7 @@ public class Turning {
     }
 
     public Turning() {
-        this.error = error;
+        this.error = 0;
         this.currentAngle = 0;
         this.destination = 0;
         this.pComponent = 0;

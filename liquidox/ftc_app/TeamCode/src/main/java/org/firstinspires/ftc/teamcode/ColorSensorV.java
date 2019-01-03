@@ -57,9 +57,8 @@ public class ColorSensorV {
 
       this.colorSensor = hardwareMap.get(NormalizedColorSensor.class, "sensor_color"); // set the colorSensor to the actual hardware color sensor
 
-      this.runSample(); // actually execute the sampling code; start up the loop
+     // this.runSample(); // actually execute the sampling code; start up the loop
   }
-
 
   //Switch the sample loop on/off
   public void switchSampling(boolean start_or_dont) {
