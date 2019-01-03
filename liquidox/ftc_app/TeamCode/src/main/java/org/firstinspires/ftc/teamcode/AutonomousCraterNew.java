@@ -63,7 +63,7 @@ public class AutonomousCraterNew extends LO2Library {
         colorSensor.init(hardwareMap);
         imu = new imuData(hardwareMap);
 
-        turning.offSet = imu.getAngle();
+        turning.setoffSet(imu.getAngle());
     }
 
     public void loop() {
