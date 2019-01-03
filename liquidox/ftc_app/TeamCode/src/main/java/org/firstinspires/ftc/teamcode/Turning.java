@@ -53,8 +53,8 @@ public class Turning {
         this.error = this.currentAngle - this.destination;
         this.pComponent = Range.clip(error * P,-1,1);
 
-        if (turning) {
-            if (Math.abs(error) < 5) {
+        if (this.turning) {
+            if (Math.abs(this.error) < 5) {
                 stopTurning();
             }
             LO2Library.TurnDrive((this.pComponent), (this.pComponent), -(this.pComponent), -(this.pComponent));
