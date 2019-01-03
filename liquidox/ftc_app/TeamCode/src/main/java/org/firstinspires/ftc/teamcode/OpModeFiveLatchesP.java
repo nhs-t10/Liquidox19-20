@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
@@ -10,19 +11,28 @@ import com.qualcomm.robotcore.util.Range;
 public class OpModeFiveLatchesP extends OpMode {
     //private double random;
     //instantiate hardware devices
-    int time = 0;
     boolean a = true;
     boolean b = true;
     DcMotor frontLeft, backLeft, frontRight, backRight, latchM;
 
-    Servo rightChestShoulder, leftChestShoulder, leftOuterShoulder, rightOuterShoulder, latchS;
+    Servo rightChestShoulder, leftChestShoulder, leftOuterShoulder, rightOuterShoulder;
+
+    CRServo latchS;
 
     float speed = 0.8f;
-    void clockTick(){
-        time = time+1;
-        if (time > 1000) {
-            time = 0;
-        }
+    public void upArm() throws InterruptedException {
+        this.latchS.setPower(0.2);
+        latchM.setPower(0.2f);
+        Thread.sleep(1000);
+        this.latchS.setPower(0);
+        latchM.setPower(0f);
+    }
+    public void downArm() throws InterruptedException {
+        this.latchS.setPower(-0.2);
+        latchM.setPower(-0.2f);
+        Thread.sleep(1000);
+        this.latchS.setPower(0);
+        latchM.setPower(0f);
     }
     public void init() {
         /*Naming the Motors for phone*/
@@ -31,12 +41,18 @@ public class OpModeFiveLatchesP extends OpMode {
         frontRight = hardwareMap.dcMotor.get("FR");
         backRight = hardwareMap.dcMotor.get("BR");
 
+
        // assign shoulders (motors involved in arms)
         rightChestShoulder = hardwareMap.servo.get("RCS");
         leftChestShoulder = hardwareMap.servo.get("LCS");
         rightOuterShoulder = hardwareMap.servo.get("ROS");
         leftOuterShoulder = hardwareMap.servo.get("LOS");
         leftOuterShoulder.setDirection(Servo.Direction.REVERSE);
+
+
+       /*naming the latching devices*/
+        latchS = hardwareMap.crservo.get("latchS");
+        latchM = hardwareMap.dcMotor.get("latchM");
     }
     public final void drive(float bl, float fl, float fr, float br ) {
 /** Tells the robot how to drive */
@@ -51,7 +67,6 @@ public class OpModeFiveLatchesP extends OpMode {
 
 
     public void loop() {
-        clockTick();
 /** finds the values from the controller*/
         float lX = Range.clip(gamepad1.left_stick_x , -1, 1);
         float lY = Range.clip(gamepad1.left_stick_y, -1, 1);
@@ -100,39 +115,19 @@ public class OpModeFiveLatchesP extends OpMode {
 
 /** going up*/
         if (gamepad1.left_stick_button) {
-            /**waits until servo clock is on time*/
             try {
-                wait(1000-time);
+                upArm();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            latchM.setPower(0.2f);
-            /**insert servo here */
-            /**waiting for servo to finish moving*/
-            try {
-                wait(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            latchM.setPower(0f);
-            /**insert servo here */
         }
 /** coming down*/
         if (gamepad1.right_stick_button) {
             try {
-                wait(1000-time);
+                downArm();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            latchM.setPower(-0.2f);
-            /**insert servo here */
-            try {
-                wait(500);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            latchM.setPower(0f);
-            /**insert servo here */
         }
 
         //Throttle Code

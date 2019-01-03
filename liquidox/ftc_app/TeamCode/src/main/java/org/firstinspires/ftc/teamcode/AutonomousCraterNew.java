@@ -62,7 +62,6 @@ public class AutonomousCraterNew extends LO2Library {
 
         colorSensor= new ColorSensorV(hardwareMap);
         imu = new imuData(hardwareMap);
-
         turning.setOffset(imu.getAngle());
     }
 
