@@ -100,6 +100,7 @@ public class OpModeFiveLatchesP extends OpMode {
 
 /** going up*/
         if (gamepad1.left_stick_button) {
+            /**waits until servo clock is on time*/
             try {
                 wait(1000-time);
             } catch (InterruptedException e) {
@@ -107,8 +108,9 @@ public class OpModeFiveLatchesP extends OpMode {
             }
             latchM.setPower(0.2f);
             /**insert servo here */
+            /**waiting for servo to finish moving*/
             try {
-                wait(500);
+                wait(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

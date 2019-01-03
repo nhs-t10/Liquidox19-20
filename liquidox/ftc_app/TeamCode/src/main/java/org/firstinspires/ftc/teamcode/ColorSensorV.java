@@ -57,29 +57,29 @@ public class ColorSensorV {
 
       this.colorSensor = hardwareMap.get(NormalizedColorSensor.class, "sensor_color"); // set the colorSensor to the actual hardware color sensor
 
-      runSample(); // actually execute the sampling code; start up the loop
+      this.runSample(); // actually execute the sampling code; start up the loop
   }
 
 
   //Switch the sample loop on/off
   public void switchSampling(boolean start_or_dont) {
           //save a boolean for the loop's state before changes
-          boolean weShouldRead_old = weShouldRead;
-          weShouldRead = start_or_dont;
+          boolean weShouldRead_old = this.weShouldRead;
+          this.weShouldRead = start_or_dont;
           //if it's switching on from being previously off, start the loop again
           if(start_or_dont != weShouldRead_old && start_or_dont) {
-              runSample();
+              this.runSample();
           }
   }
 
   //return our color integer
   public int getColorInt () {
-      return colorReturned;
+      return this.colorReturned;
     }
 
   public String getHexCode() {
 
-      return Color.red(colorReturned) + Color.green(colorReturned) + Color.blue(colorReturned) + Color.alpha(colorReturned) + "";
+      return Color.red(this.colorReturned) + Color.green(this.colorReturned) + Color.blue(this.colorReturned) + Color.alpha(this.colorReturned) + "";
   }
 
 //Test if we're seeing gold
@@ -109,16 +109,16 @@ public boolean isGold() {
 
     // If possible, turn the light on in the beginning (it might already be on anyway,
     // we just make sure it is if we can).
-    if (colorSensor instanceof SwitchableLight) {
-      ((SwitchableLight)colorSensor).enableLight(true);
+    if (this.colorSensor instanceof SwitchableLight) {
+      ((SwitchableLight)this.colorSensor).enableLight(true);
     }
 
     // Loop until we are asked to stop
-    while (weShouldRead) {
+    while (this.weShouldRead) {
 
 
         // Read the sensor
-        NormalizedRGBA colors = colorSensor.getNormalizedColors();
+        NormalizedRGBA colors = this.colorSensor.getNormalizedColors();
 
         //Convert the color to HSV
         //Color.colorToHSV(colors.toColor(), hsvValues);
@@ -133,7 +133,7 @@ public boolean isGold() {
         colors.blue /= max;
 
         //set the colorReturned variable so it can be used by the other methods
-        colorReturned = colors.toColor();
+        this.colorReturned = colors.toColor();
 
 
     }
