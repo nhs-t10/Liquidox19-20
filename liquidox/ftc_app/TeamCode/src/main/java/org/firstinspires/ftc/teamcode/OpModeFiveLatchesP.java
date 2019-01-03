@@ -40,7 +40,7 @@ public class OpModeFiveLatchesP extends OpMode {
         backLeft = hardwareMap.dcMotor.get("BL");
         frontRight = hardwareMap.dcMotor.get("FR");
         backRight = hardwareMap.dcMotor.get("BR");
-        latchM = hardwareMap.dcMotor.get("latchM");
+
 
        // assign shoulders (motors involved in arms)
         rightChestShoulder = hardwareMap.servo.get("RCS");
@@ -48,7 +48,11 @@ public class OpModeFiveLatchesP extends OpMode {
         rightOuterShoulder = hardwareMap.servo.get("ROS");
         leftOuterShoulder = hardwareMap.servo.get("LOS");
         leftOuterShoulder.setDirection(Servo.Direction.REVERSE);
+
+
+       /*naming the latching devices*/
         latchS = hardwareMap.crservo.get("latchS");
+        latchM = hardwareMap.dcMotor.get("latchM");
     }
     public final void drive(float bl, float fl, float fr, float br ) {
 /** Tells the robot how to drive */
