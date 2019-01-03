@@ -10,6 +10,7 @@ import com.qualcomm.robotcore.util.Range;
 public class OpModeFiveLatchesP extends OpMode {
     //private double random;
     //instantiate hardware devices
+    int time = 0;
     boolean a = true;
     boolean b = true;
     DcMotor frontLeft, backLeft, frontRight, backRight, latchM;
@@ -17,6 +18,12 @@ public class OpModeFiveLatchesP extends OpMode {
     Servo rightChestShoulder, leftChestShoulder, leftOuterShoulder, rightOuterShoulder, latchS;
 
     float speed = 0.8f;
+    void clockTick(){
+        time = time+1;
+        if (time > 1000) {
+            time = 0;
+        }
+    }
     public void init() {
         /*Naming the Motors for phone*/
         frontLeft = hardwareMap.dcMotor.get("FL");
@@ -44,6 +51,7 @@ public class OpModeFiveLatchesP extends OpMode {
 
 
     public void loop() {
+        clockTick();
 /** finds the values from the controller*/
         float lX = Range.clip(gamepad1.left_stick_x , -1, 1);
         float lY = Range.clip(gamepad1.left_stick_y, -1, 1);
@@ -92,6 +100,11 @@ public class OpModeFiveLatchesP extends OpMode {
 
 /** going up*/
         if (gamepad1.left_stick_button) {
+            try {
+                wait(1000-time);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             latchM.setPower(0.2f);
             /**insert servo here */
             try {
@@ -104,6 +117,11 @@ public class OpModeFiveLatchesP extends OpMode {
         }
 /** coming down*/
         if (gamepad1.right_stick_button) {
+            try {
+                wait(1000-time);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             latchM.setPower(-0.2f);
             /**insert servo here */
             try {
@@ -140,7 +158,7 @@ public class OpModeFiveLatchesP extends OpMode {
         telemetry.addData("leftOuterShoulder: ", leftOuterShoulder.getPosition());
         telemetry.addData("rightChestShoulder: ", rightChestShoulder.getPosition());
         telemetry.addData("leftOuterShoulder: ", leftOuterShoulder.getPosition());
-        telemetry.addData("Current speed: ", speed);
+        telemetry.addData("Clock: ", time);
         telemetry.update();
     }
 
