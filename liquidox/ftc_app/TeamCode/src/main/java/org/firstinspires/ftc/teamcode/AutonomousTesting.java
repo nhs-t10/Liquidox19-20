@@ -9,6 +9,7 @@ import com.qualcomm.robotcore.util.Range;
 import org.firstinspires.ftc.teamcode.Turning;
 import org.firstinspires.ftc.teamcode.ColorSensorV;
 import org.firstinspires.ftc.teamcode.imuData;
+import org.firstinspires.ftc.teamcode.LiftHandler;
 
 @TeleOp
 public class AutonomousTesting extends OpMode {
@@ -20,6 +21,7 @@ public class AutonomousTesting extends OpMode {
 
     Turning turning = new Turning();
     imuData imu;
+    LiftHandler lift;
 
     ColorSensorV colorSensor;
 
@@ -43,6 +45,8 @@ public class AutonomousTesting extends OpMode {
         colorSensor = new ColorSensorV(hardwareMap);
         imu = new imuData(hardwareMap);
         turning.offSet = imu.getAngle();
+
+        lift = new LiftHandler(hardwareMap);
     }
     public final void drive(float bl, float fl, float fr, float br ) {
 /** Tells the robot how to drive */
