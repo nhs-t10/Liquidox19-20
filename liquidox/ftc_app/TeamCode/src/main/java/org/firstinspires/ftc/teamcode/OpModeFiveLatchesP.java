@@ -108,7 +108,7 @@ public class OpModeFiveLatchesP extends OpMode {
             latchM.setPower(0.2f);
             /**insert servo here */
             try {
-                wait(500);
+                wait(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
