@@ -2,7 +2,9 @@ package org.firstinspires.ftc.teamcode;
 
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
+import com.qualcomm.robotcore.util.Range;
 
 import java.util.concurrent.TimeUnit;
 
@@ -19,6 +21,7 @@ public class AutonomousDepot extends LO2Library {
     float timeDone = 0;
     ColorSensorV colorSensor;
     float timer1;
+    DcMotor latchM;
     boolean isDelay;
     void nextStep(float delay) {
         if(!isDelay){
@@ -35,9 +38,9 @@ public class AutonomousDepot extends LO2Library {
 
     void sample(float time) {
         if(timer1 > time + 500 && timer1 < time + 1000)
-        if(colorSensor.isGold()){
-            goldNow = true;
-        }
+            if(colorSensor.isGold()){
+                goldNow = true;
+            }
 
         if(goldNow){
             if(timer1 > time + 1000 && timer1 < time + 1250){
@@ -58,18 +61,19 @@ public class AutonomousDepot extends LO2Library {
     @Override
     public void init() {
         super.initialize_robot();
-
+        latchM = hardwareMap.dcMotor.get("latchM");
         colorSensor= new ColorSensorV(hardwareMap);
         imu = new imuData(hardwareMap);
         turning.setOffset(imu.getAngle());
+        latchM.setPower(1);
     }
 
     public void loop() {
         timer1 = eTimeObj.time(TimeUnit.MILLISECONDS);
 
         switch (step) {
-            case (1):
-                nextStep(1000);//3000
+            case (1):latchM.setPower(Range.clip(1/timer1*3, -1, 1));
+                nextStep(3000);//3000 nextStep(1000);//3000
                 break;
             case (2):
                 //strafing left
@@ -77,11 +81,12 @@ public class AutonomousDepot extends LO2Library {
                 nextStep(3750);//4000
                 break;
             case (3):
+                //Contract bar
                 step = 4;
                 break;
             case (4):
                 //strafing to center
-                drive(0.6f,0.6f,0.6f,0.6f);
+                drive(0.8f,0.8f,0.8f,0.8f);
                 nextStep(500);//8000
                 break;
             default:

@@ -6,6 +6,9 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.teamcode.Turning;
 import org.firstinspires.ftc.teamcode.ColorSensorV;
 import java.util.concurrent.TimeUnit;
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.util.Range;
+
 
 @Autonomous
 public class AutonomousCraterNew extends LO2Library {
@@ -21,6 +24,7 @@ public class AutonomousCraterNew extends LO2Library {
     ColorSensorV colorSensor;
     float timer1;
     boolean isDelay;
+    DcMotor latchM;
     void nextStep(float delay) {
         if(!isDelay){
             timeDone = timer1 + delay;
@@ -55,28 +59,29 @@ public class AutonomousCraterNew extends LO2Library {
         nextStep( 1500);
     }
 //void unlatch(){ }
-
+boolean haveInit = false;
     @Override
     public void init() {
         super.initialize_robot();
-
+        latchM = hardwareMap.dcMotor.get("latchM");
         colorSensor= new ColorSensorV(hardwareMap);
         imu = new imuData(hardwareMap);
         turning.setOffset(imu.getAngle());
+            latchM.setPower(0.6);
     }
 
     public void loop() {
         timer1 = eTimeObj.time(TimeUnit.MILLISECONDS);
-
+        haveInit = true;
         switch (step) {
             case (1):
-                //Lower down and extend bar
-                nextStep(1000);//3000
+                latchM.setPower(Range.clip(3/timer1, 0, 1));
+                nextStep(3000);//3000
                 break;
             case (2):
                 //strafing left
                 drive(-0.2f,0.2f,-0.2f,0.2f);
-                nextStep(5);//4000
+                nextStep(1000);//4000
                 break;
             case (3):
                 //Contract bar
@@ -85,7 +90,7 @@ public class AutonomousCraterNew extends LO2Library {
             case (4):
                 //strafing to center
                 drive(0.2f,-0.2f,0.2f,-0.2f);
-                nextStep(5);//8000
+                nextStep(1000);//8000
                 break;
             case (5):
                 //move forwards to the the sample sites
@@ -128,7 +133,7 @@ public class AutonomousCraterNew extends LO2Library {
                 nextStep(3100);//18750
                 break;
             case (13):
-                turning.setDestination(-130);
+                turning.setDestination(-135);
                 turning.update(imu);
                 nextStep(4000);
                 break;
