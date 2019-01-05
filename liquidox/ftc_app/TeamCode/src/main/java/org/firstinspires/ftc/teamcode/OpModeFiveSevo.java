@@ -91,15 +91,9 @@ public class OpModeFiveSevo extends OpMode {
             speed = 0.5f;
             //otherwise, if the left bumper is down, decrease the speed (with a minumum of 0)
         } else {
-            if (gamepad1.left_trigger > 0f) {
-                //then, if the right bumper is down, increase the speed (max of 5)
-                speed = 0.5f - gamepad1.left_trigger * 0.5f;
-            }
-            if (gamepad1.right_trigger > 0f) {
-                speed = 0.5f + gamepad1.right_trigger * 0.5f;
-            }
+                speed = 0.5f + (gamepad1.right_trigger-gamepad1.left_trigger) * 0.5f;
             if (gamepad1.dpad_right) {
-                //then, if the right bumper is down, increase the speed (max of 5)
+                //then, if the right bumper is down, increase the speed (max of 5) Austin says Hi
                 speed = 1f;
             }
             if (gamepad1.dpad_left) {

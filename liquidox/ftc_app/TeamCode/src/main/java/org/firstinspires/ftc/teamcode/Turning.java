@@ -63,8 +63,12 @@ public class Turning {
     public double get_angle(){
         return this.currentAngle;
     }
+
     public double getError(){
         return this.error;
+    }
+    public double getDestination(){
+        return this.destination;
     }
 
 }
