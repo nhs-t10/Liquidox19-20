@@ -87,17 +87,31 @@ public class OpModeFiveSevo extends OpMode {
         //Throttle Code
 
         //If both bumpers are down, revert the speed to default
-        if (!gamepad1.left_bumper && !gamepad2.right_bumper) {
+        if (gamepad1.left_trigger == 0 && gamepad1.right_trigger == 0) {
             speed = 0.5f;
             //otherwise, if the left bumper is down, decrease the speed (with a minumum of 0)
         } else {
-            if (gamepad1.left_bumper) {
+            if (gamepad1.left_trigger > 0) {
+                //then, if the right bumper is down, increase the speed (max of 5)
+                speed = 0.5f - gamepad1.left_trigger * 2;
+            }
+            if (gamepad1.right_trigger > 0) {
+                speed = 0.5f + gamepad1.left_trigger * 5;
+            }
+
+        }
+        if (!gamepad1.dpad_right && !gamepad1.dpad_left) {
+            speed = 0.5f;
+            //otherwise, if the left bumper is down, decrease the speed (with a minumum of 0)
+        } else {
+            if (gamepad1.dpad_right) {
+                //then, if the right bumper is down, increase the speed (max of 5)
+                speed = 1f;
+            }
+            if (gamepad1.dpad_left) {
                 speed = 0.3f;
             }
-            if (gamepad1.right_bumper) {
-                //then, if the right bumper is down, increase the speed (max of 5)
-                speed = 0.9f;
-            }
+
         }
         //////////////////////////////
 
@@ -112,6 +126,8 @@ public class OpModeFiveSevo extends OpMode {
         telemetry.addData("leftOuterShoulder: ", leftOuterShoulder.getPosition());
         telemetry.addData("rightChestShoulder: ", rightChestShoulder.getPosition());
         telemetry.addData("leftOuterShoulder: ", leftOuterShoulder.getPosition());
+        telemetry.addData("Left Trigger: ", gamepad1.left_trigger);
+        telemetry.addData("Right Trigger: ", gamepad1.right_trigger);
         telemetry.addData("Current speed: ", speed);
         telemetry.update();
     }
