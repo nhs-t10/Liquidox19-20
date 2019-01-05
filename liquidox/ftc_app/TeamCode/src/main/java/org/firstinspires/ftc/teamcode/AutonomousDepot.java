@@ -2,47 +2,66 @@ package org.firstinspires.ftc.teamcode;
 
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
-import org.firstinspires.ftc.teamcode.ColorSensorV;
-
-import org.firstinspires.ftc.teamcode.Turning;
-
 
 import java.util.concurrent.TimeUnit;
 
 @Autonomous
 public class AutonomousDepot extends LO2Library {
-    boolean gold = false;
-    int step = 1;
-    ElapsedTime eTimeObj = new ElapsedTime();
 
-    imuData imu = null;
-    ColorSensorV colorSensor;
     Turning turning = new Turning();
 
+    boolean gold = false;
+    int step = 1;
+    boolean goldNow = false;
+    ElapsedTime eTimeObj = new ElapsedTime();
+    imuData imu;
+    float timeDone = 0;
+    ColorSensorV colorSensor;
     float timer1;
-
-    void sample(float time1, float time2) {
-        gold = colorSensor.isGold();
-        if (gold) {
-            if (timer1 > time1 && timer1 < time2) {
-                drive(0.2f, 0.2f, 0.2f, 0.2f);
-            } else if (timer1 > time2) {
-                drive(-0.1f, -0.1f, -0.1f, -0.1f);
-            }
+    boolean isDelay;
+    void nextStep(float delay) {
+        if(!isDelay){
+            timeDone = timer1 + delay;
+            isDelay = true;
         }
+        if(timer1 >= timeDone) {
+            drive(0, 0, 0, 0);
+            isDelay = false;
+            step++;
+        }
+
     }
 
-    //void unlatch(){ }
+    void sample(float time) {
+        if(timer1 > time + 500 && timer1 < time + 1000)
+        if(colorSensor.isGold()){
+            goldNow = true;
+        }
+
+        if(goldNow){
+            if(timer1 > time + 1000 && timer1 < time + 1250){
+                drive(1.5f,1.5f,1.5f,1.5f);
+            }
+            if(timer1 > time + 1250 && timer1 < time + 1500){
+                drive(-1.5f,-1.5f,-1.5f,-1.5f);
+            }
+            if(timer1 < time + 1495){
+                goldNow = false;
+            }
+        }
+
+        nextStep( 1500);
+    }
+//void unlatch(){ }
 
     @Override
     public void init() {
         super.initialize_robot();
-        colorSensor = new ColorSensorV(hardwareMap);
+
+        colorSensor= new ColorSensorV(hardwareMap);
         imu = new imuData(hardwareMap);
-
-
+        turning.setOffset(imu.getAngle());
     }
 
     public void loop() {
@@ -50,87 +69,82 @@ public class AutonomousDepot extends LO2Library {
 
         switch (step) {
             case (1):
-                //unlatch();
-                if (timer1 >= 5000) {
-                    drive(0f, 0f, 0f, 0f);
-                    step++;
-                }
+                //Lower down and extend bar
+                nextStep(1000);//3000
                 break;
-
             case (2):
-                drive(-0.3f, -0.3f, -0.3f, -0.3f);
-                if (timer1 >= 6000) {
-                    drive(0f, 0f, 0f, 0f);
-                    step++;
-                }
+                //strafing left
+                drive(-0.2f,0.2f,-0.2f,0.2f);
+                nextStep(1000);//4000
                 break;
-
             case (3):
-                drive(-0.3f, 0.3f, 0.3f, -0.3f);
-                if (timer1 >= 6500) {
-                    drive(0f, 0f, 0f, 0f);
-                    step++;
-                }
+                //Contract bar
+                nextStep(5);//7000
                 break;
             case (4):
-
-                sample(7000, 7250);
-                if (timer1 >= 7500) {
-                    drive(0f, 0f, 0f, 0f);
-                    step++;
-                }
-
+                //strafing to center
+                drive(0.2f,-0.2f,0.2f,-0.2f);
+                nextStep(1000);//8000
                 break;
             case (5):
-                //moving to the next thing
-                drive(0.2f, -0.2f, -0.2f, 0.2f);
-                if (timer1 >= 8000) {
-                    drive(0f, 0f, 0f, 0f);
-                    step++;
-                }
+                //move forwards to the the sample sites
+                drive(-0.285f, -0.285f, -0.285f, -0.285f);
+                nextStep(500); //8500
                 break;
-            case (6):
-                //sample 2
-                sample(8500f, 8750f);
-                if (timer1 >= 9000) {
-                    drive(0f, 0f, 0f, 0f);
-                    step++;
-                }
 
+            case (6):
+                //move to the side to get to the sample sites
+                drive(0.285f, -0.285f, 0.285f, -0.285f);
+                nextStep(750);//9250
                 break;
             case (7):
-                drive(0.2f, -0.2f, -0.2f, 0.2f);
-                if (timer1 >= 9500) {
-                    drive(0f, 0f, 0f, 0f);
-                    step++;
-                }
+                //first sample
+                //sample(9250);//10750
+                //it will automatically move to the next one after 1500ms
+                nextStep(5);
                 break;
             case (8):
-                //sample 3
-                sample(10000, 10250);
-                if (timer1 >= 10500) {
-                    drive(0f, 0f, 0f, 0f);
-                    step++;
-                }
-
+                //moving to the next thing
+                drive(-0.285f, 0.285f, -0.285f, 0.285f);
+                nextStep(1000);//11750
                 break;
             case (9):
-                drive(0.2f, -0.2f, -0.2f, 0.2f);
-                if (timer1 >= 11500) {
-                    drive(0f, 0f, 0f, 0f);
-                    step++;
-                }
+                //sample 2
+                //sample(11750);//13250
+                nextStep(5);
+                break;
             case (10):
-                turning.setDestination(-45);
+                drive(-0.285f, 0.285f, -0.285f, 0.285f);
+                 nextStep(1000); //14250
+                break;
+            case (11):
+                //sample 3
+                //sample(14250);//15750
+                nextStep(5);
+                break;
+            case (12):
+                drive(-0.2f, 0.2f, -0.2f, 0.2f);
+                nextStep(3100);//18750
+                break;
+            case (13):
+                turning.setDestination(45);
                 turning.update(imu);
-                if (timer1 >= 16500) {
-                    drive(0f, 0f, 0f, 0f);
-                    step++;
-                }
+                nextStep(4000);
+                break;
+            case (14):
+              drive(-0.24f, -0.24f, -0.24f, -0.24f);
+               nextStep(500);
+                break;
+            case (15):
+                drive(-0.5f, -0.5f, -0.5f, -0.5f);
+                nextStep(1000);
+                break;
             default:
                 drive(0, 0, 0, 0);
                 break;
         }
+
+
 
         telemetry.addData("Front Left Power: ", frontLeft.getPower());
         telemetry.addData("Front Right Power: ", frontRight.getPower());
@@ -139,6 +153,13 @@ public class AutonomousDepot extends LO2Library {
         telemetry.addData("Time: ", timer1 + "");
         telemetry.addData("Step: ", step + "");
         telemetry.addData("Orientation", turning.currentAngle + "");
+        telemetry.addData("pComponent", turning.pComponent + "");
+        telemetry.addData("turning", turning.turning + "");
+        telemetry.addData("destination", turning.destination + "");
+        telemetry.addData("isGold", colorSensor.isGold() + "");
+        telemetry.addData("Error",  turning.getError() + "" );
+        telemetry.addData("Off Set: ", turning.offSet +"");
+        telemetry.addData("Angle",  imu.getAngle() + "");
         telemetry.addData("Hex code", colorSensor.getHexCode() + "");
 
         telemetry.update();
