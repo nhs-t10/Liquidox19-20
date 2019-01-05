@@ -69,76 +69,21 @@ public class AutonomousDepot extends LO2Library {
 
         switch (step) {
             case (1):
-                //Lower down and extend bar
                 nextStep(1000);//3000
                 break;
             case (2):
                 //strafing left
-                drive(-0.2f,0.2f,-0.2f,0.2f);
-                nextStep(1000);//4000
+                drive(-0.2f,-0.2f,-0.2f,-0.2f);
+                nextStep(3750);//4000
                 break;
             case (3):
-               drive(0.6f, 0.6f, 0.6f,0.6f);
-                nextStep(600);//7000
+                step = 4;
                 break;
-//            case (4):
-//                //strafing to center
-//                drive(0.2f,-0.2f,0.2f,-0.2f);
-//                nextStep(1000);//8000
-//                break;
-//            case (5):
-//                //move forwards to the the sample sites
-//                drive(-0.285f, -0.285f, -0.285f, -0.285f);
-//                nextStep(500); //8500
-//                break;
-//
-//            case (6):
-//                //move to the side to get to the sample sites
-//                drive(0.285f, -0.285f, 0.285f, -0.285f);
-//                nextStep(750);//9250
-//                break;
-//            case (7):
-//                //first sample
-//                //sample(9250);//10750
-//                //it will automatically move to the next one after 1500ms
-//                nextStep(5);
-//                break;
-//            case (8):
-//                //moving to the next thing
-//                drive(-0.285f, 0.285f, -0.285f, 0.285f);
-//                nextStep(1000);//11750
-//                break;
-//            case (9):
-//                //sample 2
-//                //sample(11750);//13250
-//                nextStep(5);
-//                break;
-//            case (10):
-//                drive(-0.285f, 0.285f, -0.285f, 0.285f);
-//                 nextStep(1000); //14250
-//                break;
-//            case (11):
-//                //sample 3
-//                //sample(14250);//15750
-//                nextStep(5);
-//                break;
-//            case (12):
-//                drive(-0.2f, 0.2f, -0.2f, 0.2f);
-//                nextStep(3100);//18750
-//                break;
-//            case (13):
-//                turning.setDestination(45);
-//                turning.update(imu);
-//                nextStep(4000);
-//                break;
-//            case (14):
-//              drive(-0.24f, -0.24f, -0.24f, -0.24f);
-//               nextStep(500);
-//                break;
-//            case (15):
-//                drive(-0.5f, -0.5f, -0.5f, -0.5f);
-//                nextStep(1000);
-//                break;
+            case (4):
+                //strafing to center
+                drive(0.6f,0.6f,0.6f,0.6f);
+                nextStep(500);//8000
+                break;
             default:
                 drive(0, 0, 0, 0);
                 break;

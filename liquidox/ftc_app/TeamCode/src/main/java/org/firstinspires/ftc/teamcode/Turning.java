@@ -17,12 +17,13 @@ public class Turning {
     public double pComponent;
     public boolean turning=false;
     public double offSet;
+    float p = 0.001f;
 
     public void setDestination(double degrees){
         if(degrees > 180) {
             this.destination = degrees - 360;
         }else {
-            this.destination = degrees;
+            this.destination = degrees - 15;
             this.turning = true;
         }
     }
@@ -49,10 +50,10 @@ public class Turning {
     public void update(imuData imu) {
         this.currentAngle = imu.getAngle() - this.offSet;
         this.error = this.currentAngle - this.destination;
-        this.pComponent = Range.clip(error * 0.001,-1,1);
+        this.pComponent = Range.clip(error * p,-1,1);
 
         if (this.turning) {
-            if (Math.abs(this.error) < 5) {
+            if (Math.abs(this.error) < 3) {
                 stopTurning();
             }
             LO2Library.TurnDrive((this.pComponent), (this.pComponent), -(this.pComponent), -(this.pComponent));

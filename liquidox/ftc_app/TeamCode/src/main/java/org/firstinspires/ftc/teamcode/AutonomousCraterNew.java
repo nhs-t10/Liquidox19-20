@@ -76,7 +76,7 @@ public class AutonomousCraterNew extends LO2Library {
             case (2):
                 //strafing left
                 drive(-0.2f,0.2f,-0.2f,0.2f);
-                nextStep(1000);//4000
+                nextStep(5);//4000
                 break;
             case (3):
                 //Contract bar
@@ -85,18 +85,18 @@ public class AutonomousCraterNew extends LO2Library {
             case (4):
                 //strafing to center
                 drive(0.2f,-0.2f,0.2f,-0.2f);
-                nextStep(1000);//8000
+                nextStep(5);//8000
                 break;
             case (5):
                 //move forwards to the the sample sites
                 drive(-0.285f, -0.285f, -0.285f, -0.285f);
-                nextStep(500); //8500
+                nextStep(650); //8500
                 break;
 
             case (6):
                 //move to the side to get to the sample sites
-                drive(0.285f, -0.285f, 0.285f, -0.285f);
-                nextStep(750);//9250
+                //drive(0.285f, -0.285f, 0.285f, -0.285f);
+                nextStep(5);//9250
                 break;
             case (7):
                 //first sample
@@ -106,8 +106,8 @@ public class AutonomousCraterNew extends LO2Library {
                 break;
             case (8):
                 //moving to the next thing
-                drive(-0.285f, 0.285f, -0.285f, 0.285f);
-                nextStep(1000);//11750
+                //drive(-0.285f, 0.285f, -0.285f, 0.285f);
+                nextStep(5);//11750
                 break;
             case (9):
                 //sample 2
@@ -120,25 +120,25 @@ public class AutonomousCraterNew extends LO2Library {
                 break;
             case (11):
                 //sample 3
-                //sample(14250);//15750
-                nextStep(5);
+                drive(-0.285f, -0.285f, -0.285f, -0.285f);
+                nextStep(325); //850
                 break;
             case (12):
                 drive(-0.2f, 0.2f, -0.2f, 0.2f);
                 nextStep(3100);//18750
                 break;
             case (13):
-                turning.setDestination(-45);
+                turning.setDestination(-130);
                 turning.update(imu);
                 nextStep(4000);
                 break;
             case (14):
               drive(-0.24f, -0.24f, -0.24f, -0.24f);
-               nextStep(500);
+               nextStep(2000);
                 break;
             case (15):
-                drive(-0.5f, -0.5f, -0.5f, -0.5f);
-                nextStep(1000);
+                drive(0.5f, 0.5f, 0.5f, 0.5f);
+                nextStep(2250);
                 break;
             default:
                 drive(0, 0, 0, 0);
