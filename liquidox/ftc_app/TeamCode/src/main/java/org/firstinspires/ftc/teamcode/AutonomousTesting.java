@@ -99,7 +99,7 @@ public class AutonomousTesting extends OpMode {
             rightOuterShoulder.setPosition(0);
         }
         if(gamepad1.x) {
-            turning.setDestination(30);
+            turning.setDestination(-135);
             turning.update(imu);
         }
         if(gamepad1.y) {

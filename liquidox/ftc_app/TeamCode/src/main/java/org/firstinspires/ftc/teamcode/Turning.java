@@ -20,18 +20,18 @@ public class Turning {
     float p = 0.001f;
 
     public void setDestination(double degrees){
-        if(degrees > 180) {
-            this.destination = degrees - 360;
-        }else {
-            this.destination = degrees - 15;
-            this.turning = true;
-        }
+//        if(degrees > 180) {
+//            this.destination = degrees - 360;
+//        }else {
+//            this.destination = degrees - 15;
+//            this.turning = true;
+//        }
     }
 
     public Turning() {
         this.error = 0;
         this.currentAngle = 0;
-        this.destination = 0;
+        this.destination = -135;
         this.pComponent = 0;
         this.turning = false;
         this.offSet = 0;

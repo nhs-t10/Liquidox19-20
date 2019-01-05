@@ -72,7 +72,7 @@ public class AutonomousDepot extends LO2Library {
         timer1 = eTimeObj.time(TimeUnit.MILLISECONDS);
 
         switch (step) {
-            case (1):latchM.setPower(Range.clip(1/timer1*3, -1, 1));
+            case (1):latchM.setPower(Range.clip(3/timer1, -1, 1));
                 nextStep(3000);//3000 nextStep(1000);//3000
                 break;
             case (2):

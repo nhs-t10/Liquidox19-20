@@ -76,7 +76,7 @@ boolean haveInit = false;
         switch (step) {
             case (1):
                 latchM.setPower(Range.clip(3/timer1, 0, 1));
-                nextStep(3000);//3000
+                nextStep(3500);//3000
                 break;
             case (2):
                 //strafing left
@@ -94,7 +94,7 @@ boolean haveInit = false;
                 break;
             case (5):
                 //move forwards to the the sample sites
-                drive(-0.285f, -0.285f, -0.285f, -0.285f);
+                drive(-0.285f, -0.585f, -0.285f, -0.285f);
                 nextStep(650); //8500
                 break;
 
@@ -120,7 +120,7 @@ boolean haveInit = false;
                 nextStep(5);
                 break;
             case (10):
-                drive(-0.285f, 0.285f, -0.285f, 0.285f);
+                drive(0.285f, -0.285f, 0.285f, -0.285f);
                  nextStep(1000); //14250
                 break;
             case (11):
@@ -129,22 +129,23 @@ boolean haveInit = false;
                 nextStep(325); //850
                 break;
             case (12):
-                drive(-0.2f, 0.2f, -0.2f, 0.2f);
+                drive(0.2f, -0.2f, -0.2f, -0.2f);
                 nextStep(3100);//18750
                 break;
             case (13):
-                turning.setDestination(-135);
-                turning.update(imu);
-                nextStep(4000);
+                drive(-0.2f,-0.2f,-0.2f,-0.2f);
+
+                //turning.update(imu);
+                nextStep(1000);
                 break;
-            case (14):
+            /*case (14):
               drive(-0.24f, -0.24f, -0.24f, -0.24f);
                nextStep(2000);
                 break;
             case (15):
                 drive(0.5f, 0.5f, 0.5f, 0.5f);
                 nextStep(2250);
-                break;
+                break;*/
             default:
                 drive(0, 0, 0, 0);
                 break;

@@ -7,6 +7,9 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
 
+
+import org.firstinspires.ftc.teamcode.LiftHandler;
+
 @TeleOp
 public class OpModeFiveLatchesP extends OpMode {
     //private double random;
@@ -14,6 +17,8 @@ public class OpModeFiveLatchesP extends OpMode {
     boolean a = true;
     boolean b = true;
     DcMotor frontLeft, backLeft, frontRight, backRight, latchM;
+
+    LiftHandler lift;
 
     Servo latchS;
 
@@ -42,6 +47,8 @@ public class OpModeFiveLatchesP extends OpMode {
        /*naming the latching devices*/
         latchS = hardwareMap.servo.get("latchS");
         latchM = hardwareMap.dcMotor.get("latchM");
+
+        lift = new LiftHandler(hardwareMap);
         latchS.setPosition(1);
     }
     public final void drive(float bl, float fl, float fr, float br ) {
@@ -96,7 +103,7 @@ public class OpModeFiveLatchesP extends OpMode {
 /** going up*/
         if (gamepad1.left_stick_button) {
             try {
-                upArm();
+                LiftHandler.upArm();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -104,7 +111,7 @@ public class OpModeFiveLatchesP extends OpMode {
 /** coming down*/
         if (gamepad1.right_stick_button) {
             try {
-                downArm();
+                LiftHandler.downArm();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
