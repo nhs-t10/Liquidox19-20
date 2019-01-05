@@ -4,7 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 //import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.util.Range;
 
 
@@ -20,18 +20,18 @@ public class OpModeFiveLatchesP extends OpMode {
 
     LiftHandler lift;
 
-    Servo latchS;
+    CRServo latchS;
 
     float speed = 0.8f;
     public void upArm() throws InterruptedException {
-        latchS.setPosition(1);
+        latchS.setPower(1);
         latchM.setPower(0.12);
         Thread.sleep(900);
         latchM.setPower(0f);
     }
 
     public void downArm() throws InterruptedException {
-        latchS.setPosition(-1);
+        latchS.setPower(-1);
         latchM.setPower(-0.2f);
         Thread.sleep(1000);
         latchM.setPower(0f);
@@ -45,11 +45,11 @@ public class OpModeFiveLatchesP extends OpMode {
 
 
        /*naming the latching devices*/
-        latchS = hardwareMap.servo.get("latchS");
+        latchS = hardwareMap.crservo.get("latchS");
         latchM = hardwareMap.dcMotor.get("latchM");
 
         lift = new LiftHandler(hardwareMap);
-        latchS.setPosition(1);
+        latchS.setPower(1);
     }
     public final void drive(float bl, float fl, float fr, float br ) {
 /** Tells the robot how to drive */
@@ -92,18 +92,18 @@ public class OpModeFiveLatchesP extends OpMode {
         //if the button is down, move left and right shoulders forwards.
         /**moves outer servos if a button is pressed*/
         if(gamepad1.a) {
-            latchS.setPosition(0.3);
+            latchS.setPower(0.3);
             latchM.setPower(1);
             } /*no else because we don't want one button to "take precedence" over another-- might be jittery, but there you go `\_('-')_/` */
         /**moves outer servos in opposite direction when b button is pressed*/
         if (gamepad1.b) {
-            latchS.setPosition(-0.3);
+            latchS.setPower(-0.3);
             latchM.setPower(-1);
         }
 /** going up*/
         if (gamepad1.left_stick_button) {
             try {
-                LiftHandler.upArm();
+                lift.upArm();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -111,7 +111,7 @@ public class OpModeFiveLatchesP extends OpMode {
 /** coming down*/
         if (gamepad1.right_stick_button) {
             try {
-                LiftHandler.downArm();
+                lift.downArm();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

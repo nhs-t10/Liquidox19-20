@@ -8,18 +8,18 @@ public class LiftHandler {
      CRServo latchS;
     DcMotor latchM;
 
-    public static LiftHandler(HardwareMap h) {
+    public LiftHandler(HardwareMap h) {
         this.latchS = h.crservo.get("Limb");
     }
 
-    public static void upArm() throws InterruptedException {
+    public void upArm() throws InterruptedException {
         this.latchS.setPower(0.2);
         latchM.setPower(0.2f);
         Thread.sleep(1000);
         this.latchS.setPower(0);
         latchM.setPower(0f);
     }
-    public static void downArm() throws InterruptedException {
+    public void downArm() throws InterruptedException {
         this.latchS.setPower(-0.2);
         latchM.setPower(-0.2f);
         Thread.sleep(1000);
