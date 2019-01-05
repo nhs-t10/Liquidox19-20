@@ -16,14 +16,12 @@ public class Turning {
     public double destination = 0;
     public double pComponent;
     public boolean turning=false;
-    private final double P = 0.0048;
     public double offSet;
 
     public void setDestination(double degrees){
         if(degrees > 180) {
-            destination = degrees - 360;
+            this.destination = degrees - 360;
         }else {
-            destination = degrees;
             this.destination = degrees;
             this.turning = true;
         }
@@ -51,7 +49,7 @@ public class Turning {
     public void update(imuData imu) {
         this.currentAngle = imu.getAngle() - this.offSet;
         this.error = this.currentAngle - this.destination;
-        this.pComponent = Range.clip(error * P,-1,1);
+        this.pComponent = Range.clip(error * 0.001,-1,1);
 
         if (this.turning) {
             if (Math.abs(this.error) < 5) {

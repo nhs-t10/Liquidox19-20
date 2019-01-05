@@ -2,7 +2,7 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.CRServo;
+//import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
@@ -15,23 +15,20 @@ public class OpModeFiveLatchesP extends OpMode {
     boolean b = true;
     DcMotor frontLeft, backLeft, frontRight, backRight, latchM;
 
-    Servo rightChestShoulder, leftChestShoulder, leftOuterShoulder, rightOuterShoulder;
-
-    CRServo latchS;
+    Servo latchS;
 
     float speed = 0.8f;
     public void upArm() throws InterruptedException {
-        this.latchS.setPower(0.2);
-        latchM.setPower(0.2f);
-        Thread.sleep(1000);
-        this.latchS.setPower(0);
+        latchS.setPosition(1);
+        latchM.setPower(0.12);
+        Thread.sleep(900);
         latchM.setPower(0f);
     }
+
     public void downArm() throws InterruptedException {
-        this.latchS.setPower(-0.2);
+        latchS.setPosition(-1);
         latchM.setPower(-0.2f);
         Thread.sleep(1000);
-        this.latchS.setPower(0);
         latchM.setPower(0f);
     }
     public void init() {
@@ -42,17 +39,10 @@ public class OpModeFiveLatchesP extends OpMode {
         backRight = hardwareMap.dcMotor.get("BR");
 
 
-       // assign shoulders (motors involved in arms)
-        rightChestShoulder = hardwareMap.servo.get("RCS");
-        leftChestShoulder = hardwareMap.servo.get("LCS");
-        rightOuterShoulder = hardwareMap.servo.get("ROS");
-        leftOuterShoulder = hardwareMap.servo.get("LOS");
-        leftOuterShoulder.setDirection(Servo.Direction.REVERSE);
-
-
        /*naming the latching devices*/
-        latchS = hardwareMap.crservo.get("latchS");
+        latchS = hardwareMap.servo.get("latchS");
         latchM = hardwareMap.dcMotor.get("latchM");
+        latchS.setPosition(1);
     }
     public final void drive(float bl, float fl, float fr, float br ) {
 /** Tells the robot how to drive */
@@ -92,27 +82,17 @@ public class OpModeFiveLatchesP extends OpMode {
 /** makes it go vroom*/
         drive(sum[0],sum[1],sum[2],sum[3]);
 
-        //okay now that that masterpiece of coding is done, have some disgusting pasta.
         //if the button is down, move left and right shoulders forwards.
         /**moves outer servos if a button is pressed*/
         if(gamepad1.a) {
-                leftOuterShoulder.setPosition(0.5);
-                rightOuterShoulder.setPosition(0.5);
+            latchS.setPosition(0.3);
+            latchM.setPower(1);
             } /*no else because we don't want one button to "take precedence" over another-- might be jittery, but there you go `\_('-')_/` */
         /**moves outer servos in opposite direction when b button is pressed*/
         if (gamepad1.b) {
-            leftOuterShoulder.setPosition(0);
-            rightOuterShoulder.setPosition(0);
+            latchS.setPosition(-0.3);
+            latchM.setPower(-1);
         }
-        if(gamepad1.x) {
-//            rightChestShoulder.setPosition(0.5);
-//            leftChestShoulder.setPosition(0.5);
-        } /*no else because we don't want one button to "take precedence" over another-- might be jittery, but there you go `\_('-')_/` */
-        if(gamepad1.y) {
-//            rightChestShoulder.setPosition(0);
-//            leftChestShoulder.setPosition(0);
-        }
-
 /** going up*/
         if (gamepad1.left_stick_button) {
             try {
@@ -151,13 +131,10 @@ public class OpModeFiveLatchesP extends OpMode {
         telemetry.addData("Back Right Power: ", backRight.getPower());
         telemetry.addData("Left Gamepad X-Coordinate: ", lX);
         telemetry.addData("Left Gamepad Y-Coordinate: ", lY);
-        telemetry.addData("leftChestShoulder: ", leftChestShoulder.getPosition());
-        telemetry.addData("leftOuterShoulder: ", leftOuterShoulder.getPosition());
-        telemetry.addData("rightChestShoulder: ", rightChestShoulder.getPosition());
-        telemetry.addData("leftOuterShoulder: ", leftOuterShoulder.getPosition());
-        telemetry.addData("Clock: ", time);
         telemetry.update();
     }
+
+
 
 
 }

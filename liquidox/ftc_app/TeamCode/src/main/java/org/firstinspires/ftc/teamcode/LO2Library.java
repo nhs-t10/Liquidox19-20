@@ -17,10 +17,6 @@ public abstract class LO2Library extends OpMode {
         frontRight = hardwareMap.dcMotor.get("FR");
         backRight = hardwareMap.dcMotor.get("BR");
 
-        rightChestShoulder = hardwareMap.servo.get("RCS");
-        leftChestShoulder = hardwareMap.servo.get("LCS");
-        rightOuterShoulder = hardwareMap.servo.get("ROS");
-        leftOuterShoulder = hardwareMap.servo.get("LOS");
 
 
     }
