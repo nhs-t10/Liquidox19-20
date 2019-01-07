@@ -17,7 +17,7 @@ public class Turning {
     public double pComponent;
     public boolean turning=false;
     public double offSet;
-    float p = 0.001f;
+    float p = 0.0015f;
 
     public void setDestination(double degrees){
 //        if(degrees > 180) {

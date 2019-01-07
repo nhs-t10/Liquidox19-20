@@ -9,7 +9,7 @@ public class LiftHandler {
     DcMotor latchM;
 
     public LiftHandler(HardwareMap h) {
-        this.latchS = h.crservo.get("Limb");
+        this.latchS = h.crservo.get("latchS");
     }
 
     public void upArm() throws InterruptedException {
