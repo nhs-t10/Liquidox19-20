@@ -2,68 +2,61 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+//import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.util.Range;
 
-import org.firstinspires.ftc.teamcode.Turning;
-import org.firstinspires.ftc.teamcode.ColorSensorV;
-import org.firstinspires.ftc.teamcode.imuData;
-import org.firstinspires.ftc.teamcode.LO2Library;
+
 import org.firstinspires.ftc.teamcode.LiftHandler;
 
 @TeleOp
-public class AutonomousTesting extends OpMode {
+public class OpModeFiveLatchesP extends OpMode {
     //private double random;
     //instantiate hardware devices
     boolean a = true;
     boolean b = true;
     DcMotor frontLeft, backLeft, frontRight, backRight, latchM;
 
-    Turning turning = new Turning();
-    imuData imu;
     LiftHandler lift;
 
-    ColorSensorV colorSensor;
-
+    CRServo latchS;
 
     float speed = 0.8f;
+    public void upArm() throws InterruptedException {
+        latchS.setPower(1);
+        latchM.setPower(0.12);
+        Thread.sleep(900);
+        latchM.setPower(0f);
+    }
+
+    public void downArm() throws InterruptedException {
+        latchS.setPower(-1);
+        latchM.setPower(-0.2f);
+        Thread.sleep(1000);
+        latchM.setPower(0f);
+    }
     public void init() {
-//        /*Naming the Motors for phone*/
-//        frontLeft = hardwareMap.dcMotor.get("FL");
-//        backLeft = hardwareMap.dcMotor.get("BL");
-//        frontRight = hardwareMap.dcMotor.get("FR");
-//        backRight = hardwareMap.dcMotor.get("BR");
-//
-//        // assign shoulders (motors involved in arms)
-//        rightChestShoulder = hardwareMap.servo.get("RCS");
-//        leftChestShoulder = hardwareMap.servo.get("LCS");
-//        rightOuterShoulder = hardwareMap.servo.get("ROS");
-//        leftOuterShoulder = hardwareMap.servo.get("LOS");
-//        leftOuterShoulder.setDirection(Servo.Direction.REVERSE);
-//
-//        colorSensor = new ColorSensorV(hardwareMap);
-//        imu = new imuData(hardwareMap);
-//        turning.offSet = imu.getAngle();
-//
-//        lift = new LiftHandler(hardwareMap);
+        /*Naming the Motors for phone*/
         frontLeft = hardwareMap.dcMotor.get("FL");
         backLeft = hardwareMap.dcMotor.get("BL");
         frontRight = hardwareMap.dcMotor.get("FR");
         backRight = hardwareMap.dcMotor.get("BR");
+
+
+       /*naming the latching devices*/
+        latchS = hardwareMap.crservo.get("latchS");
         latchM = hardwareMap.dcMotor.get("latchM");
-        colorSensor= new ColorSensorV(hardwareMap);
-        imu = new imuData(hardwareMap);
-        turning.setOffset(imu.getAngle());
-        latchM.setPower(0.6);
+
         lift = new LiftHandler(hardwareMap);
+        latchS.setPower(1);
     }
     public final void drive(float bl, float fl, float fr, float br ) {
 /** Tells the robot how to drive */
-        frontLeft.setPower(-fl*speed); //Scaled by 1.8
-        backRight.setPower(br*speed);
-        frontRight.setPower(fr*speed);
-        backLeft.setPower(-bl*speed);
+          frontLeft.setPower(-fl*speed); //Scaled by 1.8
+          backRight.setPower(br*speed);
+          frontRight.setPower(fr*speed);
+          backLeft.setPower(-bl*speed);
 
     }
 
@@ -96,31 +89,40 @@ public class AutonomousTesting extends OpMode {
 /** makes it go vroom*/
         drive(sum[0],sum[1],sum[2],sum[3]);
 
-        //okay now that that masterpiece of coding is done, have some disgusting pasta.
         //if the button is down, move left and right shoulders forwards.
         /**moves outer servos if a button is pressed*/
         if(gamepad1.a) {
-//            leftOuterShoulder.setPosition(0.5);
-//            rightOuterShoulder.setPosition(0.5);
-        } /*no else because we don't want one button to "take precedence" over another-- might be jittery, but there you go `\_('-')_/` */
+            latchS.setPower(0.3);
+            latchM.setPower(1);
+            } /*no else because we don't want one button to "take precedence" over another-- might be jittery, but there you go `\_('-')_/` */
         /**moves outer servos in opposite direction when b button is pressed*/
         if (gamepad1.b) {
-
+            latchS.setPower(-0.3);
+            latchM.setPower(-1);
         }
-        if(gamepad1.x) {
-            turning.setDestination(45);
-            turning.update(imu);
+/** going up*/
+        if (gamepad1.left_stick_button) {
+            try {
+                lift.upArm();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
-        if(gamepad1.y) {
-//
+/** coming down*/
+        if (gamepad1.right_stick_button) {
+            try {
+                lift.downArm();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
 
         //Throttle Code
 
         //If both bumpers are down, revert the speed to default
         if(gamepad1.left_bumper && gamepad2.right_bumper) {
-            speed = 0.8f;
-            //otherwise, if the left bumper is down, decrease the speed (with a minumum of 0)
+           speed = 0.8f;
+           //otherwise, if the left bumper is down, decrease the speed (with a minumum of 0)
         } else if(gamepad1.left_bumper) {
             speed = Math.max(speed - 0.05f, 0);
         } else if(gamepad1.right_bumper) {
@@ -134,14 +136,12 @@ public class AutonomousTesting extends OpMode {
         telemetry.addData("Front Right Power: ", frontRight.getPower());
         telemetry.addData("Back Left Power: ", backLeft.getPower());
         telemetry.addData("Back Right Power: ", backRight.getPower());
-        telemetry.addData("Hex code", colorSensor.getHexCode() + "");
-        telemetry.addData("Turning Error", turning.getError() + "");
-        telemetry.addData("Turning Destination", turning.getDestination() + "");
-        telemetry.addData("Turning Angle", turning.get_angle() + "");
-
-
+        telemetry.addData("Left Gamepad X-Coordinate: ", lX);
+        telemetry.addData("Left Gamepad Y-Coordinate: ", lY);
         telemetry.update();
     }
+
+
 
 
 }

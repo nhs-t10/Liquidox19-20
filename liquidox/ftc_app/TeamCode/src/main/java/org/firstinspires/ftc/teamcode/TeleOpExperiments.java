@@ -40,10 +40,10 @@ public class TeleOpExperiments extends OpMode {
 
     public final void drive(float bl, float fl, float fr, float br ) {
 
-        frontLeft.setPower(-fl*speed);
-        backRight.setPower(br*speed);
-        frontRight.setPower(fr*speed);
-        backLeft.setPower(-bl*speed);
+        frontLeft.setPower(-fl*speed*9/10);
+        backRight.setPower(br*speed*5.5/10);
+        frontRight.setPower(fr*speed*5.5/10);
+        backLeft.setPower(-bl*speed*9/10);
 
     }
 

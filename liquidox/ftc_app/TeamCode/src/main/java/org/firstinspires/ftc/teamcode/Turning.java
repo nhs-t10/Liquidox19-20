@@ -1,81 +1,75 @@
 
 package org.firstinspires.ftc.teamcode;
-import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.util.Range;
+import org.firstinspires.ftc.teamcode.imuData;
+
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.hardware.HardwareMap;
 
 
-@Autonomous
-public class Turning extends LO2Library {
-    float currentAngle;
-    float destination;
-    float pComponent;
-    boolean turning=false;
-    float sumError = 0;
-    float prevTime = 0;
-    final float P = 0.03f;
 
 
-    DcMotor frontLeft, backLeft, frontRight, backRight;
 
+public class Turning {
+    public double error;
+    public double currentAngle;
+    public double destination = 0;
+    public double pComponent;
+    public boolean turning=false;
+    public double offSet;
+    float p = 0.0015f;
 
-    public void init() {
-        /*Naming the Motors for phone*/
-        frontLeft = hardwareMap.dcMotor.get("FL");
-        backLeft = hardwareMap.dcMotor.get("BL");
-        frontRight = hardwareMap.dcMotor.get("FR");
-        backRight = hardwareMap.dcMotor.get("BR");
+    public void setDestination(double degrees){
+//        if(degrees > 180) {
+//            this.destination = degrees - 360;
+//        }else {
+//            this.destination = degrees - 15;
+//            this.turning = true;
+//        }
     }
 
-    public final void drive(float bl, float fl, float fr, float br ) {
-
-        frontLeft.setPower(-fl);
-        backRight.setPower(br);
-        frontRight.setPower(fr);
-        backLeft.setPower(-bl);
-
+    public Turning() {
+        this.error = 0;
+        this.currentAngle = 0;
+        this.destination = -135;
+        this.pComponent = 0;
+        this.turning = false;
+        this.offSet = 0;
     }
 
-    public void Turning() {
-        destination=0;
+    public void setOffset(double angel_i_know_its_wrong) {
+        this.offSet = angel_i_know_its_wrong;
     }
 
-    public void setDestination(float degrees){
-        if(degrees>180) destination=degrees-360;
-        else destination=degrees;
-        prevTime = getCurrTime();
-        destination=degrees;
-        turning=true;
-    }
 
     public void stopTurning(){
-        turning = false;
-        sumError=0;
-        drive(0,0,0,0);
+        this.turning = false;
+        LO2Library.drive(0f,0f,0f,0f);
     }
 
-    public void update(float sean) {
-        currentAngle = sean;
-        float error = getError();
-        pComponent = error * P;
-        double currTime = getCurrTime();
+    public void update(imuData imu) {
+        this.currentAngle = imu.getAngle() - this.offSet;
+        this.error = this.currentAngle - this.destination;
+        this.pComponent = Range.clip(error * p,-1,1);
 
-
-        sumError += error*(currTime-prevTime);
-        if (turning) {
-            if (Math.abs(error) < 3) {
+        if (this.turning) {
+            if (Math.abs(this.error) < 3) {
                 stopTurning();
             }
-            drive((pComponent), (pComponent),-(pComponent),-(pComponent));
-
+            LO2Library.TurnDrive((this.pComponent), (this.pComponent), -(this.pComponent), -(this.pComponent));
         }
-        prevTime = (float)currTime;
+
     }
 
-    public float getError(){
-        return currentAngle- destination ;
+    public double get_angle(){
+        return this.currentAngle;
     }
 
-    public float getCurrTime() {
-        return System.currentTimeMillis();
+    public double getError(){
+        return this.error;
     }
+    public double getDestination(){
+        return this.destination;
+    }
+
 }
