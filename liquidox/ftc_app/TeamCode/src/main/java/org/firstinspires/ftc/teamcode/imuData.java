@@ -11,8 +11,8 @@ public class imuData {
     Orientation angle = new Orientation();
 
     public imuData (HardwareMap hardwareMap) {
-        imu = hardwareMap.get(BNO055IMU.class, "imu");
-        initImu();
+        this.imu = hardwareMap.get(BNO055IMU.class, "imu");
+        this.initImu();
     }
     public void initImu() {
         BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
@@ -23,11 +23,11 @@ public class imuData {
         parameters.loggingTag = "IMU";
         parameters.accelerationIntegrationAlgorithm = new JustLoggingAccelerationIntegrator();
 
-        imu.initialize(parameters);
+       this.imu.initialize(parameters);
     }
 
-    public float getAngle(){
-       angle= imu.getAngularOrientation();
+    public float getAngle() {
+       this.angle= imu.getAngularOrientation();
        return angle.firstAngle;
 
     }

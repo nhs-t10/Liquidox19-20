@@ -11,47 +11,65 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 
 
 public class Turning {
-    public static double error;
-    public static double currentAngle;
-    private static double destination;
-    private static double pComponent;
-    private static boolean turning=false;
-    private static final double P = 0.03;
+    public double error;
+    public double currentAngle;
+    public double destination = 0;
+    public double pComponent;
+    public boolean turning=false;
+    public double offSet;
+    float p = 0.0015f;
 
-    public static void Turning() {
-        destination=0;
+    public void setDestination(double degrees){
+//        if(degrees > 180) {
+//            this.destination = degrees - 360;
+//        }else {
+//            this.destination = degrees - 15;
+//            this.turning = true;
+//        }
     }
 
-    public static void setDestination(double degrees){
-        if(degrees > 180) destination = degrees - 360;
-        else destination = degrees;
-        destination = degrees;
-        turning = true;
-
+    public Turning() {
+        this.error = 0;
+        this.currentAngle = 0;
+        this.destination = -135;
+        this.pComponent = 0;
+        this.turning = false;
+        this.offSet = 0;
     }
 
-    public static void stopTurning(){
-        turning = false;
+    public void setOffset(double angel_i_know_its_wrong) {
+        this.offSet = angel_i_know_its_wrong;
+    }
+
+
+    public void stopTurning(){
+        this.turning = false;
         LO2Library.drive(0f,0f,0f,0f);
     }
 
-    public static void update(imuData imu) {
-        currentAngle = imu.getAngle();
-        error = getError();
-        pComponent = Range.clip(error * P,-1,1);
+    public void update(imuData imu) {
+        this.currentAngle = imu.getAngle() - this.offSet;
+        this.error = this.currentAngle - this.destination;
+        this.pComponent = Range.clip(error * p,-1,1);
 
-
-        if (turning) {
-            if (Math.abs(error) < 3) {
+        if (this.turning) {
+            if (Math.abs(this.error) < 3) {
                 stopTurning();
             }
-                LO2Library.TurnDrive((pComponent * 0.16), (pComponent  * 0.16), -(pComponent  * 0.16), -(pComponent  * 0.16));
+            LO2Library.TurnDrive((this.pComponent), (this.pComponent), -(this.pComponent), -(this.pComponent));
         }
 
     }
 
-    public static double getError(){
-        return currentAngle - destination ;
+    public double get_angle(){
+        return this.currentAngle;
+    }
+
+    public double getError(){
+        return this.error;
+    }
+    public double getDestination(){
+        return this.destination;
     }
 
 }

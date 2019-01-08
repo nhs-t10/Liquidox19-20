@@ -17,7 +17,9 @@ public class AutonomousCrater extends LO2Library {
     int step = 1;
     ElapsedTime eTimeObj = new ElapsedTime();
     imuData imu = null;
-    ColorSensorV colorSensor = new ColorSensorV();
+    ColorSensorV colorSensor;
+
+    Turning turning = new Turning();
 
     float timer1;
 
@@ -37,7 +39,7 @@ public class AutonomousCrater extends LO2Library {
     @Override
     public void init() {
         super.initialize_robot();
-        colorSensor.init(hardwareMap);
+        colorSensor = new ColorSensorV(hardwareMap);
         imu = new imuData(hardwareMap);
     }
 
@@ -120,8 +122,8 @@ public class AutonomousCrater extends LO2Library {
                 }
                 break;
             case (10):
-                Turning.setDestination(45);
-                Turning.update(imu);
+                turning.setDestination(45);
+                turning.update(imu);
                 if (timer1 >= 18500) {
                     drive(0f, 0f, 0f, 0f);
                     step++;
@@ -152,8 +154,8 @@ public class AutonomousCrater extends LO2Library {
         telemetry.addData("Back Right Power: ", backRight.getPower());
         telemetry.addData("Time: ", timer1 + "");
         telemetry.addData("Step: ", step + "");
-        telemetry.addData("Orientation", Turning.currentAngle + "");
-        telemetry.addData("error", Turning.getError() + "");
+        telemetry.addData("Orientation", turning.currentAngle + "");
+        telemetry.addData("error", turning.getError() + "");
 
     }
 }

@@ -45,34 +45,48 @@ public class ColorSensorV {
   /** The colorSensor field will contain a reference to our color sensor hardware object */
   NormalizedColorSensor colorSensor;
   HardwareMap hardwareMap;
-  boolean weShouldRead = false, weveInitiated = false;
+  boolean weShouldRead, weveInitiated;
   int colorReturned;
 
-  public void init(HardwareMap passedHardwareMap) {
+  public ColorSensorV(HardwareMap _hardwareMap) {
+      this.hardwareMap = _hardwareMap; //since we don't get the hardwaremap by default-- this isn't an OpMode-- we have to set it manually
 
-      hardwareMap = passedHardwareMap;
+      this.weveInitiated = true; //We have initiated the code
 
-      weveInitiated = true;
+      this.weShouldRead = false;
 
-      runSample(); // actually execute the sampling code
+      this.colorSensor = hardwareMap.get(NormalizedColorSensor.class, "sensor_color"); // set the colorSensor to the actual hardware color sensor
+
+     // this.runSample(); // actually execute the sampling code; start up the loop
   }
 
+  //Switch the sample loop on/off
   public void switchSampling(boolean start_or_dont) {
-          boolean weShouldRead_old = weShouldRead;
-          weShouldRead = start_or_dont;
+          //save a boolean for the loop's state before changes
+          boolean weShouldRead_old = this.weShouldRead;
+          this.weShouldRead = start_or_dont;
           //if it's switching on from being previously off, start the loop again
           if(start_or_dont != weShouldRead_old && start_or_dont) {
-              runSample();
+              this.runSample();
           }
   }
 
+  //return our color integer
   public int getColorInt () {
-      return colorReturned;
+      return this.colorReturned;
     }
 
+  public String getHexCode() {
+
+      return Color.red(this.colorReturned) + Color.green(this.colorReturned) + Color.blue(this.colorReturned) + Color.alpha(this.colorReturned) + "";
+  }
+
+//Test if we're seeing gold
 public boolean isGold() {
-    if (0x53 <= Color.green(colorReturned) && Color.green(colorReturned) <= 0x64) {
+      //if the green value is between 0x53 (hexidecimal 53) and 0x64 (hexidecimal 64), it's gold. Otherwise, it's false.
+    if (0x53 <= Color.green(this.colorReturned) && Color.green(this.colorReturned) <= 0x64) {
         return true;
+    //Since the condition is commented out, this will always be passed over
     } else if (/*TODO: Test for ground*/false) {
     } else {
         return false;
@@ -82,42 +96,43 @@ public boolean isGold() {
     return false;
     }
 
+  //This won't be ran by any code outside of this class, so we can make it private.
+
+  //Why won't it be ran? Simple! See, by making this method private, we keep the
+  //public methods (and the wiki) nice and concise. Also, it doesn't return anything,
+  //which isn't the best for an informational class.
   private void runSample() {
 
     // values is a reference to the hsvValues array.
     float[] hsvValues = new float[3];
-    final float values[] = hsvValues;
-
-    // bPrevState and bCurrState keep track of the previous and current state of the button
-    boolean bPrevState = false;
-    boolean bCurrState = false;
-
-    // Naming for the Phone
-    colorSensor = hardwareMap.get(NormalizedColorSensor.class, "sensor_color");
 
     // If possible, turn the light on in the beginning (it might already be on anyway,
     // we just make sure it is if we can).
-    if (colorSensor instanceof SwitchableLight) {
-      ((SwitchableLight)colorSensor).enableLight(true);
+    if (this.colorSensor instanceof SwitchableLight) {
+      ((SwitchableLight)this.colorSensor).enableLight(true);
     }
 
     // Loop until we are asked to stop
-    while (weShouldRead) {
+    while (this.weShouldRead) {
 
 
         // Read the sensor
-        NormalizedRGBA colors = colorSensor.getNormalizedColors();
+        NormalizedRGBA colors = this.colorSensor.getNormalizedColors();
 
-        Color.colorToHSV(colors.toColor(), hsvValues);
+        //Convert the color to HSV
+        //Color.colorToHSV(colors.toColor(), hsvValues);
 
         /** We also display a conversion of the colors to an equivalent Android color integer.
          * @see Color */
 
+        //normalize the colors-- make it so brightness won't affect our readout (much)
         float max = Math.max(Math.max(colors.red, colors.green), Math.max(colors.blue, colors.alpha));
         colors.red /= max;
         colors.green /= max;
         colors.blue /= max;
-        colorReturned = colors.toColor();
+
+        //set the colorReturned variable so it can be used by the other methods
+        this.colorReturned = colors.toColor();
 
 
     }
