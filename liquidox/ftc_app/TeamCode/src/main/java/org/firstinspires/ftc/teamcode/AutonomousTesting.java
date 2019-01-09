@@ -9,6 +9,7 @@ import com.qualcomm.robotcore.util.Range;
 import org.firstinspires.ftc.teamcode.Turning;
 import org.firstinspires.ftc.teamcode.ColorSensorV;
 import org.firstinspires.ftc.teamcode.imuData;
+import org.firstinspires.ftc.teamcode.LO2Library;
 import org.firstinspires.ftc.teamcode.LiftHandler;
 
 @TeleOp
@@ -17,7 +18,7 @@ public class AutonomousTesting extends OpMode {
     //instantiate hardware devices
     boolean a = true;
     boolean b = true;
-    DcMotor frontLeft, backLeft, frontRight, backRight;
+    DcMotor frontLeft, backLeft, frontRight, backRight, latchM;
 
     Turning turning = new Turning();
     imuData imu;
@@ -25,27 +26,43 @@ public class AutonomousTesting extends OpMode {
 
     ColorSensorV colorSensor;
 
-    Servo rightChestShoulder, leftChestShoulder, leftOuterShoulder, rightOuterShoulder;
 
     float speed = 0.8f;
     public void init() {
-        /*Naming the Motors for phone*/
+//        /*Naming the Motors for phone*/
+//        frontLeft = hardwareMap.dcMotor.get("FL");
+//        backLeft = hardwareMap.dcMotor.get("BL");
+//        frontRight = hardwareMap.dcMotor.get("FR");
+//        backRight = hardwareMap.dcMotor.get("BR");
+//
+//        // assign shoulders (motors involved in arms)
+//        rightChestShoulder = hardwareMap.servo.get("RCS");
+//        leftChestShoulder = hardwareMap.servo.get("LCS");
+//        rightOuterShoulder = hardwareMap.servo.get("ROS");
+//        leftOuterShoulder = hardwareMap.servo.get("LOS");
+//        leftOuterShoulder.setDirection(Servo.Direction.REVERSE);
+//
+//        colorSensor = new ColorSensorV(hardwareMap);
+//        imu = new imuData(hardwareMap);
+//        turning.offSet = imu.getAngle();
+//
+//        lift = new LiftHandler(hardwareMap);
         frontLeft = hardwareMap.dcMotor.get("FL");
         backLeft = hardwareMap.dcMotor.get("BL");
         frontRight = hardwareMap.dcMotor.get("FR");
         backRight = hardwareMap.dcMotor.get("BR");
-
+        
         // assign shoulders (motors involved in arms)
         /*rightChestShoulder = hardwareMap.servo.get("RCS");
         leftChestShoulder = hardwareMap.servo.get("LCS");
         rightOuterShoulder = hardwareMap.servo.get("ROS");
         leftOuterShoulder = hardwareMap.servo.get("LOS");
         leftOuterShoulder.setDirection(Servo.Direction.REVERSE);*/
-
-        colorSensor = new ColorSensorV(hardwareMap);
+        latchM = hardwareMap.dcMotor.get("latchM");
+        colorSensor= new ColorSensorV(hardwareMap);
         imu = new imuData(hardwareMap);
-        turning.offSet = imu.getAngle();
-
+        turning.setOffset(imu.getAngle());
+        latchM.setPower(0.6);
         lift = new LiftHandler(hardwareMap);
     }
     public final void drive(float bl, float fl, float fr, float br ) {
@@ -90,21 +107,19 @@ public class AutonomousTesting extends OpMode {
         //if the button is down, move left and right shoulders forwards.
         /**moves outer servos if a button is pressed*/
         if(gamepad1.a) {
-            leftOuterShoulder.setPosition(0.5);
-            rightOuterShoulder.setPosition(0.5);
+//            leftOuterShoulder.setPosition(0.5);
+//            rightOuterShoulder.setPosition(0.5);
         } /*no else because we don't want one button to "take precedence" over another-- might be jittery, but there you go `\_('-')_/` */
         /**moves outer servos in opposite direction when b button is pressed*/
         if (gamepad1.b) {
-            leftOuterShoulder.setPosition(0);
-            rightOuterShoulder.setPosition(0);
+
         }
         if(gamepad1.x) {
-            turning.setDestination(-135);
+            turning.setDestination(45);
             turning.update(imu);
         }
         if(gamepad1.y) {
-//            rightChestShoulder.setPosition(0);
-//            leftChestShoulder.setPosition(0);
+//
         }
 
         //Throttle Code
