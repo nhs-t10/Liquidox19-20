@@ -36,11 +36,11 @@ public class AutonomousTesting extends OpMode {
         backRight = hardwareMap.dcMotor.get("BR");
 
         // assign shoulders (motors involved in arms)
-        rightChestShoulder = hardwareMap.servo.get("RCS");
+        /*rightChestShoulder = hardwareMap.servo.get("RCS");
         leftChestShoulder = hardwareMap.servo.get("LCS");
         rightOuterShoulder = hardwareMap.servo.get("ROS");
         leftOuterShoulder = hardwareMap.servo.get("LOS");
-        leftOuterShoulder.setDirection(Servo.Direction.REVERSE);
+        leftOuterShoulder.setDirection(Servo.Direction.REVERSE);*/
 
         colorSensor = new ColorSensorV(hardwareMap);
         imu = new imuData(hardwareMap);
