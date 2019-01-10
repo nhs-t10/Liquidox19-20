@@ -20,7 +20,7 @@ public class AutonomousTesting extends OpMode {
     boolean b = true;
     DcMotor frontLeft, backLeft, frontRight, backRight, latchM;
     Servo john;
-    Turning turning = new Turning();
+    Turning turning = new Turning(0);
     imuData imu;
     Servo latchS;
     LiftHandler lift;
@@ -60,8 +60,8 @@ public class AutonomousTesting extends OpMode {
         leftOuterShoulder = hardwareMap.servo.get("LOS");
         leftOuterShoulder.setDirection(Servo.Direction.REVERSE);*/
         latchM = hardwareMap.dcMotor.get("latchM");
-        john = hardwareMap.dcMotor.get("john");
-        lathcS = hardwareMap.dcMotor.get("latchS");
+        john = hardwareMap.servo.get("john");
+        latchS = hardwareMap.servo.get("latchS");
 
         colorSensor= new ColorSensorV(hardwareMap);
         imu = new imuData(hardwareMap);
@@ -124,7 +124,7 @@ public class AutonomousTesting extends OpMode {
             john.setPosition(0);
         }
         if(gamepad1.x) {
-            turning.setDestination(45);
+            turning.destination=45;
             turning.update(imu);
         }
         if(gamepad1.y) {
