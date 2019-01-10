@@ -19,9 +19,10 @@ public class AutonomousTesting extends OpMode {
     boolean a = true;
     boolean b = true;
     DcMotor frontLeft, backLeft, frontRight, backRight, latchM;
-
+    Servo john;
     Turning turning = new Turning();
     imuData imu;
+    Servo latchS;
     LiftHandler lift;
 
     ColorSensorV colorSensor;
@@ -59,10 +60,13 @@ public class AutonomousTesting extends OpMode {
         leftOuterShoulder = hardwareMap.servo.get("LOS");
         leftOuterShoulder.setDirection(Servo.Direction.REVERSE);*/
         latchM = hardwareMap.dcMotor.get("latchM");
+        john = hardwareMap.dcMotor.get("john");
+        lathcS = hardwareMap.dcMotor.get("latchS");
+
         colorSensor= new ColorSensorV(hardwareMap);
         imu = new imuData(hardwareMap);
         turning.setOffset(imu.getAngle());
-        latchM.setPower(0.6);
+        //latchM.setPower(0.6);
         lift = new LiftHandler(hardwareMap);
     }
     public final void drive(float bl, float fl, float fr, float br ) {
@@ -106,20 +110,29 @@ public class AutonomousTesting extends OpMode {
         //okay now that that masterpiece of coding is done, have some disgusting pasta.
         //if the button is down, move left and right shoulders forwards.
         /**moves outer servos if a button is pressed*/
-        if(gamepad1.a) {
+      //  if(gamepad1.a) {
+
+
 //            leftOuterShoulder.setPosition(0.5);
 //            rightOuterShoulder.setPosition(0.5);
-        } /*no else because we don't want one button to "take precedence" over another-- might be jittery, but there you go `\_('-')_/` */
+     //   } /*no else because we don't want one button to "take precedence" over another-- might be jittery, but there you go `\_('-')_/` */
         /**moves outer servos in opposite direction when b button is pressed*/
-        if (gamepad1.b) {
-
+        if(gamepad1.a){
+            john.setPosition(0.5);
+        }
+        if(gamepad1.b){
+            john.setPosition(0);
         }
         if(gamepad1.x) {
             turning.setDestination(45);
             turning.update(imu);
         }
         if(gamepad1.y) {
-//
+            if(john.getPosition() == 0.5){
+                john.setPosition(0);
+            } else{
+                john.setPosition(0.5);
+            }
         }
 
         //Throttle Code
