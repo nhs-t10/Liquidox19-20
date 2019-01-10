@@ -20,7 +20,7 @@ public class AutonomousTesting extends OpMode {
     boolean b = true;
     DcMotor frontLeft, backLeft, frontRight, backRight, latchM;
     Servo john, latchS;
-    Turning turning = new Turning();
+    Turning turning = new Turning(0);
     imuData imu;
     LiftHandler lift;
 
@@ -123,7 +123,7 @@ public class AutonomousTesting extends OpMode {
             john.setPosition(0);
         }
         if(gamepad1.x) {
-            turning.setDestination(imu.getAngle() + 45);
+            turning.destination=45;
             turning.update(imu);
         } else {
             drive(sum[0],sum[1],sum[2],sum[3]);

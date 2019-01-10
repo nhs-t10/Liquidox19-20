@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit;
 @Autonomous
 public class AutonomousDepot extends LO2Library {
 
-    Turning turning = new Turning();
+    Turning turning = new Turning(-45);
 
     boolean gold = false;
     int step = 1;

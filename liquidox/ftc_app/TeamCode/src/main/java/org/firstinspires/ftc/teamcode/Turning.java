@@ -19,19 +19,12 @@ public class Turning {
     public double offSet;
     float p = 0.0015f;
 
-    public void setDestination(double degrees){
-//        if(degrees > 180) {
-//            this.destination = degrees - 360;
-//        }else {
-//            this.destination = degrees - 15;
-//            this.turning = true;
-//        }
-    }
 
-    public Turning() {
+
+    public Turning(double destination) {
         this.error = 0;
         this.currentAngle = 0;
-        this.destination = -135;
+        this.destination = destination;
         this.pComponent = 0;
         this.turning = false;
         this.offSet = 0;

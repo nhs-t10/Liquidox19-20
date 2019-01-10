@@ -26,5 +26,26 @@ public class LiftHandler {
         this.latchS.setPower(0);
         latchM.setPower(0f);
     }
+    public void landBot() {
+        latchM.setPower(0.5);
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        //unlatch servo
+        try {
+            Thread.sleep(250);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        latchM.setPower(-0.3);
+        try {
+            Thread.sleep(450);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        latchM.setPower(0);
+    }
 
 }

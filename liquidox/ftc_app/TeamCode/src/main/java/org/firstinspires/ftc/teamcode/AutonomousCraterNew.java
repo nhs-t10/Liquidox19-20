@@ -13,7 +13,7 @@ import com.qualcomm.robotcore.util.Range;
 @Autonomous
 public class AutonomousCraterNew extends LO2Library {
 
-    Turning turning = new Turning();
+    Turning turning = new Turning(-135);
 
     boolean gold = false;
     int step = 1;
