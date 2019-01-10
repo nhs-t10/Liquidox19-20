@@ -51,7 +51,7 @@ public class AutonomousTesting extends OpMode {
         backLeft = hardwareMap.dcMotor.get("BL");
         frontRight = hardwareMap.dcMotor.get("FR");
         backRight = hardwareMap.dcMotor.get("BR");
-        
+
         // assign shoulders (motors involved in arms)
         /*rightChestShoulder = hardwareMap.servo.get("RCS");
         leftChestShoulder = hardwareMap.servo.get("LCS");
@@ -101,7 +101,7 @@ public class AutonomousTesting extends OpMode {
         }
 
 /** makes it go vroom*/
-        drive(sum[0],sum[1],sum[2],sum[3]);
+
 
         //okay now that that masterpiece of coding is done, have some disgusting pasta.
         //if the button is down, move left and right shoulders forwards.
@@ -115,8 +115,10 @@ public class AutonomousTesting extends OpMode {
 
         }
         if(gamepad1.x) {
-            turning.setDestination(45);
+            turning.setDestination(imu.getAngle() + 45);
             turning.update(imu);
+        } else {
+            drive(sum[0],sum[1],sum[2],sum[3]);
         }
         if(gamepad1.y) {
 //
