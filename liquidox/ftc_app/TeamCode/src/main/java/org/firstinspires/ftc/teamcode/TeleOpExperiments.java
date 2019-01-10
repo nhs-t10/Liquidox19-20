@@ -122,22 +122,23 @@ public class TeleOpExperiments extends OpMode {
 ////            latchS.setPower(-0.3);
 ////            latchM.setPower(-1);
 ////        }
-/** going up*/
-        if (gamepad1.left_stick_button) {
-            try {
-                lift.upArm();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-/** coming down*/
-        if (gamepad1.right_stick_button) {
-            try {
-                lift.downArm();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
+
+///** going up*/
+//        if (gamepad1.left_stick_button) {
+//            try {
+//                lift.upArm();
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//        }
+///** coming down*/
+//        if (gamepad1.right_stick_button) {
+//            try {
+//                lift.downArm();
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//        }
 
 
         /** testing section
@@ -177,6 +178,24 @@ public class TeleOpExperiments extends OpMode {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+        }
+        if (gamepad1.right_stick_button) {
+            latchM.setPower(-0.3);
+            LMP = latchM.getPower();
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        if (gamepad1.left_stick_button) {
+            latchM.setPower(0.6);
+            LMP = latchM.getPower();
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }       
         }
             //Throttle Code
 
