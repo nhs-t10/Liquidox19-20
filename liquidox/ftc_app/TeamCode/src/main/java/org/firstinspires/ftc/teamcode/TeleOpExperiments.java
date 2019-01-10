@@ -140,7 +140,8 @@ public class TeleOpExperiments extends OpMode {
         }
 
 
-        /** testing section*/
+        /** testing section
+         * Basically just adjusts the power of the latching mechanism to find useful values*/
         if (gamepad1.x) {
             latchM.setPower(BA(LMP));
             LMP = latchM.getPower();
