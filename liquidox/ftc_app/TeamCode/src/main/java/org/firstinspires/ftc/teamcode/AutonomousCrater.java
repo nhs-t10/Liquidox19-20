@@ -23,6 +23,9 @@ public class AutonomousCrater extends LO2Library {
 
     float timer1;
 
+    String speedBar(float percent, float resolution) {
+        return "["+"\u2588".repeat(Math.floor(percent*resolution)) + " ".repeat(Math.floor(resolution - (percent*resolution)))+"]";
+    }
     void sample(float time1, float time2) {
         gold = colorSensor.isGold();
         if (gold) {
@@ -130,7 +133,7 @@ public class AutonomousCrater extends LO2Library {
                 }
                 break;
             case (11):
-              drive(-0.285f, -0.285f, -0.285f, -0.285f);
+                drive(-0.285f, -0.285f, -0.285f, -0.285f);
                 if (timer1 >= 19000) {
                     drive(0f, 0f, 0f, 0f);
                     step++;
@@ -147,11 +150,16 @@ public class AutonomousCrater extends LO2Library {
                 drive(0, 0, 0, 0);
                 break;
         }
-
-        telemetry.addData("Front Left Power: ", frontLeft.getPower());
-        telemetry.addData("Front Right Power: ", frontRight.getPower());
-        telemetry.addData("Back Left Power: ", backLeft.getPower());
-        telemetry.addData("Back Right Power: ", backRight.getPower());
+        }
+        //get the good-looking power bar
+        String FLsb speedBar(frontLeft.getPower(), 10);
+        String FRsb speedBar(frontRight.getPower(), 10);
+        String BLsb speedBar(backLeft.getPower(), 10);
+        String BRsb speedBar(backRight.getPower(), 10);
+       telemetry.addData("FL Power", FLsb + frontLeft.getPower());
+        telemetry.addData("FR Power = ", FRsb + frontRight.getPower());
+        telemetry.addData("BL Power = ", BLsb + backLeft.getPower());
+        telemetry.addData("BR Power = ", BRsb + backRight.getPower());
         telemetry.addData("Time: ", timer1 + "");
         telemetry.addData("Step: ", step + "");
         telemetry.addData("Orientation", turning.currentAngle + "");

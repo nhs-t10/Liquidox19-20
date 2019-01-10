@@ -17,7 +17,7 @@ public class OpModeFiveLatchesP extends OpMode {
     boolean a = true;
     boolean b = true;
     DcMotor frontLeft, backLeft, frontRight, backRight, latchM;
-
+    Servo john;
     LiftHandler lift;
 
     CRServo latchS;
@@ -47,6 +47,7 @@ public class OpModeFiveLatchesP extends OpMode {
        /*naming the latching devices*/
         latchS = hardwareMap.crservo.get("latchS");
         latchM = hardwareMap.dcMotor.get("latchM");
+        john = hardwareMap.servo.get("john")
 
         lift = new LiftHandler(hardwareMap);
         latchS.setPower(1);
@@ -99,6 +100,12 @@ public class OpModeFiveLatchesP extends OpMode {
         if (gamepad1.b) {
             latchS.setPower(-0.3);
             latchM.setPower(-1);
+        }
+        if(gamepad1.x){
+            john.setPosition(0.5);
+        }
+        if(gamepad1.x){
+            john.setPosition(0);
         }
 /** going up*/
         if (gamepad1.left_stick_button) {
