@@ -118,22 +118,25 @@ public class AutonomousTesting extends OpMode {
      //   } /*no else because we don't want one button to "take precedence" over another-- might be jittery, but there you go `\_('-')_/` */
         /**moves outer servos in opposite direction when b button is pressed*/
         if(gamepad1.a){
-            john.setPosition(0.5);
+            john.setPosition(0.8);
         }
         if(gamepad1.b){
             john.setPosition(0);
         }
         if(gamepad1.x) {
-            //Turning.destination=45;
-              double currentAngle = imu.getAngle() - offSet;
-             error = currentAngle - 45;
-             double pComponent = Range.clip(error * 0.005,-1,1);
+            turning.destination=45;
+            turning.update(imu);
 
 
-                if (Math.abs(error) < 3) {
-                    drive(0, 0, 0, 0);
-                }
-                drive((float)(pComponent), (float)(pComponent), (float)-(pComponent), (float)-(pComponent));
+//              double currentAngle = imu.getAngle() - offSet;
+//             error = currentAngle - 45;
+//             double pComponent = Range.clip(error * 0.005,-1,1);
+//
+//
+//                if (Math.abs(error) < 3) {
+//                    drive(0, 0, 0, 0);
+//                }
+//                drive((float)(pComponent), (float)(pComponent), (float)-(pComponent), (float)-(pComponent));
 
         } else {
            offSet = imu.getAngle();
@@ -166,7 +169,7 @@ public class AutonomousTesting extends OpMode {
         telemetry.addData("Back Left Power: ", backLeft.getPower());
         telemetry.addData("Back Right Power: ", backRight.getPower());
         telemetry.addData("Hex code", colorSensor.getHexCode() + "");
-        telemetry.addData("Turning Error", error + "");
+        telemetry.addData("Turning Error", turning.getError() + "");
         telemetry.addData("Turning Destination", turning.getDestination() + "");
         telemetry.addData("Turning Angle", imu.getAngle() + "");
 
