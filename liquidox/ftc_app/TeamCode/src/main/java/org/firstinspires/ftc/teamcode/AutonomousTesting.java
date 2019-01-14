@@ -25,6 +25,7 @@ public class AutonomousTesting extends OpMode {
     LiftHandler lift;
     ColorSensorV colorSensor;
     double offSet;
+    double error;
 
     float speed = 0.8f;
     public void init() {
@@ -125,7 +126,7 @@ public class AutonomousTesting extends OpMode {
         if(gamepad1.x) {
             //Turning.destination=45;
               double currentAngle = imu.getAngle() - offSet;
-             double error = currentAngle - 45;
+             error = currentAngle - 45;
              double pComponent = Range.clip(error * 0.005,-1,1);
 
 
@@ -165,9 +166,9 @@ public class AutonomousTesting extends OpMode {
         telemetry.addData("Back Left Power: ", backLeft.getPower());
         telemetry.addData("Back Right Power: ", backRight.getPower());
         telemetry.addData("Hex code", colorSensor.getHexCode() + "");
-        telemetry.addData("Turning Error", error() + "");
+        telemetry.addData("Turning Error", error + "");
         telemetry.addData("Turning Destination", turning.getDestination() + "");
-        telemetry.addData("Turning Angle", imu.getAngle) + "");
+        telemetry.addData("Turning Angle", imu.getAngle() + "");
 
 
         telemetry.update();
