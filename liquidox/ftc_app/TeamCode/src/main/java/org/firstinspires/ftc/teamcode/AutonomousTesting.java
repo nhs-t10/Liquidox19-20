@@ -64,7 +64,7 @@ public class AutonomousTesting extends OpMode {
         colorSensor= new ColorSensorV(hardwareMap);
         imu = new imuData(hardwareMap);
         turning.setOffset(imu.getAngle());
-        offSet imu.getAngle();
+        offSet = imu.getAngle();
         //latchM.setPower(0.6);
        // lift = new LiftHandler(hardwareMap);
     }
@@ -135,7 +135,7 @@ public class AutonomousTesting extends OpMode {
                 drive((float)(pComponent), (float)(pComponent), (float)-(pComponent), (float)-(pComponent));
 
         } else {
-           offSet = imu.getAngle;
+           offSet = imu.getAngle();
         }
         if(gamepad1.y) {
             if(john.getPosition() == 0.5){
