@@ -17,7 +17,7 @@ public class Turning {
     public double pComponent;
     public boolean turning=false;
     public double offSet;
-    float p = 0.0015f;
+    float p = 0.03f;
 
 
 
@@ -43,7 +43,7 @@ public class Turning {
     public void update(imuData imu) {
         this.currentAngle = imu.getAngle() - this.offSet;
         this.error = this.currentAngle - this.destination;
-        this.pComponent = Range.clip(error * p,-1,1);
+        this.pComponent = Range.clip(this.error * p,-1,1);
 
         if (this.turning) {
             if (Math.abs(this.error) < 3) {

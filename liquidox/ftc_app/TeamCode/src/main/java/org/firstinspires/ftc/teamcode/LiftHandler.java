@@ -34,11 +34,16 @@ public class LiftHandler {
             e.printStackTrace();
         }
         //unlatch servo
+
+
+
         try {
             Thread.sleep(250);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
+
         latchM.setPower(-0.3);
         try {
             Thread.sleep(450);
