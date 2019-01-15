@@ -44,7 +44,7 @@ public class LiftHandler {
         }
 
 
-        latchM.setPower(-0.3);
+        latchM.setPower(0.3);
         try {
             Thread.sleep(450);
         } catch (InterruptedException e) {

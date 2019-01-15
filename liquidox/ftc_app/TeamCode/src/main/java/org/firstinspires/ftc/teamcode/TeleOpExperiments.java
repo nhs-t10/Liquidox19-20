@@ -195,7 +195,7 @@ public class TeleOpExperiments extends OpMode {
                 Thread.sleep(500);
             } catch (InterruptedException e) {
                 e.printStackTrace();
-            }       
+            }
         }
             //Throttle Code
 
