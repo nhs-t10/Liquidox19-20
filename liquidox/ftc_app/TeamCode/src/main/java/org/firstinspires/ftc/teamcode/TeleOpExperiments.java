@@ -2,25 +2,60 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+//import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.util.Range;
-import org.firstinspires.ftc.robotcore.external.*;
-import java.util.concurrent.TimeUnit;
+
+
+import org.firstinspires.ftc.teamcode.LiftHandler;
 
 @TeleOp
 public class TeleOpExperiments extends OpMode {
-
+    //private double random;
     //instantiate hardware devices
-    DcMotor frontLeft, backLeft, frontRight, backRight;
+    boolean a = true;
+    boolean b = true;
+    double LMP = 0;
+    double PIT = 0;
+    DcMotor frontLeft, backLeft, frontRight, backRight, latchM;
 
-    Servo rightShoulder, leftShoulder, chestShoulder;
+    LiftHandler lift;
 
+    CRServo latchS;
 
-    float speed = 0.5f;
-    float sSpeed = 0.5f;
-    float lT, rT;
-    float lGun, rGun;
+    float speed = 0.8f;
+
+    public double BA(double num) {
+        return num + 0.1f;
+    }
+
+    public double LA(double num) {
+        return num + 0.01f;
+    }
+
+    public double BS(double num) {
+        return num - 0.1f;
+    }
+
+    public double LS(double num) {
+        return num - 0.01f;
+    }
+
+    public void upArm() throws InterruptedException {
+        latchS.setPower(1);
+        latchM.setPower(0.12);
+        Thread.sleep(900);
+        latchM.setPower(0f);
+    }
+
+    public void downArm() throws InterruptedException {
+        latchS.setPower(-1);
+        latchM.setPower(-0.2f);
+        Thread.sleep(1000);
+        latchM.setPower(0f);
+    }
+
     public void init() {
         /*Naming the Motors for phone*/
         frontLeft = hardwareMap.dcMotor.get("FL");
@@ -28,78 +63,165 @@ public class TeleOpExperiments extends OpMode {
         frontRight = hardwareMap.dcMotor.get("FR");
         backRight = hardwareMap.dcMotor.get("BR");
 
-        //assign shoulders (motors involved in arms)
-        //  rightShoulder = hardwareMap.servo.get("RS");
-        //leftShoulder = hardwareMap.servo.get("LS");
-        //chestShoulder = hardwareMap.servo.get("CS");
+
+        /*naming the latching devices*/
+        latchS = hardwareMap.crservo.get("latchS");
+        latchM = hardwareMap.dcMotor.get("latchM");
+
+        lift = new LiftHandler(hardwareMap);
+        latchS.setPower(1);
+    }
+
+    public final void drive(float bl, float fl, float fr, float br) {
+/** Tells the robot how to drive */
+        frontLeft.setPower(-fl * speed); //Scaled by 1.8
+        backRight.setPower(br * speed);
+        frontRight.setPower(fr * speed);
+        backLeft.setPower(-bl * speed);
 
     }
 
-
-
-
-    public final void drive(float bl, float fl, float fr, float br ) {
-
-        frontLeft.setPower(-fl*speed*9/10);
-        backRight.setPower(br*speed*5.5/10);
-        frontRight.setPower(fr*speed*5.5/10);
-        backLeft.setPower(-bl*speed*9/10);
-
-    }
-
-    float[] sum = {0,0,0,0};
-
+    float[] sum = {0, 0, 0, 0};
 
 
     public void loop() {
+        latchM.setPower(LMP);
+/** finds the values from the controller*/
         float lX = Range.clip(gamepad1.left_stick_x, -1, 1);
         float lY = Range.clip(gamepad1.left_stick_y, -1, 1);
-        float rX = Range.clip(gamepad1.right_stick_x, -1, 1);
-        float lT = Range.clip(gamepad1.left_trigger, -1, 1);
-        float rT = Range.clip(gamepad1.right_trigger, -1, 1);
+        float rX = Range.clip(gamepad1.right_stick_x / 1.5f, -1, 1);
 
-        float[] vertical = {lY, lY, lY, lY};
-        float[] horizontal = {-lX, lX, lX, -lX};
-        float[] rotational = {rX, rX, -rX, -rX};
-
-        for(int i=0; i<4; i++) {
+/** creates driving modes */
+        float[] vertical = {0.7f * lY, 0.7f * lY, 0.7f * lY, 0.7f * lY};
+        float[] horizontal = {lX, -lX, lX, -lX};
+        float[] rotational = {-0.7f * rX, -0.7f * rX, 0.7f * rX, 0.7f * rX};
+/** Adds all of the driving modes together */
+        for (int i = 0; i < 4; i++) {
             sum[i] = vertical[i] + horizontal[i] + rotational[i];
         }
 
         float highest = Math.max(Math.max(sum[0], sum[1]), Math.max(sum[2], sum[3]));
-
-        if(Math.abs(highest)>1) {
-            for (int i=0; i<4; i++) {
-                sum[i]=sum[i]/highest;
+/** Makes sure the robot doesnt drive above the maximum speed */
+        if (Math.abs(highest) > 1) {
+            for (int i = 0; i < 4; i++) {
+                sum[i] = sum[i] / highest;
             }
         }
 
+/** makes it go vroom*/
+        drive(sum[0], sum[1], sum[2], sum[3]);
 
-        drive(sum[0],sum[1],sum[2],sum[3]);
-        //okay now that that masterpiece of coding is done, have some disgusting pasta.
         //if the button is down, move left and right shoulders forwards.
-//            if(gamepad1.a) {
-//              //  rightShoulder.setPosition(rightShoulder.getPosition()+1);
-//                leftShoulder.setPosition(leftShoulder.getPosition()+1);
-//            } /*no else because we don't want one button to "take precedence" over another-- might be jittery, but there you go `\_('-')_/` */ if (gamepad1.b) {
-//            //rightShoulder.setPosition(rightShoulder.getPosition()-1);
-//            leftShoulder.setPosition(leftShoulder.getPosition() - 1);
+//        /**moves outer servos if a button is pressed*/
+////        if(gamepad1.a) {
+////            latchS.setPower(0.3);
+////            latchM.setPower(1);
+////        } /*no else because we don't want one button to "take precedence" over another-- might be jittery, but there you go `\_('-')_/` */
+////        /**moves outer servos in opposite direction when b button is pressed*/
+////        if (gamepad1.b) {
+////            latchS.setPower(-0.3);
+////            latchM.setPower(-1);
+////        }
+
+///** going up*/
+//        if (gamepad1.left_stick_button) {
+//            try {
+//                lift.upArm();
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
 //        }
-        // why the heck did this show up here? }
-        //if the left bumper is down, down the speed by 1.
-        if (rT > 0 || lT > 0) { speed = Math.abs((rT + lT)/2 -1); }
-        else {speed = 1/2;}
-        telemetry.addData("Front Left Power: ", frontLeft.getPower());
-        telemetry.addData("Front Right Power: ", frontRight.getPower());
-        telemetry.addData("Back Left Power: ", backLeft.getPower());
-        telemetry.addData("Back Right Power: ", backRight.getPower());
-        telemetry.addData("Left Gamepad X-Coordinate: ", lX);
-        telemetry.addData("Left Gamepad X-Coordinate: ", lY);
-        telemetry.addData("Data we eventually feed into `drive()`: ", sum.toString());
-        telemetry.addData("sSpeed", sSpeed);
-        telemetry.update();
+///** coming down*/
+//        if (gamepad1.right_stick_button) {
+//            try {
+//                lift.downArm();
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//        }
+
+
+        /** testing section
+         * Basically just adjusts the power of the latching mechanism to find useful values*/
+        if (gamepad1.x) {
+            latchM.setPower(BA(LMP));
+            LMP = latchM.getPower();
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        if (gamepad1.y) {
+            latchM.setPower(BS(LMP));
+            LMP = latchM.getPower();
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        if (gamepad1.a) {
+            latchM.setPower(LA(LMP));
+            LMP = latchM.getPower();
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        if (gamepad1.b) {
+            latchM.setPower(LS(LMP));
+            LMP = latchM.getPower();
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        if (gamepad1.right_stick_button) {
+            latchM.setPower(0.3);
+            LMP = latchM.getPower();
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        if (gamepad1.left_stick_button) {
+            latchM.setPower(0.6);
+            LMP = latchM.getPower();
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+            //Throttle Code
+
+//        //If both bumpers are down, revert the speed to default
+//        if(gamepad1.left_bumper && gamepad1.right_bumper) {
+//            speed = 0.8f;
+//            //otherwise, if the left bumper is down, decrease the speed (with a minumum of 0)
+//        } else if(gamepad1.left_bumper) {
+//            speed = Math.max(speed - 0.05f, 0);
+//        } else if(gamepad1.right_bumper) {
+//            //then, if the right bumper is down, increase the speed (max of 5)
+//            speed = Math.min(speed + 0.05f, 5);
+//        }
+            //////////////////////////////
+
+            //////////////////////////////
+            telemetry.addData("Front Left Power: ", frontLeft.getPower());
+            telemetry.addData("Front Right Power: ", frontRight.getPower());
+            telemetry.addData("Back Left Power: ", backLeft.getPower());
+            telemetry.addData("Back Right Power: ", backRight.getPower());
+            telemetry.addData("Left Gamepad X-Coordinate: ", lX);
+            telemetry.addData("Left Gamepad Y-Coordinate: ", lY);
+            telemetry.addData("LMP: ", latchM.getPower());
+            telemetry.addData("PIT: ", LMP);
+
+
+
     }
-
-    /**Working on speed code*/
-
 }

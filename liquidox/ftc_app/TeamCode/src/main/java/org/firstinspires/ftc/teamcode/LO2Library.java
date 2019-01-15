@@ -21,6 +21,13 @@ public abstract class LO2Library extends OpMode {
 
     }
 
+    String repeatString(String s, int n) {
+        for(int i = 0; i < n; i++ ) {
+            s = s + s;
+        }
+        return s;
+    }
+
     public static void drive(float bl, float fl, float fr, float br) {
         frontLeft.setPower(-fl);
         backRight.setPower(br);
