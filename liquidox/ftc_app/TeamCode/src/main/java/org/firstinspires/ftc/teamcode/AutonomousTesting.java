@@ -19,9 +19,8 @@ public class AutonomousTesting extends OpMode {
     boolean a = true;
     boolean b = true;
     DcMotor frontLeft, backLeft, frontRight, backRight;
-    Servo john ;
-    CRServo latchS;
-    Turning turning = new Turning(0);
+    Servo john, latchS;
+    Turning turning;
     imuData imu;
     LiftHandler lift;
     ColorSensorV colorSensor;
@@ -126,7 +125,7 @@ public class AutonomousTesting extends OpMode {
             latchS.setPower(0);
         }
         if(gamepad1.x) {
-            turning.destination=45;
+            turning = new Turning(-45);
             turning.update(imu);
 
 

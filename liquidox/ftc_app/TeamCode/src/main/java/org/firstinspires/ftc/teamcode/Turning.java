@@ -47,7 +47,7 @@ public class Turning {
 
         if (this.turning) {
             if (Math.abs(this.error) < 3) {
-                stopTurning();
+                this.stopTurning();
             }
             LO2Library.TurnDrive((this.pComponent), (this.pComponent), -(this.pComponent), -(this.pComponent));
         }
