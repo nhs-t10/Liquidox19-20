@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
-
+import com.qualcomm.robotcore.hardware.CRServo;
 import org.firstinspires.ftc.teamcode.Turning;
 import org.firstinspires.ftc.teamcode.ColorSensorV;
 import org.firstinspires.ftc.teamcode.imuData;
@@ -19,7 +19,8 @@ public class AutonomousTesting extends OpMode {
     boolean a = true;
     boolean b = true;
     DcMotor frontLeft, backLeft, frontRight, backRight;
-    Servo john, latchS;
+    Servo john ;
+    CRServo latchS;
     Turning turning = new Turning(0);
     imuData imu;
     LiftHandler lift;
@@ -60,7 +61,7 @@ public class AutonomousTesting extends OpMode {
         leftOuterShoulder.setDirection(Servo.Direction.REVERSE);*/
        //  latchM = hardwareMap.dcMotor.get("latchM");
         john = hardwareMap.servo.get("john");
-        latchS = hardwareMap.servo.get("latchS");
+        latchS = hardwareMap.crservo.get("latchS");
 
         colorSensor= new ColorSensorV(hardwareMap);
         imu = new imuData(hardwareMap);
@@ -118,10 +119,11 @@ public class AutonomousTesting extends OpMode {
      //   } /*no else because we don't want one button to "take precedence" over another-- might be jittery, but there you go `\_('-')_/` */
         /**moves outer servos in opposite direction when b button is pressed*/
         if(gamepad1.a){
-            john.setPosition(0.8);
-        }
-        if(gamepad1.b){
-            john.setPosition(0);
+            latchS.setPower(0.5);
+        } else if(gamepad1.b){
+            latch.setPower(-0.5);
+        } else {
+            latchS.setPower(0);
         }
         if(gamepad1.x) {
             turning.destination=45;
@@ -142,10 +144,10 @@ public class AutonomousTesting extends OpMode {
            offSet = imu.getAngle();
         }
         if(gamepad1.y) {
-            if(john.getPosition() == 0.5){
+            if(john.getPosition() == 0.8){
                 john.setPosition(0);
             } else{
-                john.setPosition(0.5);
+                john.setPosition(0.8);
             }
         }
 
