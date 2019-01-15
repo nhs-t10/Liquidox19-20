@@ -19,7 +19,8 @@ public class AutonomousTesting extends OpMode {
     boolean a = true;
     boolean b = true;
     DcMotor frontLeft, backLeft, frontRight, backRight;
-    Servo john, latchS;
+    Servo john;
+    CRServo latchS;
     Turning turning;
     imuData imu;
     LiftHandler lift;
@@ -118,9 +119,9 @@ public class AutonomousTesting extends OpMode {
      //   } /*no else because we don't want one button to "take precedence" over another-- might be jittery, but there you go `\_('-')_/` */
         /**moves outer servos in opposite direction when b button is pressed*/
         if(gamepad1.a){
-            latchS.setPower(0.5);
+            latchS.setPower(0.5f);
         } else if(gamepad1.b){
-            latch.setPower(-0.5);
+            latchS.setPower(-0.5f);
         } else {
             latchS.setPower(0);
         }
