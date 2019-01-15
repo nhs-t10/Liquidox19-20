@@ -180,7 +180,7 @@ public class TeleOpExperiments extends OpMode {
             }
         }
         if (gamepad1.right_stick_button) {
-            latchM.setPower(-0.3);
+            latchM.setPower(0.3);
             LMP = latchM.getPower();
             try {
                 Thread.sleep(500);
