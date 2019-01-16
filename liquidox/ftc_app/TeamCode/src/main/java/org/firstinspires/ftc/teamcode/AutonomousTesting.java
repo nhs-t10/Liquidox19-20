@@ -27,9 +27,12 @@ public class AutonomousTesting extends OpMode {
     ColorSensorV colorSensor;
     double offSet;
     double error;
+    DcMotor latchM;
+
 
     float speed = 0.8f;
     public void init() {
+        turning = new Turning(-45);
 //        /*Naming the Motors for phone*/
 //        frontLeft = hardwareMap.dcMotor.get("FL");
 //        backLeft = hardwareMap.dcMotor.get("BL");
@@ -52,6 +55,7 @@ public class AutonomousTesting extends OpMode {
         backLeft = hardwareMap.dcMotor.get("BL");
         frontRight = hardwareMap.dcMotor.get("FR");
         backRight = hardwareMap.dcMotor.get("BR");
+        latchM = hardwareMap.dcMotor.get("latchM");
 
         // assign shoulders (motors involved in arms)
         /*rightChestShoulder = hardwareMap.servo.get("RCS");
@@ -97,6 +101,7 @@ public class AutonomousTesting extends OpMode {
             sum[i] = vertical[i] + horizontal[i] + rotational[i];
         }
 
+
         float highest = Math.max(Math.max(sum[0], sum[1]), Math.max(sum[2], sum[3]));
 /** Makes sure the robot doesnt drive above the maximum speed */
         if(Math.abs(highest)>1) {
@@ -107,7 +112,7 @@ public class AutonomousTesting extends OpMode {
 
 /** makes it go vroom*/
 
-
+        drive(sum[0], sum[1], sum[2], sum[3]);
         //okay now that that masterpiece of coding is done, have some disgusting pasta.
         //if the button is down, move left and right shoulders forwards.
         /**moves outer servos if a button is pressed*/
@@ -126,28 +131,36 @@ public class AutonomousTesting extends OpMode {
             latchS.setPower(0);
         }
         if(gamepad1.x) {
-            turning = new Turning(-45);
             turning.update(imu);
 
 
-//              double currentAngle = imu.getAngle() - offSet;
-//             error = currentAngle - 45;
-//             double pComponent = Range.clip(error * 0.005,-1,1);
-//
-//
-//                if (Math.abs(error) < 3) {
-//                    drive(0, 0, 0, 0);
-//                }
-//                drive((float)(pComponent), (float)(pComponent), (float)-(pComponent), (float)-(pComponent));
+              double currentAngle = imu.getAngle() - offSet;
+             error = currentAngle - 45;
+             double pComponent = Range.clip(error * 0.005,-1,1);
+
+
+                if (Math.abs(error) < 3) {
+                    drive(0, 0, 0, 0);
+                }
+                drive((float)(pComponent), (float)(pComponent), (float)-(pComponent), (float)-(pComponent));
 
         } else {
-           offSet = imu.getAngle();
+          // offSet = imu.getAngle();
         }
         if(gamepad1.y) {
             if(john.getPosition() == 0.8){
                 john.setPosition(0);
             } else{
                 john.setPosition(0.8);
+            }
+        }
+        if (gamepad1.dpad_down) {
+            latchM.setPower(1);
+          //  LMP = latchM.getPower();
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         }
 
