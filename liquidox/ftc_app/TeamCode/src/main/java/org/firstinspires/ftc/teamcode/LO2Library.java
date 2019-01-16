@@ -21,7 +21,7 @@ public abstract class LO2Library extends OpMode {
 
     }
 
-    String repeatString(String s, int n) {
+    public static String repeatString(String s, int n) {
         for(int i = 0; i < n; i++ ) {
             s = s + s;
         }
@@ -42,6 +42,9 @@ public abstract class LO2Library extends OpMode {
         frontRight.setPower(fr);
         backLeft.setPower(-bl);
     }
-
+    public static String speedBar(double percent, int resolution) {
+        percent = Math.abs(percent);
+        return "["+repeatString("\u2588",(int)Math.floor(percent*resolution)) + repeatString(" ",(int)Math.floor(resolution - (percent*resolution)))+"]";
+    }
 
 }

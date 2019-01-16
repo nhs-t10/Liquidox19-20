@@ -132,20 +132,18 @@ public class AutonomousTesting extends OpMode {
         }
         if(gamepad1.x) {
             turning.update(imu);
+            double currentAngle = imu.getAngle() - offSet;
+            error = currentAngle - 45;
+            double pComponent = Range.clip(error * 0.005, -1, 1);
 
 
-              double currentAngle = imu.getAngle() - offSet;
-             error = currentAngle - 45;
-             double pComponent = Range.clip(error * 0.005,-1,1);
+            if (Math.abs(error) < 3) {
+                drive(0, 0, 0, 0);
+            }
+            drive((float) (pComponent), (float) (pComponent), (float) -(pComponent), (float) -(pComponent));
 
-
-                if (Math.abs(error) < 3) {
-                    drive(0, 0, 0, 0);
-                }
-                drive((float)(pComponent), (float)(pComponent), (float)-(pComponent), (float)-(pComponent));
-
-        } else {
-          // offSet = imu.getAngle();
+        }else {
+            drive(sum[0], sum[1], sum[2], sum[3]);
         }
         if(gamepad1.y) {
             if(john.getPosition() == 0.8){
@@ -179,10 +177,10 @@ public class AutonomousTesting extends OpMode {
         //////////////////////////////
 
         //////////////////////////////
-        telemetry.addData("Front Left Power: ", frontLeft.getPower());
-        telemetry.addData("Front Right Power: ", frontRight.getPower());
-        telemetry.addData("Back Left Power: ", backLeft.getPower());
-        telemetry.addData("Back Right Power: ", backRight.getPower());
+        telemetry.addData("FL Power: ", frontLeft.getPower() + " " + LO2Library.speedBar(frontLeft.getPower(),8));
+        telemetry.addData("FR Power: ", frontRight.getPower() + " " + LO2Library.speedBar(frontRight.getPower(),8));
+        telemetry.addData("BL Power: ", backLeft.getPower() + " " + LO2Library.speedBar(backLeft.getPower(),8));
+        telemetry.addData("BR Power: ", backRight.getPower() + " " + LO2Library.speedBar(backRight.getPower(),8));
         telemetry.addData("Hex code", colorSensor.getHexCode() + "");
         telemetry.addData("Turning Error", turning.getError() + "");
         telemetry.addData("Turning Destination", turning.getDestination() + "");

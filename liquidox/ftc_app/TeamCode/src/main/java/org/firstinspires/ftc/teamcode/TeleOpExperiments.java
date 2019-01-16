@@ -241,10 +241,10 @@ public class TeleOpExperiments extends OpMode {
             //////////////////////////////
 
             //////////////////////////////
-            telemetry.addData("Front Left Power: ", frontLeft.getPower());
-            telemetry.addData("Front Right Power: ", frontRight.getPower());
-            telemetry.addData("Back Left Power: ", backLeft.getPower());
-            telemetry.addData("Back Right Power: ", backRight.getPower());
+        telemetry.addData("FL Power: ", frontLeft.getPower() + " " + LO2Library.speedBar(frontLeft.getPower(),8));
+        telemetry.addData("FR Power: ", frontRight.getPower() + " " + LO2Library.speedBar(frontRight.getPower(),8));
+        telemetry.addData("BL Power: ", backLeft.getPower() + " " + LO2Library.speedBar(backLeft.getPower(),8));
+        telemetry.addData("BR Power: ", backRight.getPower() + " " + LO2Library.speedBar(backRight.getPower(),8));
             telemetry.addData("Left Gamepad X-Coordinate: ", lX);
             telemetry.addData("Left Gamepad Y-Coordinate: ", lY);
             telemetry.addData("Actual Power: ", latchM.getPower());
