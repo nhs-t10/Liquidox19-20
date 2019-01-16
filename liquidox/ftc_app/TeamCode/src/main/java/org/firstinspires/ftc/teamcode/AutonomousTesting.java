@@ -129,19 +129,8 @@ public class AutonomousTesting extends OpMode {
             turning = new Turning(-45);
             turning.update(imu);
 
-
-//              double currentAngle = imu.getAngle() - offSet;
-//             error = currentAngle - 45;
-//             double pComponent = Range.clip(error * 0.005,-1,1);
-//
-//
-//                if (Math.abs(error) < 3) {
-//                    drive(0, 0, 0, 0);
-//                }
-//                drive((float)(pComponent), (float)(pComponent), (float)-(pComponent), (float)-(pComponent));
-
         } else {
-           offSet = imu.getAngle();
+            drive(sum[0], sum[1], sum[2], sum[3]);
         }
         if(gamepad1.y) {
             if(john.getPosition() == 0.8){
