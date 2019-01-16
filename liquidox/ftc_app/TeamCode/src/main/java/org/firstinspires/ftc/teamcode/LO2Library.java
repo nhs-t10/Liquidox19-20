@@ -42,6 +42,9 @@ public abstract class LO2Library extends OpMode {
         frontRight.setPower(fr);
         backLeft.setPower(-bl);
     }
-
+    String speedBar(float percent, int resolution) {
+        percent = Math.abs(percent);
+        return "["+repeatString("\u2588",Math.floor(percent*resolution)) + repeatString(" ",Math.floor(resolution - (percent*resolution)))+"]";
+    }
 
 }

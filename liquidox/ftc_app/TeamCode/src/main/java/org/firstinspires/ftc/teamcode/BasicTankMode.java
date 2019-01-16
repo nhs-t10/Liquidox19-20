@@ -60,10 +60,10 @@ public class BasicTankMode extends OpMode {
             drive(1, 1 ,1, 1);
         }
 
-        telemetry.addData("Front Left: ", frontLeft.getPower());
-        telemetry.addData("Front Right: ", frontRight.getPower());
-        telemetry.addData("Back Left: ", backLeft.getPower());
-        telemetry.addData("Back Right: ", backRight.getPower());
+        telemetry.addData("FL Power: ", frontLeft.getPower() + " " + speedBar(frontLeft.getPower(),8));
+        telemetry.addData("FR Power: ", frontRight.getPower() + " " + speedBar(frontRight.getPower(),8));
+        telemetry.addData("BL Power: ", backLeft.getPower() + " " + speedBar(backLeft.getPower(),8));
+        telemetry.addData("BR Power: ", backRight.getPower() + " " + speedBar(backRight.getPower(),8));
 
         }
 

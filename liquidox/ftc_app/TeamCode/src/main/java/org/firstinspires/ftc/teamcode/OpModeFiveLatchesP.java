@@ -140,10 +140,10 @@ public class OpModeFiveLatchesP extends OpMode {
         //////////////////////////////
 
         //////////////////////////////
-        telemetry.addData("Front Left Power: ", frontLeft.getPower());
-        telemetry.addData("Front Right Power: ", frontRight.getPower());
-        telemetry.addData("Back Left Power: ", backLeft.getPower());
-        telemetry.addData("Back Right Power: ", backRight.getPower());
+        telemetry.addData("FL Power: ", frontLeft.getPower() + " " + speedBar(frontLeft.getPower(),8));
+        telemetry.addData("FR Power: ", frontRight.getPower() + " " + speedBar(frontRight.getPower(),8));
+        telemetry.addData("BL Power: ", backLeft.getPower() + " " + speedBar(backLeft.getPower(),8));
+        telemetry.addData("BR Power: ", backRight.getPower() + " " + speedBar(backRight.getPower(),8));
         telemetry.addData("Left Gamepad X-Coordinate: ", lX);
         telemetry.addData("Left Gamepad Y-Coordinate: ", lY);
         telemetry.update();
