@@ -51,8 +51,8 @@ public class OpModeFiveLatchesP extends OpMode {
         latchM = hardwareMap.dcMotor.get("latchM");
         john = hardwareMap.servo.get("john");
 
-        lift = new LiftHandler(hardwareMap);
-        latchS.setPower(1);
+        //lift = new LiftHandler(hardwareMap);
+        //latchS.setPower(1);
     }
     public final void drive(float bl, float fl, float fr, float br ) {
 /** Tells the robot how to drive */
@@ -95,20 +95,25 @@ public class OpModeFiveLatchesP extends OpMode {
         //if the button is down, move left and right shoulders forwards.
         /**moves outer servos if a button is pressed*/
         if(gamepad1.a) {
-            latchS.setPower(0.3);
+            //latchS.setPower(0.3);
             latchM.setPower(1);
             } /*no else because we don't want one button to "take precedence" over another-- might be jittery, but there you go `\_('-')_/` */
         /**moves outer servos in opposite direction when b button is pressed*/
         if (gamepad1.b) {
             latchS.setPower(-0.3);
-            latchM.setPower(-1);
+            //latchM.setPower(-1);
+        } else if (gamepad1.y) {
+            latchS.setPower(0.3);
+            //latchM.setPower(-1);
+        } else {
+          latchS.setPower(0);
         }
-        if(gamepad1.x){
-            john.setPosition(0.5);
-        }
-        if(gamepad1.x){
-            john.setPosition(0);
-        }
+//        if(gamepad1.x){
+//            john.setPosition(0.5);
+//        }
+//        if(gamepad1.x){
+//            john.setPosition(0);
+//        }
 /** going up*/
         if (gamepad1.left_stick_button) {
             try {
