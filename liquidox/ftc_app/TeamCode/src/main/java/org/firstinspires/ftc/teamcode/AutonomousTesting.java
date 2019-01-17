@@ -130,6 +130,13 @@ public class AutonomousTesting extends OpMode {
         } else {
             latchS.setPower(0);
         }
+        if(gamepad1.y) {
+            if(john.getPosition() == 0.8){
+                john.setPosition(0);
+            } else{
+                john.setPosition(0.8);
+            }
+        }
         if(gamepad1.x) {
             turning.update(imu);
             double currentAngle = imu.getAngle() - offSet;
@@ -145,13 +152,7 @@ public class AutonomousTesting extends OpMode {
         }else {
             drive(sum[0], sum[1], sum[2], sum[3]);
         }
-        if(gamepad1.y) {
-            if(john.getPosition() == 0.8){
-                john.setPosition(0);
-            } else{
-                john.setPosition(0.8);
-            }
-        }
+
         if (gamepad1.dpad_down) {
             latchM.setPower(1);
           //  LMP = latchM.getPower();
