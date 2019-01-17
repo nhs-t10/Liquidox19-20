@@ -139,15 +139,15 @@ public class AutonomousTesting extends OpMode {
         }
         if(gamepad1.x) {
             turning.update(imu);
-            double currentAngle = imu.getAngle() - offSet;
-            error = currentAngle - 45;
-            double pComponent = Range.clip(error * 0.005, -1, 1);
-
-
-            if (Math.abs(error) < 3) {
-                drive(0, 0, 0, 0);
-            }
-            drive((float) (pComponent), (float) (pComponent), (float) -(pComponent), (float) -(pComponent));
+//            double currentAngle = imu.getAngle() - offSet;
+//            error = currentAngle - 45;
+//            double pComponent = Range.clip(error * 0.005, -1, 1);
+//
+//
+//            if (Math.abs(error) < 3) {
+//                drive(0, 0, 0, 0);
+//            }
+//            drive((float) (pComponent), (float) (pComponent), (float) -(pComponent), (float) -(pComponent));
 
         }else {
             drive(sum[0], sum[1], sum[2], sum[3]);
@@ -183,8 +183,8 @@ public class AutonomousTesting extends OpMode {
         telemetry.addData("BL Power: ", backLeft.getPower() + " " + LO2Library.speedBar(backLeft.getPower(),8));
         telemetry.addData("BR Power: ", backRight.getPower() + " " + LO2Library.speedBar(backRight.getPower(),8));
         telemetry.addData("Hex code", colorSensor.getHexCode() + "");
-        telemetry.addData("Turning Error", turning.getError() + "");
-        telemetry.addData("Turning Destination", turning.getDestination() + "");
+        telemetry.addData("Turning Error", turning.error + "");
+        telemetry.addData("Turning Destination", turning.destination + "");
         telemetry.addData("Turning Angle", imu.getAngle() + "");
         telemetry.addData("Turning pComponent", turning.pComponent + "");
         telemetry.addData("Turning", turning.turning + "");

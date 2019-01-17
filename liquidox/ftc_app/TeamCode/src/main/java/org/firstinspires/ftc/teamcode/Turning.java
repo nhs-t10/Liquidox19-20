@@ -17,7 +17,7 @@ public class Turning {
     public double pComponent;
     public boolean turning=false;
     public double offSet;
-    float p = 0.03f;
+    float p = 0.0005f;
 
 
 
@@ -46,7 +46,7 @@ public class Turning {
         this.pComponent = Range.clip(this.error * p,-1,1);
 
         if (this.turning) {
-            if (Math.abs(this.error) < 3) {
+            if (Math.abs(this.error) < 10) {
                 this.stopTurning();
             }
             LO2Library.TurnDrive((this.pComponent), (this.pComponent), -(this.pComponent), -(this.pComponent));
