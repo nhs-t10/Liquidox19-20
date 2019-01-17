@@ -15,10 +15,9 @@ public class Turning {
     public double currentAngle;
     public double destination;
     public double pComponent;
-    public boolean turning=false;
+    public boolean turning = false;
     public double offSet;
     float p = 0.0005f;
-
 
 
     public Turning(double destination) {
@@ -35,15 +34,15 @@ public class Turning {
     }
 
 
-    public void stopTurning(){
+    public void stopTurning() {
         this.turning = false;
-        LO2Library.drive(0f,0f,0f,0f);
+        LO2Library.drive(0f, 0f, 0f, 0f);
     }
 
     public void update(imuData imu) {
         this.currentAngle = imu.getAngle() - this.offSet;
         this.error = this.currentAngle - this.destination;
-        this.pComponent = Range.clip(this.error * p,-1,1);
+        this.pComponent = Range.clip(this.error * p, -1, 1);
 
 //        if (this.turning) {
 //            if (Math.abs(this.error) < 10) {
@@ -52,17 +51,19 @@ public class Turning {
 //            LO2Library.TurnDrive((this.pComponent), (this.pComponent), -(this.pComponent), -(this.pComponent));
 //        }
 //
-//    }
-
-    public double get_angle(){
-        return this.currentAngle;
     }
 
-    public double getError(){
-        return this.error;
-    }
-    public double getDestination(){
-        return this.destination;
-    }
+        public double get_Angle () {
+            return this.currentAngle;
+        }
+
+        public double getError () {
+            return this.error;
+        }
+        public double getDestination () {
+            return this.destination;
+        }
 
 }
+
+
