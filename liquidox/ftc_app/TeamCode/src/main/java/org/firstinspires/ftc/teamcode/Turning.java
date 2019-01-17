@@ -13,7 +13,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 public class Turning {
     public double error;
     public double currentAngle;
-    public double destination = 0;
+    public double destination;
     public double pComponent;
     public boolean turning=false;
     public double offSet;

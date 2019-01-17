@@ -172,7 +172,8 @@ public class AutonomousTesting extends OpMode {
         telemetry.addData("Turning Error", turning.getError() + "");
         telemetry.addData("Turning Destination", turning.getDestination() + "");
         telemetry.addData("Turning Angle", imu.getAngle() + "");
-
+        telemetry.addData("Turning pComponent", turning.pComponent + "");
+        telemetry.addData("Turning", turning.turning + "");
 
         telemetry.update();
     }
