@@ -4,7 +4,9 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.util.Range;
+import org.firstinspires.ftc.teamcode.LO2Library;
 
 @TeleOp
 public class OpModeFiveSevo extends OpMode {
@@ -13,7 +15,8 @@ public class OpModeFiveSevo extends OpMode {
     boolean a = true;
     boolean b = true;
     DcMotor frontLeft, backLeft, frontRight, backRight;
-
+    Servo john;
+    CRServo latchS;
     Servo rightChestShoulder, leftChestShoulder, leftOuterShoulder, rightOuterShoulder;
 
     float speed = 0.5f;
@@ -30,6 +33,9 @@ public class OpModeFiveSevo extends OpMode {
         rightOuterShoulder = hardwareMap.servo.get("ROS");
         leftOuterShoulder = hardwareMap.servo.get("LOS");
         leftOuterShoulder.setDirection(Servo.Direction.REVERSE);
+        //assign lift motors
+        john = hardwareMap.servo.get("john");
+        latchS = hardwareMap.crservo.get("latchS");
     }
     public final void drive(float bl, float fl, float fr, float br ) {
 /** Tells the robot how to drive */
@@ -74,14 +80,19 @@ public class OpModeFiveSevo extends OpMode {
         //okay now that the pretty code is done, have some disgusting pasta.
         //if the button is down, move left and right shoulders forwards.
         /*moves outer servos if a button is pressed*/
-        if (gamepad1.a) {
-            leftOuterShoulder.setPosition(0.5);
-            rightOuterShoulder.setPosition(0.5);
-        } /*no else because we don't want one button to "take precedence" over another-- might be jittery, but there you go `\_('-')_/` */
-        /*moves outer servos in opposite direction when b button is pressed*/
-        if (gamepad1.b) {
-            leftOuterShoulder.setPosition(0);
-            rightOuterShoulder.setPosition(0);
+        if(gamepad1.a){
+            latchS.setPower(0.5f);
+        } else if(gamepad1.b){
+            latchS.setPower(-0.5f);
+        } else {
+            latchS.setPower(0);
+        }
+        if(gamepad1.y) {
+            if(john.getPosition() == 0.8){
+                john.setPosition(0);
+            } else{
+                john.setPosition(0.8);
+            }
         }
 
         //Throttle Code
@@ -104,10 +115,10 @@ public class OpModeFiveSevo extends OpMode {
         //////////////////////////////
 
         //////////////////////////////
-        telemetry.addData("Front Left Power: ", frontLeft.getPower());
-        telemetry.addData("Front Right Power: ", frontRight.getPower());
-        telemetry.addData("Back Left Power: ", backLeft.getPower());
-        telemetry.addData("Back Right Power: ", backRight.getPower());
+        telemetry.addData("FL Power: ", frontLeft.getPower() + " " + LO2Library.speedBar(frontLeft.getPower(),8));
+        telemetry.addData("FR Power: ", frontRight.getPower() + " " + LO2Library.speedBar(frontRight.getPower(),8));
+        telemetry.addData("BL Power: ", backLeft.getPower() + " " + LO2Library.speedBar(backLeft.getPower(),8));
+        telemetry.addData("BR Power: ", backRight.getPower() + " " + LO2Library.speedBar(backRight.getPower(),8));
         telemetry.addData("Left Gamepad X-Coordinate: ", lX);
         telemetry.addData("Left Gamepad Y-Coordinate: ", lY);
         telemetry.addData("leftChestShoulder: ", leftChestShoulder.getPosition());
@@ -122,3 +133,5 @@ public class OpModeFiveSevo extends OpMode {
 
 
 }
+
+//Test Comment

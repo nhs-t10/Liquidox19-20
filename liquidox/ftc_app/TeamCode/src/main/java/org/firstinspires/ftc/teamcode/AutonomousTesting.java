@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
-
+import com.qualcomm.robotcore.hardware.CRServo;
 import org.firstinspires.ftc.teamcode.Turning;
 import org.firstinspires.ftc.teamcode.ColorSensorV;
 import org.firstinspires.ftc.teamcode.imuData;
@@ -19,16 +19,20 @@ public class AutonomousTesting extends OpMode {
     boolean a = true;
     boolean b = true;
     DcMotor frontLeft, backLeft, frontRight, backRight;
-    Servo john, latchS;
+    Servo john;
+    CRServo latchS;
     Turning turning;
     imuData imu;
     LiftHandler lift;
     ColorSensorV colorSensor;
     double offSet;
     double error;
+    DcMotor latchM;
+
 
     float speed = 0.8f;
     public void init() {
+        turning = new Turning(-45);
 //        /*Naming the Motors for phone*/
 //        frontLeft = hardwareMap.dcMotor.get("FL");
 //        backLeft = hardwareMap.dcMotor.get("BL");
@@ -51,6 +55,7 @@ public class AutonomousTesting extends OpMode {
         backLeft = hardwareMap.dcMotor.get("BL");
         frontRight = hardwareMap.dcMotor.get("FR");
         backRight = hardwareMap.dcMotor.get("BR");
+        latchM = hardwareMap.dcMotor.get("latchM");
 
         // assign shoulders (motors involved in arms)
         /*rightChestShoulder = hardwareMap.servo.get("RCS");
@@ -60,7 +65,7 @@ public class AutonomousTesting extends OpMode {
         leftOuterShoulder.setDirection(Servo.Direction.REVERSE);*/
        //  latchM = hardwareMap.dcMotor.get("latchM");
         john = hardwareMap.servo.get("john");
-        latchS = hardwareMap.servo.get("latchS");
+        latchS = hardwareMap.crservo.get("latchS");
 
         colorSensor= new ColorSensorV(hardwareMap);
         imu = new imuData(hardwareMap);
@@ -96,6 +101,7 @@ public class AutonomousTesting extends OpMode {
             sum[i] = vertical[i] + horizontal[i] + rotational[i];
         }
 
+
         float highest = Math.max(Math.max(sum[0], sum[1]), Math.max(sum[2], sum[3]));
 /** Makes sure the robot doesnt drive above the maximum speed */
         if(Math.abs(highest)>1) {
@@ -106,7 +112,7 @@ public class AutonomousTesting extends OpMode {
 
 /** makes it go vroom*/
 
-
+        drive(sum[0], sum[1], sum[2], sum[3]);
         //okay now that that masterpiece of coding is done, have some disgusting pasta.
         //if the button is down, move left and right shoulders forwards.
         /**moves outer servos if a button is pressed*/
@@ -118,34 +124,42 @@ public class AutonomousTesting extends OpMode {
      //   } /*no else because we don't want one button to "take precedence" over another-- might be jittery, but there you go `\_('-')_/` */
         /**moves outer servos in opposite direction when b button is pressed*/
         if(gamepad1.a){
-            john.setPosition(0.8);
-        }
-        if(gamepad1.b){
-            john.setPosition(0);
-        }
-        if(gamepad1.x) {
-            turning = new Turning(-45);
-            turning.update(imu);
-
-
-//              double currentAngle = imu.getAngle() - offSet;
-//             error = currentAngle - 45;
-//             double pComponent = Range.clip(error * 0.005,-1,1);
-//
-//
-//                if (Math.abs(error) < 3) {
-//                    drive(0, 0, 0, 0);
-//                }
-//                drive((float)(pComponent), (float)(pComponent), (float)-(pComponent), (float)-(pComponent));
-
+            latchS.setPower(0.5f);
+        } else if(gamepad1.b){
+            latchS.setPower(-0.5f);
         } else {
-           offSet = imu.getAngle();
+            latchS.setPower(0);
         }
         if(gamepad1.y) {
-            if(john.getPosition() == 0.5){
+            if(john.getPosition() == 0.8){
                 john.setPosition(0);
             } else{
-                john.setPosition(0.5);
+                john.setPosition(0.8);
+            }
+        }
+        if(gamepad1.x) {
+            turning.update(imu);
+            double currentAngle = imu.getAngle() - offSet;
+            error = currentAngle - 45;
+            double pComponent = Range.clip(error * 0.005, -1, 1);
+
+
+            if (Math.abs(error) < 3) {
+                drive(0, 0, 0, 0);
+            }
+            drive((float) (pComponent), (float) (pComponent), (float) -(pComponent), (float) -(pComponent));
+
+        }else {
+            drive(sum[0], sum[1], sum[2], sum[3]);
+        }
+
+        if (gamepad1.dpad_down) {
+            latchM.setPower(1);
+          //  LMP = latchM.getPower();
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         }
 
@@ -164,10 +178,10 @@ public class AutonomousTesting extends OpMode {
         //////////////////////////////
 
         //////////////////////////////
-        telemetry.addData("Front Left Power: ", frontLeft.getPower());
-        telemetry.addData("Front Right Power: ", frontRight.getPower());
-        telemetry.addData("Back Left Power: ", backLeft.getPower());
-        telemetry.addData("Back Right Power: ", backRight.getPower());
+        telemetry.addData("FL Power: ", frontLeft.getPower() + " " + LO2Library.speedBar(frontLeft.getPower(),8));
+        telemetry.addData("FR Power: ", frontRight.getPower() + " " + LO2Library.speedBar(frontRight.getPower(),8));
+        telemetry.addData("BL Power: ", backLeft.getPower() + " " + LO2Library.speedBar(backLeft.getPower(),8));
+        telemetry.addData("BR Power: ", backRight.getPower() + " " + LO2Library.speedBar(backRight.getPower(),8));
         telemetry.addData("Hex code", colorSensor.getHexCode() + "");
         telemetry.addData("Turning Error", turning.getError() + "");
         telemetry.addData("Turning Destination", turning.getDestination() + "");

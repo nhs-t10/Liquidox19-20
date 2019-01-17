@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
+
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 //import com.qualcomm.robotcore.hardware.CRServo;
@@ -25,6 +26,7 @@ public class TeleOpExperiments extends OpMode {
     CRServo latchS;
 
     float speed = 0.8f;
+
 
     public double BA(double num) {
         return num + 0.1f;
@@ -180,7 +182,7 @@ public class TeleOpExperiments extends OpMode {
             }
         }
         if (gamepad1.right_stick_button) {
-            latchM.setPower(0.3);
+            latchM.setPower(0);
             LMP = latchM.getPower();
             try {
                 Thread.sleep(500);
@@ -188,8 +190,35 @@ public class TeleOpExperiments extends OpMode {
                 e.printStackTrace();
             }
         }
-        if (gamepad1.left_stick_button) {
-            latchM.setPower(0.6);
+        if (gamepad1.dpad_up) {
+            latchM.setPower(1.0);
+            LMP = latchM.getPower();
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        if (gamepad1.dpad_right) {
+            latchM.setPower(0.75);
+            LMP = latchM.getPower();
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        if (gamepad1.dpad_down) {
+            latchM.setPower(0.5);
+            LMP = latchM.getPower();
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        if (gamepad1.dpad_left) {
+            latchM.setPower(0.25);
             LMP = latchM.getPower();
             try {
                 Thread.sleep(500);
@@ -212,14 +241,14 @@ public class TeleOpExperiments extends OpMode {
             //////////////////////////////
 
             //////////////////////////////
-            telemetry.addData("Front Left Power: ", frontLeft.getPower());
-            telemetry.addData("Front Right Power: ", frontRight.getPower());
-            telemetry.addData("Back Left Power: ", backLeft.getPower());
-            telemetry.addData("Back Right Power: ", backRight.getPower());
+        telemetry.addData("FL Power: ", frontLeft.getPower() + " " + LO2Library.speedBar(frontLeft.getPower(),8));
+        telemetry.addData("FR Power: ", frontRight.getPower() + " " + LO2Library.speedBar(frontRight.getPower(),8));
+        telemetry.addData("BL Power: ", backLeft.getPower() + " " + LO2Library.speedBar(backLeft.getPower(),8));
+        telemetry.addData("BR Power: ", backRight.getPower() + " " + LO2Library.speedBar(backRight.getPower(),8));
             telemetry.addData("Left Gamepad X-Coordinate: ", lX);
             telemetry.addData("Left Gamepad Y-Coordinate: ", lY);
-            telemetry.addData("LMP: ", latchM.getPower());
-            telemetry.addData("PIT: ", LMP);
+            telemetry.addData("Actual Power: ", latchM.getPower());
+            telemetry.addData("Theoretical Power: ", LMP);
 
 
 

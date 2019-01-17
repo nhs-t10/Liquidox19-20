@@ -4,6 +4,8 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.Range;
+import org.firstinspires.ftc.teamcode.LO2Library;
+
 
 @TeleOp
 public class BasicTankMode extends OpMode {
@@ -60,10 +62,10 @@ public class BasicTankMode extends OpMode {
             drive(1, 1 ,1, 1);
         }
 
-        telemetry.addData("Front Left: ", frontLeft.getPower());
-        telemetry.addData("Front Right: ", frontRight.getPower());
-        telemetry.addData("Back Left: ", backLeft.getPower());
-        telemetry.addData("Back Right: ", backRight.getPower());
+        telemetry.addData("FL Power: ", frontLeft.getPower() + " " + LO2Library.speedBar(frontLeft.getPower(),8));
+        telemetry.addData("FR Power: ", frontRight.getPower() + " " + LO2Library.speedBar(frontRight.getPower(),8));
+        telemetry.addData("BL Power: ", backLeft.getPower() + " " + LO2Library.speedBar(backLeft.getPower(),8));
+        telemetry.addData("BR Power: ", backRight.getPower() + " " + LO2Library.speedBar(backRight.getPower(),8));
 
         }
 

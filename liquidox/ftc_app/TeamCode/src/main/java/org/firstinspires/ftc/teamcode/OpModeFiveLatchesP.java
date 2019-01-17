@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
+import org.firstinspires.ftc.teamcode.LO2Library;
 
 
 import org.firstinspires.ftc.teamcode.LiftHandler;
@@ -50,8 +51,8 @@ public class OpModeFiveLatchesP extends OpMode {
         latchM = hardwareMap.dcMotor.get("latchM");
         john = hardwareMap.servo.get("john");
 
-        lift = new LiftHandler(hardwareMap);
-        latchS.setPower(1);
+        //lift = new LiftHandler(hardwareMap);
+        //latchS.setPower(1);
     }
     public final void drive(float bl, float fl, float fr, float br ) {
 /** Tells the robot how to drive */
@@ -94,37 +95,28 @@ public class OpModeFiveLatchesP extends OpMode {
         //if the button is down, move left and right shoulders forwards.
         /**moves outer servos if a button is pressed*/
         if(gamepad1.a) {
-            latchS.setPower(0.3);
             latchM.setPower(1);
-            } /*no else because we don't want one button to "take precedence" over another-- might be jittery, but there you go `\_('-')_/` */
-        /**moves outer servos in opposite direction when b button is pressed*/
+            try {
+                Thread.sleep(750);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            latchM.setPower(0.1); //we only need to let it sit at 0.05 power; the rest is wasted (I have it a bit higher just in case)
+            }
+        /**moves outer servos in opposite direction when b button is pressed*/// - we only need one direction... think about it
         if (gamepad1.b) {
-            latchS.setPower(-0.3);
-            latchM.setPower(-1);
-        }
-        if(gamepad1.x){
-            john.setPosition(0.5);
-        }
-        if(gamepad1.x){
-            john.setPosition(0);
-        }
-/** going up*/
-        if (gamepad1.left_stick_button) {
-            try {
-                lift.upArm();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-/** coming down*/
-        if (gamepad1.right_stick_button) {
-            try {
-                lift.downArm();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            latchS.setPower(0.3);
+        } else {
+          latchS.setPower(0);
         }
 
+        if(gamepad1.x) {
+            if(john.getPosition() == 0.8){
+                john.setPosition(0);
+            } else{
+                john.setPosition(0.8);
+            }
+        }
         //Throttle Code
 
         //If both bumpers are down, revert the speed to default
@@ -140,10 +132,10 @@ public class OpModeFiveLatchesP extends OpMode {
         //////////////////////////////
 
         //////////////////////////////
-        telemetry.addData("Front Left Power: ", frontLeft.getPower());
-        telemetry.addData("Front Right Power: ", frontRight.getPower());
-        telemetry.addData("Back Left Power: ", backLeft.getPower());
-        telemetry.addData("Back Right Power: ", backRight.getPower());
+        telemetry.addData("FL Power: ", frontLeft.getPower() + " " + LO2Library.speedBar(frontLeft.getPower(),8));
+        telemetry.addData("FR Power: ", frontRight.getPower() + " " + LO2Library.speedBar(frontRight.getPower(),8));
+        telemetry.addData("BL Power: ", backLeft.getPower() + " " + LO2Library.speedBar(backLeft.getPower(),8));
+        telemetry.addData("BR Power: ", backRight.getPower() + " " + LO2Library.speedBar(backRight.getPower(),8));
         telemetry.addData("Left Gamepad X-Coordinate: ", lX);
         telemetry.addData("Left Gamepad Y-Coordinate: ", lY);
         telemetry.update();
