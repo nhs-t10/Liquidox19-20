@@ -64,6 +64,13 @@ public class Turning {
             return this.destination;
         }
 
+    public double getpComponent() {
+        return pComponent;
+    }
+
+    public boolean isTurning() {
+        return turning;
+    }
 }
 
 

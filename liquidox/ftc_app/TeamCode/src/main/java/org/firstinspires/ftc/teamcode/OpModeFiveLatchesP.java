@@ -50,9 +50,7 @@ public class OpModeFiveLatchesP extends OpMode {
         latchS = hardwareMap.crservo.get("latchS");
         latchM = hardwareMap.dcMotor.get("latchM");
         john = hardwareMap.servo.get("john");
-
-        //lift = new LiftHandler(hardwareMap);
-        //latchS.setPower(1);
+        john.setPosition(0);
     }
     public final void drive(float bl, float fl, float fr, float br ) {
 /** Tells the robot how to drive */
@@ -105,17 +103,15 @@ public class OpModeFiveLatchesP extends OpMode {
             }
         /**moves outer servos in opposite direction when b button is pressed*/// - we only need one direction... think about it
         if (gamepad1.b) {
+            latchS.setPower(-0.3);
+        } else if(gamepad1.y) {
             latchS.setPower(0.3);
-        } else {
+        }else{
           latchS.setPower(0);
         }
 
         if(gamepad1.x) {
-            if(john.getPosition() == 0.8){
-                john.setPosition(0);
-            } else{
-                john.setPosition(0.8);
-            }
+
         }
         //Throttle Code
 
@@ -124,10 +120,16 @@ public class OpModeFiveLatchesP extends OpMode {
            speed = 0.8f;
            //otherwise, if the left bumper is down, decrease the speed (with a minumum of 0)
         } else if(gamepad1.left_bumper) {
-            speed = Math.max(speed - 0.05f, 0);
+            speed = 0.3f;
         } else if(gamepad1.right_bumper) {
             //then, if the right bumper is down, increase the speed (max of 5)
-            speed = Math.min(speed + 0.05f, 5);
+            speed = 1;
+        }
+        if(gamepad1.left_trigger > 0.1){
+            john.setPosition(0.8);
+        }
+        if(gamepad1.right_trigger > 0.1) {
+            john.setPosition(0);
         }
         //////////////////////////////
 

@@ -53,6 +53,8 @@ public class ColorSensorV {
 
       this.weveInitiated = true; //We have initiated the code
 
+      this.colorReturned = 0;
+
       this.weShouldRead = false;
 
       this.colorSensor = hardwareMap.get(NormalizedColorSensor.class, "sensor_color"); // set the colorSensor to the actual hardware color sensor
@@ -79,6 +81,10 @@ public class ColorSensorV {
   public String getHexCode() {
 
       return Color.red(this.colorReturned) + Color.green(this.colorReturned) + Color.blue(this.colorReturned) + Color.alpha(this.colorReturned) + "";
+  }
+  public boolean getReadState() {
+
+      return this.weShouldRead;
   }
 
 //Test if we're seeing gold
@@ -120,10 +126,7 @@ public boolean isGold() {
         NormalizedRGBA colors = this.colorSensor.getNormalizedColors();
 
         //Convert the color to HSV
-        //Color.colorToHSV(colors.toColor(), hsvValues);
-
-        /** We also display a conversion of the colors to an equivalent Android color integer.
-         * @see Color */
+        Color.colorToHSV(colors.toColor(), hsvValues);
 
         //normalize the colors-- make it so brightness won't affect our readout (much)
         float max = Math.max(Math.max(colors.red, colors.green), Math.max(colors.blue, colors.alpha));

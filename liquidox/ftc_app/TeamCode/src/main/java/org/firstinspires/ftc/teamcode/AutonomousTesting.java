@@ -68,6 +68,7 @@ public class AutonomousTesting extends OpMode {
         latchS = hardwareMap.crservo.get("latchS");
 
         colorSensor= new ColorSensorV(hardwareMap);
+        colorSensor.switchSampling(true);
         imu = new imuData(hardwareMap);
         turning.setOffset(imu.getAngle());
 //        offSet = imu.getAngle();
@@ -188,16 +189,18 @@ public class AutonomousTesting extends OpMode {
         //////////////////////////////
 
         //////////////////////////////
-        telemetry.addData("FL Power: ", frontLeft.getPower() + " " + LO2Library.speedBar(frontLeft.getPower(),8));
-        telemetry.addData("FR Power: ", frontRight.getPower() + " " + LO2Library.speedBar(frontRight.getPower(),8));
-        telemetry.addData("BL Power: ", backLeft.getPower() + " " + LO2Library.speedBar(backLeft.getPower(),8));
-        telemetry.addData("BR Power: ", backRight.getPower() + " " + LO2Library.speedBar(backRight.getPower(),8));
+        telemetry.addData("FL Power: ", Math.floor(frontLeft.getPower()*10) + " " + LO2Library.speedBar(frontLeft.getPower(),8));
+        telemetry.addData("FR Power: ", Math.floor(frontRight.getPower()*10) + " " + LO2Library.speedBar(frontRight.getPower(),8));
+        telemetry.addData("BL Power: ", Math.floor(backLeft.getPower()*10) + " " + LO2Library.speedBar(backLeft.getPower(),8));
+        telemetry.addData("BR Power: ", Math.floor(backRight.getPower()*10) + " " + LO2Library.speedBar(backRight.getPower(),8));
         telemetry.addData("Hex code", colorSensor.getHexCode() + "");
-        telemetry.addData("Turning Error", turning.error + "");
-        telemetry.addData("Turning Destination", turning.destination + "");
+        telemetry.addData("Color Int", colorSensor.getColorInt() + "");
+        telemetry.addData("Color Read State", colorSensor.getReadState() + "");
+        telemetry.addData("Turning Error", turning.getError() + "");
+        telemetry.addData("Turning Destination", turning.getDestination() + "");
         telemetry.addData("Turning Angle", imu.getAngle() + "");
-        telemetry.addData("Turning pComponent", turning.pComponent + "");
-        telemetry.addData("Turning", turning.turning + "");
+        telemetry.addData("Turning pComponent", turning.getpComponent() + "");
+        telemetry.addData("Turning", turning.isTurning() + "");
 
         telemetry.update();
     }
