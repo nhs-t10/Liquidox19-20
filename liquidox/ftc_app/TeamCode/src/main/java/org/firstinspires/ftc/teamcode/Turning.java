@@ -45,14 +45,14 @@ public class Turning {
         this.error = this.currentAngle - this.destination;
         this.pComponent = Range.clip(this.error * p,-1,1);
 
-        if (this.turning) {
-            if (Math.abs(this.error) < 10) {
-                this.stopTurning();
-            }
-            LO2Library.TurnDrive((this.pComponent), (this.pComponent), -(this.pComponent), -(this.pComponent));
-        }
-
-    }
+//        if (this.turning) {
+//            if (Math.abs(this.error) < 10) {
+//                this.stopTurning();
+//            }
+//            LO2Library.TurnDrive((this.pComponent), (this.pComponent), -(this.pComponent), -(this.pComponent));
+//        }
+//
+//    }
 
     public double get_angle(){
         return this.currentAngle;

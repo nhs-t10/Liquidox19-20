@@ -70,7 +70,7 @@ public class AutonomousTesting extends OpMode {
         colorSensor= new ColorSensorV(hardwareMap);
         imu = new imuData(hardwareMap);
         turning.setOffset(imu.getAngle());
-        offSet = imu.getAngle();
+//        offSet = imu.getAngle();
         //latchM.setPower(0.6);
        // lift = new LiftHandler(hardwareMap);
     }
@@ -148,20 +148,30 @@ public class AutonomousTesting extends OpMode {
 //                drive(0, 0, 0, 0);
 //            }
 //            drive((float) (pComponent), (float) (pComponent), (float) -(pComponent), (float) -(pComponent));
+            if (turning.turning) {
+                if (Math.abs(this.error) < 10) {
+                    turning.stopTurning();
+                }
+                LO2Library.TurnDrive((turning.pComponent), (turning.pComponent), -(turning.pComponent), -(turning.pComponent));
+            }
+
+
 
         }else {
             drive(sum[0], sum[1], sum[2], sum[3]);
         }
 
-        if (gamepad1.dpad_down) {
-            latchM.setPower(1);
-          //  LMP = latchM.getPower();
-            try {
-                Thread.sleep(500);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+        if (gamepad1.dpad_down){
+        latchM.setPower(1);
+        //  LMP = latchM.getPower();
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
+    }    
+
+
 
         //Throttle Code
 
