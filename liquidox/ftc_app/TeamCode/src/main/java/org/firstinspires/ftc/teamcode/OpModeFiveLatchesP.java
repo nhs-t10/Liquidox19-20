@@ -110,7 +110,7 @@ public class OpModeFiveLatchesP extends OpMode {
           latchS.setPower(0);
         }
 
-        if(gamepad1.a) {
+        if(gamepad1.x) {
             if(john.getPosition() == 0.8){
                 john.setPosition(0);
             } else{
