@@ -67,7 +67,7 @@ boolean haveInit = false;
         colorSensor= new ColorSensorV(hardwareMap);
         imu = new imuData(hardwareMap);
         turning.setOffset(imu.getAngle());
-            latchM.setPower(0.6);
+        latchM.setPower(0.1);
     }
 
     public void loop() {
@@ -75,32 +75,34 @@ boolean haveInit = false;
         haveInit = true;
         switch (step) {
             case (1):
-                latchM.setPower(Range.clip(3/timer1, 0, 1));
-                nextStep(3500);//3000
+                latchM.setPower(0.03);
+                nextStep(2000);//3000
                 break;
             case (2):
                 //strafing left
-                drive(-0.2f,0.2f,-0.2f,0.2f);
-                nextStep(1000);//4000
+                drive(-0.33f,0.33f,-0.33f,0.33f);
+                nextStep(400);//4000
                 break;
             case (3):
-                //Contract bar
-                nextStep(5);//7000
+                //strafing back
+                drive(-0.33f,0.33f,-0.33f,0.33f);
+                nextStep(400);//7000
                 break;
+                /**we are now at the centre, unlatched, at 2800ms*/
             case (4):
-                //strafing to center
-                drive(0.2f,-0.2f,0.2f,-0.2f);
+                // going forward
+                drive(-0.4f,-0.4f,-0.4f,-0.4f);
                 nextStep(1000);//8000
                 break;
             case (5):
-                //move forwards to the the sample sites
+                //move side ways to the sample sites
                 drive(-0.285f, -0.585f, -0.285f, -0.285f);
                 nextStep(650); //8500
                 break;
 
             case (6):
                 //move to the side to get to the sample sites
-                //drive(0.285f, -0.285f, 0.285f, -0.285f);
+                drive(0.285f, -0.285f, 0.285f, -0.285f);
                 nextStep(5);//9250
                 break;
             case (7):
