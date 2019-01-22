@@ -79,6 +79,7 @@ boolean haveInit = false;
                 nextStep(2000);//3000
                 break;
             case (2):
+                latchM.setPower(0);
                 //strafing left
                 drive(-0.33f,0.33f,-0.33f,0.33f);
                 nextStep(400);//4000
