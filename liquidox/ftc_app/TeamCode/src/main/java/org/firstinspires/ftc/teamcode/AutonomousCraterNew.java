@@ -7,6 +7,7 @@ import org.firstinspires.ftc.teamcode.Turning;
 import org.firstinspires.ftc.teamcode.ColorSensorV;
 import java.util.concurrent.TimeUnit;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
 
 
@@ -26,6 +27,7 @@ public class AutonomousCraterNew extends LO2Library {
     float timer1;
     boolean isDelay;
     DcMotor latchM;
+    Servo mark;
     void nextStep(float delay) {
         if(!isDelay){
             timeDone = timer1 + delay;
@@ -59,6 +61,7 @@ boolean haveInit = false;
         imu = new imuData(hardwareMap);
         turning.setOffset(imu.getAngle());
         latchM.setPower(0.1);
+        mark = hardwareMap.servo.get("mark");
     }
 
     public void loop() {
@@ -128,7 +131,10 @@ boolean haveInit = false;
                     break;
                 }
             case (10):
-                
+
+            case (30):
+                //Activate the Magical WonderServo of Markers
+                mark.setPosition(10);
             case (50):
                 drive(0.4f,0.4f,0.4f,0.4f);
                 nextStepX(400, 50+condition);
