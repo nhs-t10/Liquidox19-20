@@ -128,14 +128,22 @@ boolean haveInit = false;
                     break;
                 }
             case (10):
-                
+
             case (50):
                 drive(0.4f,0.4f,0.4f,0.4f);
                 nextStepX(400, 50+condition);
                 break;
             case (51):
                 drive(-0.285f, 0.285f, -0.285f, 0.285f);
+                nextStepX(2000, 10);
+                break;
+            case (52):
+                drive(-0.285f, 0.285f, -0.285f, 0.285f);
                 nextStepX(3000, 10);
+                break;
+            case (53):
+                drive(-0.285f, 0.285f, -0.285f, 0.285f);
+                nextStepX(1000, 10);
                 break;
 
 
