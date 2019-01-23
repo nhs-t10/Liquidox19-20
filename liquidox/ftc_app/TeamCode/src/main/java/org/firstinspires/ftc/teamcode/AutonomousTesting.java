@@ -150,7 +150,7 @@ public class AutonomousTesting extends OpMode {
 //            }
 //            drive((float) (pComponent), (float) (pComponent), (float) -(pComponent), (float) -(pComponent));
             if (turning.turning) {
-                if (Math.abs(this.error) < 10) {
+                if (Math.abs(turning.error) < 10) {
                     turning.stopTurning();
                 }
                 LO2Library.TurnDrive((turning.pComponent), (turning.pComponent), -(turning.pComponent), -(turning.pComponent));
