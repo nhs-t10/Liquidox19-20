@@ -19,7 +19,7 @@ public class OpModeFiveLatchesP extends OpMode {
     boolean a = true;
     boolean b = true;
     DcMotor frontLeft, backLeft, frontRight, backRight, latchM;
-    Servo john;
+    Servo john, mark;
     LiftHandler lift;
 
     CRServo latchS;
@@ -51,7 +51,13 @@ public class OpModeFiveLatchesP extends OpMode {
         latchM = hardwareMap.dcMotor.get("latchM");
         john = hardwareMap.servo.get("john");
         john.setPosition(0);
+
+        //Naming the marker servo
+        mark = hardwareMap.servo.get("mark");
+
     }
+
+
     public final void drive(float bl, float fl, float fr, float br ) {
 /** Tells the robot how to drive */
           frontLeft.setPower(-fl*speed); //Scaled by 1.8
@@ -110,9 +116,18 @@ public class OpModeFiveLatchesP extends OpMode {
           latchS.setPower(0);
         }
 
-        if(gamepad1.x) {
+        
 
+        // Marker Servo
+
+        if (gamepad1.dpad_up) {
+            mark.setPosition(0);
+        } else if(gamepad1.dpad_down) {
+            mark.setPosition(0.8);
+        }else{
+            mark.setPosition(0);
         }
+
         //Throttle Code
 
         //If both bumpers are down, revert the speed to default
@@ -131,6 +146,8 @@ public class OpModeFiveLatchesP extends OpMode {
         if(gamepad1.right_trigger > 0.1) {
             john.setPosition(0);
         }
+
+
         //////////////////////////////
 
         //////////////////////////////
