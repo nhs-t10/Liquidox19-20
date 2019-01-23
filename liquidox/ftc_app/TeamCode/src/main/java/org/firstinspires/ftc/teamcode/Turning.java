@@ -17,7 +17,7 @@ public class Turning {
     public double pComponent;
     public boolean turning = false;
     public double offSet;
-    float p = 0.0005f;
+    float p = 0.002f;
 
 
     public Turning(double destination) {
@@ -29,8 +29,8 @@ public class Turning {
         this.offSet = 0;
     }
 
-    public void setOffset(double angel_i_know_its_wrong) {
-        this.offSet = angel_i_know_its_wrong;
+    public void setOffset(double angel) {
+        this.offSet = angel;
     }
 
 
@@ -52,7 +52,6 @@ public class Turning {
 //        }
 //
     }
-
         public double get_Angle () {
             return this.currentAngle;
         }

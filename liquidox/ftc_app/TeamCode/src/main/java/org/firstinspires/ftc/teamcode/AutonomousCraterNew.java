@@ -76,19 +76,19 @@ public class AutonomousCraterNew extends LO2Library {
             case (2):
                 latchM.setPower(0);
                 //strafing left
-                drive(-0.33f,0.33f,-0.33f,0.33f);
+                drive(0.33f,-0.33f,0.33f,-0.33f);
                 nextStep(400);//4000
                 break;
             case (3):
                 //strafing back
                 drive(-0.33f,0.33f,-0.33f,0.33f);
-                nextStep(800);//7000
+                nextStep(400);//7000
                 break;
             /**we are now at the centre, unlatched, at 2800ms*/
             case (4):
                 // going forward
                 drive(-0.4f,-0.4f,-0.4f,-0.4f);
-                nextStep(500);//8000
+                nextStep(450);//8000
                 break;
             case (5):
                 drive(-0.15f, 0.15f, -0.15f, 0.15f);
@@ -96,8 +96,9 @@ public class AutonomousCraterNew extends LO2Library {
                     drive(-0.4f, -0.4f, -0.4f, -0.4f);
                     condition = 1;
                     nextStepX(200, 50);
+                } else {
+                    nextStep(1100);
                 }
-                nextStep(750);
                 break;
             case (6):
                 drive(-0.15f, 0.15f, -0.15f, 0.15f);
@@ -105,8 +106,10 @@ public class AutonomousCraterNew extends LO2Library {
                     drive(-0.4f, -0.4f, -0.4f, -0.4f);
                     condition = 2;
                     nextStepX(200, 51);
+                }else {
+                    nextStep(1100);
                 }
-                nextStep(750);
+
                 break;
             case (7):
                 drive(-0.15f, 0.15f, -0.15f, 0.15f);
@@ -114,8 +117,10 @@ public class AutonomousCraterNew extends LO2Library {
                     drive(-0.4f, -0.4f, -0.4f, -0.4f);
                     condition = 3;
                     nextStepX(200, 52);
+                }else {
+                    nextStep(1100);
                 }
-                nextStep(750);
+
                 break;
             case (8):
                 //moving to the next thing
@@ -152,6 +157,10 @@ public class AutonomousCraterNew extends LO2Library {
                 /**sample done*/
 
                 break;
+            case (80):
+
+
+                break;
 
             /*case (14):
               drive(-0.24f, -0.24f, -0.24f, -0.24f);
@@ -183,7 +192,7 @@ public class AutonomousCraterNew extends LO2Library {
         telemetry.addData("Error",  turning.getError() + "" );
         telemetry.addData("Off Set: ", turning.offSet +"");
         telemetry.addData("Angle",  imu.getAngle() + "");
-        telemetry.addData("Hex code", colorSensor.getHexCode() + "");
+        telemetry.addData("site: ", condition + "");
 
         telemetry.update();
     }
