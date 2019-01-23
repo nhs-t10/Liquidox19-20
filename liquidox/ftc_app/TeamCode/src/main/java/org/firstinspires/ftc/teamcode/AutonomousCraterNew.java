@@ -17,6 +17,7 @@ public class AutonomousCraterNew extends LO2Library {
 
     boolean gold = false;
     int step = 1;
+    int condition = 0;
     boolean goldNow = false;
     ElapsedTime eTimeObj = new ElapsedTime();
     imuData imu;
@@ -37,28 +38,18 @@ public class AutonomousCraterNew extends LO2Library {
         }
 
     }
-
-    void sample(float time) {
-        if(timer1 > time + 500 && timer1 < time + 1000)
-        if(colorSensor.isGold()){
-            goldNow = true;
+    void nextStepX(float delay, int stepNum) {
+        if(!isDelay){
+            timeDone = timer1 + delay;
+            isDelay = true;
+        }
+        if(timer1 >= timeDone) {
+            drive(0, 0, 0, 0);
+            isDelay = false;
+            step = stepNum;
         }
 
-        if(goldNow){
-            if(timer1 > time + 1000 && timer1 < time + 1250){
-                drive(1.5f,1.5f,1.5f,1.5f);
-            }
-            if(timer1 > time + 1250 && timer1 < time + 1500){
-                drive(-1.5f,-1.5f,-1.5f,-1.5f);
-            }
-            if(timer1 < time + 1495){
-                goldNow = false;
-            }
-        }
-
-        nextStep( 1500);
     }
-//void unlatch(){ }
 boolean haveInit = false;
     @Override
     public void init() {
@@ -96,51 +87,58 @@ boolean haveInit = false;
                 nextStep(1000);//8000
                 break;
             case (5):
-                //move side ways to the sample sites
-                drive(-0.285f, -0.585f, -0.285f, -0.285f);
-                nextStep(650); //8500
-                break;
+                if(colorSensor.isGold()){
+                    drive(-0.4f,-0.4f,-0.4f,-0.4f);
+                    condition = 1;
+                    nextStepX(400, 50);
+                    break;
+                }else {
+                    nextStep(50);
+                    break;
+                }
 
             case (6):
                 //move to the side to get to the sample sites
                 drive(0.285f, -0.285f, 0.285f, -0.285f);
-                nextStep(5);//9250
+                nextStep(1000);//9250
                 break;
             case (7):
-                //first sample
-                //sample(9250);//10750
-                //it will automatically move to the next one after 1500ms
-                nextStep(5);
-                break;
+                if(colorSensor.isGold()){
+                    drive(-0.4f,-0.4f,-0.4f,-0.4f);
+                    condition = 2;
+                    nextStepX(400, 50);
+                    break;
+                }else {
+                    nextStep(50);
+                    break;
+                }
             case (8):
                 //moving to the next thing
-                //drive(-0.285f, 0.285f, -0.285f, 0.285f);
-                nextStep(5);//11750
+                drive(-0.285f, 0.285f, -0.285f, 0.285f);
+                nextStep(2000);//11750
                 break;
             case (9):
-                //sample 2
-                //sample(11750);//13250
-                nextStep(5);
-                break;
+                if(colorSensor.isGold()){
+                    drive(-0.4f,-0.4f,-0.4f,-0.4f);
+                    condition = 3;
+                    nextStepX(400, 50);
+                    break;
+                }else {
+                    nextStepX(50, 53);
+                    break;
+                }
             case (10):
-                drive(0.285f, -0.285f, 0.285f, -0.285f);
-                 nextStep(1000); //14250
+                
+            case (50):
+                drive(0.4f,0.4f,0.4f,0.4f);
+                nextStepX(400, 50+condition);
                 break;
-            case (11):
-                //sample 3
-                drive(-0.285f, -0.285f, -0.285f, -0.285f);
-                nextStep(325); //850
+            case (51):
+                drive(-0.285f, 0.285f, -0.285f, 0.285f);
+                nextStepX(3000, 10);
                 break;
-            case (12):
-                drive(0.2f, -0.2f, -0.2f, -0.2f);
-                nextStep(3100);//18750
-                break;
-            case (13):
-                drive(-0.2f,-0.2f,-0.2f,-0.2f);
 
-                //turning.update(imu);
-                nextStep(1000);
-                break;
+
             /*case (14):
               drive(-0.24f, -0.24f, -0.24f, -0.24f);
                nextStep(2000);
