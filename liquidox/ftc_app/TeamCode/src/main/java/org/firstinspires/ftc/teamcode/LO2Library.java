@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.util.Range;
 
 
 public abstract class LO2Library extends OpMode {
@@ -29,10 +30,10 @@ public abstract class LO2Library extends OpMode {
     }
 
     public static void drive(float bl, float fl, float fr, float br) {
-        frontLeft.setPower(-fl);
-        backRight.setPower(br);
-        frontRight.setPower(fr);
-        backLeft.setPower(-bl);
+        frontLeft.setPower(Range.clip(-fl, -1, 1));
+        backRight.setPower(Range.clip(br, -1, 1));
+        frontRight.setPower(Range.clip(fr, -1, 1));
+        backLeft.setPower(Range.clip(-bl, -1, 1));
 
     }
 
