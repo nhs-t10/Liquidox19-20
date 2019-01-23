@@ -7,7 +7,6 @@ import org.firstinspires.ftc.teamcode.Turning;
 import org.firstinspires.ftc.teamcode.ColorSensorV;
 import java.util.concurrent.TimeUnit;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
 
 
@@ -27,7 +26,7 @@ public class AutonomousCraterNew extends LO2Library {
     float timer1;
     boolean isDelay;
     DcMotor latchM;
-    Servo mark;
+    boolean GoldNow;
     void nextStep(float delay) {
         if(!isDelay){
             timeDone = timer1 + delay;
@@ -49,10 +48,10 @@ public class AutonomousCraterNew extends LO2Library {
             drive(0, 0, 0, 0);
             isDelay = false;
             step = stepNum;
+            goldNow = false;
         }
-
     }
-boolean haveInit = false;
+    boolean haveInit = false;
     @Override
     public void init() {
         super.initialize_robot();
@@ -61,12 +60,14 @@ boolean haveInit = false;
         imu = new imuData(hardwareMap);
         turning.setOffset(imu.getAngle());
         latchM.setPower(0.1);
-        mark = hardwareMap.servo.get("mark");
     }
 
     public void loop() {
         timer1 = eTimeObj.time(TimeUnit.MILLISECONDS);
         haveInit = true;
+        if(goldNow = false){
+            goldNow = colorSensor.isGold();
+        }
         switch (step) {
             case (1):
                 latchM.setPower(0.03);
@@ -81,40 +82,41 @@ boolean haveInit = false;
             case (3):
                 //strafing back
                 drive(-0.33f,0.33f,-0.33f,0.33f);
-                nextStep(400);//7000
+                nextStep(800);//7000
                 break;
-                /**we are now at the centre, unlatched, at 2800ms*/
+            /**we are now at the centre, unlatched, at 2800ms*/
             case (4):
                 // going forward
                 drive(-0.4f,-0.4f,-0.4f,-0.4f);
-                nextStep(1000);//8000
+                nextStep(500);//8000
                 break;
             case (5):
-                if(colorSensor.isGold()){
-                    drive(-0.4f,-0.4f,-0.4f,-0.4f);
+                drive(-0.15f, 0.15f, -0.15f, 0.15f);
+                if(goldNow) {
+                    drive(-0.4f, -0.4f, -0.4f, -0.4f);
                     condition = 1;
-                    nextStepX(400, 50);
-                    break;
-                }else {
-                    nextStep(50);
-                    break;
+                    nextStepX(200, 50);
                 }
-
+                nextStep(750);
+                break;
             case (6):
-                //move to the side to get to the sample sites
-                drive(0.285f, -0.285f, 0.285f, -0.285f);
-                nextStep(1000);//9250
+                drive(-0.15f, 0.15f, -0.15f, 0.15f);
+                if(goldNow) {
+                    drive(-0.4f, -0.4f, -0.4f, -0.4f);
+                    condition = 2;
+                    nextStepX(200, 51);
+                }
+                nextStep(750);
                 break;
             case (7):
-                if(colorSensor.isGold()){
-                    drive(-0.4f,-0.4f,-0.4f,-0.4f);
-                    condition = 2;
-                    nextStepX(400, 50);
-                    break;
-                }else {
-                    nextStep(50);
-                    break;
+                drive(-0.15f, 0.15f, -0.15f, 0.15f);
+                if(goldNow) {
+                    drive(-0.4f, -0.4f, -0.4f, -0.4f);
+                    condition = 3;
+                    nextStepX(200, 52);
                 }
+                nextStep(750);
+                break;
             case (8):
                 //moving to the next thing
                 drive(-0.285f, 0.285f, -0.285f, 0.285f);
@@ -125,32 +127,31 @@ boolean haveInit = false;
                     drive(-0.4f,-0.4f,-0.4f,-0.4f);
                     condition = 3;
                     nextStepX(400, 50);
-                    break;
                 }else {
                     nextStepX(50, 53);
-                    break;
+
                 }
-            case (10):
-            case (30):
-                //Activate the Magical WonderServo of Markers
-                mark.setPosition(10);
-            case (50):
-                drive(0.4f,0.4f,0.4f,0.4f);
-                nextStepX(400, 50+condition);
                 break;
+//            case (50):
+//                drive(0.4f,0.4f,0.4f,0.4f);
+//                nextStepX(400, 54);
+//                break;
             case (51):
-                drive(-0.285f, 0.285f, -0.285f, 0.285f);
-                nextStepX(2000, 10);
+                drive(-0.3f, 0.3f, -0.3f, 0.3f);
+                nextStepX(1200, 54);
                 break;
             case (52):
-                drive(-0.285f, 0.285f, -0.285f, 0.285f);
-                nextStepX(3000, 10);
+                drive(-0.3f, 0.3f, -0.3f, 0.3f);
+                nextStepX(800, 54);
                 break;
             case (53):
-                drive(-0.285f, 0.285f, -0.285f, 0.285f);
-                nextStepX(1000, 10);
+                drive(-0.3f, 0.3f, -0.3f, 0.3f);
+                nextStepX(400, 54);
                 break;
+            case (54):
+                /**sample done*/
 
+                break;
 
             /*case (14):
               drive(-0.24f, -0.24f, -0.24f, -0.24f);
