@@ -68,7 +68,6 @@ public class AutonomousTesting extends OpMode {
         latchS = hardwareMap.crservo.get("latchS");
 
         colorSensor= new ColorSensorV(hardwareMap);
-        colorSensor.switchSampling(true);
         imu = new imuData(hardwareMap);
         turning.setOffset(imu.getAngle());
 //        offSet = imu.getAngle();
@@ -88,6 +87,7 @@ public class AutonomousTesting extends OpMode {
 
 
     public void loop() {
+        colorSensor.runSample();
 /** finds the values from the controller*/
         float lX = Range.clip(gamepad1.left_stick_x , -1, 1);
         float lY = Range.clip(gamepad1.left_stick_y, -1, 1);
@@ -195,6 +195,7 @@ public class AutonomousTesting extends OpMode {
         telemetry.addData("BR Power: ", Math.floor(backRight.getPower()*10) + " " + LO2Library.speedBar(backRight.getPower(),8));
         telemetry.addData("Hex code", colorSensor.getHexCode() + "");
         telemetry.addData("Color Int", colorSensor.getColorInt() + "");
+        telemetry.addData("Gold? ", colorSensor.isGold() + "");
         telemetry.addData("Color Read State", colorSensor.getReadState() + "");
         telemetry.addData("Turning Error", turning.getError() + "");
         telemetry.addData("Turning Destination", turning.getDestination() + "");

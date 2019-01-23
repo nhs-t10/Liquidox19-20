@@ -68,9 +68,6 @@ public class ColorSensorV {
           boolean weShouldRead_old = this.weShouldRead;
           this.weShouldRead = start_or_dont;
           //if it's switching on from being previously off, start the loop again
-          if(start_or_dont != weShouldRead_old && start_or_dont) {
-              this.runSample();
-          }
   }
 
   //return our color integer
@@ -80,7 +77,7 @@ public class ColorSensorV {
 
   public String getHexCode() {
 
-      return Color.red(this.colorReturned) + Color.green(this.colorReturned) + Color.blue(this.colorReturned) + Color.alpha(this.colorReturned) + "";
+      return Color.red(this.colorReturned) + " | "+ Color.green(this.colorReturned) + " | " + Color.blue(this.colorReturned) + " | " +Color.alpha(this.colorReturned);
   }
   public boolean getReadState() {
 
@@ -90,12 +87,13 @@ public class ColorSensorV {
 //Test if we're seeing gold
 public boolean isGold() {
       //if the green value is between 0x53 (hexidecimal 53) and 0x64 (hexidecimal 64), it's gold. Otherwise, it's false.
-    if (0x53 <= Color.green(this.colorReturned) && Color.green(this.colorReturned) <= 0x64) {
-        return true;
-    //Since the condition is commented out, this will always be passed over
-    } else if (/*TODO: Test for ground*/false) {
-    } else {
+    if (0x53 <= Color.green(this.colorReturned) && Color.green(this.colorReturned) <= 0x64 || 0x124 <= Color.green(this.colorReturned) && Color.green(this.colorReturned) <= 0x134) {
         return false;
+    //Since the condition is commented out, this will always be passed over
+    } else if (/*fix pls*/ false) {
+
+    } else {
+        return true;
     }
 
     //strange, i know, but it shows an error without this line?
@@ -107,7 +105,7 @@ public boolean isGold() {
   //Why won't it be ran? Simple! See, by making this method private, we keep the
   //public methods (and the wiki) nice and concise. Also, it doesn't return anything,
   //which isn't the best for an informational class.
-  private void runSample() {
+  public void runSample() {
 
     // values is a reference to the hsvValues array.
     float[] hsvValues = new float[3];
@@ -119,9 +117,6 @@ public boolean isGold() {
     }
 
     // Loop until we are asked to stop
-    while (this.weShouldRead) {
-
-
         // Read the sensor
         NormalizedRGBA colors = this.colorSensor.getNormalizedColors();
 
@@ -136,9 +131,6 @@ public boolean isGold() {
 
         //set the colorReturned variable so it can be used by the other methods
         this.colorReturned = colors.toColor();
-
-
-    }
   }
 }
 
