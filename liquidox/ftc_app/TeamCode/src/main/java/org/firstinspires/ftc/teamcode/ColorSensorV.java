@@ -87,7 +87,7 @@ public class ColorSensorV {
 //Test if we're seeing gold
 public boolean isGold() {
       //if the green value is between 0x53 (hexidecimal 53) and 0x64 (hexidecimal 64), it's gold. Otherwise, it's false.
-    if (0x53 <= Color.green(this.colorReturned) && Color.green(this.colorReturned) <= 0x64 || 0x124 <= Color.green(this.colorReturned) && Color.green(this.colorReturned) <= 0x134) {
+    if ( Color.red(this.colorReturned) >= 112) {
         return true;
     //Since the condition is commented out, this will always be passed over
     } else if (/*fix pls*/ false) {

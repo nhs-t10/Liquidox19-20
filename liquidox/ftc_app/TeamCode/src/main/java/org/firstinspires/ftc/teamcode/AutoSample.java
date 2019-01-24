@@ -57,7 +57,7 @@ public class AutoSample extends LO2Library {
         colorSensor= new ColorSensorV(hardwareMap);
         imu = new imuData(hardwareMap);
         turning.setOffset(imu.getAngle());
-        latchM.setPower(0.1);
+        latchM.setPower(0.7);
     }
 
     public void loop() {
@@ -69,27 +69,27 @@ public class AutoSample extends LO2Library {
         switch (step) {
             case (1):
                 latchM.setPower(0.03);
-                nextStep(2000);//3000
+                nextStep(3500);//3000
                 break;
             case (2):
                 latchM.setPower(0);
                 //strafing left
-                drive(0.33f,-0.33f,0.33f,-0.33f);
+                drive(-0.33f,0.33f,-0.33f,0.33f);
                 nextStep(400);//4000
                 break;
             case (3):
                 //strafing back
-                drive(-0.33f,0.33f,-0.33f,0.33f);
+                drive(0.33f,-0.33f,0.33f,-0.33f);
                 nextStep(400);//7000
                 break;
             /**we are now at the centre, unlatched, at 2800ms*/
             case (4):
                 // going forward
                 drive(-0.4f,-0.4f,-0.4f,-0.4f);
-                nextStep(465);//8000
+                nextStep(475);//8000
                 break;
             case(5):
-                drive(-0.33f,0.33f,-0.33f,0.33f);
+                drive(0.33f,-0.33f,0.33f,-0.33f);
                 nextStep(500);
                 break;
             case (6):
@@ -97,7 +97,7 @@ public class AutoSample extends LO2Library {
                 if(goldNow) {
                    step = 12;
                 }
-                nextStep(4000);
+                nextStep(7000);
                 break;
             case(12):
                 drive(-0.2f, -0.2f, -0.2f, -0.2f);

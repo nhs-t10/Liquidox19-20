@@ -101,11 +101,11 @@ public class OpModeFiveLatchesP extends OpMode {
         if(gamepad1.a) {
             latchM.setPower(1);
             try {
-                Thread.sleep(750);
+                Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            latchM.setPower(0.1); //we only need to let it sit at 0.05 power; the rest is wasted (I have it a bit higher just in case)
+            latchM.setPower(0.7); //we only need to let it sit at 0.05 power; the rest is wasted (I have it a bit higher just in case)
             }
         /**moves outer servos in opposite direction when b button is pressed*/// - we only need one direction... think about it
         if (gamepad1.b) {
@@ -115,8 +115,9 @@ public class OpModeFiveLatchesP extends OpMode {
         }else{
           latchS.setPower(0);
         }
-
-        
+        if(gamepad1.a) {
+            latchM.setPower(-0.1);
+        }
 
         // Marker Servo
 
