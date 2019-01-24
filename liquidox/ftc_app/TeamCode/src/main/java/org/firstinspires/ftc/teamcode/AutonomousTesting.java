@@ -149,11 +149,11 @@ public class AutonomousTesting extends OpMode {
 //                drive(0, 0, 0, 0);
 //            }
 //            drive((float) (pComponent), (float) (pComponent), (float) -(pComponent), (float) -(pComponent));
-            if (turning.turning) {
-                if (Math.abs(turning.error) < 10) {
+            if (turning.isTurning()) {
+                if (Math.abs(turning.getError()) < 10) {
                     turning.stopTurning();
                 }
-               drive((float)(turning.pComponent), (float)(turning.pComponent), (float)-(turning.pComponent), (float)-(turning.pComponent));
+               drive((float)(turning.getpComponent()), (float)(turning.getpComponent()), (float)-(turning.getpComponent()), (float)-(turning.getpComponent()));
             }
 
 
