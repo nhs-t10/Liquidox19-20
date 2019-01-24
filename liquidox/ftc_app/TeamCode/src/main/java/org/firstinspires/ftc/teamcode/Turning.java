@@ -42,7 +42,7 @@ public class Turning {
     public void update(imuData imu) {
         this.currentAngle = imu.getAngle() - this.offSet;
         this.error = this.currentAngle - this.destination;
-        this.pComponent = Range.clip(this.error * p, -1, 1);
+        this.pComponent = Range.clip(this.error * p, -0.2, 0.4);
 
 //        if (this.turning) {
 //            if (Math.abs(this.error) < 10) {
