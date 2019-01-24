@@ -2,16 +2,14 @@ package org.firstinspires.ftc.teamcode;
 
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.util.ElapsedTime;
-import org.firstinspires.ftc.teamcode.Turning;
-import org.firstinspires.ftc.teamcode.ColorSensorV;
-import java.util.concurrent.TimeUnit;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.util.Range;
+import com.qualcomm.robotcore.util.ElapsedTime;
+
+import java.util.concurrent.TimeUnit;
 
 
 @Autonomous
-public class AutonomousCraterNew extends LO2Library {
+public class AutoSample extends LO2Library {
 
     Turning turning = new Turning(-135);
 
@@ -77,12 +75,12 @@ public class AutonomousCraterNew extends LO2Library {
                 latchM.setPower(0);
                 //strafing left
                 drive(0.33f,-0.33f,0.33f,-0.33f);
-                nextStep(500);//4000
+                nextStep(400);//4000
                 break;
             case (3):
                 //strafing back
                 drive(-0.33f,0.33f,-0.33f,0.33f);
-                nextStep(500);//7000
+                nextStep(400);//7000
                 break;
             /**we are now at the centre, unlatched, at 2800ms*/
             case (4):
@@ -90,85 +88,21 @@ public class AutonomousCraterNew extends LO2Library {
                 drive(-0.4f,-0.4f,-0.4f,-0.4f);
                 nextStep(465);//8000
                 break;
-            case (5):
-                drive(-0.15f, 0.15f, -0.15f, 0.15f);
-                if(goldNow) {
-                    drive(-0.4f, -0.4f, -0.4f, -0.4f);
-                    condition = 1;
-                    nextStepX(200, 50);
-                } else {
-                    nextStep(1500);
-                }
+            case(5):
+                drive(-0.33f,0.33f,-0.33f,0.33f);
+                nextStep(500);
                 break;
             case (6):
                 drive(-0.15f, 0.15f, -0.15f, 0.15f);
                 if(goldNow) {
-                    drive(-0.4f, -0.4f, -0.4f, -0.4f);
-                    condition = 2;
-                    nextStepX(200, 51);
-                }else {
-                    nextStep(1500);
+                   step = 12;
                 }
-
+                nextStep(4000);
                 break;
-            case (7):
-                drive(-0.15f, 0.15f, -0.15f, 0.15f);
-                if(goldNow) {
-                    drive(-0.4f, -0.4f, -0.4f, -0.4f);
-                    condition = 3;
-                    nextStepX(200, 52);
-                }else {
-                    nextStep(1500);
-                }
+            case(12):
+                drive(-0.2f, -0.2f, -0.2f, -0.2f);
+                nextStep(500);
                 break;
-            case (8):
-                //moving to the next thing
-                drive(-0.285f, 0.285f, -0.285f, 0.285f);
-                nextStep(2000);//11750
-                break;
-            case (9):
-                if(colorSensor.isGold()){
-                    drive(-0.4f,-0.4f,-0.4f,-0.4f);
-                    condition = 3;
-                    nextStepX(400, 50);
-                }else {
-                    nextStepX(50, 53);
-
-                }
-                break;
-//            case (50):
-//                drive(0.4f,0.4f,0.4f,0.4f);
-//                nextStepX(400, 54);
-//                break;
-            case (51):
-                drive(-0.3f, 0.3f, -0.3f, 0.3f);
-                nextStepX(1200, 54);
-                break;
-            case (52):
-                drive(-0.3f, 0.3f, -0.3f, 0.3f);
-                nextStepX(800, 54);
-                break;
-            case (53):
-                drive(-0.3f, 0.3f, -0.3f, 0.3f);
-                nextStepX(400, 54);
-                break;
-            case (54):
-                /**sample done*/
-
-                break;
-            case (80):
-
-
-                break;
-
-            /*case (14):
-              drive(-0.24f, -0.24f, -0.24f, -0.24f);
-               nextStep(2000);
-                break;
-            case (15):
-                drive(0.5f, 0.5f, 0.5f, 0.5f);
-                nextStep(2250);
-                break;*/
             default:
                 drive(0, 0, 0, 0);
                 break;
