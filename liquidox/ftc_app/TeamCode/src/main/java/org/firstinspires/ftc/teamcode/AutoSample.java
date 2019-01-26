@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit;
 public class AutoSample extends LO2Library {
 
     Turning turning = new Turning(-135);
-
+boolean end = false;
     boolean gold = false;
     int step = 1;
     int condition = 0;
@@ -63,51 +63,74 @@ public class AutoSample extends LO2Library {
     public void loop() {
         timer1 = eTimeObj.time(TimeUnit.MILLISECONDS);
         haveInit = true;
+        colorSensor.runSample();
         if(goldNow = false){
             goldNow = colorSensor.isGold();
         }
         switch (step) {
             case (1):
-                latchM.setPower(0.03);
-                nextStep(3500);//3000
+                latchM.setPower(0.007);
+                nextStep(7000);//3000
                 break;
             case (2):
                 latchM.setPower(0);
-                //strafing left
-                drive(-0.33f,0.33f,-0.33f,0.33f);
-                nextStep(400);//4000
+               // drive(-0.4f,-0.4f,-0.4f,-0.4f);
+                nextStep(20);//3000
                 break;
             case (3):
+                latchM.setPower(0);
+                //strafing left
+                drive(-0.25f,0.25f,-0.25f,0.25f);
+                nextStep(1000);//4000
+                break;
+            case (4):
                 //strafing back
-                drive(0.33f,-0.33f,0.33f,-0.33f);
-                nextStep(400);//7000
+                drive(0.25f,-0.25f,0.25f,-0.25f);
+                nextStep(1000);//7000
                 break;
             /**we are now at the centre, unlatched, at 2800ms*/
-            case (4):
+            case (5):
                 // going forward
                 drive(-0.4f,-0.4f,-0.4f,-0.4f);
                 nextStep(475);//8000
                 break;
-            case(5):
+            case(6):
                 drive(0.33f,-0.33f,0.33f,-0.33f);
-                nextStep(500);
+                nextStep(1000);
                 break;
-            case (6):
-                drive(-0.15f, 0.15f, -0.15f, 0.15f);
-                if(goldNow) {
+            case (7):
+                drive(-0.25f, 0.25f, -0.25f, 0.25f);
+                if(colorSensor.isGold()) {
                    step = 12;
                 }
-                nextStep(7000);
+                nextStep(10000);
                 break;
             case(12):
-                drive(-0.2f, -0.2f, -0.2f, -0.2f);
-                nextStep(500);
+end = true;
+                break;
+            case(13):
+                drive(0.2f, 0.2f, 0.2f, 0.2f);
+                nextStepX(600,1094);
                 break;
             default:
                 drive(0, 0, 0, 0);
                 break;
         }
-
+        if(end){
+            drive(0.2f, -0.2f, 0.2f, -0.2f);
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            drive(-0.2f, -0.2f, -0.2f, -0.2f);
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            stop();
+}
 
 
 

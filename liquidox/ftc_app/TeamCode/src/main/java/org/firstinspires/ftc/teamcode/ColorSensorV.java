@@ -89,15 +89,11 @@ public boolean isGold() {
       //if the green value is between 0x53 (hexidecimal 53) and 0x64 (hexidecimal 64), it's gold. Otherwise, it's false.
     if ( Color.red(this.colorReturned) >= 112) {
         return true;
-    //Since the condition is commented out, this will always be passed over
-    } else if (/*fix pls*/ false) {
-
+        //Since the condition is commented out, this will always be passed over
     } else {
-        return true;
+        return false;
     }
-
-    //strange, i know, but it shows an error without this line?
-    return false;
+    
     }
 
   //This won't be ran by any code outside of this class, so we can make it private.
