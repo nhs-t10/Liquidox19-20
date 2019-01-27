@@ -109,9 +109,9 @@ public class AutoSample extends LO2Library {
                 }
                 nextStep(7000);
                 break;
-            case(8):
-                drive(0,0,0,0);
-                break;
+//            case(8):
+//                drive(0,0,0,0);
+//                break;
             case(12):
                 end = true;
                 step = 14;
@@ -145,7 +145,6 @@ public class AutoSample extends LO2Library {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            stop();
             drive(0,0,0,0);
             try {
                 Thread.sleep(250);
