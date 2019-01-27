@@ -1,14 +1,9 @@
-
 package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.util.Range;
 import org.firstinspires.ftc.teamcode.imuData;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-
-
-
-
 
 public class Turning {
     public double error;

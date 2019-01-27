@@ -28,9 +28,9 @@ public class AutonomousCraterNew extends LO2Library {
     DcMotor latchM;
     boolean GoldNow;
     void nextStep(float delay) {
-        if(!isDelay){
-            timeDone = timer1 + delay;
+        if(!isDelay) {
             isDelay = true;
+            timeDone = timer1 + delay;
         }
         if(timer1 >= timeDone) {
             drive(0, 0, 0, 0);
@@ -65,7 +65,7 @@ public class AutonomousCraterNew extends LO2Library {
     public void loop() {
         timer1 = eTimeObj.time(TimeUnit.MILLISECONDS);
         haveInit = true;
-        if(goldNow = false){
+        if(goldNow = false) {
             goldNow = colorSensor.isGold();
         }
         switch (step) {
