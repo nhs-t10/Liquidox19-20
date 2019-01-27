@@ -56,10 +56,12 @@ boolean end = false;
     public void init() {
         super.initialize_robot();
         latchM = hardwareMap.dcMotor.get("latchM");
+        mark = hardwareMap.servo.get("mark");
         colorSensor= new ColorSensorV(hardwareMap);
         imu = new imuData(hardwareMap);
         turning.setOffset(imu.getAngle());
         latchM.setPower(0.7);
+        mark.setPosition(0);
     }
 
     public void loop() {
