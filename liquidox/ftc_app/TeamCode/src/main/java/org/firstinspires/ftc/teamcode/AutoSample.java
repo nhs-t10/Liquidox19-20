@@ -120,7 +120,7 @@ end = true;
                 drive(0, 0, 0, 0);
                 break;
         }
-        if(end){
+        if(end) {
             end = false;
             drive(0.2f, -0.2f, 0.2f, -0.2f);
             try {
@@ -134,16 +134,20 @@ end = true;
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            stop();
-}
-mark.setPosition(0.8);
-        try {
-            Thread.sleep(250);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+            drive(0.2f, 0.2f, 0.2f, 0.2f);
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            mark.setPosition(0.8);
+            try {
+                Thread.sleep(250);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            mark.setPosition(0);
         }
-mark.setPosition(0);
-
         telemetry.addData("FL Power: ", frontLeft.getPower() + " " + speedBar(frontLeft.getPower(),8));
         telemetry.addData("FR Power: ", frontRight.getPower() + " " + speedBar(frontRight.getPower(),8));
         telemetry.addData("BL Power: ", backLeft.getPower() + " " + speedBar(backLeft.getPower(),8));
