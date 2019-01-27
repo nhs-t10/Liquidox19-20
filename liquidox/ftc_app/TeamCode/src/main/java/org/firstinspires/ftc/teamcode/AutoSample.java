@@ -134,7 +134,7 @@ end = true;
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            drive(0.2f, 0.2f, 0.2f, 0.2f);
+            drive(-0.2f, -0.2f, -0.2f, -0.2f);
             try {
                 Thread.sleep(500);
             } catch (InterruptedException e) {
