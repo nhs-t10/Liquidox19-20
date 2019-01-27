@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import java.util.concurrent.TimeUnit;
@@ -25,6 +26,7 @@ boolean end = false;
     boolean isDelay;
     DcMotor latchM;
     boolean GoldNow;
+    Servo mark;
     void nextStep(float delay) {
         if(!isDelay){
             timeDone = timer1 + delay;
@@ -132,8 +134,13 @@ end = true;
             }
             stop();
 }
-
-
+mark.setPosition(0.8);
+        try {
+            Thread.sleep(250);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+mark.setPosition(0);
 
         telemetry.addData("FL Power: ", frontLeft.getPower() + " " + speedBar(frontLeft.getPower(),8));
         telemetry.addData("FR Power: ", frontRight.getPower() + " " + speedBar(frontRight.getPower(),8));
