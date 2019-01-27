@@ -117,6 +117,7 @@ end = true;
                 break;
         }
         if(end){
+            end = false;
             drive(0.2f, -0.2f, 0.2f, -0.2f);
             try {
                 Thread.sleep(500);
