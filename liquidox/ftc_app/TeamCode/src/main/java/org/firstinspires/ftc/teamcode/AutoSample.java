@@ -96,7 +96,7 @@ public class AutoSample extends LO2Library {
             case (5):
                 // going forward
                 drive(-0.3f,-0.3f,-0.3f,-0.3f);
-                nextStep(675);//8000
+                nextStep(690);//8000
                 break;
             case(6):
                 drive(0.33f,-0.33f,0.33f,-0.33f);
