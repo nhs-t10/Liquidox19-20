@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit;
 public class AutoSample extends LO2Library {
 
     Turning turning = new Turning(-135);
-boolean end = false;
+    boolean end = false;
     boolean gold = false;
     int step = 1;
     int condition = 0;
@@ -56,12 +56,12 @@ boolean end = false;
     public void init() {
         super.initialize_robot();
         latchM = hardwareMap.dcMotor.get("latchM");
-        mark = hardwareMap.servo.get("mark");
         colorSensor= new ColorSensorV(hardwareMap);
         imu = new imuData(hardwareMap);
         turning.setOffset(imu.getAngle());
         latchM.setPower(0.7);
-        mark.setPosition(0);
+        mark = hardwareMap.servo.get("mark");
+
     }
 
     public void loop() {
@@ -78,25 +78,25 @@ boolean end = false;
                 break;
             case (2):
                 latchM.setPower(0);
-               // drive(-0.4f,-0.4f,-0.4f,-0.4f);
-                nextStep(20);//3000
+                drive(-0.2f,-0.2f,-0.2f,-0.2f);
+                nextStep(50 );//3000
                 break;
             case (3):
                 latchM.setPower(0);
                 //strafing left
                 drive(-0.25f,0.25f,-0.25f,0.25f);
-                nextStep(1000);//4000
+                nextStep(800);//4000
                 break;
             case (4):
                 //strafing back
                 drive(0.25f,-0.25f,0.25f,-0.25f);
-                nextStep(1000);//7000
+                nextStep(800);//7000
                 break;
             /**we are now at the centre, unlatched, at 2800ms*/
             case (5):
                 // going forward
-                drive(-0.4f,-0.4f,-0.4f,-0.4f);
-                nextStep(475);//8000
+                drive(-0.3f,-0.3f,-0.3f,-0.3f);
+                nextStep(675);//8000
                 break;
             case(6):
                 drive(0.33f,-0.33f,0.33f,-0.33f);
@@ -105,19 +105,30 @@ boolean end = false;
             case (7):
                 drive(-0.25f, 0.25f, -0.25f, 0.25f);
                 if(colorSensor.isGold()) {
-                   step = 12;
+                    step = 12;
                 }
-                nextStep(10000);
+                nextStep(7000);
+                break;
+            case(8):
+                drive(0,0,0,0);
                 break;
             case(12):
-end = true;
+                end = true;
+                step = 14;
                 break;
             case(13):
                 drive(0.2f, 0.2f, 0.2f, 0.2f);
                 nextStepX(600,1094);
                 break;
+            case(14):
+                //nothing
+                break;
             default:
                 drive(0, 0, 0, 0);
+                /**say hi*/
+                if(timer1 == 7) {
+                    drive(3,3,3,3);
+                }
                 break;
         }
         if(end) {
@@ -134,13 +145,8 @@ end = true;
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            drive(-0.2f, -0.2f, -0.2f, -0.2f);
-            try {
-                Thread.sleep(500);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            mark.setPosition(0.8);
+            stop();
+            drive(0,0,0,0);
             try {
                 Thread.sleep(250);
             } catch (InterruptedException e) {

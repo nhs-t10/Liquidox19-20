@@ -18,6 +18,7 @@ public class OpModeFiveLatchesP extends OpMode {
     //instantiate hardware devices
     boolean a = true;
     boolean b = true;
+    boolean _liftfinetuning;
     DcMotor frontLeft, backLeft, frontRight, backRight, latchM;
     Servo john, mark;
     LiftHandler lift;
@@ -116,17 +117,21 @@ public class OpModeFiveLatchesP extends OpMode {
           latchS.setPower(0);
         }
         if(gamepad1.x) {
-            latchM.setPower(-0.1);
         }
 
         // Marker Servo
 
         if (gamepad1.dpad_up) {
-            mark.setPosition(0);
-        } else if(gamepad1.dpad_down) {
-            mark.setPosition(0.8);
-        }else{
-            mark.setPosition(0);
+            latchM.setPower(-0.5);
+            _liftfinetuning = true;
+        }if(gamepad1.dpad_down) {
+            latchM.setPower(0.5);
+            _liftfinetuning = true;
+        }
+
+        if(_liftfinetuning && (!gamepad1.dpad_down && !gamepad1.dpad_up)) {
+        latchM.setPower(0);
+        _liftfinetuning = false;
         }
 
         //Throttle Code
