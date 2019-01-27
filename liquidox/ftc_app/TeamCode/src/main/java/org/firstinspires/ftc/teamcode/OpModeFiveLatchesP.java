@@ -112,10 +112,12 @@ public class OpModeFiveLatchesP extends OpMode {
             latchS.setPower(-0.3);
         } else if(gamepad1.y) {
             latchS.setPower(0.3);
-        }else{
+        } else{
           latchS.setPower(0);
         }
         if(gamepad1.a) {
+            latchM.setPower(-0.1);
+        } else if(gamepad1.x) {
             latchM.setPower(-0.1);
         }
 
