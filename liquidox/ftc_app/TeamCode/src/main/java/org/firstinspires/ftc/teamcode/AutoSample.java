@@ -57,8 +57,8 @@ public class AutoSample extends LO2Library {
         super.initialize_robot();
         latchM = hardwareMap.dcMotor.get("latchM");
         colorSensor= new ColorSensorV(hardwareMap);
-        imu = new imuData(hardwareMap);
-        turning.setOffset(imu.getAngle());
+       // imu = new imuData(hardwareMap);
+        //turning.setOffset(imu.getAngle());
         latchM.setPower(0.7);
         mark = hardwareMap.servo.get("mark");
 
@@ -96,13 +96,16 @@ public class AutoSample extends LO2Library {
             case (5):
                 // going forward
                 drive(-0.3f,-0.3f,-0.3f,-0.3f);
-                nextStep(690);//8000
+                nextStep(415);//8000
                 break;
-            case(6):
+            case (6):
+                nextStep(2000);//3000
+                break;
+            case(7):
                 drive(0.33f,-0.33f,0.33f,-0.33f);
                 nextStep(1000);
                 break;
-            case (7):
+            case (8):
                 drive(-0.25f, 0.25f, -0.25f, 0.25f);
                 if(colorSensor.isGold()) {
                     step = 12;
@@ -159,14 +162,14 @@ public class AutoSample extends LO2Library {
         telemetry.addData("BR Power: ", backRight.getPower() + " " + speedBar(backRight.getPower(),8));
         telemetry.addData("Time: ", timer1 + "");
         telemetry.addData("Step: ", step + "");
-        telemetry.addData("Orientation", turning.currentAngle + "");
-        telemetry.addData("pComponent", turning.pComponent + "");
-        telemetry.addData("turning", turning.turning + "");
-        telemetry.addData("destination", turning.destination + "");
-        telemetry.addData("isGold", colorSensor.isGold() + "");
-        telemetry.addData("Error",  turning.getError() + "" );
-        telemetry.addData("Off Set: ", turning.offSet +"");
-        telemetry.addData("Angle",  imu.getAngle() + "");
+//        telemetry.addData("Orientation", turning.currentAngle + "");
+//        telemetry.addData("pComponent", turning.pComponent + "");
+//        telemetry.addData("turning", turning.turning + "");
+//        telemetry.addData("destination", turning.destination + "");
+//        telemetry.addData("isGold", colorSensor.isGold() + "");
+//        telemetry.addData("Error",  turning.getError() + "" );
+//        telemetry.addData("Off Set: ", turning.offSet +"");
+//        telemetry.addData("Angle",  imu.getAngle() + "");
         telemetry.addData("site: ", condition + "");
         telemetry.addData("gold now? ", goldNow + "");
 
