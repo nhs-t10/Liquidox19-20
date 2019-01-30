@@ -189,6 +189,9 @@ public class AutonomousTesting extends OpMode {
         //////////////////////////////
 
         //////////////////////////////
+       string[] arrayOfmemes = {Josh, Joshipoo, TheRealJoshipoo, Short, Squashua};
+        string meme = arrayofmemes[Math.floor(Math.random()*5)];
+telementry.addData("", meme);
         telemetry.addData("FL Power: ", Math.floor(frontLeft.getPower()*10) + " " + LO2Library.speedBar(frontLeft.getPower(),8));
         telemetry.addData("FR Power: ", Math.floor(frontRight.getPower()*10) + " " + LO2Library.speedBar(frontRight.getPower(),8));
         telemetry.addData("BL Power: ", Math.floor(backLeft.getPower()*10) + " " + LO2Library.speedBar(backLeft.getPower(),8));
