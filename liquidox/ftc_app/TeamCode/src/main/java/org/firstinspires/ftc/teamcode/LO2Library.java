@@ -36,7 +36,13 @@ public abstract class LO2Library extends OpMode {
         backLeft.setPower(Range.clip(-bl, -1, 1));
 
     }
+    public static void drive(double bl, double fl, double fr, double br) {
+        frontLeft.setPower(Range.clip(-fl, -1, 1));
+        backRight.setPower(Range.clip(br, -1, 1));
+        frontRight.setPower(Range.clip(fr, -1, 1));
+        backLeft.setPower(Range.clip(-bl, -1, 1));
 
+    }
     public static void TurnDrive(double bl, double fl, double fr, double br) {
         frontLeft.setPower(-fl);
         backRight.setPower(br);
