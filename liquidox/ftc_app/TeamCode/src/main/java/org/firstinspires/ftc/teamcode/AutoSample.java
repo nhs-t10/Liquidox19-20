@@ -39,7 +39,7 @@ public class AutoSample extends LO2Library {
         }
 
     }
-    void nextStepX(float delay, int stepNum) {
+    void nextStep(float delay, int stepNum) {
         if(!isDelay){
             timeDone = timer1 + delay;
             isDelay = true;
@@ -121,7 +121,7 @@ public class AutoSample extends LO2Library {
                 break;
             case(13):
                 drive(0.2f, 0.2f, 0.2f, 0.2f);
-                nextStepX(600,1094);
+                nextStep(600,1094);
                 break;
             case(14):
                 //nothing

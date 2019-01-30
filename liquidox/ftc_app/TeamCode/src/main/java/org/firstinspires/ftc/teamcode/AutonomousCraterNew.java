@@ -39,7 +39,7 @@ public class AutonomousCraterNew extends LO2Library {
         }
 
     }
-    void nextStepX(float delay, int stepNum) {
+    void nextStep(float delay, int stepNum) {
         if(!isDelay){
             timeDone = timer1 + delay;
             isDelay = true;
@@ -95,7 +95,7 @@ public class AutonomousCraterNew extends LO2Library {
                 if(goldNow) {
                     drive(-0.4f, -0.4f, -0.4f, -0.4f);
                     condition = 1;
-                    nextStepX(200, 50);
+                    nextStep(200, 50);
                 } else {
                     nextStep(1500);
                 }
@@ -105,7 +105,7 @@ public class AutonomousCraterNew extends LO2Library {
                 if(goldNow) {
                     drive(-0.4f, -0.4f, -0.4f, -0.4f);
                     condition = 2;
-                    nextStepX(200, 51);
+                    nextStep(200, 51);
                 }else {
                     nextStep(1500);
                 }
@@ -116,7 +116,7 @@ public class AutonomousCraterNew extends LO2Library {
                 if(goldNow) {
                     drive(-0.4f, -0.4f, -0.4f, -0.4f);
                     condition = 3;
-                    nextStepX(200, 52);
+                    nextStep(200, 52);
                 }else {
                     nextStep(1500);
                 }
@@ -130,27 +130,27 @@ public class AutonomousCraterNew extends LO2Library {
                 if(colorSensor.isGold()){
                     drive(-0.4f,-0.4f,-0.4f,-0.4f);
                     condition = 3;
-                    nextStepX(400, 50);
+                    nextStep(400, 50);
                 }else {
-                    nextStepX(50, 53);
+                    nextStep(50, 53);
 
                 }
                 break;
 //            case (50):
 //                drive(0.4f,0.4f,0.4f,0.4f);
-//                nextStepX(400, 54);
+//                nextStep(400, 54);
 //                break;
             case (51):
                 drive(-0.3f, 0.3f, -0.3f, 0.3f);
-                nextStepX(1200, 54);
+                nextStep(1200, 54);
                 break;
             case (52):
                 drive(-0.3f, 0.3f, -0.3f, 0.3f);
-                nextStepX(800, 54);
+                nextStep(800, 54);
                 break;
             case (53):
                 drive(-0.3f, 0.3f, -0.3f, 0.3f);
-                nextStepX(400, 54);
+                nextStep(400, 54);
                 break;
             case (54):
                 /**sample done*/
