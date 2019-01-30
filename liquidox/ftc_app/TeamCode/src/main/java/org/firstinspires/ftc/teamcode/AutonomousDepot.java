@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit;
 @Autonomous
 public class AutonomousDepot extends LO2Library {
 
-    Turning turning = new Turning(-45);
+    Turning turning;
 
     boolean gold = false;
     int step = 1;
@@ -61,6 +61,7 @@ public class AutonomousDepot extends LO2Library {
     @Override
     public void init() {
         super.initialize_robot();
+        turning = new Turning(-45);
         latchM = hardwareMap.dcMotor.get("latchM");
         colorSensor= new ColorSensorV(hardwareMap);
         imu = new imuData(hardwareMap);
@@ -72,26 +73,40 @@ public class AutonomousDepot extends LO2Library {
         timer1 = eTimeObj.time(TimeUnit.MILLISECONDS);
 
         switch (step) {
-            case (1):latchM.setPower(Range.clip(3/timer1, -1, 1));
-                nextStep(3000);//3000 nextStep(1000);//3000
+
+            case (1):
+                turning = new Turning(-45);
+                turning.update(imu);
+                nextStep(5000);
                 break;
             case (2):
-                //strafing left
-                drive(-0.2f,-0.2f,-0.2f,-0.2f);
-                nextStep(3750);//4000
-                break;
-            case (3):
-                //Contract bar
-                step = 4;
-                break;
-            case (4):
-                //strafing to center
-                drive(0.8f,0.8f,0.8f,0.8f);
-                nextStep(500);//8000
+                turning  = new Turning(45);
+                turning.update(imu);
+                nextStep(5000);
                 break;
             default:
-                drive(0, 0, 0, 0);
+                drive(0,0,0,0);
                 break;
+//            case (1):latchM.setPower(Range.clip(3/timer1, -1, 1));
+//                nextStep(3000);//3000 nextStep(1000);//3000
+//                break;
+//            case (2):
+//                //strafing left
+//                drive(-0.2f,-0.2f,-0.2f,-0.2f);
+//                nextStep(3750);//4000
+//                break;
+//            case (3):
+//                //Contract bar
+//                step = 4;
+//                break;
+//            case (4):
+//                //strafing to center
+//                drive(0.8f,0.8f,0.8f,0.8f);
+//                nextStep(500);//8000
+//                break;
+//            default:
+//                drive(0, 0, 0, 0);
+//                break;
         }
 
 
@@ -102,10 +117,10 @@ public class AutonomousDepot extends LO2Library {
         telemetry.addData("BR Power: ", backRight.getPower() + " " + speedBar(backRight.getPower(),8));
         telemetry.addData("Time: ", timer1 + "");
         telemetry.addData("Step: ", step + "");
-        telemetry.addData("Orientation", turning.currentAngle + "");
-        telemetry.addData("pComponent", turning.pComponent + "");
-        telemetry.addData("turning", turning.turning + "");
-        telemetry.addData("destination", turning.destination + "");
+        telemetry.addData("Orientation", turning.get_Angle() + "");
+        telemetry.addData("pComponent", turning.getpComponent() + "");
+        telemetry.addData("turning", turning.isTurning() + "");
+        telemetry.addData("destination", turning.getDestination() + "");
         telemetry.addData("isGold", colorSensor.isGold() + "");
         telemetry.addData("Error",  turning.getError() + "" );
         telemetry.addData("Off Set: ", turning.offSet +"");

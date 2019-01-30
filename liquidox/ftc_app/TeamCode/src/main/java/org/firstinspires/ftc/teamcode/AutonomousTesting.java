@@ -202,6 +202,7 @@ public class AutonomousTesting extends OpMode {
         telemetry.addData("Turning Angle", imu.getAngle() + "");
         telemetry.addData("Turning pComponent", turning.getpComponent() + "");
         telemetry.addData("Turning", turning.isTurning() + "");
+        telemetry.addData("X", gamepad1.x );
 
         telemetry.update();
     }
