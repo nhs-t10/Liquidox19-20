@@ -68,7 +68,7 @@ public class AutoSample extends LO2Library {
         timer1 = eTimeObj.time(TimeUnit.MILLISECONDS);
         haveInit = true;
         colorSensor.runSample();
-        if(goldNow = false){
+        if(goldNow == false){
             goldNow = colorSensor.isGold();
         }
         switch (step) {

@@ -8,6 +8,8 @@ import org.firstinspires.ftc.teamcode.ColorSensorV;
 import java.util.concurrent.TimeUnit;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.Range;
+import org.firstinspires.ftc.robotcore.external.android.AndroidTextToSpeech;
+
 
 
 @Autonomous
@@ -48,12 +50,14 @@ public class AutonomousCraterNew extends LO2Library {
             drive(0, 0, 0, 0);
             isDelay = false;
             step = stepNum;
-            goldNow = false;
         }
     }
     boolean haveInit = false;
     @Override
     public void init() {
+        AndroidTextToSpeech stt = new AndroidTextToSpeech();
+
+        stt.speak("Hello, Adam Carita");
         super.initialize_robot();
         latchM = hardwareMap.dcMotor.get("latchM");
         colorSensor= new ColorSensorV(hardwareMap);
@@ -65,7 +69,8 @@ public class AutonomousCraterNew extends LO2Library {
     public void loop() {
         timer1 = eTimeObj.time(TimeUnit.MILLISECONDS);
         haveInit = true;
-        if(goldNow = false) {
+        if(colorSensor.isGold())
+        if(goldNow == false) {
             goldNow = colorSensor.isGold();
         }
         switch (step) {
