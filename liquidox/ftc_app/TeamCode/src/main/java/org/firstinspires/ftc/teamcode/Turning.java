@@ -1,7 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.util.Range;
 import org.firstinspires.ftc.teamcode.imuData;
-
+import org.firstinspires.ftc.teamcode.LO2Library;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
@@ -31,7 +31,7 @@ public class Turning {
 
     public void stopTurning() {
         this.turning = false;
-        LO2Library.drive(0f, 0f, 0f, 0f);
+        //drive(0f, 0f, 0f, 0f);
     }
 
     public void update(imuData imu) {
@@ -43,7 +43,7 @@ public class Turning {
             if (Math.abs(this.error) < 10) {
                 this.stopTurning();
             }
-            LO2Library.TurnDrive((this.pComponent), (this.pComponent), -(this.pComponent), -(this.pComponent));
+            //drive((this.pComponent), (this.pComponent), -(this.pComponent), -(this.pComponent));
         }
 
     }
@@ -59,11 +59,11 @@ public class Turning {
         }
 
     public double getpComponent() {
-        return pComponent;
+        return this.pComponent;
     }
 
     public boolean isTurning() {
-        return turning;
+        return this.turning;
     }
 }
 

@@ -11,7 +11,8 @@ import java.util.concurrent.TimeUnit;
 @Autonomous
 public class AutonomousDepot extends LO2Library {
 
-    Turning turning;
+    Turning turn1;
+    Turning turn2;
 
     boolean gold = false;
     int step = 1;
@@ -33,7 +34,28 @@ public class AutonomousDepot extends LO2Library {
             isDelay = false;
             step++;
         }
-
+    }
+    void nextStep(float delay, int intStep) {
+        if(!isDelay){
+            timeDone = timer1 + delay;
+            isDelay = true;
+        }
+        if(timer1 >= timeDone) {
+            drive(0, 0, 0, 0);
+            isDelay = false;
+            step = intStep;
+        }
+    }
+    void nextStep(float delay, Turning turn) {
+        if(!isDelay){
+            timeDone = timer1 + delay;
+            isDelay = true;
+        }
+        if(timer1 >= timeDone || turn.getError() < 5) {
+            drive(0, 0, 0, 0);
+            isDelay = false;
+            step++;
+        }
     }
 
     void sample(float time) {
@@ -61,11 +83,13 @@ public class AutonomousDepot extends LO2Library {
     @Override
     public void init() {
         super.initialize_robot();
-        turning = new Turning(-45);
+        turn1 = new Turning(-45);
+        turn2 = new Turning(45);
         latchM = hardwareMap.dcMotor.get("latchM");
         colorSensor= new ColorSensorV(hardwareMap);
         imu = new imuData(hardwareMap);
-        turning.setOffset(imu.getAngle());
+        turn1.setOffset(imu.getAngle());
+        turn2.setOffset(imu.getAngle());
         latchM.setPower(1);
     }
 
@@ -75,13 +99,13 @@ public class AutonomousDepot extends LO2Library {
         switch (step) {
 
             case (1):
-                turning = new Turning(-45);
-                turning.update(imu);
+                turn1.update(imu);
+                turn(turn1.getpComponent());
                 nextStep(5000);
                 break;
             case (2):
-                turning  = new Turning(45);
-                turning.update(imu);
+                turn2.update(imu);
+                turn(turn2.getpComponent());
                 nextStep(5000);
                 break;
             default:
@@ -117,13 +141,13 @@ public class AutonomousDepot extends LO2Library {
         telemetry.addData("BR Power: ", backRight.getPower() + " " + speedBar(backRight.getPower(),8));
         telemetry.addData("Time: ", timer1 + "");
         telemetry.addData("Step: ", step + "");
-        telemetry.addData("Orientation", turning.get_Angle() + "");
-        telemetry.addData("pComponent", turning.getpComponent() + "");
-        telemetry.addData("turning", turning.isTurning() + "");
-        telemetry.addData("destination", turning.getDestination() + "");
+        telemetry.addData("Orientation", turn1.get_Angle() + "");
+        telemetry.addData("pComponent", turn1.getpComponent() + "");
+        telemetry.addData("turning", turn1.isTurning() + "");
+        telemetry.addData("destination", turn1.getDestination() + "");
         telemetry.addData("isGold", colorSensor.isGold() + "");
-        telemetry.addData("Error",  turning.getError() + "" );
-        telemetry.addData("Off Set: ", turning.offSet +"");
+        telemetry.addData("Error",  turn1.getError() + "" );
+        telemetry.addData("Off Set: ", turn1.offSet +"");
         telemetry.addData("Angle",  imu.getAngle() + "");
         telemetry.addData("Hex code", colorSensor.getHexCode() + "");
 

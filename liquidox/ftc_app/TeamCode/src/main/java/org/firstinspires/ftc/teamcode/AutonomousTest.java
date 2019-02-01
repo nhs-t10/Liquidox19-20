@@ -84,28 +84,68 @@ public class AutonomousTest extends LO2Library {
         timer1 = eTimeObj.time(TimeUnit.MILLISECONDS);
 
         switch (step) {
-
             case (1):
-                drive(-0.2f, -0.2f, -0.2f, -0.2f);
-                nextStep(1000);
+                latchM.setPower(0.007);
+                nextStep(7000);//3000
                 break;
             case (2):
-                turning  = new Turning(45);
-                turning.update(imu);
-                nextStep(1000, 60);
+                latchM.setPower(0);
+                drive(-0.2f,-0.2f,-0.2f,-0.2f);
+                nextStep(50 );//3000
                 break;
-            case (60):
-               drive(-0.2, 0.2, -0.2, 0.2);
+            case (3):
+                latchM.setPower(0);
+                //strafing left
+                drive(-0.25f,0.25f,-0.25f,0.25f);
+                nextStep(800);//4000
+                break;
+            case (4):
+                //strafing back
+                drive(0.25f,-0.25f,0.25f,-0.25f);
+                nextStep(800);//7000
+                break;
+            /**we are now at the centre, unlatched, at 2800ms*/
+            case (5):
+                // going forward
+                drive(-0.3f,-0.3f,-0.3f,-0.3f);
+                nextStep(415);//8000
+                break;
+            case (6):
+                nextStep(2000);//3000
+                break;
+            case(7):
+                drive(0.33f,-0.33f,0.33f,-0.33f);
                 nextStep(1000);
                 break;
-            case (61):
+            case (8):
+                drive(-0.25f, 0.25f, -0.25f, 0.25f);
+                if(colorSensor.isGold()) {
+                    step = 12;
+                }
+                nextStep(7000);
+                break;
+//            case(8):
+//                drive(0,0,0,0);
+//                break;
+            case(12):
                 drive(0.2, -0.2, 0.2, -0.2);
+                nextStep(500);
+                break;
+            case(13):
+                drive(0.2f, 0.2f, 0.2f, 0.2f);
                 nextStep(1000);
+                break;
+            case(14):
+                //nothing
                 break;
             default:
-                drive(0,0,0,0);
+                drive(0, 0, 0, 0);
+                /**say hi*/
+                if(timer1 == 7) {
+                    drive(3,3,3,3);
+                }
                 break;
-          }
+        }
 
         telemetry.addData("FL Power: ", frontLeft.getPower() + " " + speedBar(frontLeft.getPower(),8));
         telemetry.addData("FR Power: ", frontRight.getPower() + " " + speedBar(frontRight.getPower(),8));
