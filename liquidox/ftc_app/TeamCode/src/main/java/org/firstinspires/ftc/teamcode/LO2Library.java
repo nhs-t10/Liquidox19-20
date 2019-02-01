@@ -42,6 +42,9 @@ public abstract class LO2Library extends OpMode {
     public static void strafe(float howMuch) {
         drive(-howMuch, howMuch, -howMuch, howMuch);
     }
+    public static void forward(float howMuch) {
+        drive(-howMuch, -howMuch, -howMuch, -howMuch);
+    }
     public static void drive(double bl, double fl, double fr, double br) {
         frontLeft.setPower(Range.clip(-fl, -1, 1));
         backRight.setPower(Range.clip(br, -1, 1));
