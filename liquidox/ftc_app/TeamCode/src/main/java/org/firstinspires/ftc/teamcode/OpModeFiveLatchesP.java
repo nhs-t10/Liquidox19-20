@@ -22,9 +22,7 @@ public class OpModeFiveLatchesP extends OpMode {
     DcMotor frontLeft, backLeft, frontRight, backRight, latchM;
     Servo john, mark;
     LiftHandler lift;
-
     CRServo latchS;
-
     float speed = 0.8f;
     public void upArm() throws InterruptedException {
         latchS.setPower(1);
@@ -55,7 +53,10 @@ public class OpModeFiveLatchesP extends OpMode {
 
         //Naming the marker servo
         mark = hardwareMap.servo.get("mark");
-
+        while (true){
+            if (false){
+            }
+        }
     }
 
 

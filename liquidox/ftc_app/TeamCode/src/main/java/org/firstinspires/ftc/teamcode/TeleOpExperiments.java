@@ -8,9 +8,6 @@ import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
 
-
-import org.firstinspires.ftc.teamcode.LiftHandler;
-
 @TeleOp
 public class TeleOpExperiments extends OpMode {
     //private double random;
@@ -23,8 +20,6 @@ public class TeleOpExperiments extends OpMode {
     double PIT = 0;
     Servo john, mark;
     DcMotor frontLeft, backLeft, frontRight, backRight, latchM;
-
-    LiftHandler lift;
 
     CRServo latchS;
 
@@ -59,8 +54,6 @@ public class TeleOpExperiments extends OpMode {
         latchS = hardwareMap.crservo.get("latchS");
         latchM = hardwareMap.dcMotor.get("latchM");
         mark = hardwareMap.servo.get("mark");
-
-        lift = new LiftHandler(hardwareMap);
         latchS.setPower(1);
     }
 
