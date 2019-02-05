@@ -9,6 +9,7 @@ import java.util.concurrent.TimeUnit;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.Range;
 import org.firstinspires.ftc.robotcore.external.android.AndroidTextToSpeech;
+import org.firstinspires.ftc.robotcore.external.android.AndroidSoundPool;
 
 
 
@@ -56,7 +57,8 @@ public class AutonomousCraterNew extends LO2Library {
     @Override
     public void init() {
         AndroidTextToSpeech stt = new AndroidTextToSpeech();
-
+        AndroidSoundPool asp = new AndroidSoundPool();
+        stt.initialize();
         stt.speak("Hello, Adam Carita");
         super.initialize_robot();
         latchM = hardwareMap.dcMotor.get("latchM");

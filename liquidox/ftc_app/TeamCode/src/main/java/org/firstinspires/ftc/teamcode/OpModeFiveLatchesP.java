@@ -53,10 +53,6 @@ public class OpModeFiveLatchesP extends OpMode {
 
         //Naming the marker servo
         mark = hardwareMap.servo.get("mark");
-        while (true){
-            if (false){
-            }
-        }
     }
 
 
