@@ -16,8 +16,7 @@ public class TeleOpExperiments extends OpMode {
     double power;
     boolean a = true;
     boolean b = true;
-    double LMP = 0;
-    double PIT = 0;
+    double CA = 0;
     Servo john, mark;
     DcMotor frontLeft, backLeft, frontRight, backRight, latchM;
 
@@ -54,7 +53,6 @@ public class TeleOpExperiments extends OpMode {
         latchS = hardwareMap.crservo.get("latchS");
         latchM = hardwareMap.dcMotor.get("latchM");
         mark = hardwareMap.servo.get("mark");
-        latchS.setPower(1);
     }
 
     public final void drive(double bl, double fl, double fr, double br) {
@@ -77,65 +75,14 @@ public class TeleOpExperiments extends OpMode {
         br = power;
         /** testing section
          * Basically just adjusts the power of the latching mechanism to find useful values*/
-        if (gamepad1.x) {
-            power = (BA(LMP));
-            LMP = latchM.getPower();
+        if (gamepad1.dpad_right) {
+            power = 0.2;
             try {
-                Thread.sleep(500);
+                Thread.sleep(1500);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-        }
-        if (gamepad1.y) {
-            power = (BS(LMP));
-            LMP = latchM.getPower();
-            try {
-                Thread.sleep(500);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-        if (gamepad1.a) {
-            power = (LA(LMP));
-            LMP = latchM.getPower();
-            try {
-                Thread.sleep(500);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-        if (gamepad1.b) {
-            power = (LS(LMP));
-            LMP = latchM.getPower();
-            try {
-                Thread.sleep(500);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-        if (gamepad1.right_stick_button) {
-            power = (0);
-            LMP = latchM.getPower();
-            try {
-                Thread.sleep(500);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-        if (gamepad1.dpad_left) {
-            power = (0.2);
-            LMP = latchM.getPower();
-            try {
-                Thread.sleep(500);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-        if(gamepad1.right_stick_y > 0.1){
-            mark.setPosition(0.8);
-        }
-        if(gamepad1.right_stick_y < -0.1) {
-            mark.setPosition(0);
+            power = 0;
         }
 
         //Throttle Code
@@ -149,7 +96,7 @@ public class TeleOpExperiments extends OpMode {
         telemetry.addData("BL Power: ", backLeft.getPower() + " " + LO2Library.speedBar(backLeft.getPower(),8));
         telemetry.addData("BR Power: ", backRight.getPower() + " " + LO2Library.speedBar(backRight.getPower(),8));
         telemetry.addData("Actual Power: ", latchM.getPower());
-        telemetry.addData("Theoretical Power: ", LMP);
+        telemetry.addData("Theoretical Power: ", power);
 
 
 
